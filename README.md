@@ -6,8 +6,8 @@
 # 关于文档说明，请认真看完！
 
 ## 联系
- >QQ: 327.56.88 （请把点换成0，验证：瞎想） \
- >微信：![联系微信](./demo/images/wechat_contacts.jpg)
+> QQ: 327.56.88 （请把点换成0，验证：瞎想） \
+> 微信：![联系微信](./demo/images/wechat_contacts.jpg)
  
 
 ### 前台:
