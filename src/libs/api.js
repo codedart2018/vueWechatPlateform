@@ -3,7 +3,7 @@
  */
 const Api = window.Api || {}
 /** 主请求域名**/
-Api.domain = process.env.NODE_ENV == 'production' ? 'http://www.hphp.cn/' : ''
+Api.domain = process.env.NODE_ENV == 'production' ? 'http://api.daimatu.cn/' : ''
 
 export default Api
 
