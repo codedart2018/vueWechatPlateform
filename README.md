@@ -8,7 +8,7 @@
 ## 联系
 > QQ: 327.56.88 （请把点换成0，验证：瞎想）\
 > 加微信请先打赏（不介意加QQ）
-> ![微信联系人](./demo/images/wechat_contacts.gif)
+> ![微信联系人](./demo/images/wechat_contacts.jpg)
  
 
 ### 前台:
