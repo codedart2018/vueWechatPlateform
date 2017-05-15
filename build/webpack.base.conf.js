@@ -6,11 +6,15 @@ var vueLoaderConfig = require('./vue-loader.conf')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
+var glob = require('glob');
+//多页模块入口JS文件
+var entries = getEntry('./src/module/**/*.js');
 
 module.exports = {
-  entry: {
-    app: './src/main.js'
-  },
+  // entry: {
+  //   app: './src/main.js',
+  // },
+  entry: entries,
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
@@ -55,4 +59,19 @@ module.exports = {
       }
     ]
   }
+}
+
+// 获取入口文件
+function getEntry(globPath) {
+  var entries = {},
+    basename, tmp, pathname;
+  
+  glob.sync(globPath).forEach(function (entry) {
+    basename = path.basename(entry, path.extname(entry));
+    tmp = entry.split('/').splice(-3);
+    pathname = tmp.splice(0, 1) + '/' + basename; // 正确输出js和html的路径
+    entries[pathname] = entry;
+  });
+  
+  return entries;
 }
