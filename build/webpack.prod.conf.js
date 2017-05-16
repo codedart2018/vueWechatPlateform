@@ -33,7 +33,8 @@ var webpackConfig = merge(baseWebpackConfig, {
       compress: {
         warnings: false
       },
-      sourceMap: true
+      //sourceMap为true，可以在线上生成sourceMap文件，便于调试,还是关闭吧
+      sourceMap: false
     }),
     // extract css into its own file
     new ExtractTextPlugin({
@@ -147,7 +148,6 @@ function getEntry(globPath) {
 var pages = getEntry(['./src/module/*.html','./src/module/**/*.html']);
 
 for (var pathname in pages) {
-  console.log(1, pages)
   // 配置生成的html文件，定义路径等
   var conf = {
     filename: pathname + '.html',

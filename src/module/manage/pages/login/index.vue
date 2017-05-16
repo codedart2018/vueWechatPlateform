@@ -1,4 +1,4 @@
-<style src="../assets/style/login/index.less" lang="less"></style>
+<style src="../../assets/style/login/index.less" lang="less"></style>
 <template>
     <div class="large-header" id="home">
         <canvas id="canvas" class="canvas"></canvas>
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-    import {canvas} from '../../assets/js/canvas/canvas_login'
+    import {canvas} from '../../../../libs/canvas/star'
     import { mapActions } from 'vuex'
     import {sessionRouters, filterRouters} from '../../router'
 
@@ -170,9 +170,7 @@
         },
         //挂载执行
         mounted() {
-            canvas();
-            //this.myMethod();
-            //console.log(this.$router.options.routes)
+            canvas()
         },
         components: {
 

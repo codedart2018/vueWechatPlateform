@@ -1,4 +1,4 @@
-<style src="../assets/style/common/404.less" lang="less" scoped></style>
+<style src="../../assets/style/common/404.less" lang="less" scoped></style>
 <template>
     <div class="wrap">
         <p class="shine">呃，一溜烟不知道开到哪儿去了</p>
