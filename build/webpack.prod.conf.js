@@ -30,6 +30,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       'process.env': env
     }),
     new webpack.optimize.UglifyJsPlugin({
+      comments: false, //去掉注释
       compress: {
         warnings: false
       },
@@ -88,7 +89,8 @@ var webpackConfig = merge(baseWebpackConfig, {
       name: 'manifest',
       chunks: ['vendor']
     }),
-    // copy custom static assets
+    // copy custom static assets 太TMD讨厌了，怎么过滤都过滤不到 注释了禁止复制过去
+    /**
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),
@@ -96,6 +98,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ])
+     **/
   ]
 })
 
@@ -154,9 +157,9 @@ for (var pathname in pages) {
     template: pages[pathname],   // 模板路径
     inject: true,              // js插入位置
     minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true
+      removeComments: true, //去掉注释
+      collapseWhitespace: true, //压缩空格
+      removeAttributeQuotes: true //去除属性引用
       // more options:
       // https://github.com/kangax/html-minifier#options-quick-reference
     },

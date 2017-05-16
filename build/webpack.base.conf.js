@@ -63,15 +63,23 @@ module.exports = {
 
 // 获取入口文件
 function getEntry(globPath) {
-  var entries = {},
-    basename, tmp, pathname;
-  
-  glob.sync(globPath).forEach(function (entry) {
-    basename = path.basename(entry, path.extname(entry));
-    tmp = entry.split('/').splice(-3);
-    pathname = tmp.splice(0, 1) + '/' + basename; // 正确输出js和html的路径
-    entries[pathname] = entry;
-  });
-  
-  return entries;
+    var entries = {}, basename, tmp, pathname;
+    if (typeof (globPath) != "object") {
+        globPath = [globPath]
+    }
+    globPath.forEach((itemPath) => {
+        glob.sync(itemPath).forEach(function (entry) {
+            basename = path.basename(entry, path.extname(entry));
+            //防止目录下的路由打包
+            if(basename == 'router') return
+            if (entry.split('/').length > 4) {
+                tmp = entry.split('/').splice(-3);
+                pathname = tmp.splice(0, 1) + '/' + basename; // 正确输出js和html的路径
+                entries[pathname] = entry;
+            } else {
+                entries[basename] = entry;
+            }
+        });
+    });
+    return entries;
 }
