@@ -35,3 +35,10 @@ Vue.filter('formatDate', function (value, format) {
     }
     return format
 });
+
+/**
+ * 数组转字符串
+ */
+Vue.filter('arrayToString', function (array, join) {
+    return array.length === 1 ? array[0] : array.join(join)
+});

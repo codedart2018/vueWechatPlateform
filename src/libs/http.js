@@ -5,10 +5,8 @@
 
 import methodMap from './methodMap'
 import AxiosInst from './axios'
-import Store from '../vuex/store'
-import {delMainMenu, userOut} from '../vuex/actions'
-import {filterRouters} from '../router'
-import Router from '../router.js'
+
+//todo 后面来试下是否可以继承
 
 class Http {
 
@@ -57,7 +55,6 @@ Http.install = function (Vue) {
     Vue.prototype.apiPost = function(url, data) {
         return new Promise((resolve, reject) => {
             AxiosInst.post(url, data).then((response) => {
-                Vue.prototype.response(response.data)
                 resolve(response.data)
             }).catch((response) => {
                 console.log('Customize Notice', response)
@@ -78,7 +75,6 @@ Http.install = function (Vue) {
             AxiosInst.get(url, {
                 params: data
             }).then((response) => {
-                Vue.prototype.response(response.data)
                 resolve(response.data)
             }).catch((response) => {
                 console.log('Customize Notice', response)
@@ -101,39 +97,7 @@ Http.install = function (Vue) {
      * @returns {boolean}
      */
     Vue.prototype.response = function (data) {
-        if(data == null) {
-            console.log("接口输出异常...")
-            this.$Message.error("接口输出异常...")
-            setTimeout(() => closeLoading(), 800)
-            return false
-        }
-        //登陆失效 做退出处理
-        if(data['code'] == 1000) {
-            this.$Message.error(data['msg'])
-            let uid = Store.state.User.user_info.uid
-            let menu = Store.state.MainMenu.mainMenu
-            let new_router = filterRouters(Router.options.routes, menu)
-            Router.options.routes = new_router
-            delMainMenu(Store)
-            userOut(Store)
-            Router.push({path: '/login'})
-            //暂时不后台处理退出
-            // this.request("LoginOut", {uid: uid}).then((res) => {
-            //     if (res.status) {
-            //
-            //     }
-            // })
-            setTimeout(() => closeLoading(), 800)
-            return false
-        }
-        //没有权限
-        if(data['code'] == 1001) {
-            this.$Message.error(data['msg'])
-            setTimeout(() => closeLoading(), 800)
-            return false
-        }
-        //延迟关闭
-        setTimeout(() => closeLoading(), 800)
+
     }
 }
 
