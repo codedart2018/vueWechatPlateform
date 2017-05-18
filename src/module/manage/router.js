@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Manage from './pages/common/Manage'
+import Manage from './pages/common/manage'
 import Test from './pages/common/Test'
 import NotFound from './pages/common/404'  //404 未找到页面
 import Login from './pages/login/index'  //404 未找到页面
@@ -26,7 +26,7 @@ if(token) {
  */
 const router =[
     {
-        path: '/',
+        path: '',
         name: 'Manage',
         component: Manage,
     },
@@ -92,6 +92,7 @@ export function sessionRouters(menu = [], routes = []) {
  * todo 后期来处理一级导航可以不填组件地址
  */
 function eachMenu(menu = [], routes = []) {
+    //console.log(router)
     if(menu.length <= 0) return routes
     for (let item of menu){
         if(item.path && item.component) {
@@ -103,7 +104,7 @@ function eachMenu(menu = [], routes = []) {
                 path: item.path,
                 url: item.url,
                 display: item.display,
-                component: resolve => require([`${item.component}`], resolve)
+                component: resolve => require([`${item.component}.vue`], resolve)// todo 不知道为毛最后不加字符串一直警告，真TMD烦人
             };
             
             //参数处理 todo 之前理解错了 地址栏参数获取是query

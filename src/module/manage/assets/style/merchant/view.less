@@ -1,0 +1,35 @@
+//iview 公共 liess
+@import '~iview/src/styles/index.less';
+
+.col-plan {
+    width: 30%;
+    height: 85px;
+    cursor: pointer;
+
+    .box {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        border: 1px dashed #dedede;
+
+        .item {
+            width: 100%;
+            height: 50%;
+            text-align: center;
+
+            .icon {
+                font-size: 40px;
+                padding-top: 10px;
+            }
+        }
+
+        .item:nth-child(2) {
+            padding-top: 10px;
+        }
+    }
+}
+

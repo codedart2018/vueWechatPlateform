@@ -21,7 +21,6 @@ Router.beforeEach(({meta, path}, from, next) => {
     let auth = meta.routeAuth == false ? false : true
     //获取用户是否登陆
     let token = window.localStorage.getItem('token');
-    console.log(token)
     if (auth && !token && path != '/login') {
         next({path: '/login'})
     } else if (path == '/login' && token) {

@@ -1,0 +1,129 @@
+.nav-bar {
+    background-color: #09C;
+    color: #FFF;
+    height: 50px;
+
+    .logo {
+        background-color: #0087b4;
+        height: 100%;
+        text-align: center;
+        line-height: 50px;
+        font-size: 34px;
+    }
+
+    .bar-ul > li {
+        float: left;
+        position: relative;
+        display: block;
+        height: 50px;
+        padding: 0 15px;
+        line-height: 50px;
+        cursor: pointer;
+    }
+
+    .bar-ul {
+        .li-border {
+            border-right: 1px solid #008fbf;
+        }
+
+        .bell {
+            font-size: 18px;
+            line-height: 50px;
+            padding-right: 3px;
+        }
+        //消息数字
+        .bell-num {
+            font-size: 12px;
+            color: #fff;
+            background: #f90;
+            border-radius: 5px;
+            padding: 2px 5px;
+            vertical-align: top;
+            text-align: center;
+            line-height: 50px;
+        }
+        //头像
+        .avatar {
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-position: 50%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border: 1px solid #FFFFFF;
+            padding: 1px;
+        }
+        //用户
+        .user {
+            padding-left: 60px;
+            min-width: 120px;
+        }
+
+        .arrow-size {
+            font-size: 16px;
+        }
+    }
+
+    a {
+        color: #FFFFFF;
+    }
+}
+
+.container {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+
+    .main {
+        background-color: #293038;
+        position: absolute;
+        top: 50px;
+        bottom: 0px;
+        width: 100%;
+        overflow: hidden;
+
+        aside {
+            width: 155px;
+
+            .sidebar-fold {
+                width: 100%;
+                background: #394555;
+                color: #aeb9c2;
+                text-align: center;
+                height: 40px;
+                font-size: 12px;
+                cursor: pointer;
+                line-height: 40px;
+                font-size: 20px;
+            }
+
+            .menu-item {
+                padding: 0px;
+                height: 49px;
+                line-height: 49px;
+                text-align: center;
+                span {
+                    width: 100%;
+                    height: 100%;
+                    display: inline-block;
+                }
+            }
+
+        }
+
+        .content-container {
+            background: #FDFDFD;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+            left: 155px;
+            overflow-y: scroll;
+            padding: 20px;
+        }
+    }
+}

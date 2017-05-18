@@ -55,6 +55,7 @@ Http.install = function (Vue) {
     Vue.prototype.apiPost = function(url, data) {
         return new Promise((resolve, reject) => {
             AxiosInst.post(url, data).then((response) => {
+                Vue.prototype.response(response.data)
                 resolve(response.data)
             }).catch((response) => {
                 console.log('Customize Notice', response)
@@ -75,6 +76,7 @@ Http.install = function (Vue) {
             AxiosInst.get(url, {
                 params: data
             }).then((response) => {
+                Vue.prototype.response(response.data)
                 resolve(response.data)
             }).catch((response) => {
                 console.log('Customize Notice', response)
@@ -91,6 +93,7 @@ Http.install = function (Vue) {
         Vue.prototype.$loading.close()
     }
     
+    
     /**
      * 返回码检查
      * @param data
@@ -98,6 +101,7 @@ Http.install = function (Vue) {
      */
     Vue.prototype.response = function (data) {
 
+        setTimeout(() => closeLoading(), 800)
     }
 }
 
