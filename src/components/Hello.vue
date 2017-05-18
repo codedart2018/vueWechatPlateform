@@ -4,13 +4,11 @@
     <h2>Essential Links</h2>
     <ul>
       <li><a href="./manage.html">管理中心</a></li>
+      <li><a href="./merchant.html">商户中心</a></li>
       <li><router-link to="/test">Test路由</router-link></li>
       <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
       <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
       <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
     </ul>
     <h2>Ecosystem</h2>
     <ul>

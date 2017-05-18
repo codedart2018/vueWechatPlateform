@@ -6,7 +6,6 @@
 </template>
 
 <script>
-    import '../../common/css/reset.css';
     import Hello from '../../components/Hello'
     export default {
         name: 'app',
