@@ -280,7 +280,7 @@
                 })
             },
             authGo(id) {
-                this.$router.push({ path: '/manage/authorize/' + id, params: { id: id }})
+                this.$router.push({ path: '/role/authorize/' + id, params: { id: id }})
             }
         },
         mounted() {
