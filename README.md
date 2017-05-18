@@ -129,6 +129,8 @@
  
  ### 截图
  
+ ![多项目入口](./demo/images/index.jpg)
+ 
  #### vue 微信编辑器（微信编辑器我并没有上传，这个不打算提交，请删除 router.js 里的 微信编辑器 再进行支行）
  ![vue 微信编辑器](./demo/images/wx_editor.gif)
  
