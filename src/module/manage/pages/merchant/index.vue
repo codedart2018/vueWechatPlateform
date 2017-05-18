@@ -35,7 +35,7 @@
             </Form>
             </Col>
             <Col span="6" class="text-align-right">
-            <Button type="primary" @click="addModal = true" v-if=""><Icon type="plus-round"></Icon>&nbsp;添加商户</Button></Button>
+            <Button type="primary" @click="addModal = true" v-if="auth.ADD_MERCHANT"><Icon type="plus-round"></Icon>&nbsp;添加商户</Button></Button>
             </Col>
         </Row>
         <Row class="mb-15">
@@ -197,7 +197,7 @@
                         width: 200,
                         align: 'center',
                         render (row, column, index) {
-                            return `<i-button type="primary" size="small" @click="view(${row.id})">查看</i-button> <i-button type="primary" size="small" @click="del(${index}, ${row.id})">切换商户</i-button>`;
+                            return `<i-button type="primary" size="small" v-if="auth.MERCHANT_VIEW" @click="view(${row.id})">查看</i-button> <i-button type="primary" size="small" @click="del(${index}, ${row.id})">切换商户</i-button>`;
                         }
                     }
                 ],
@@ -325,6 +325,7 @@
         },
         mounted() {
         	this.auth = this.$store.state.MainMenu.auth
+            console.log(this.auth)
             //服务端获取数据
             this.getData();
         }

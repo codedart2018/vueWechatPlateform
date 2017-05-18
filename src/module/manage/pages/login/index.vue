@@ -130,8 +130,6 @@
                                 this.mainMenu(res.data.menu)
                                 //追加路由菜单
                                 let routes = sessionRouters(res.data.menu)
-//                                console.log(routes)
-//                                return
                                 //重新追加权限路由
                                 for (let route of routes) {
                                     this.$router.options.routes.push(route)
@@ -146,10 +144,8 @@
                                     user_info,
                                     token
                                 })
-                                this.auth({'append' : 1})
+                                this.auth(res.data.alias)
                                 this.$router.push({ path: '/' })
-                                //console.log(this.$router.options.routes)
-                                //console.log(this.formValidate)
                             } else {
                                 this.$Message.error(res.msg)
                             }
