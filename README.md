@@ -142,7 +142,7 @@
  ![非法权限请求](./demo/images/auth2.jpg)
  
  #### 角色授权
- ![角色授权](./demo/images/gif_auth.gif)
+ ![角色授权](./demo/images/auth.gif)
  
  #### 角色授权
  ![角色授权](./demo/images/auth.jpg)
