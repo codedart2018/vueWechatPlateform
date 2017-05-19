@@ -36,6 +36,15 @@
 <script>
 
     export default{
+    	//watch 监听不到用它来
+        //https://router.vuejs.org/zh-cn/advanced/navigation-guards.html 文档地址 标记组件内的钩子
+        beforeRouteEnter (to, from, next) {
+            next(vm => {
+                // 通过 `vm` 访问组件实例'
+                //解决进入路由不刷新验证码问题
+                vm.verifyUrl = '/api/login/code?v=' + Math.random() * 1000
+            })
+        },
         data(){
             return{
                 formLogin: {
@@ -57,7 +66,7 @@
                         { type: 'string', message: '验证码只能英文数字', trigger: 'blur', pattern: /^[a-z0-9A-Z]+$/ }
                     ]
                 },
-                verifyUrl: '/api/login/code',
+                verifyUrl: '',
             }
         },
         methods: {
@@ -77,6 +86,9 @@
                     this.verifyUrl = '/api/login/code?v=' + Math.random() * 1000
                 }, 500)
             }
+        },
+        watch: {
+
         },
         components:{
 

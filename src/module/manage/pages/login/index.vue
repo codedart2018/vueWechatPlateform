@@ -64,6 +64,13 @@
             document.getElementsByTagName('body')[0].style.width = window.innerWidth + 'px'
             document.getElementsByTagName('body')[0].style.height = window.innerHeight + 'px'
         },
+        beforeRouteEnter (to, from, next) {
+            next(vm => {
+                // 通过 `vm` 访问组件实例'
+                //解决进入路由不刷新验证码问题
+                vm.verifyUrl = '/api/login/code?v=' + Math.random() * 1000
+            })
+        },
         data() {
             const validatePassword = (rule, value, callback) => {
                 if (value === '') {
@@ -107,7 +114,7 @@
                 },
                 account: true,
                 scan: false,
-                verifyUrl: '/api/login/code',
+                verifyUrl: '',
                 login_loading: false
             }
         },

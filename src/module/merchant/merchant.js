@@ -14,6 +14,11 @@ Router.beforeEach(({meta, path}, from, next) => {
     next()
 })
 
+Router.afterEach((to, from) => {
+    //console.log(to, from)
+})
+
+
 new Vue({
     el: '#app',
     router: Router,

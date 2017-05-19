@@ -9,6 +9,12 @@
         name: 'app',
         components: {
 
+        },
+        watch: {
+            '$route' (to, from) {
+                // 对路由变化作出响应...
+                //console.log(to,from)
+            }
         }
     }
 </script>
@@ -22,7 +28,7 @@
     body, html {
         width: 100%;
         height: 100%;
-        background: "#FFF";
+        background-color: #FFFFFF;
     }
 
     #app {

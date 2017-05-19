@@ -8,8 +8,8 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'Hello',
-            component: resolve => require(['../../components/Hello'], resolve),
+            name: 'manage',
+            component: resolve => require(['./pages/common/manage'], resolve),
         },
         {
             path: '/login', //登录
@@ -19,7 +19,7 @@ export default new Router({
                 routeAuth: false
             },
             component: resolve => require(['./pages/login/index'], resolve),
-            display: 0
+            display: 0,
         },
     ]
 })
