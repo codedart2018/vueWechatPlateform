@@ -19,7 +19,7 @@
                         <Input type="password" v-model="formValidate.password" placeholder="密码" @on-enter="handleSubmit('formValidate')"></Input>
                     </Form-item>
 
-                    <Form-item prop="code" class="">
+                    <Form-item prop="code">
                         <Input type="text" v-model="formValidate.code" placeholder="验证码" @on-enter="handleSubmit('formValidate')"></Input>
                         <img :src="verifyUrl" @click="refreshVerify()" class="code-img" title="点击切换验证码">
                     </Form-item>

@@ -1,0 +1,80 @@
+<style src="../../assets/style/login/index.less" lang="less" scoped></style>
+<template>
+    <div class="container merchant-login">
+        <div class="login">
+            <div class="left">
+                <div class="welcome">欢迎登陆代码兔商户管理平台</div>
+                <Form ref="formInline" :model="formInline" :rules="ruleInline" inline class="form">
+                    <Form-item prop="user">
+                        <Input type="text" v-model="formInline.user" placeholder="帐号 / 手机号">
+                        <Icon type="person" slot="prepend" class="icon"></Icon>
+                        </Input>
+                    </Form-item>
+                    <Form-item prop="password">
+                        <Input type="password" v-model="formInline.password" placeholder="请填写密码">
+                        <Icon type="locked" slot="prepend" class="icon"></Icon>
+                        </Input>
+                    </Form-item>
+                    <Form-item prop="code">
+                        <Input type="text" v-model="formInline.code" placeholder="请填写验证码" @on-enter="handleSubmit('formValidate')"></Input>
+                        <img :src="verifyUrl" @click="refreshVerify()" class="code-img" title="点击切换验证码">
+                    </Form-item>
+                    <Form-item>
+                        <Button type="primary" @click="handleSubmit('formInline')">登录</Button>
+                    </Form-item>
+                </Form>
+            </div>
+            <div class="scan">
+                <div class="qr-code"><img src="../../assets/images/qrcode.jpg" alt=""></div>
+                <div class="notice">微信扫描登陆更快捷</div>
+                <div class="tel">客服电话:400-8181909</div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+
+    export default{
+        data(){
+            return{
+                formInline: {
+                    user: '',
+                    password: '',
+                    code: ''
+                },
+                ruleInline: {
+                    user: [
+                        { required: true, message: '请填写用户名', trigger: 'blur' }
+                    ],
+                    password: [
+                        { required: true, message: '请填写密码', trigger: 'blur' },
+                        { type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur' }
+                    ]
+                },
+                verifyUrl: '/api/login/code',
+            }
+        },
+        methods: {
+            handleSubmit(name) {
+                this.$refs[name].validate((valid) => {
+                    if (valid) {
+                        this.$Message.success('提交成功!');
+                    } else {
+                        this.$Message.error('表单验证失败!');
+                    }
+                })
+            },
+            //刷新切换验证码
+            refreshVerify() {
+                this.verifyUrl = ''
+                setTimeout(() => {
+                    this.verifyUrl = '/api/login/code?v=' + Math.random() * 1000
+                }, 500)
+            }
+        },
+        components:{
+
+        }
+    }
+</script>

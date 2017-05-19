@@ -1,0 +1,100 @@
+/**
+ * Created by truncate on 2017/5/18.
+ * Author: 带鞋拖地
+ * QQ: 327056088
+ *
+ * 《相思》· 王维
+ * 红豆生南国，春来发几枝。
+ * 愿君多采撷，此物最相思。
+ */
+body,html,.container{
+    height: 100%;
+    background: url(../../images/bg.jpg) top center no-repeat;
+    background-size: cover;
+}
+.container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+
+
+    .login {
+        display: flex;
+        flex-direction: row;
+        width: 600px;
+        height: 350px;
+        max-height: 400px;
+        border: 1px solid #dedede;
+        background: #FFFFFF;
+
+        .left {
+            width: 320px;
+            height: 100%;
+            max-height: 100%;
+            border-right: 1px solid #dedede;
+            .welcome {
+                text-align: center;
+                height: 60px;
+                line-height: 60px;
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .form {
+                padding-top: 1px;
+                padding-left: 30px;
+                padding-right: 30px;
+
+            }
+            .code-img {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 120px;
+                height: 50px;
+                cursor: pointer;
+            }
+        }
+
+        .scan {
+            flex: 1;
+            flex-direction: column;
+
+            .qr-code{
+                width: 100%;
+                padding: 0;
+                align-content: center;
+                text-align: center;
+
+                img {
+                    width: 250px;
+                    margin-top: 15px;
+                    border: 1px dashed #dedede;
+                }
+            }
+
+            .notice {
+                font-size: 14px;
+                padding-top: 10px;
+                text-align: center;
+            }
+            .tel {
+                font-size: 14px;
+                padding-top: 12px;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.container {
+    .ivu-form-inline .ivu-form-item {
+        display: block;
+        margin-right: 0;
+    }
+
+}
+.icon {
+    width: 30px;
+    padding: 0px;
+}
