@@ -12,15 +12,18 @@
 
                 <Form ref="formValidate" :model="formValidate" :rules="ruleValidate">
                     <Form-item prop="username">
-                        <Input type="text" v-model="formValidate.username" placeholder="帐号" @on-enter="handleSubmit('formValidate')"></Input>
+                        <Input type="text" v-model="formValidate.username" placeholder="帐号"
+                               @on-enter="handleSubmit('formValidate')"></Input>
                     </Form-item>
 
                     <Form-item prop="password">
-                        <Input type="password" v-model="formValidate.password" placeholder="密码" @on-enter="handleSubmit('formValidate')"></Input>
+                        <Input type="password" v-model="formValidate.password" placeholder="密码"
+                               @on-enter="handleSubmit('formValidate')"></Input>
                     </Form-item>
 
                     <Form-item prop="code">
-                        <Input type="text" v-model="formValidate.code" placeholder="验证码" @on-enter="handleSubmit('formValidate')"></Input>
+                        <Input type="text" v-model="formValidate.code" placeholder="验证码"
+                               @on-enter="handleSubmit('formValidate')"></Input>
                         <img :src="verifyUrl" @click="refreshVerify()" class="code-img" title="点击切换验证码">
                     </Form-item>
 
@@ -52,9 +55,8 @@
 
 <script>
     import {canvas} from '../../../../libs/canvas/star'
-    import { mapActions } from 'vuex'
+    import {mapActions} from 'vuex'
     import {sessionRouters, filterRouters} from '../../router'
-
     export default {
         beforeCreate: function () {
             document.getElementsByTagName("body")[0].className = "login_body"
@@ -77,7 +79,6 @@
                 if (!value) {
                     return callback(new Error('验证码不能为空'));
                 }
-
                 let reg = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
                 if (!reg.test(value)) {
                     callback(new Error('验证码中能中文数字'));
@@ -85,7 +86,6 @@
                     callback();
                 }
             };
-
             return {
                 formValidate: {
                     username: '',
@@ -110,7 +110,6 @@
                 verifyUrl: '/api/login/code',
                 login_loading: false
             }
-
         },
         methods: {
             ...mapActions(['mainMenu', 'userLogin', 'auth']),
@@ -145,7 +144,7 @@
                                     token
                                 })
                                 this.auth(res.data.alias)
-                                this.$router.push({ path: '/' })
+                                this.$router.push({path: '/'})
                             } else {
                                 this.$Message.error(res.msg)
                             }
@@ -169,9 +168,7 @@
         mounted() {
             canvas()
         },
-        components: {
-
-        },
+        components: {},
         beforeDestroy: function () {
             //销毁移除
             document.body.removeAttribute("class", "login_body")
