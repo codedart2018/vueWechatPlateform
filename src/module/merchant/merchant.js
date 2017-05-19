@@ -4,20 +4,29 @@ import Router from './router.js' //路由地址
 import IView from 'iview' //Iview
 import 'iview/dist/styles/iview.css' // 使用 IVIEW CSS
 import './assets/style/common/customize.less' // 定制公共 less
+import Toast from '../../libs/toast/' // 定制吐司
 import Util from '../../libs/util' // 工具
+import Http from '../../libs/http' //请求工具
+import '../../libs/filter' //过滤器
 
+Vue.use(Toast)
+Vue.use(Http)
 Vue.use(IView)
+
 Vue.config.productionTip = false
 
 Router.beforeEach(({meta, path}, from, next) => {
     Util.title(meta.title)
+    let auth = meta.routeAuth == false ? false : true
+    //获取用户是否登陆
+    let token = window.localStorage.getItem('merchantToken');
+    if (auth && !token && path != '/login') {
+        next({path: '/login'})
+    } else if (path == '/login' && token) {
+        next({path: '/'})
+    }
     next()
 })
-
-Router.afterEach((to, from) => {
-    //console.log(to, from)
-})
-
 
 new Vue({
     el: '#app',

@@ -11,7 +11,7 @@ const methodMap = {
     EditMaterialList: {url: '/api/common_api/edit_material_list', method: 'get'},
     
     /** 登陆接口 **/
-    Login: {url: '/api/login/manage_login', method: "post"},
+    Login: {url: '/merchant/login/index', method: "post"},
     /** 退出接口 **/
     LoginOut: {url: '/api/login/out', method: "post"},
     /** 持续验证登陆 **/
@@ -70,6 +70,9 @@ const methodMap = {
     DelEditorMaterialCate: {url: '/api/editor_material/del_cate', method: "post"},
     /** 删除编辑器素材 **/
     DelEditorMaterial: {url: '/api/editor_material/del', method: "post"},
+    
+    // /** 以下接口为商户平台接口 **/
+    MerchantLogin: {url: '/merchant/login/index', method: "post"},
 }
 
 export default methodMap

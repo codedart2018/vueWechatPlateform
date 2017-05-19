@@ -28,11 +28,20 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
+        //后台
         '/api': {
             target: 'http://www.hphp.cn/',
             changeOrigin: true,
             pathRewrite: {
                 '^/api': '/api'
+            }
+        },
+        //商户平台
+        '/merchant': {
+            target: 'http://www.hphp.cn/',
+            changeOrigin: true,
+            pathRewrite: {
+                '^/merchant': '/merchant'
             }
         }
     },

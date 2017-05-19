@@ -6,17 +6,17 @@
                 <div class="welcome">欢迎登陆代码兔商户管理平台</div>
                 <Form ref="formLogin" :model="formLogin" :rules="ruleValidate" inline class="form">
                     <Form-item prop="account">
-                        <Input type="text" v-model="formLogin.account" placeholder="帐号 / 手机号">
+                        <Input type="text" v-model="formLogin.account" placeholder="帐号 / 手机号" @on-enter="handleSubmit('formLogin')">
                         <Icon type="person" slot="prepend" class="icon"></Icon>
                         </Input>
                     </Form-item>
                     <Form-item prop="password">
-                        <Input type="password" v-model="formLogin.password" placeholder="请填写密码">
+                        <Input type="password" v-model="formLogin.password" placeholder="请填写密码" @on-enter="handleSubmit('formLogin')">
                         <Icon type="locked" slot="prepend" class="icon"></Icon>
                         </Input>
                     </Form-item>
                     <Form-item prop="code">
-                        <Input type="text" v-model="formLogin.code" placeholder="请填写验证码" @on-enter="handleSubmit('formValidate')"></Input>
+                        <Input type="text" v-model="formLogin.code" placeholder="请填写验证码" @on-enter="handleSubmit('formLogin')"></Input>
                         <img :src="verifyUrl" @click="refreshVerify()" class="code-img" title="点击切换验证码">
                     </Form-item>
                     <Form-item>
@@ -73,9 +73,18 @@
             handleSubmit(name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.$Message.success('提交成功!');
+                        this.request('MerchantLogin', this.formLogin).then((res) => {
+                            if (res.status) {
+                                this.$Message.success("登陆成功")
+                                window.localStorage.setItem('merchantLogin', JSON.stringify(res.data.info))
+                                window.localStorage.setItem('merchantToken', JSON.stringify(res.data.info.token))
+                                this.$router.push({path: '/'})
+                            } else {
+                                this.$Message.error(res.msg)
+                            }
+                        })
                     } else {
-                        this.$Message.error('表单验证失败!');
+                        this.$Message.error('表单验证失败!')
                     }
                 })
             },

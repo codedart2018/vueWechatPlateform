@@ -59,6 +59,7 @@
     import {sessionRouters, filterRouters} from '../../router'
     export default {
         beforeCreate: function () {
+        	//todo 后期更改成flex box 自适应
             document.getElementsByTagName("body")[0].className = "login_body"
             //计算屏幕高度宽度 让其自适应
             document.getElementsByTagName('body')[0].style.width = window.innerWidth + 'px'
@@ -157,12 +158,12 @@
                             }
                         })
                     } else {
-                        this.$Message.error('表单验证失败!');
+                        this.$Message.error('表单验证失败!')
                     }
                 })
             },
             handleReset (name) {
-                this.$refs[name].resetFields();
+                this.$refs[name].resetFields()
             },
             refreshVerify() {
                 this.verifyUrl = ''

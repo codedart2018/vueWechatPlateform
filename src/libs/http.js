@@ -6,8 +6,6 @@
 import methodMap from './methodMap'
 import AxiosInst from './axios'
 
-//todo 后面来试下是否可以继承
-
 class Http {
 
 }
@@ -100,7 +98,13 @@ Http.install = function (Vue) {
      * @returns {boolean}
      */
     Vue.prototype.response = function (data) {
-
+        if(data == null) {
+            console.log("接口输出异常...")
+            this.$Message.error("接口输出异常...")
+            setTimeout(() => closeLoading(), 800)
+            return false
+        }
+        
         setTimeout(() => closeLoading(), 800)
     }
 }
