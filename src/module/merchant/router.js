@@ -10,6 +10,16 @@ export default new Router({
             path: '/',
             name: 'manage',
             component: resolve => require(['./pages/common/manage'], resolve),
+            children: [{
+                path: '/edit',
+                name: 'edit',
+                component: resolve => require(['./pages/user/edit'], resolve),
+            }]
+        },
+        {
+            path: '/add',
+            name: 'add',
+            component: resolve => require(['./pages/user/add'], resolve),
         },
         {
             path: '/login', //登录
