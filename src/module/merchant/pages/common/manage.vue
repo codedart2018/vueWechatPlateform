@@ -43,7 +43,7 @@
                                             已绑定手机：150****2861
                                         </div>
                                     </div>
-                                    <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-around; margin-top: 15px; margin-bottom: 15px;">
+                                    <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-around; margin-top: 10px; margin-bottom: 10px;">
                                         <div>商户认证：已认证</div>
                                         <div>会员等级：普通会员</div>
                                         <div>商户有期期：2019-10-20</div>
@@ -61,20 +61,26 @@
                                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 20px; flex: 1">
                                     <div style="background: #fafafa; width: 100%; height: 100%; display: block">
                                         <a href="" class="undo-item">
-                                            <span class="item-text">工单</span>
-                                            <span class="item-number" ng-class="{'item-number-grey':todoInfo.workorder.total == 0}">2</span>
+                                            <span class="item-text">未读消息</span>
+                                            <span class="item-number">2</span>
                                         </a>
                                     </div>
-                                    <div style="background: #fafafa; width: 100%; height: 100%; display: block; margin: 0 20px;">
+                                    <div style="background: #fafafa; width: 100%; height: 100%; display: block; margin-left: 20px">
+                                        <a href="" class="undo-item">
+                                            <span class="item-text">工单</span>
+                                            <span class="item-number">2</span>
+                                        </a>
+                                    </div>
+                                    <div style="background: #fafafa; width: 100%; height: 100%; display: block; margin-left: 20px;">
                                         <a href="" class="undo-item">
                                             <span class="item-text">续费</span>
-                                            <span class="item-number" ng-class="{'item-number-grey':todoInfo.workorder.total == 0}">2</span>
+                                            <span class="item-number">2</span>
                                         </a>
                                     </div>
-                                    <div style="background: #fafafa; width: 100%; height: 100%; display: block">
+                                    <div style="background: #fafafa; width: 100%; height: 100%; display: block; margin-left: 20px;">
                                         <a href="" class="undo-item">
                                             <span class="item-text">未支付订单</span>
-                                            <span class="item-number" ng-class="{'item-number-grey':todoInfo.workorder.total == 0}">2</span>
+                                            <span class="item-number">2</span>
                                         </a>
                                     </div>
                                 </div>
@@ -186,7 +192,6 @@
         text-decoration: none;
     }
     .item-text {
-        width: 50%;
         padding-left: 36px;
         color: #333;
         display: inline-block;
