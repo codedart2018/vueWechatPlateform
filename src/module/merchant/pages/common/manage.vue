@@ -85,6 +85,8 @@
                                             个人设置
                                         </template>
                                         <Menu-item name="6-1"><router-link to="/personal" style="color: #657180;">资料修改</router-link></Menu-item>
+                                        <Menu-item name="6-2"><router-link to="/personal" style="color: #657180;">登陆日志</router-link></Menu-item>
+                                        <Menu-item name="6-3"><router-link to="/personal" style="color: #657180;">操作日志</router-link></Menu-item>
                                     </Submenu>
                                     <Submenu name="7">
                                         <template slot="title">
@@ -94,8 +96,13 @@
                                         <Menu-item name="7-1">新增用户</Menu-item>
                                         <Menu-item name="7-2">活跃用户</Menu-item>
                                     </Submenu>
+                                    <Submenu name="8">
+                                        <template slot="title">
+                                            <Icon type="settings"></Icon>
+                                            <a href="" style="color: #657180;">定制中心</a>
+                                        </template>
+                                    </Submenu>
                                 </Menu>
-
                             </div>
                         </div>
                         <!--右边盒子-->
