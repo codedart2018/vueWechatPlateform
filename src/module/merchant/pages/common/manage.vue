@@ -75,7 +75,7 @@
                                             <Icon type="stats-bars"></Icon>
                                             商户管理
                                         </template>
-                                        <Menu-item name="5-1">新增和启动</Menu-item>
+                                        <Menu-item name="5-1">资料修改</Menu-item>
                                         <Menu-item name="5-2">活跃分析</Menu-item>
                                         <Menu-item name="5-3">时段分析</Menu-item>
                                     </Submenu>

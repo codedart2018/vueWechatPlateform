@@ -11,7 +11,7 @@ const methodMap = {
     EditMaterialList: {url: '/api/common_api/edit_material_list', method: 'get'},
     
     /** 登陆接口 **/
-    Login: {url: '/merchant/login/index', method: "post"},
+    Login: {url: '/api/login/index', method: "post"},
     /** 退出接口 **/
     LoginOut: {url: '/api/login/out', method: "post"},
     /** 持续验证登陆 **/
