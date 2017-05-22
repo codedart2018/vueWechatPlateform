@@ -320,7 +320,7 @@
                 })
             },
             view(id) {
-                this.$router.push({ path: '/manage/merchant/view/' + id, params: { id: id }})
+                this.$router.push({ path: '/merchant/view/' + id, params: { id: id }})
             }
         },
         mounted() {
