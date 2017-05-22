@@ -77,9 +77,9 @@
                         <Breadcrumb-item v-if="navTwo">{{navTwo}}</Breadcrumb-item>
                     </Breadcrumb>
                 </div>
-                <span v-if="$route.path == '/'">
+                <transition v-if="$route.path == '/'">
                     <common-main></common-main>
-                </span>
+                </transition>
                 <transition :name="transitionName" v-if="$route.path != '/'">
                     <router-view></router-view>
                 </transition>

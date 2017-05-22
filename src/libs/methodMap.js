@@ -72,7 +72,12 @@ const methodMap = {
     DelEditorMaterial: {url: '/api/editor_material/del', method: "post"},
     
     // /** 以下接口为商户平台接口 **/
+    /** 商户平台登陆中心 **/
     MerchantLogin: {url: '/merchant/login/index', method: "post"},
+    /** 获取某个用户详情 **/
+    MerchantUserView: {url: '/merchant/user/view', method: "get"},
+    /** 商户用户个人资料修改 **/
+    MerchantUserEdit: {url: '/merchant/user/edit', method: "post"},
 }
 
 export default methodMap

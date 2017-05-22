@@ -25,6 +25,7 @@
 .box {
     margin: 0 auto;
     width: 1280px;
+    height: 100%;
     //min-height:1000px;
     flex: 1;
     background: #FFFFFF;
@@ -177,6 +178,7 @@
     .menu-box {
         width: 240px;
         height: auto;
+        border-radius: 3px;
 
         .tip {
             height: 70px;
@@ -184,13 +186,19 @@
             line-height: 70px;
             padding-left: 20px;
             background: #0099e8;
-            color: #FFFFFF
+            color: #FFFFFF;
+            border-radius: 3px 3px 0 0;
+
+            a {
+                color: white;
+            }
         }
 
         .sub-menu {
             border: 1px solid #dedede;
             overflow-x: hidden;
             overflow-y: hidden;
+            border-radius: 0 0 3px 3px;
         }
     }
 

@@ -34,7 +34,7 @@
                 <div class="box">
                     <div class="box-content flex">
                         <div class="menu-box">
-                            <div class="tip">管理中心</div>
+                            <div class="tip"><router-link to="/">管理中心</router-link></div>
                             <div class="sub-menu">
                                 <Menu width="auto" style="position: static;" accordion>
                                     <Submenu name="1">
@@ -42,7 +42,7 @@
                                             <Icon type="chatbubbles"></Icon>
                                             公众号
                                         </template>
-                                        <Menu-item name="1-1"> <router-link to="/edit" style="color: #657180;">文章管理</router-link></Menu-item>
+                                        <Menu-item name="1-1"><router-link to="/edit" style="color: #657180;">文章管理</router-link></Menu-item>
                                         <Menu-item name="1-2"> <router-link to="/add" style="color: #657180;">评论管理</router-link></Menu-item>
                                         <Menu-item name="1-3">举报管理</Menu-item>
                                     </Submenu>
@@ -54,52 +54,45 @@
                                         <Menu-item name="2-1">新增用户</Menu-item>
                                         <Menu-item name="2-2">活跃用户</Menu-item>
                                     </Submenu>
-                                    <Submenu name="2">
+                                    <Submenu name="3">
                                         <template slot="title">
                                             <Icon type="ios-people"></Icon>
                                             短信管理
                                         </template>
-                                        <Menu-item name="2-1">新增用户</Menu-item>
-                                        <Menu-item name="2-2">活跃用户</Menu-item>
+                                        <Menu-item name="3-1">新增用户</Menu-item>
+                                        <Menu-item name="3-2">活跃用户</Menu-item>
                                     </Submenu>
-                                    <Submenu name="2">
+                                    <Submenu name="4">
                                         <template slot="title">
                                             <Icon type="ios-people"></Icon>
                                             消息工单
                                         </template>
-                                        <Menu-item name="2-1">新增用户</Menu-item>
-                                        <Menu-item name="2-2">活跃用户</Menu-item>
+                                        <Menu-item name="4-1">新增用户</Menu-item>
+                                        <Menu-item name="4-2">活跃用户</Menu-item>
                                     </Submenu>
-                                    <Submenu name="3">
+                                    <Submenu name="5">
                                         <template slot="title">
                                             <Icon type="stats-bars"></Icon>
                                             商户管理
                                         </template>
-                                        <Menu-group title="使用">
-                                            <Menu-item name="3-1">新增和启动</Menu-item>
-                                            <Menu-item name="3-2">活跃分析</Menu-item>
-                                            <Menu-item name="3-3">时段分析</Menu-item>
-                                        </Menu-group>
-                                        <Menu-group title="留存">
-                                            <Menu-item name="3-4">用户留存</Menu-item>
-                                            <Menu-item name="3-5">流失用户</Menu-item>
-                                        </Menu-group>
+                                        <Menu-item name="5-1">新增和启动</Menu-item>
+                                        <Menu-item name="5-2">活跃分析</Menu-item>
+                                        <Menu-item name="5-3">时段分析</Menu-item>
                                     </Submenu>
-                                    <Submenu name="4">
+                                    <Submenu name="6">
                                         <template slot="title">
                                             <Icon type="ios-gear-outline"></Icon>
                                             个人设置
                                         </template>
-                                        <Menu-item name="2-1">新增用户</Menu-item>
-                                        <Menu-item name="2-2">活跃用户</Menu-item>
+                                        <Menu-item name="6-1"><router-link to="/personal" style="color: #657180;">资料修改</router-link></Menu-item>
                                     </Submenu>
-                                    <Submenu name="2">
+                                    <Submenu name="7">
                                         <template slot="title">
                                             <Icon type="help-circled"></Icon>
                                             帮助中心
                                         </template>
-                                        <Menu-item name="2-1">新增用户</Menu-item>
-                                        <Menu-item name="2-2">活跃用户</Menu-item>
+                                        <Menu-item name="7-1">新增用户</Menu-item>
+                                        <Menu-item name="7-2">活跃用户</Menu-item>
                                     </Submenu>
                                 </Menu>
 
@@ -107,7 +100,24 @@
                         </div>
                         <!--右边盒子-->
                         <div class="right-content">
-                            <common-main></common-main>
+                            <transition :name="transitionName" v-if="$route.path == '/'">
+                                <common-main></common-main>
+                            </transition>
+                            <transition :name="transitionName" v-if="$route.path != '/'">
+                                <div>
+                                    <div style="height: 70px; display: flex; align-items: center">
+                                        <Breadcrumb>
+                                            <Breadcrumb-item href="/">Home</Breadcrumb-item>
+                                            <Breadcrumb-item href="/components/breadcrumb">Components</Breadcrumb-item>
+                                            <Breadcrumb-item>Breadcrumb</Breadcrumb-item>
+                                        </Breadcrumb>
+                                    </div>
+                                    <div style="border: 1px solid #dedede; padding-top: 20px; border-radius: 3px">
+                                        <router-view></router-view>
+                                    </div>
+
+                                </div>
+                            </transition>
                         </div>
                     </div>
 
@@ -138,7 +148,9 @@
 
     export default {
         data () {
-            return {}
+            return {
+                transitionName: 'slide-left',
+            }
         },
         components: {
             CommonMain

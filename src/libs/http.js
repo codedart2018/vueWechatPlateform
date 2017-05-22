@@ -56,6 +56,7 @@ Http.install = function (Vue) {
                 Vue.prototype.response(response.data)
                 resolve(response.data)
             }).catch((response) => {
+                this.$Message.error("服务请求出错")
                 console.log('Customize Notice', response)
                 closeLoading()
                 reject(response)
@@ -77,6 +78,7 @@ Http.install = function (Vue) {
                 Vue.prototype.response(response.data)
                 resolve(response.data)
             }).catch((response) => {
+                this.$Message.error("服务请求出错")
                 console.log('Customize Notice', response)
                 closeLoading()
                 reject(response)
@@ -104,7 +106,6 @@ Http.install = function (Vue) {
             setTimeout(() => closeLoading(), 800)
             return false
         }
-        
         setTimeout(() => closeLoading(), 800)
     }
 }

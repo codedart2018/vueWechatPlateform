@@ -11,9 +11,9 @@ export default new Router({
             name: 'manage',
             component: resolve => require(['./pages/common/manage'], resolve),
             children: [{
-                path: '/edit',
-                name: 'edit',
-                component: resolve => require(['./pages/user/edit'], resolve),
+                path: '/personal',
+                name: 'personal',
+                component: resolve => require(['./pages/personal/index'], resolve),
             }]
         },
         {
