@@ -14,6 +14,10 @@ export default new Router({
                 path: '/personal',
                 name: 'personal',
                 component: resolve => require(['./pages/personal/index'], resolve),
+            },{
+                path: '/merchant',
+                name: 'merchant',
+                component: resolve => require(['./pages/setting/merchant'], resolve),
             }]
         },
         {

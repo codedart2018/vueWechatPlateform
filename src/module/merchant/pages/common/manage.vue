@@ -75,7 +75,7 @@
                                             <Icon type="stats-bars"></Icon>
                                             商户管理
                                         </template>
-                                        <Menu-item name="5-1">资料修改</Menu-item>
+                                        <Menu-item name="5-1"><router-link to="/merchant" style="color: #657180;">商户信息</router-link></Menu-item>
                                         <Menu-item name="5-2">活跃分析</Menu-item>
                                         <Menu-item name="5-3">时段分析</Menu-item>
                                     </Submenu>
@@ -119,7 +119,7 @@
                                             <Breadcrumb-item>Breadcrumb</Breadcrumb-item>
                                         </Breadcrumb>
                                     </div>
-                                    <div style="border: 1px solid #dedede; padding-top: 20px; border-radius: 3px">
+                                    <div style="border: 1px solid #dedede; padding: 20px; border-radius: 3px">
                                         <router-view></router-view>
                                     </div>
 
