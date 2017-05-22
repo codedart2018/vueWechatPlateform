@@ -5,8 +5,8 @@
             <Form-item label="帐号" prop="account">
                 <Input v-model="form.account" disabled ></Input>
             </Form-item>
-            <Form-item label="身份" prop="name">
-                <Input v-model="form.name" disabled ></Input>
+            <Form-item label="身份">
+                <span>商户主</span>
             </Form-item>
             <Form-item label="密码" prop="password">
                 <Input v-model="form.password" placeholder="密码留空将则不会修改密码" ></Input>
@@ -44,30 +44,36 @@
                     mobile: [
                         { type: 'string', message: '手机号码不正确', trigger: 'blur', pattern: /^1[34578]\d{9}$/}
                     ]
-                }
+                },
+                subCount: 0
             }
         },
         methods: {
             handleSubmit (name) {
-                this.$refs[name].validate((valid) => {
-                    if (valid) {
-                    	this.request("MerchantUserEdit", this.form).then((res) => {
-                            if(res.status) {
-                                this.$Message.success('提交成功!');
-                            } else {
-                                this.$Message.error(res.msg);
-                            }
-                        }).catch(err => {
-                        	console.log(err)
-                            this.$Message.error('系统服务错误');
-                        })
-                    } else {
-                        this.$Message.error('表单验证失败!');
-                    }
-                })
+            	if(this.subCount > 2) {
+                    this.$Message.error('不允许多次提交修改')
+                } else {
+                    this.$refs[name].validate((valid) => {
+                        if (valid) {
+                            this.request("MerchantUserEdit", this.form).then((res) => {
+                                if(res.status) {
+                                    this.subCount++
+                                    this.$Message.success(res.msg)
+                                } else {
+                                    this.$Message.error(res.msg)
+                                }
+                            }).catch(err => {
+                                console.log(err)
+                                this.$Message.error('系统服务错误')
+                            })
+                        } else {
+                            this.$Message.error('表单验证失败!')
+                        }
+                    })
+                }
             },
             handleReset (name) {
-                this.$refs[name].resetFields();
+                this.$refs[name].resetFields()
             },
             //获得当前用户数据
             getData() {
@@ -79,7 +85,6 @@
                     }
                 }).catch((err => {
                     this.$router.go(-1)
-                	console.log(err, 233)
                 }))
             },
             //返回
@@ -89,7 +94,7 @@
         },
         mounted() {
             //服务端获取数据
-            this.getData();
+            this.getData()
         }
     }
 </script>
