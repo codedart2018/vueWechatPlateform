@@ -18,21 +18,21 @@
     right: 0;
     bottom: 0;
     left: 0;
-    overflow-y: scroll;/*显示y轴滚动条*/
-    overflow-x: hidden;/*隐藏x轴滚动条*/
+    overflow-y: scroll; /*显示y轴滚动条*/
+    overflow-x: hidden; /*隐藏x轴滚动条*/
 }
 
 .box {
     margin: 0 auto;
     width: 1280px;
-    min-height:1000px;
+    //min-height:1000px;
     flex: 1;
     background: #FFFFFF;
     border: 1px solid #dedede;
 }
 
 .box-shadow {
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.06);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .06);
 }
 
 .header {
@@ -157,6 +157,201 @@
                 background-color: #ef5b56;
             }
         }
+    }
+}
+
+//中间部分
+.mt20 {
+    margin-top: 20px;
+}
+
+.flex {
+    display: flex;
+}
+
+.box-content {
+    margin: 30px 20px 20px;
+    flex-direction: row;
+    height: auto;
+
+    .menu-box {
+        width: 240px;
+        height: auto;
+
+        .tip {
+            height: 70px;
+            font-size: 24px;
+            line-height: 70px;
+            padding-left: 20px;
+            background: #0099e8;
+            color: #FFFFFF
+        }
+
+        .sub-menu {
+            border: 1px solid #dedede;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+    }
+
+    .right-content {
+        flex: 1;
+        height: auto;
+        margin-left: 20px;
+
+        .welcome {
+            width: 100%;
+            height: 135px;
+            border: 1px solid #dedede;
+
+            .sub-box {
+                height: 130px;
+                display: flex;
+                flex-direction: row;
+
+                .avatar {
+                    width: 140px;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    img {
+                        border: 1px solid #dedede;
+                        display: block;
+                        width: 90px;
+                        height: 90px;
+                        border-radius: 50%
+                    }
+                }
+
+                .info {
+                    width: 500px;
+                    margin-left: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    margin-top: 15px;
+                    margin-bottom: 15px;
+                }
+
+                .auth {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        .finance {
+            width: 100%;
+            height: 150px;
+            display: flex;
+            flex-direction: row;
+            margin-top: 20px;
+
+            .left-box {
+                width: 600px;
+                border: 1px solid #dedede;
+                flex-direction: column;
+                display: flex;
+
+                .title {
+                    width: 100%;
+                    height: 45px;
+                    background: #fafafa;
+                    border-bottom: 1px dashed #dedede;
+                    line-height: 45px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    font-family: '宋体', Arial;
+                    padding-left: 20px;
+                }
+
+                .pre {
+                    height: 50px;
+                    padding-left: 25px;
+                    line-height: 50px;
+                    font-size: 15px;
+                }
+
+                .row {
+                    display: flex;
+                    flex-direction: row;
+                    flex: 1;
+                    padding: 0 0 0 20px;
+
+                    .money {
+                        color: #ed3c4c;
+                        font-size: 20px;
+                        font-weight: bold;
+                        height: 34px;
+                        line-height: 34px;
+                    }
+
+                    .recharge {
+                        color: #FFFFFF;
+                        background: #ed3c4c;
+                        width: 100px;
+                        text-align: center;
+                        height: 34px;
+                        line-height: 34px;
+                        margin-left: 30px;
+                        font-size: 14px;
+                    }
+
+                    .list {
+                        flex: 1px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        div {
+                            width: 90px;
+                            text-align: center;
+                            height: 16px;
+                            line-height: 16px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .express {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            .icon {
+                margin-top: 20px;
+                width: 222px;
+                height: 130px;
+                border-radius: 10px;
+                background: #f5f7fa;
+                cursor: pointer;
+
+                .hover i {
+                    width: 100%;
+                    height: 90px;
+                    line-height: 90px;
+                    font-size: 50px;
+                    display: block;
+                    text-align: center;
+                }
+
+                .hover h3 {
+                    font-size: 16px;
+                    line-height: 100%;
+                    text-align: center;
+                }
+            }
+        }
+
+
     }
 }
 
