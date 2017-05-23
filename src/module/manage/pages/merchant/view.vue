@@ -22,7 +22,7 @@
                     <Form-item label="管理员帐号">
                         {{data.account}}
                     </Form-item>
-                    <Form-item label="帐号有效期">
+                    <Form-item label="商户有效期">
                         <div v-if="data.validity == 0">长期有效</div>
                         <div v-if="data.validity != 0">{{ data.validity | formatDate('yyyy-MM-dd h:m') }}</div>
                     </Form-item>
@@ -40,9 +40,6 @@
                     </Form-item>
                     <Form-item label="联系邮箱" prop="email">
                         <Input v-model="data.email" placeholder="请填写邮箱地址"></Input>
-                    </Form-item>
-                    <Form-item label="qq/微信" prop="email">
-                        <Input v-model="data.qq" placeholder="请填写邮箱地址"></Input>
                     </Form-item>
 
                     <Form-item label="简要说明" prop="desc">
@@ -199,7 +196,7 @@
             },
             getData (params) {
                 let id = this.$route.params.id
-                this.request('MerchantView', {id: id}, true).then((res) => {
+                this.request('AdminMerchantView', {id: id}, true).then((res) => {
                     if(res.status) {
                         //数据
                         this.data = res.data
