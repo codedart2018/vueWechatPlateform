@@ -42,9 +42,8 @@
                                             <Icon type="chatbubbles"></Icon>
                                             公众号
                                         </template>
-                                        <Menu-item name="1-1"><router-link to="/edit" style="color: #657180;">文章管理</router-link></Menu-item>
-                                        <Menu-item name="1-2"> <router-link to="/add" style="color: #657180;">评论管理</router-link></Menu-item>
-                                        <Menu-item name="1-3">举报管理</Menu-item>
+                                        <Menu-item name="1-1"><router-link to="/public/list" style="color: #657180;">公众号列表</router-link></Menu-item>
+                                        <Menu-item name="1-2"> <router-link to="/public/bind" style="color: #657180;">快速绑定</router-link></Menu-item>
                                     </Submenu>
                                     <Submenu name="2">
                                         <template slot="title">
@@ -75,7 +74,7 @@
                                             <Icon type="stats-bars"></Icon>
                                             商户管理
                                         </template>
-                                        <Menu-item name="5-1"><router-link to="/merchant" style="color: #657180;">商户信息</router-link></Menu-item>
+                                        <Menu-item name="5-1"><router-link to="/setting/merchant" style="color: #657180;">商户信息</router-link></Menu-item>
                                         <Menu-item name="5-2">活跃分析</Menu-item>
                                         <Menu-item name="5-3">时段分析</Menu-item>
                                     </Submenu>
@@ -84,7 +83,7 @@
                                             <Icon type="ios-gear-outline"></Icon>
                                             个人设置
                                         </template>
-                                        <Menu-item name="6-1"><router-link to="/personal" style="color: #657180;">资料修改</router-link></Menu-item>
+                                        <Menu-item name="6-1"><router-link to="/setting/personal" style="color: #657180;">资料修改</router-link></Menu-item>
                                         <Menu-item name="6-2"><router-link to="/personal" style="color: #657180;">登陆日志</router-link></Menu-item>
                                         <Menu-item name="6-3"><router-link to="/personal" style="color: #657180;">操作日志</router-link></Menu-item>
                                     </Submenu>

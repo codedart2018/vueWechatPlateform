@@ -11,13 +11,21 @@ export default new Router({
             name: 'manage',
             component: resolve => require(['./pages/common/manage'], resolve),
             children: [{
-                path: '/personal',
+                path: '/setting/personal',
                 name: 'personal',
-                component: resolve => require(['./pages/personal/index'], resolve),
+                component: resolve => require(['./pages/setting/personal'], resolve),
             },{
-                path: '/merchant',
+                path: '/setting/merchant',
                 name: 'merchant',
                 component: resolve => require(['./pages/setting/merchant'], resolve),
+            },{
+                path: '/public/list',
+                name: 'public',
+                component: resolve => require(['./pages/public/list'], resolve),
+            },{
+                path: '/public/bind',
+                name: 'bind',
+                component: resolve => require(['./pages/public/bind'], resolve),
             }]
         },
         {
