@@ -23,10 +23,12 @@
 }
 
 .box {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     margin: 0 auto;
     width: 1280px;
     min-height: 100%;
-    flex: 1;
     background: #FFFFFF;
     border: 1px solid #dedede;
 }
@@ -171,8 +173,9 @@
 }
 
 .box-content {
-    margin: 30px 20px 20px;
     flex-direction: row;
+    flex: 1;
+    margin: 30px 20px 20px;
     height: auto;
 
     .menu-box {

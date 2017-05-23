@@ -126,10 +126,11 @@
                                 </div>
                             </transition>
                         </div>
-
                     </div>
 
-
+                    <div style="height: 40px; text-align: center; line-height: 40px;">
+                        Copyright　© daimatu.cn　All Rights Reserved　代码兔微信公众平台版权所有
+                    </div>
                 </div>
 
             </div>
