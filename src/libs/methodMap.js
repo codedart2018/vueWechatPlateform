@@ -80,6 +80,8 @@ const methodMap = {
     MerchantUserEdit: {url: '/merchant/user/edit', method: "post"},
     /** 获取商户详情资料 **/
     MerchantView: {url: '/merchant/merchant/view', method: "get"},
+    /** 保存商户资料 **/
+    MerchantInfoSave: {url: '/merchant/merchant/save', method: "post"},
 }
 
 export default methodMap
