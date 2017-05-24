@@ -3,7 +3,7 @@
 <template>
     <div class="fixedDiv">
         <!--头部组件-->
-        <Header></Header>
+        <common-header></common-header>
         <!--头部组件结束-->
 
         <div class="contentDiv">
@@ -126,8 +126,8 @@
 </style>
 
 <script>
+    import CommonHeader from "./header.vue"
     import CommonMain from "./main.vue"
-    import Header from "./header.vue"
 
     export default {
         data () {
@@ -136,8 +136,12 @@
             }
         },
         components: {
-            CommonMain,
-            Header
+            CommonHeader,
+            CommonMain
+
         },
+        mounted() {
+
+        }
     }
 </script>

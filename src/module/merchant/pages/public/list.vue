@@ -70,7 +70,8 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.show(params.index)
+                                            //todo 切换过去的时候先保存一份public_signal号在vuex数据里面后面的操作全在里面
+                                            this.$router.push({ path: '/wechat/' + params.row.id })
                                         }
                                     }
                                 }, '管理'),
@@ -82,7 +83,7 @@
                                     on: {
                                         click: () => {
                                         	//todo 切换过去的时候先保存一份public_signal号在vuex数据里面后面的操作全在里面
-                                            this.$router.push({ path: '/add/' + params.row.id })
+                                            this.$router.push({ path: '/wechat/' + params.row.id })
                                         }
                                     }
                                 }, '接口')
@@ -94,15 +95,6 @@
             }
         },
         methods: {
-            show (index) {
-                this.$Modal.info({
-                    title: '用户信息',
-                    content: 23
-                })
-            },
-            remove (index) {
-                this.data.splice(index, 1);
-            },
             //获得数据
             getData() {
                 this.request("MerchantPublicList", {mch_id: 1}, true).then((res) => {

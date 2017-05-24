@@ -73,10 +73,12 @@
         <!--快捷图标-->
         <div class="express">
             <div class="icon">
-                <div class="hover">
-                    <i class="iconfont icon-gongzhonghao" style="font-size: 60px;"></i>
-                    <h3>公众号</h3>
-                </div>
+                <router-link to="/public/list" style="color: #657180;">
+                    <div class="hover">
+                        <i class="iconfont icon-gongzhonghao" style="font-size: 60px;"></i>
+                        <h3>公众号</h3>
+                    </div>
+                </router-link>
             </div>
             <div class="icon">
                 <div class="hover">

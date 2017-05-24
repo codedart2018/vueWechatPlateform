@@ -29,9 +29,9 @@ export default new Router({
             }]
         },
         {
-            path: '/add/:id?',
+            path: '/wechat/:id?',
             name: 'add',
-            component: resolve => require(['./pages/user/add'], resolve),
+            component: resolve => require(['./pages/wechat/manage'], resolve),
         },
         {
             path: '/login', //登录
@@ -45,4 +45,5 @@ export default new Router({
         },
     ]
 })
-
+//苏格拉底 --》 伯拉图 --》 亚里士多德--》 亚里山大--》阿基米德
+//                        加律略
