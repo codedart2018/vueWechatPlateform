@@ -1,5 +1,5 @@
 <template>
-    <Row>
+    <Row class="bp203">
         <Col span="10">
             <Form ref="form" :model="form" :rules="ruleValidate" :label-width="80">
             <Form-item label="帐号" prop="account">

@@ -1,6 +1,6 @@
 <template>
 
-    <Row>
+    <Row class="bp203">
         <Col span="14">
         <Form ref="data" :model="data" :rules="ruleValidate" :label-width="80">
             <Form-item label="商户名称">

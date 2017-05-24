@@ -118,10 +118,7 @@
                                             <Breadcrumb-item>Breadcrumb</Breadcrumb-item>
                                         </Breadcrumb>
                                     </div>
-                                    <div style="border: 1px solid #dedede; padding: 20px; border-radius: 3px">
-                                        <router-view></router-view>
-                                    </div>
-
+                                    <router-view></router-view>
                                 </div>
                             </transition>
                         </div>
