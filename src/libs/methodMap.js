@@ -82,6 +82,8 @@ const methodMap = {
     MerchantView: {url: '/merchant/merchant/view', method: "get"},
     /** 保存商户资料 **/
     MerchantInfoSave: {url: '/merchant/merchant/save', method: "post"},
+    /** 商户公众号列表 **/
+    MerchantPublicList: {url: '/merchant/public_signal/index', method: "get"},
 }
 
 export default methodMap

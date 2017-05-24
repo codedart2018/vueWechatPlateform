@@ -29,7 +29,7 @@ export default new Router({
             }]
         },
         {
-            path: '/add',
+            path: '/add/:id?',
             name: 'add',
             component: resolve => require(['./pages/user/add'], resolve),
         },

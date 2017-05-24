@@ -1,16 +1,19 @@
 <template>
     <div>
-        <Table border :columns="columns7" :data="data6"></Table>
+        <Table border :columns="columns7" :data="data"></Table>
     </div>
 </template>
 <script>
+
     export default {
         data () {
             return {
+                that: this,
                 columns7: [
                     {
-                        title: '姓名',
-                        key: 'name',
+                        title: '平台号',
+                        width: 100,
+                        key: 'id',
                         render: (h, params) => {
                             return h('div', [
                                 h('Icon', {
@@ -18,17 +21,37 @@
                                         type: 'person'
                                     }
                                 }),
-                                h('strong', params.row.name)
+                                h('strong', '  ' + params.row.id)
                             ]);
                         }
                     },
                     {
-                        title: '年龄',
-                        key: 'age'
+                        title: '公众号名称',
+                        key: 'public_name'
                     },
                     {
-                        title: '地址',
-                        key: 'address'
+                        title: '粉丝数量',
+                        key: 'id'
+                    },
+                    {
+                        title: '状态',
+                        key: 'status',
+                        width: 80,
+                        align: 'center',
+                        render (row) {
+                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red';
+                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除';
+                            return `<tag type="dot" style="padding-right: 3px" color="${color}" title="${text}"></tag>`;
+                        }
+                    },
+                    {
+                        title: '添加时间',
+                        key: 'create_time',
+                        width: 135,
+                        align: 'center',
+                        render (h, params) {
+                            return "<span>{{ row.create_time | formatDate('yyyy-MM-dd h:m') }}</span>"
+                        }
                     },
                     {
                         title: '操作',
@@ -50,56 +73,48 @@
                                             this.show(params.index)
                                         }
                                     }
-                                }, '查看'),
+                                }, '管理'),
                                 h('Button', {
                                     props: {
-                                        type: 'error',
+                                        type: 'success',
                                         size: 'small'
                                     },
                                     on: {
                                         click: () => {
-                                            this.remove(params.index)
+                                        	//todo 切换过去的时候先保存一份public_signal号在vuex数据里面后面的操作全在里面
+                                            this.$router.push({ path: '/add/' + params.row.id })
                                         }
                                     }
-                                }, '删除')
+                                }, '接口')
                             ]);
                         }
                     }
                 ],
-                data6: [
-                    {
-                        name: '王小明',
-                        age: 18,
-                        address: '北京市朝阳区芍药居'
-                    },
-                    {
-                        name: '张小刚',
-                        age: 25,
-                        address: '北京市海淀区西二旗'
-                    },
-                    {
-                        name: '李小红',
-                        age: 30,
-                        address: '上海市浦东新区世纪大道'
-                    },
-                    {
-                        name: '周小伟',
-                        age: 26,
-                        address: '深圳市南山区深南大道'
-                    }
-                ]
+                data: []
             }
         },
         methods: {
             show (index) {
                 this.$Modal.info({
                     title: '用户信息',
-                    content: `姓名：${this.data6[index].name}<br>年龄：${this.data6[index].age}<br>地址：${this.data6[index].address}`
+                    content: 23
                 })
             },
             remove (index) {
-                this.data6.splice(index, 1);
+                this.data.splice(index, 1);
+            },
+            //获得数据
+            getData() {
+                this.request("MerchantPublicList", {mch_id: 1}, true).then((res) => {
+                    if(res.status) {
+                    	this.data = res.data
+                    }
+                })
             }
+        },
+        mounted() {
+            //服务端获取数据
+            this.getData();
         }
     }
 </script>
