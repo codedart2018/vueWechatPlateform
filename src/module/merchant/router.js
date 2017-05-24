@@ -9,29 +9,53 @@ export default new Router({
         {
             path: '/',
             name: 'manage',
+            meta: {
+                title: '管理中心',
+                group: 'manage'
+            },
             component: resolve => require(['./pages/common/manage'], resolve),
             children: [{
                 path: '/setting/personal',
                 name: 'personal',
+                meta: {
+                    title: '个人设置',
+                    group: 'manage'
+                },
                 component: resolve => require(['./pages/setting/personal'], resolve),
             },{
                 path: '/setting/merchant',
                 name: 'merchant',
+                meta: {
+                    title: '商户设置',
+                    group: 'manage'
+                },
                 component: resolve => require(['./pages/setting/merchant'], resolve),
             },{
                 path: '/public/list',
                 name: 'public',
+                meta: {
+                    title: '公众号列表',
+                    group: 'manage'
+                },
                 component: resolve => require(['./pages/public/list'], resolve),
             },{
                 path: '/public/bind',
                 name: 'bind',
+                meta: {
+                    title: '绑定公众号',
+                    group: 'manage'
+                },
                 component: resolve => require(['./pages/public/bind'], resolve),
+            },
+            {
+                path: '/wechat/:id?',
+                name: 'wechatManage',
+                meta: {
+                    title: '微信公众号平台',
+                    group: 'wechat'
+                },
+                component: resolve => require(['./pages/wechat/manage'], resolve),
             }]
-        },
-        {
-            path: '/wechat/:id?',
-            name: 'add',
-            component: resolve => require(['./pages/wechat/manage'], resolve),
         },
         {
             path: '/login', //登录
