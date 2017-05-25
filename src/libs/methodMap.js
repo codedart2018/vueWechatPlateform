@@ -70,6 +70,8 @@ const methodMap = {
     DelEditorMaterialCate: {url: '/api/editor_material/del_cate', method: "post"},
     /** 删除编辑器素材 **/
     DelEditorMaterial: {url: '/api/editor_material/del', method: "post"},
+    /** 获取公众号列表 **/
+    AdminPublicList: {url: '/api/public_signal/index', method: "get"},
     
     // /** 以下接口为商户平台接口 **/
     /** 商户平台登陆中心 **/
