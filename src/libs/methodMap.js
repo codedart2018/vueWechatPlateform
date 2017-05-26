@@ -37,17 +37,17 @@ const methodMap = {
     /** 保存角色授权 **/
     SaveAuth: {url: '/api/role_auth/save_authorize', method: "post"},
     /** 后台用户列表 **/
-    User: {url: '/api/user/index', method: "get"},
+    AdminUser: {url: '/api/user/index', method: "get"},
     /** 添加后台用户 **/
-    AddUser: {url: '/api/user/add', method: "post"},
+    AdminAddUser: {url: '/api/user/add', method: "post"},
     /** 编辑后台用户 **/
-    EditUser: {url: '/api/user/edit', method: "post"},
+    AdminEditUser: {url: '/api/user/edit', method: "post"},
     /** 重置后台用户密码 **/
     RestPassword: {url: '/api/user/rest_password', method: "post"},
     /** 商户列表 **/
-    Merchant: {url: '/api/merchant/index', method: "get"},
+    AdminMerchant: {url: '/api/merchant/index', method: "get"},
     /** 添加商户 **/
-    AddMerchant: {url: '/api/merchant/add', method: "post"},
+    AdminAddMerchant: {url: '/api/merchant/add', method: "post"},
     /** 查看商户 **/
     AdminMerchantView: {url: '/api/merchant/view', method: "get"},
     /** 商户用户列表 **/
@@ -72,6 +72,8 @@ const methodMap = {
     DelEditorMaterial: {url: '/api/editor_material/del', method: "post"},
     /** 获取公众号列表 **/
     AdminPublicList: {url: '/api/public_signal/index', method: "get"},
+    /** 文章分类列表 **/
+    AdminCategoryList: {url: '/api/category/index', method: "get"},
     
     // /** 以下接口为商户平台接口 **/
     /** 商户平台登陆中心 **/

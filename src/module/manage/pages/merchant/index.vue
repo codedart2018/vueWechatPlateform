@@ -256,7 +256,7 @@
             addSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AddMerchant", this.addForm)
+                        this.save("AdminAddMerchant", this.addForm)
                     } else {
                         this.$Message.error('表单验证失败!')
                     }
@@ -278,7 +278,7 @@
             },
             getData (params) {
                 if (!params) params = {page: 1}
-                this.request('Merchant', params, true).then((res) => {
+                this.request('AdminMerchant', params, true).then((res) => {
                     if(res.status) {
                         //列表数据
                         this.list = res.data.list

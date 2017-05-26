@@ -2,40 +2,57 @@
     <div>
         <Row class="mb-15">
             <Col span="18" class="search">
-                <Form :model="formSearch" :label-width="80" inline label-position="right">
-                    <Form-item label="素材名称：">
-                        <Input v-model="formSearch.keywords" placeholder="请输入角色名称关键词"></Input>
-                    </Form-item>
-                    <Form-item label="素材分类：">
-                        <Select v-model="formSearch.c_id" placeholder="请选择" style="width:90px">
-                            <Option value="">请选择</Option>
-                            <Option v-for="item in cate" :value="item.id" :key="item.id">{{ item.name }}</Option>
-                        </Select>
-                    </Form-item>
-                    <Form-item label="素材状态：">
-                        <Select v-model="formSearch.status" placeholder="请选择" style="width:90px">
-                            <Option value="">请选择</Option>
-                            <Option value="1">正常</Option>
-                            <Option value="0">锁定</Option>
-                            <Option value="-1">删除</Option>
-                        </Select>
-                    </Form-item>
-                    <Form-item :label-width="1">
-                        <Button type="primary" @click="search('formSearch')" icon="ios-search">搜索</Button>
-                    </Form-item>
-                </Form>
+            <Form :model="formSearch" :label-width="80" inline label-position="right">
+                <Form-item label="素材名称：">
+                    <Input v-model="formSearch.keywords" placeholder="请输入角色名称关键词"></Input>
+                </Form-item>
+                <Form-item label="素材状态：">
+                    <Select v-model="formSearch.status" placeholder="请选择" style="width:90px">
+                        <Option value="">请选择</Option>
+                        <Option value="1">正常</Option>
+                        <Option value="0">锁定</Option>
+                        <Option value="-1">删除</Option>
+                    </Select>
+                </Form-item>
+                <Form-item :label-width="1">
+                    <Button type="primary" @click="search('formSearch')" icon="ios-search">搜索</Button>
+                </Form-item>
+            </Form>
             &nbsp;
             </Col>
             <Col span="6" class="text-align-right">
-                <router-link to="/manage/editor_material/add_material"><Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加素材</Button></Button></router-link>
+                <Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加分类</Button></Button>
             </Col>
         </Row>
         <Row class="mb-15">
             <Table :context="self" :columns="columns" :data="list"></Table>
         </Row>
         <Row type="flex" justify="end">
-            <Page :total="total" :page-size="pageSize" :current="pageNumber" show-total show-elevator @on-change="changePage"></Page>
         </Row>
+
+
+        <!--添加 Modal 对话框-->
+        <Modal v-model="addModal" title="添加分类" class-name="customize-modal-center" @on-cancel="modalCancel()">
+            <div>
+                <Form ref="addForm" :model="addForm" :rules="ruleValidate" :label-width="80">
+                    <Form-item label="分类名称" prop="name">
+                        <Input v-model="addForm.name" placeholder="请填写角色名称"></Input>
+                    </Form-item>
+                    <Form-item label="分类状态" prop="status">
+                        <Radio-group v-model="addForm.status">
+                            <Radio label="1">正常</Radio>
+                            <Radio label="0">锁定</Radio>
+                        </Radio-group>
+                    </Form-item>
+                </Form>
+            </div>
+            <div slot="footer">
+                <Button type="primary" @click="addSubmit('addForm')">提交</Button>
+                <Button type="ghost" @click="handleReset('addForm')" style="margin-left: 8px">重置</Button>
+            </div>
+        </Modal>
+
+
     </div>
 </template>
 
@@ -48,7 +65,7 @@
 </style>
 
 <script>
-
+    // todo 后期处理分类列表展现
     export default {
         data () {
             return {
@@ -58,16 +75,11 @@
                     {
                         title: 'ID',
                         key: 'id',
-                        width: 60
+                        width: 160
                     },
                     {
-                        title: '所属分类',
-                        key: 'cate_name',
-                        width: 200
-                    },
-                    {
-                        title: '素材名称',
-                        key: 'title',
+                        title: '分类名称',
+                        key: '_name'
                     },
                     {
                         title: '状态',
@@ -110,16 +122,22 @@
                 ],
                 //列表数据
                 list: [],
-                //总共数据多少条
-                total: 0,
-                //每页多少条数据
-                pageSize: 1,
-                //当前页码
-                pageNumber: 1,
+                addForm: {
+                    name: '',
+                    status: 1,
+                    desc: ''
+                },
+                //验证规则
+                ruleValidate: {
+                    name: [
+                        { required: true, message: '角色名称不能为空', trigger: 'blur' },
+                        { type: 'string', min: 2, message: '角色名称不能少于2个字符', trigger: 'blur' }
+                    ]
+                },
                 //搜索表单
                 formSearch: {},
-                //分类
-                cate: []
+                //添加 modal
+                addModal: false,
             }
         },
         methods: {
@@ -127,41 +145,23 @@
             handleReset (name) {
                 this.$refs[name].resetFields();
             },
-            //分页切换页码
-            changePage (page) {
-                this.pageNumber = page
-                let search = this.formSearch
-                let query = Object.assign({page: page }, search)
-                //分页
-                this.$router.push({ name: this.$router.currentRoute.name, query: query})
-                //获取最新数据
-                this.getData({page: page, params: search})
-            },
             //获取数据
             getData (params) {
                 if (!params) params = {page: 1}
-                this.request('EditorMaterial', params, true).then((res) => {
+                this.request('AdminCategoryList', params, true).then((res) => {
                     if(res.status) {
                         //列表数据
-                        this.list = res.data.list
-                        //总页数
-                        this.total = res.data.count
-                        //每页多少条数据
-                        this.pageSize = res.data.size
+                        this.list = res.data
                     } else {
                         //列表数据
                         this.list = []
-                        //总页数
-                        this.total = 0
-                        //每页多少条数据
-                        this.pageSize = 0
                     }
                 })
             },
             edit(id) {
                 this.$router.push({ path: '/manage/editor_material/edit_material/' + id, params: { id: id }})
             },
-            //删除素材数据
+            //删除角色数据
             del (index, id) {
                 this.$Modal.confirm({
                     title: '温馨提示',
@@ -187,24 +187,12 @@
                 let page = 1
                 this.pageNumber = page
                 let search = this.formSearch
-                //if(JSON.stringify(search) == "{}") return
                 this.getData({ params : search })
-            },
-            //获得分类数据
-            getCate() {
-                this.request('EditorMaterialCate', {type: 1}, true).then((res) => {
-                    if(res.status) {
-                        this.cate = res.data
-                    }
-                })
-            },
+            }
         },
         mounted() {
             //服务端获取数据
             this.getData()
-            //服务端分类数据
-            this.getCate()
-            console.log(JSON.stringify(this.formSearch))
         }
     }
 </script>
