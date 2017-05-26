@@ -187,7 +187,7 @@
             addSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AddRole", this.addForm)
+                        this.save("AdminAddRole", this.addForm)
                     } else {
                         this.$Message.error('表单验证失败!')
                     }

@@ -27,7 +27,7 @@ const methodMap = {
     /** 角色列表 **/
     GetRole: {url: '/api/role_auth/role', method: "get"},
     /** 添加角色 **/
-    AddRole: {url: '/api/role_auth/add_role', method: "post"},
+    AdminAddRole: {url: '/api/role_auth/add_role', method: "post"},
     /** 编辑角色 **/
     EditRole: {url: '/api/role_auth/edit_role', method: "post"},
     /** 删除角色 **/
@@ -74,6 +74,8 @@ const methodMap = {
     AdminPublicList: {url: '/api/public_signal/index', method: "get"},
     /** 文章分类列表 **/
     AdminCategoryList: {url: '/api/category/index', method: "get"},
+    /** 添加文章分类 **/
+    AdminCategoryAdd: {url: '/api/category/add', method: "post"},
     
     // /** 以下接口为商户平台接口 **/
     /** 商户平台登陆中心 **/

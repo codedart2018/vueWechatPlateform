@@ -115,7 +115,7 @@
         mounted() {
             this.user = this.$store.state.User.user_info
             //console.log(this.$route.path)
-            console.log(this.$router.options.routes)
+            //console.log(this.$router.options.routes)
             //this.$loading('加载中')
             //console.log(this.$router.options.routes)
             //console.log(this.$store.state.MainMenu.mainMenu)

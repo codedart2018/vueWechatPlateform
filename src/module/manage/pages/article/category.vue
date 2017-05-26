@@ -36,7 +36,16 @@
             <div>
                 <Form ref="addForm" :model="addForm" :rules="ruleValidate" :label-width="80">
                     <Form-item label="分类名称" prop="name">
-                        <Input v-model="addForm.name" placeholder="请填写角色名称"></Input>
+                        <Input v-model="addForm.name" placeholder="请填写角色名称" style="width:200px"></Input>
+                    </Form-item>
+                    <Form-item label="所属分类" prop="pid">
+                        <Select v-model="addForm.pid" style="width:200px">
+                            <Option value="0">顶级分类</Option>
+                            <Option v-for="(item, index) in list" :value="item.id" :key="index">{{ item._name }}</Option>
+                        </Select>
+                    </Form-item>
+                    <Form-item label="分类排序" prop="sort">
+                        <Input v-model="addForm.sort" placeholder="数字越大排序越前" style="width:200px"></Input>
                     </Form-item>
                     <Form-item label="分类状态" prop="status">
                         <Radio-group v-model="addForm.status">
@@ -49,6 +58,38 @@
             <div slot="footer">
                 <Button type="primary" @click="addSubmit('addForm')">提交</Button>
                 <Button type="ghost" @click="handleReset('addForm')" style="margin-left: 8px">重置</Button>
+            </div>
+        </Modal>
+
+        <!--修改 Modal 对话框-->
+        <!--编辑 Modal 对话框-->
+        <Modal v-model="editModal" class-name="customize-modal-center">
+            <div slot="header" class="ivu-modal-header-inner">编辑分类</div>
+            <div>
+                <Form ref="editForm" :model="editForm" :rules="ruleValidate" :label-width="80">
+                    <Form-item label="分类名称" prop="name">
+                        <Input v-model="editForm.name" placeholder="请填写角色名称" style="width:200px"></Input>
+                    </Form-item>
+                    <Form-item label="所属分类" prop="pid">
+                        <Select v-model="editForm.pid" style="width:200px">
+                            <Option value="0">顶级分类</Option>
+                            <Option v-for="(item, index) in list" :value="item.id" :key="index">{{ item._name }}</Option>
+                        </Select>
+                    </Form-item>
+                    <Form-item label="分类排序" prop="sort">
+                        <Input v-model="editForm.sort" placeholder="数字越大排序越前" style="width:200px"></Input>
+                    </Form-item>
+                    <Form-item label="分类状态" prop="status">
+                        <Radio-group v-model="editForm.status">
+                            <Radio label="1">正常</Radio>
+                            <Radio label="0">锁定</Radio>
+                        </Radio-group>
+                    </Form-item>
+                </Form>
+            </div>
+            <div slot="footer">
+                <Button type="primary" @click="editSubmit('editForm')">提交</Button>
+                <Button type="ghost" @click="modalCancel()" style="margin-left: 8px">取消</Button>
             </div>
         </Modal>
 
@@ -124,23 +165,38 @@
                 list: [],
                 addForm: {
                     name: '',
+                    pid: '',
                     status: 1,
-                    desc: ''
+                    sort: ''
                 },
+                //编辑表单
+                editForm: {},
                 //验证规则
                 ruleValidate: {
                     name: [
-                        { required: true, message: '角色名称不能为空', trigger: 'blur' },
-                        { type: 'string', min: 2, message: '角色名称不能少于2个字符', trigger: 'blur' }
+                        { required: true, message: '分类名称不能为空', trigger: 'blur' },
+                        { type: 'string', min: 2, message: '分类名称不能少于2个字符', trigger: 'blur' }
+                    ],
+                    pid: [
+                        { required: true, message: '请选择所属分类', trigger: 'blur' }
+                    ],
+                    sort: [
+                        { type: 'string', message: '排序只能数字', trigger: 'blur', pattern: /^[0-9]+$/}
                     ]
                 },
                 //搜索表单
                 formSearch: {},
                 //添加 modal
                 addModal: false,
+                //编辑 modal
+                editModal: false
             }
         },
         methods: {
+            //取消 modal
+            modalCancel() {
+                this.editModal = false
+            },
             //重置表单数据
             handleReset (name) {
                 this.$refs[name].resetFields();
@@ -155,6 +211,16 @@
                     } else {
                         //列表数据
                         this.list = []
+                    }
+                })
+            },
+            //添加数据
+            addSubmit (name) {
+                this.$refs[name].validate((valid) => {
+                    if (valid) {
+                        this.save("AdminCategoryAdd", this.addForm)
+                    } else {
+                        this.$Message.error('表单验证失败!')
                     }
                 })
             },
@@ -188,7 +254,24 @@
                 this.pageNumber = page
                 let search = this.formSearch
                 this.getData({ params : search })
-            }
+            },
+            //保存数据方法
+            save(url, data) {
+                this.request(url, data).then((res) => {
+                    if (res.status) {
+                        this.addModal = false
+                        this.editModal = false
+                        this.$Message.success(res.msg)
+                        //重置数据
+                        this.$refs['addForm'].resetFields()
+                        this.$refs['editForm'].resetFields()
+                        //重新拉取服务端数据
+                        this.getData()
+                    } else {
+                        this.$Message.error(res.msg)
+                    }
+                })
+            },
         },
         mounted() {
             //服务端获取数据
