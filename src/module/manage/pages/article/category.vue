@@ -176,9 +176,6 @@
                                 }, '删除')
                             ]);
                         }
-//                        render (row, column, index) {
-//                            return `<i-button type="primary" size="small" @click="edit(${row.id})">编辑</i-button> <i-button type="error" size="small" @click="del(${index}, ${row.id})">删除</i-button>`;
-//                        }
                     }
                 ],
                 //列表数据

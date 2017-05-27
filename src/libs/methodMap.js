@@ -80,6 +80,8 @@ const methodMap = {
     AdminCategoryEdit: {url: '/api/category/edit', method: "post"},
     /** 删除文章分类 **/
     AdminCategoryDelete: {url: '/api/category/delete', method: "post"},
+    /** 文章列表 **/
+    AdminArticleList: {url: '/api/article/index', method: "get"},
     
     // /** 以下接口为商户平台接口 **/
     /** 商户平台登陆中心 **/
