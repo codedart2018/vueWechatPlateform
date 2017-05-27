@@ -61,7 +61,6 @@
             </div>
         </Modal>
 
-        <!--修改 Modal 对话框-->
         <!--编辑 Modal 对话框-->
         <Modal v-model="editModal" class-name="customize-modal-center">
             <div slot="header" class="ivu-modal-header-inner">编辑分类</div>
@@ -156,9 +155,38 @@
                         key: 'operation',
                         width: 140,
                         align: 'center',
-                        render (row, column, index) {
-                            return `<i-button type="primary" size="small" @click="edit(${row.id})">编辑</i-button> <i-button type="error" size="small" @click="del(${index}, ${row.id})">删除</i-button>`;
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.edit(params.index)
+                                        }
+                                    }
+                                }, '查看'),
+                                h('Button', {
+                                    props: {
+                                        type: 'error',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.remove(params.index)
+                                        }
+                                    }
+                                }, '删除')
+                            ]);
                         }
+//                        render (row, column, index) {
+//                            return `<i-button type="primary" size="small" @click="edit(${row.id})">编辑</i-button> <i-button type="error" size="small" @click="del(${index}, ${row.id})">删除</i-button>`;
+//                        }
                     }
                 ],
                 //列表数据
@@ -224,8 +252,21 @@
                     }
                 })
             },
-            edit(id) {
-                this.$router.push({ path: '/manage/editor_material/edit_material/' + id, params: { id: id }})
+            //修改数据
+            editSubmit (name) {
+                this.$refs[name].validate((valid) => {
+                    if (valid) {
+                        this.save("AdminCategoryEdit", this.editForm)
+                    } else {
+                        this.$Message.error('表单验证失败!')
+                    }
+                })
+            },
+            edit(index) {
+                //打开 modal 窗口
+                this.editModal = true
+                //获取原数据
+                this.editForm = this.list[index]
             },
             //删除角色数据
             del (index, id) {

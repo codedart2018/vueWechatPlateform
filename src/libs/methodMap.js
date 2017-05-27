@@ -76,6 +76,8 @@ const methodMap = {
     AdminCategoryList: {url: '/api/category/index', method: "get"},
     /** 添加文章分类 **/
     AdminCategoryAdd: {url: '/api/category/add', method: "post"},
+    /** 修改文章分类 **/
+    AdminCategoryEdit: {url: '/api/category/edit', method: "post"},
     
     // /** 以下接口为商户平台接口 **/
     /** 商户平台登陆中心 **/
