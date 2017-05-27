@@ -67,9 +67,9 @@ const methodMap = {
     /** 编辑器素材分类列表 **/
     EditEditorMaterialCate: {url: '/api/editor_material/edit_cate', method: "post"},
     /** 删除编辑器素材分类 **/
-    DelEditorMaterialCate: {url: '/api/editor_material/del_cate', method: "post"},
+    AdminDelEditorMaterialCate: {url: '/api/editor_material/del_cate', method: "post"},
     /** 删除编辑器素材 **/
-    DelEditorMaterial: {url: '/api/editor_material/del', method: "post"},
+    AdminDelEditorMaterial: {url: '/api/editor_material/del', method: "post"},
     /** 获取公众号列表 **/
     AdminPublicList: {url: '/api/public_signal/index', method: "get"},
     /** 文章分类列表 **/
@@ -78,6 +78,8 @@ const methodMap = {
     AdminCategoryAdd: {url: '/api/category/add', method: "post"},
     /** 修改文章分类 **/
     AdminCategoryEdit: {url: '/api/category/edit', method: "post"},
+    /** 删除文章分类 **/
+    AdminCategoryDelete: {url: '/api/category/delete', method: "post"},
     
     // /** 以下接口为商户平台接口 **/
     /** 商户平台登陆中心 **/

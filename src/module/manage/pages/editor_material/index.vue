@@ -169,7 +169,7 @@
                     content: '<p>你确定要删除?删除后不可恢复!</p>',
                     loading: true,
                     onOk: () => {
-                        this.request('DelEditorMaterial', {id, id}).then((res) => {
+                        this.request('AdminDelEditorMaterial', {id, id}).then((res) => {
                             if(res.status) {
                                 this.$Message.info(res.msg)
                                 this.$Modal.remove();

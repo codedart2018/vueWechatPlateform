@@ -178,7 +178,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.remove(params.index)
+                                            this.remove(params.index, params.row.id)
                                         }
                                     }
                                 }, '删除')
@@ -269,18 +269,18 @@
                 this.editForm = this.list[index]
             },
             //删除角色数据
-            del (index, id) {
+            remove (index, id) {
                 this.$Modal.confirm({
                     title: '温馨提示',
                     width: 300,
                     content: '<p>你确定要删除?删除后不可恢复!</p>',
                     loading: true,
                     onOk: () => {
-                        this.request('DelEditorMaterial', {id, id}).then((res) => {
+                        this.request('AdminCategoryDelete', {id, id}).then((res) => {
                             if(res.status) {
                                 this.$Message.info(res.msg)
                                 this.$Modal.remove();
-                                this.list[index].status = -1
+                                this.list.splice(index, 1);
                             } else {
                                 this.$Message.error(res.msg)
                                 this.$Modal.remove();
@@ -312,7 +312,7 @@
                         this.$Message.error(res.msg)
                     }
                 })
-            },
+            }
         },
         mounted() {
             //服务端获取数据
