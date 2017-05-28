@@ -198,7 +198,7 @@
             },
             getData (params) {
                 if (!params) params = {page: 1}
-                this.request('EditorMaterialCate', params, true).then((res) => {
+                this.request('AdminEditorMaterialCate', params, true).then((res) => {
                     if(res.status) {
                         //列表数据
                         this.list = res.data.list

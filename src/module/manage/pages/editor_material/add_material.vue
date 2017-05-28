@@ -122,7 +122,7 @@
             },
             //获得分类数据
             getCate() {
-                this.request('EditorMaterialCate', {type: 1}, true).then((res) => {
+                this.request('AdminEditorMaterialCate', {type: 1}, true).then((res) => {
                     if(res.status) {
                         this.cate = res.data
                     }

@@ -61,7 +61,7 @@ const methodMap = {
     /** 编辑编辑器素材 **/
     EditMaterialEditor: {url: '/api/editor_material/edit_material', method: "post"},
     /** 编辑器素材分类列表 **/
-    EditorMaterialCate: {url: '/api/editor_material/cate', method: "get"},
+    AdminEditorMaterialCate: {url: '/api/editor_material/cate', method: "get"},
     /** 编辑器素材分类列表 **/
     AddEditorMaterialCate: {url: '/api/editor_material/add_cate', method: "post"},
     /** 编辑器素材分类列表 **/
