@@ -3,21 +3,20 @@
         <Row class="mb-15">
             <Col span="18" class="search">
             <Form :model="formSearch" :label-width="80" inline label-position="right">
-                <Form-item label="素材名称：">
-                    <Input v-model="formSearch.keywords" placeholder="请输入角色名称关键词"></Input>
+                <Form-item label="文章名称：">
+                    <Input v-model="formSearch.keywords" placeholder="请输入文章关键词"></Input>
                 </Form-item>
-                <Form-item label="素材分类：">
+                <Form-item label="文章分类：">
                     <Select v-model="formSearch.c_id" placeholder="请选择" style="width:90px">
                         <Option value="">请选择</Option>
                         <Option v-for="item in cate" :value="item.id" :key="item.id">{{ item.name }}</Option>
                     </Select>
                 </Form-item>
-                <Form-item label="素材状态：">
+                <Form-item label="文章状态：">
                     <Select v-model="formSearch.status" placeholder="请选择" style="width:90px">
                         <Option value="">请选择</Option>
                         <Option value="1">正常</Option>
-                        <Option value="0">锁定</Option>
-                        <Option value="-1">删除</Option>
+                        <Option value="0">删除</Option>
                     </Select>
                 </Form-item>
                 <Form-item :label-width="1">
@@ -115,7 +114,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.edit(params.index)
+                                            this.edit(params.row.id)
                                         }
                                     }
                                 }, '查看'),
@@ -185,7 +184,7 @@
                 })
             },
             edit(id) {
-                this.$router.push({ path: '/editor_material/edit_material/' + id, params: { id: id }})
+                this.$router.push({ path: '/article/edit/' + id, params: { id: id }})
             },
             //删除素材数据
             del (index, id) {
@@ -218,7 +217,7 @@
             },
             //获得分类数据
             getCate() {
-                this.request('AdminEditorMaterialCate', {type: 1}, true).then((res) => {
+                this.request('AdminCategoryList', {type: 1}, true).then((res) => {
                     if(res.status) {
                         this.cate = res.data
                     }
