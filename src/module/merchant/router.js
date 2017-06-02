@@ -48,13 +48,22 @@ export default new Router({
                 component: resolve => require(['./pages/public/bind'], resolve),
             },
             {
-                path: '/wechat/:id?',
+                path: '/wechat/main',
                 name: 'wechatManage',
                 meta: {
                     title: '微信公众号平台',
                     group: 'wechat'
                 },
                 component: resolve => require(['./pages/wechat/manage'], resolve),
+            },
+            {
+                path: '/wechat/menu',
+                name: 'wechatMenu',
+                meta: {
+                    title: '菜单设置',
+                    group: 'wechat'
+                },
+                component: resolve => require(['./pages/wechat/menu'], resolve),
             }]
         },
         {

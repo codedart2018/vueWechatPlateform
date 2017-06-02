@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>this is template body</div>
+        <div>this is template body222</div>
     </div>
 </template>
 <style>

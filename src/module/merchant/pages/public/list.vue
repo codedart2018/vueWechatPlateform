@@ -71,7 +71,9 @@
                                     on: {
                                         click: () => {
                                             //todo 切换过去的时候先保存一份public_signal号在vuex数据里面后面的操作全在里面
-                                            this.$router.push({ path: '/wechat/' + params.row.id })
+                                            //把平台号写到 localStorage
+                                            window.localStorage.setItem('platformNumber', params.row.id)
+                                            this.$router.push({ path: '/wechat/main' })
                                         }
                                     }
                                 }, '管理'),

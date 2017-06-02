@@ -72,12 +72,6 @@
                                         <Menu-item name="7-1">新增用户</Menu-item>
                                         <Menu-item name="7-2">活跃用户</Menu-item>
                                     </Submenu>
-                                    <Submenu name="8">
-                                        <template slot="title">
-                                            <Icon type="settings"></Icon>
-                                            <a href="" style="color: #657180;">定制中心</a>
-                                        </template>
-                                    </Submenu>
                                 </Menu>
                             </div>
                         </div>
@@ -101,8 +95,62 @@
                             </transition>
                         </div>
                     </div>
+                    <!--微信分组-->
                     <div class="box-content flex" v-if="$route.meta.group == 'wechat'">
-                        3333
+                        <div class="menu-box">
+                            <div class="tip"><router-link to="/">公众号管理中心</router-link></div>
+                            <div class="sub-menu">
+                                <Menu width="auto" style="position: static;" accordion>
+                                    <Submenu name="1">
+                                        <template slot="title">
+                                            <Icon type="chatbubbles"></Icon>
+                                            微信管理
+                                        </template>
+                                        <Menu-item name="1-1"><router-link to="/public/list" style="color: #657180;">粉丝管理</router-link></Menu-item>
+                                        <Menu-item name="1-2"> <router-link to="/public/bind" style="color: #657180;">消息管理</router-link></Menu-item>
+                                        <Menu-item name="1-3"> <router-link to="/public/bind" style="color: #657180;">自动回复</router-link></Menu-item>
+                                        <Menu-item name="1-4"> <router-link to="/public/bind" style="color: #657180;">消息群发</router-link></Menu-item>
+                                        <Menu-item name="1-5"> <router-link to="/wechat/menu" style="color: #657180;">自定义菜单</router-link></Menu-item>
+                                    </Submenu>
+                                    <Submenu name="2">
+                                        <template slot="title">
+                                            <Icon type="stats-bars"></Icon>
+                                            文章管理
+                                        </template>
+                                        <Menu-item name="2-1">素材管理</Menu-item>
+                                        <Menu-item name="2-2">文章分类</Menu-item>
+                                        <Menu-item name="2-2">文章列表</Menu-item>
+                                    </Submenu>
+                                    <Submenu name="3">
+                                        <template slot="title">
+                                            <Icon type="ios-people"></Icon>
+                                            短信管理
+                                        </template>
+                                        <Menu-item name="3-1">新增用户</Menu-item>
+                                        <Menu-item name="3-2">活跃用户</Menu-item>
+                                    </Submenu>
+                                    <Submenu name="4">
+                                        <template slot="title">
+                                            <Icon type="ios-people"></Icon>
+                                            消息工单
+                                        </template>
+                                        <Menu-item name="4-1">新增用户</Menu-item>
+                                        <Menu-item name="4-2">活跃用户</Menu-item>
+                                    </Submenu>
+                                    <Submenu name="5">
+                                        <template slot="title">
+                                            <Icon type="settings"></Icon>
+                                            <a href="" style="color: #657180;">定制中心</a>
+                                        </template>
+                                    </Submenu>
+                                </Menu>
+                            </div>
+                        </div>
+
+                        <!--右边盒子-->
+                        <div class="right-content">
+                            <router-view></router-view>
+                        </div>
                     </div>
 
                     <div style="height: 40px; text-align: center; line-height: 40px;">
@@ -132,6 +180,7 @@
 <script>
     import CommonHeader from "./header.vue"
     import CommonMain from "./main.vue"
+    import WechatMain from "../wechat/main.vue"
 
     export default {
         data () {
@@ -141,8 +190,8 @@
         },
         components: {
             CommonHeader,
-            CommonMain
-
+            CommonMain,
+            WechatMain
         },
         mounted() {
             console.log(this.$route)
