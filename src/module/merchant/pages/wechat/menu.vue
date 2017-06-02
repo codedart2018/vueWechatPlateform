@@ -18,8 +18,21 @@
                                     </a>
                                     <div class="sub_pre_menu_box js_l2TitleBox" v-if="index===activeMenuIndex">
                                         <ul class="sub_pre_menu_list">
-                                            <li v-for="(sub,index) in btn.sub_button" :key="sub.id" class='jslevel2'><a href="javascript:void(0);"  @click="menu_item_selected(sub.name,index)" :class="[{pre_menu_link: index===activeMenuItemIndex && activeMenuType()==2}]" class="jsSubView" draggable="false"><span class="sub_pre_menu_inner js_sub_pre_menu_inner"><i class="icon20_common sort_gray"></i><span class='js_l2Title'>{{ sub.name }}</span></span></a></li>
-                                            <li class='js_addMenuBox' v-if="isSet(menu.button[activeMenuIndex].sub_button)&&btn.sub_button.length>=0&&btn.sub_button.length<5"><a href="javascript:void(0);" class="jsSubView js_addL2Btn" title="最多添加5个子菜单" @click="menu_item_add()" draggable="false"><span class="sub_pre_menu_inner js_sub_pre_menu_inner"><i class="icon14_menu_add"></i></span></a></li>
+                                            <li v-for="(sub,index) in btn.sub_button" :key="sub.id" :class="[{current: index===activeMenuItemIndex && activeMenuType()==2}]">
+                                                <a href="javascript:void(0);"  @click="menu_item_selected(sub.name,index)" class="jsSubView" draggable="false">
+                                                    <span class="sub_pre_menu_inner js_sub_pre_menu_inner">
+                                                        <i class="icon20_common sort_gray"></i>
+                                                        <span class='js_l2Title'>{{ sub.name }}</span>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li class='js_addMenuBox' v-if="isSet(menu.button[activeMenuIndex].sub_button)&&btn.sub_button.length>=0&&btn.sub_button.length < 5">
+                                                <a href="javascript:void(0);" class="jsSubView js_addL2Btn" title="最多添加5个子菜单" @click="menu_item_add()" draggable="false">
+                                                    <span class="sub_pre_menu_inner js_sub_pre_menu_inner">
+                                                        <i class="icon14_menu_add"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
                                         </ul>
                                         <i class="arrow arrow_out"></i>
                                         <i class="arrow arrow_in"></i>
@@ -153,6 +166,8 @@
     }
     .menu_preview_area .pre_menu_list.no_menu .pre_menu_item .pre_menu_link {
         border: 1px solid #44b549;
+        line-height: 48px;
+        background-color: #fff;
         color: #44b549;
     }
     .menu_preview_area .pre_menu_list.no_menu .icon14_menu_add {
@@ -165,6 +180,96 @@
         vertical-align: middle;
         display: inline-block;
         margin-top: -2px;
+    }
+
+
+
+    /*添加菜单样式*/
+    .menu_preview_area .sub_pre_menu_box {
+        bottom: 60px;
+        background-color: #fafafa;
+        border-top-width: 0;
+    }
+
+    .sub_pre_menu_box {
+        position: absolute;
+        bottom: 50px;
+        left: 0;
+        width: 100%;
+        border: 1px solid #d0d0d0;
+        background-color: #fff;
+    }
+    .menu_preview_area .sub_pre_menu_list li:first-child {
+        border-top: 1px solid #d0d0d0;
+    }
+
+    .menu_preview_area .sub_pre_menu_list li {
+        line-height: 44px;
+        border: 1px solid transparent;
+        margin: 0 -1px -1px;
+    }
+
+    .sub_pre_menu_list li a {
+        padding: 0 .5em;
+    }
+    .pre_menu_item a {
+        display: block;
+        width: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-wrap: normal;
+        color: #616161;
+        text-decoration: none;
+    }
+    .menu_preview_area .sub_pre_menu_list li:first-child .sub_pre_menu_inner {
+        border-top-width: 0;
+    }
+    .menu_preview_area .sub_pre_menu_inner {
+        display: block;
+        border-top: 1px solid #e7e7eb;
+        width: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-wrap: normal;
+        cursor: pointer;
+    }
+    .sub_pre_menu_box .arrow_out {
+        bottom: -6px;
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-width: 6px;
+        border-style: dashed;
+        border-color: transparent;
+        border-bottom-width: 0;
+        border-top-color: #d0d0d0;
+        border-top-style: solid;
+    }
+    .sub_pre_menu_box .arrow {
+        position: absolute;
+        left: 50%;
+        margin-left: -6px;
+    }
+    .sub_pre_menu_box .arrow_in {
+        bottom: -5px;
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-width: 6px;
+        border-style: dashed;
+        border-color: transparent;
+        border-bottom-width: 0;
+        border-top-color: #fafafa;
+        border-top-style: solid;
+    }
+    .menu_preview_area .sub_pre_menu_list li.current {
+        background-color: #fff;
+        border: 1px solid #44b549;
+        position: relative;
+        z-index: 1;
+        line-height: 45px;
     }
 </style>
 
@@ -205,11 +310,148 @@
         },
         methods: {
         	//变量状态检测判断
-            isSet:function (variable) {
+            isSet(variable) {
                 if(typeof(variable)!='undefined'){
                     return true;
                 }else{
                     return false;
+                }
+            },
+            //添加一级菜单
+            menu_add() {
+                if(this.menu.button.length < 3){
+                    this.activeMenuItemIndex = '';
+                    this.activeMenuItemName = '';
+                    this.menu.button.push({"type":"click","name":"菜单名称","key":"","url":"","sub_button":[]});
+                    this.activeMenuIndex = this.menu.button.length-1;
+                    this.activeMenuName = '菜单名称';
+                    this.showDelBtnType = 1;
+                    //补全数据,无数据也要为空
+                    this.menu_data_completing();
+                }else{
+                    alert('最多3个一级菜单');
+                }
+            },
+            //添加二级菜单
+            menu_item_add() {
+                if(this.menu.button[this.activeMenuIndex].sub_button.length < 5){
+                    this.menu.button[this.activeMenuIndex].sub_button.push({"type":"click","name":"子菜单名称","key":"","url":"","sub_button":[]});
+                    this.activeMenuItemIndex = this.menu.button[this.activeMenuIndex].sub_button.length-1;
+                    this.activeMenuItemName = '子菜单名称';
+                    this.showDelBtnType = 2;
+                    //补全数据,无数据也要为空
+                    this.menu_data_completing();
+                }else{
+                    alert('最多5个二级菜单');
+                }
+            },
+            //当前菜单
+            menu_selected(name,index) {
+                this.showDelBtnType = 1;
+                this.activeMenuName = name;
+                this.activeMenuIndex = index;
+                this.activeMenuItemName = '';
+                this.activeMenuItemIndex = '';
+
+                //补全数据,无数据也要为空
+                this.menu_data_completing();
+
+                if(this.menu.button[this.activeMenuIndex].sub_button.length > 0){
+                    this.showMenuContentType = '';
+                }else{
+                    this.showMenuContentType = this.activeMenuBtnType();
+                }
+            },
+            //当前子菜单选中
+            menu_item_selected(name,index) {
+                this.showDelBtnType = 2;
+                this.activeMenuItemName = name;
+                this.activeMenuItemIndex = index;
+
+                //补全数据,无数据也要为空
+                this.menu_data_completing();
+
+                if(this.activeMenuIndex > 0 || this.activeMenuIndex === 0){
+                    if(this.menu.button[this.activeMenuIndex].sub_button.length > 0){
+                        this.showMenuContentType = this.activeMenuBtnType();
+                    }
+                }
+            },
+            //数据补全方法
+            menu_data_completing() {
+                for(var i=0;i<this.menu.button.length;i++){
+                    if(!('type' in this.menu.button[i])){
+                        this.menu.button[i].type = 'click';
+                    }
+                    if(!('name' in this.menu.button[i])){
+                        this.menu.button[i].name = '';
+                    }
+                    if(!('key' in this.menu.button[i])){
+                        this.menu.button[i].key = '';
+                    }
+                    if(!('url' in this.menu.button[i])){
+                        this.menu.button[i].url = '';
+                    }
+                    if(!('sub_button' in this.menu.button[i])){
+                        this.menu.button[i].sub_button = [];
+                    }
+                    if(this.menu.button[i].sub_button.length>0){
+                        for(var j=0;j<this.menu.button[i].sub_button.length;j++) {
+                            if (!('type' in this.menu.button[i].sub_button[j])) {
+                                this.menu.button[i].sub_button[j].type = 'click';
+                            }
+                            if (!('name' in this.menu.button[i].sub_button[j])) {
+                                this.menu.button[i].sub_button[j].name = '';
+                            }
+                            if (!('key' in this.menu.button[i].sub_button[j])) {
+                                this.menu.button[i].sub_button[j].key = '';
+                            }
+                            if (!('url' in this.menu.button[i].sub_button[j])) {
+                                this.menu.button[i].sub_button[j].url = '';
+                            }
+                            if (!('sub_button' in this.menu.button[i].sub_button[j])) {
+                                this.menu.button[i].sub_button[j].sub_button = [];
+                            }
+                        }
+                    }
+                }
+            },
+            //选中菜单属于几级菜单
+            activeMenuType() {
+                if(this.activeMenuIndex !== '' && this.activeMenuItemIndex !== ''){
+                    //子菜单、二级菜单
+                    return 2;
+                }else if(this.activeMenuIndex !== '' && this.activeMenuItemIndex === ''){
+                    //一级菜单
+                    return 1;
+                }else{
+                    return 0;
+                }
+            },
+            //选中菜单类型
+            activeMenuBtnType() {
+                if(this.activeMenuType() === 1){
+                    //一级菜单
+                    switch(this.menu.button[this.activeMenuIndex].type){
+                        case 'click':
+                            return 1;
+                        case 'view':
+                            return 2;
+                        default:
+                            return 0;
+                    }
+                }else if(this.activeMenuType() === 2){
+                    //子菜单、二级菜单
+                    switch(this.menu.button[this.activeMenuIndex].sub_button[this.activeMenuItemIndex].type){
+                        case 'click':
+                            return 1;
+                        case 'view':
+                            return 2;
+                        default:
+                            return 0;
+                    }
+                }else{
+                    return '';
                 }
             },
         }
