@@ -1,34 +1,35 @@
+<style src="../../assets/style/wechat/menu.less" lang="less" scoped></style>
 <template>
     <div>
-        <div class="menu_setting_box js_menuBox dn" style="display: block;">
-            <div class="menu_setting_area js_editBox">
+        <div class="menu_setting_box js_menuBox dn" style="display: flex;">
+            <!--手机模块-->
+            <div class="menu_setting_area">
                 <div class="menu_preview_area">
                     <div class="mobile_menu_preview">
                         <div class="mobile_hd tc">
                             {{ publicName }}
                         </div>
-
                         <div class="mobile_bd">
                             <ul class="pre_menu_list grid_line ui-sortable ui-sortable-disabled no_menu" style="z-index:3;" id="menuList">
                                 <li v-for="(btn,index) in menu.button" :key="btn.id" class="jsMenu pre_menu_item grid_item jslevel1 size1of3 ui-sortable ui-sortable-disabled">
                                     <a href="javascript:void(0);" @click="menu_selected(btn.name,index)" :class="[{pre_menu_link: index===activeMenuIndex && activeMenuType()==1}]" draggable="false">
                                         <i class="icon_menu_dot js_icon_menu_dot dn"></i>
                                         <i class="icon20_common sort_gray"></i>
-                                        <span class='js_l1Title'>{{ btn.name }}</span>
+                                        <span>{{ btn.name }}</span>
                                     </a>
-                                    <div class="sub_pre_menu_box js_l2TitleBox" v-if="index===activeMenuIndex">
+                                    <div class="sub_pre_menu_box" v-if="index===activeMenuIndex">
                                         <ul class="sub_pre_menu_list">
                                             <li v-for="(sub,index) in btn.sub_button" :key="sub.id" :class="[{current: index===activeMenuItemIndex && activeMenuType()==2}]">
-                                                <a href="javascript:void(0);"  @click="menu_item_selected(sub.name,index)" class="jsSubView" draggable="false">
-                                                    <span class="sub_pre_menu_inner js_sub_pre_menu_inner">
+                                                <a href="javascript:void(0);"  @click="menu_item_selected(sub.name,index)" draggable="false">
+                                                    <span class="sub_pre_menu_inner">
                                                         <i class="icon20_common sort_gray"></i>
-                                                        <span class='js_l2Title'>{{ sub.name }}</span>
+                                                        <span>{{ sub.name }}</span>
                                                     </span>
                                                 </a>
                                             </li>
                                             <li class='js_addMenuBox' v-if="isSet(menu.button[activeMenuIndex].sub_button)&&btn.sub_button.length>=0&&btn.sub_button.length < 5">
-                                                <a href="javascript:void(0);" class="jsSubView js_addL2Btn" title="最多添加5个子菜单" @click="menu_item_add()" draggable="false">
-                                                    <span class="sub_pre_menu_inner js_sub_pre_menu_inner">
+                                                <a href="javascript:void(0);"  title="最多添加5个子菜单" @click="menu_item_add()" draggable="false">
+                                                    <span class="sub_pre_menu_inner">
                                                         <i class="icon14_menu_add"></i>
                                                     </span>
                                                 </a>
@@ -38,10 +39,69 @@
                                         <i class="arrow arrow_in"></i>
                                     </div>
                                 </li>
-                                <li class="js_addMenuBox pre_menu_item grid_item no_extra size1of1"> <a href="javascript:void(0);" v-if="isSet(menu.button)?(menu.button.length>=0&&menu.button.length<3):false"  @click="menu_add()" :class="[{pre_menu_link: activeMenuIndex===''}]" class="js_addL1Btn" title="最多添加3个一级菜单" draggable="false"> <i class="icon14_menu_add"></i> <span class="js_addMenuTips">添加菜单</span></a> </li>
+                                <li class="js_addMenuBox pre_menu_item grid_item no_extra size1of1">
+                                    <a href="javascript:void(0);" v-if="isSet(menu.button)?(menu.button.length>=0&&menu.button.length<3):false" @click="menu_add()" :class="[{pre_menu_link: activeMenuIndex===''}]" class="js_addL1Btn" title="最多添加3个一级菜单" draggable="false">
+                                        <i class="icon14_menu_add"></i>
+                                        <span>添加菜单</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <!--手机模块END-->
+            <!--编辑表单区域-->
+            <div class="right-box">
+                <div class="editor-inner">
+                    <div class="menu-title-bar">
+                        <h4 class="title">菜单名称</h4>
+                        <div class="delete">
+                            <a href="javascript:void(0);" @click="menu_del()" v-if="showDelBtnType===1">删除菜单</a>
+                            <a href="javascript:void(0);" @click="menu_item_del()" v-if="showDelBtnType===2">删除子菜单</a>
+                        </div>
+                    </div>
+                    <div class="menu-form-box">
+                        <div style="display: block;" class="msg-sender-tips">已为“菜单名称”添加了5个子菜单，无法设置其他内容。</div>
+                    </div>
+                    <div class="menu-form-group">
+                        <div class="menu-form-item">
+                            <label class="menu-form-item-label" style="width: 80px;">菜单名称</label>
+                            <div class="ivu-form-item-content" style="margin-left: 80px;">
+                                <div class="ivu-input-wrapper ivu-input-type">
+                                    <i class="ivu-icon ivu-icon-load-c ivu-load-loop ivu-input-icon ivu-input-icon-validate"></i>
+                                    <input type="text" placeholder="请填写菜单名称" class="ivu-input" style="width: 250px" v-if="activeMenuType() == 1 && isSet(menu.button[activeMenuIndex])" v-model="menu.button[activeMenuIndex].name">
+                                    <input type="text" placeholder="请填写菜单名称" class="ivu-input" style="width: 250px" v-if="activeMenuType() == 2 && isSet(menu.button[activeMenuIndex].sub_button[activeMenuItemIndex])" v-model="menu.button[activeMenuIndex].sub_button[activeMenuItemIndex].name">
+                                    <p>{{stringNumberTips}}</p>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="menu-form-item">
+                            <label class="menu-form-item-label" style="width: 80px;">菜单内容</label>
+                            <div class="ivu-form-item-content" style="margin-left: 80px;">
+                                <div class="ivu-radio-group">
+                                    <label class="ivu-radio-wrapper ivu-radio-group-item ivu-radio-wrapper-checked">
+                                        <span class="ivu-radio ivu-radio-checked">
+                                            <span class="ivu-radio-inner"></span>
+                                            <input type="radio" class="ivu-radio-input">
+                                        </span>发送消息
+                                    </label>
+                                    <label class="ivu-radio-wrapper ivu-radio-group-item">
+                                        <span class="ivu-radio">
+                                            <span class="ivu-radio-inner"></span>
+                                            <input type="radio" class="ivu-radio-input">
+                                        </span>跳转网页
+                                    </label>
+                                    <label class="ivu-radio-wrapper ivu-radio-group-item">
+                                        <span class="ivu-radio">
+                                            <span class="ivu-radio-inner"></span>
+                                            <input type="radio" class="ivu-radio-input">
+                                        </span>跳转小程序
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -190,7 +250,6 @@
         background-color: #fafafa;
         border-top-width: 0;
     }
-
     .sub_pre_menu_box {
         position: absolute;
         bottom: 50px;
@@ -202,13 +261,11 @@
     .menu_preview_area .sub_pre_menu_list li:first-child {
         border-top: 1px solid #d0d0d0;
     }
-
     .menu_preview_area .sub_pre_menu_list li {
         line-height: 44px;
         border: 1px solid transparent;
         margin: 0 -1px -1px;
     }
-
     .sub_pre_menu_list li a {
         padding: 0 .5em;
     }
@@ -271,6 +328,8 @@
         z-index: 1;
         line-height: 45px;
     }
+
+
 </style>
 
 <script>
@@ -298,7 +357,9 @@
                 "activeMenuItemIndex":'',
                 "showDelBtnType":'', //1:delMenu 2:delMenuItem
                 "showMenuContentType":'', //1:发送消息 2:跳转链接
-                "showMenuContentMsgType":'' //1:图文信息 2:图片 3:语音 4:视频
+                "showMenuContentMsgType":'', //1:图文信息 2:图片 3:语音 4:视频
+                stringNumberTips: '字数不超过4个汉字或8个字母',
+
             }
         },
         components:{
@@ -328,6 +389,8 @@
                     this.showDelBtnType = 1;
                     //补全数据,无数据也要为空
                     this.menu_data_completing();
+                    //判断是否有下级子菜单
+                    console.log(this.menu.button,123)
                 }else{
                     alert('最多3个一级菜单');
                 }
@@ -347,6 +410,10 @@
             },
             //当前菜单
             menu_selected(name,index) {
+                //判断是否有下级子菜单
+            	console.log(this.menu.button)
+            	console.log(123)
+
                 this.showDelBtnType = 1;
                 this.activeMenuName = name;
                 this.activeMenuIndex = index;
@@ -374,6 +441,28 @@
                 if(this.activeMenuIndex > 0 || this.activeMenuIndex === 0){
                     if(this.menu.button[this.activeMenuIndex].sub_button.length > 0){
                         this.showMenuContentType = this.activeMenuBtnType();
+                    }
+                }
+            },
+            //菜单删除
+            menu_del() {
+                if(this.menu.button.length <= 3 && this.menu.button.length >0){
+
+                    if((this.activeMenuIndex !== 0) && (this.activeMenuIndex == this.menu.button.length-1)){
+                        this.menu.button.splice(this.activeMenuIndex,1);
+                        this.activeMenuIndex -= 1;
+                    }else if(this.activeMenuIndex == 0){
+                        this.menu.button.splice(this.activeMenuIndex,1);
+                        this.activeMenuIndex = 0;
+                    }else{
+                        this.menu.button.splice(this.activeMenuIndex,1);
+                    }
+
+                    if(this.menu.button.length == 0){
+                        this.activeMenuIndex = '';
+                        this.activeMenuName = '';
+                        this.activeMenuItemIndex = '';
+                        this.activeMenuItemName = '';
                     }
                 }
             },
