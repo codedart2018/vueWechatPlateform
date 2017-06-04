@@ -81,27 +81,45 @@
                             <label class="menu-form-item-label" style="width: 80px;">菜单内容</label>
                             <div class="ivu-form-item-content" style="margin-left: 80px;">
                                 <div class="ivu-radio-group">
-                                    <label class="ivu-radio-wrapper ivu-radio-group-item ivu-radio-wrapper-checked">
-                                        <span class="ivu-radio ivu-radio-checked">
-                                            <span class="ivu-radio-inner"></span>
-                                            <input type="radio" class="ivu-radio-input">
-                                        </span>发送消息
-                                    </label>
-                                    <label class="ivu-radio-wrapper ivu-radio-group-item">
-                                        <span class="ivu-radio">
-                                            <span class="ivu-radio-inner"></span>
-                                            <input type="radio" class="ivu-radio-input">
-                                        </span>跳转网页
-                                    </label>
-                                    <label class="ivu-radio-wrapper ivu-radio-group-item">
-                                        <span class="ivu-radio">
-                                            <span class="ivu-radio-inner"></span>
-                                            <input type="radio" class="ivu-radio-input">
-                                        </span>跳转小程序
-                                    </label>
+                                    <Radio-group v-model="showMenuContentType" @on-change="radio_label_selected">
+                                        <Radio label="1">发送消息</Radio>
+                                        <Radio label="2">跳转网页</Radio>
+                                        <Radio label="3">跳转小程序</Radio>
+                                    </Radio-group>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="menu-content-container">
+                        <div class="menu-content" v-show="showMenuContentType===1" style="display: none;">
+                            <div style="height: 240px; border: 1px solid #e7e7eb">
+                                <div class="tabs-box" style="height: 40px; border-bottom: 1px solid #e7e7eb">
+                                    <div style="width: 420px;">
+                                        <ul class="tabs" style="line-height: 38px; height: 38px; text-align: center; font-size: 14px;">
+                                            <li class="item" :class="[{selected:showMenuContentMsgType===1}]" @click="msgContentTabNav(1)">
+                                                <i class="tabs-icon news"></i>
+                                                图文消息
+                                            </li>
+                                            <li class="item" :class="[{selected:showMenuContentMsgType===2}]" @click="msgContentTabNav(2)">
+                                                <i class="tabs-icon image"></i>
+                                                图片
+                                            </li>
+                                            <li class="item" :class="[{selected:showMenuContentMsgType===3}]" @click="msgContentTabNav(3)">
+                                                <i class="tabs-icon audio"></i>
+                                                语音
+                                            </li>
+                                            <li class="item" :class="[{selected:showMenuContentMsgType===4}]" @click="msgContentTabNav(4)">
+                                                <i class="tabs-icon video"></i>
+                                                视频
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -356,8 +374,8 @@
                 "activeMenuItemName":'',
                 "activeMenuItemIndex":'',
                 "showDelBtnType":'', //1:delMenu 2:delMenuItem
-                "showMenuContentType":'', //1:发送消息 2:跳转链接
-                "showMenuContentMsgType":'', //1:图文信息 2:图片 3:语音 4:视频
+                "showMenuContentType": 1, //1:发送消息 2:跳转链接 3:小程序
+                "showMenuContentMsgType":1, //1:图文信息 2:图片 3:语音 4:视频
                 stringNumberTips: '字数不超过4个汉字或8个字母',
 
             }
@@ -466,6 +484,27 @@
                     }
                 }
             },
+            //菜单内容选项
+            radio_label_selected(val) {
+                if(val == 1){
+                    this.setType('click');
+                }else if(val == 2){
+                    this.setType('view');
+                }else if(val == 3) {
+                    this.setType('app');
+                }
+            },
+            //设置菜单内容类型
+            setType:function (type) {
+                console.log(this.activeMenuIndex);
+                if(this.activeMenuType() == 1){
+                    this.menu.button[this.activeMenuIndex].type = type;
+                }else if(this.activeMenuType() == 2){
+                    this.menu.button[this.activeMenuIndex].sub_button[this.activeMenuItemIndex].type = type;
+                } else if(this.activeMenuType() == 3) {
+
+                }
+            },
             //数据补全方法
             menu_data_completing() {
                 for(var i=0;i<this.menu.button.length;i++){
@@ -542,6 +581,10 @@
                 }else{
                     return '';
                 }
+            },
+            //消息内容选项
+            msgContentTabNav(val) {
+                this.showMenuContentMsgType = val;
             },
         }
     }
