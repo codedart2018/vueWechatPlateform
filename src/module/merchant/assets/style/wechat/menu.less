@@ -8,6 +8,10 @@
  * 锄多情只有春庭月，犹为离人照落花。
  */
 
+.position-r {
+    position: relative;
+}
+
 .right-box {
     flex: 1;
 
@@ -42,33 +46,128 @@
             }
         }
 
-        .menu-form-group {
+        //表单
+        .form-group {
             margin-bottom: 10px;
             margin-top: 30px;
             padding-bottom: 0;
+        }
 
-            .menu-form-item {
-                margin-bottom: 24px;
-                vertical-align: top;
-                zoom: 1;
+        .form-item {
+            vertical-align: top;
+            zoom: 1;
 
-                .menu-form-item-label {
-                    vertical-align: middle;
-                    float: left;
-                    font-size: 12px;
-                    color: #495060;
-                    line-height: 1;
-                    padding: 10px 12px 10px 0;
-                    box-sizing: border-box;
-                }
+            .form-item-label {
+                vertical-align: middle;
+                float: left;
+                font-size: 12px;
+                color: #495060;
+                line-height: 1;
+                padding: 10px 12px 10px 0;
+                box-sizing: border-box;
             }
         }
 
-        .menu-content-container {
+        .msg-content-container {
+            border: 1px solid #e7e7eb;
 
-            .menu-content {
+            .msg-content {
                 background-color: #fff;
 
+                .content {
+                    height: auto;
+
+                    .tab-panel {
+                        background-color: #fff;
+                        min-height: 216px;
+
+                        .inner {
+                            width: 100%;
+                            height: 215px;
+
+                            .content-box {
+                                padding: 20px;
+                                display: flex;
+                                flex-direction: row;
+                                width: 100%;
+                                height: 100%;
+                                justify-content: space-around;
+                                align-items: center;
+
+                                .item {
+                                    border: 2px dotted #dedede;
+                                    width: 40%;
+                                    height: 130px;
+                                    text-align: center;
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                    justify-content: center;
+                                    cursor: pointer;
+
+                                    .icon {
+                                        font-size: 45px;
+                                        color: #c3c3c3;
+                                        padding-bottom: 5px;
+                                    }
+
+                                    .font {
+                                        color: #8d8d8d;
+                                    }
+
+                                    .cover {
+                                        position: absolute;
+                                        width: 100%;
+                                        height: 100%;
+                                        background: #FFFFFF;
+                                        display: flex;
+                                        justify-content: space-around;
+
+                                        .item {
+                                            border: none;
+                                            width: 40%;
+                                        }
+
+                                        .item:hover * {
+                                            color: #222;
+                                        }
+                                    }
+                                }
+                                .item:hover {
+                                    border: 2px dotted #a9a9a9;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .bind-app {
+                text-align: center;
+                padding: 70px 0;
+
+                .desc {
+                    margin-bottom: 10px;
+                }
+
+                .btn {
+                    background-color: #fff;
+                    width: 120px;
+                    border: 1px solid #e7e7eb;
+                    color: #222;
+                    display: inline-block;
+                    overflow: visible;
+                    height: 38px;
+                    line-height: 38px;
+                    vertical-align: middle;
+                    text-align: center;
+                    text-decoration: none;
+                    border-radius: 3px;
+                    -moz-border-radius: 3px;
+                    -webkit-border-radius: 3px;
+                    font-size: 14px;
+                    cursor: pointer;
+                }
             }
         }
 
@@ -130,7 +229,10 @@
     }
 
 }
+
 //
 //我爱你，无论世界多污秽，有多少虚伪不纯粹
 //都有我在你身边
 //拼死给你一方碧海蓝天
+
+//有时候我希望你的一生，能被拍成一部漫长的电影 ，我就比你晚出生一千年，一辈子只做一件事。独自坐在影院里，对着屏幕用我的一生把你的一生慢慢看完。 夜，我爱你！

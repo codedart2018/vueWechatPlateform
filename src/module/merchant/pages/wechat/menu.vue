@@ -64,9 +64,9 @@
                     <div class="menu-form-box">
                         <div style="display: block;" class="msg-sender-tips">已为“菜单名称”添加了5个子菜单，无法设置其他内容。</div>
                     </div>
-                    <div class="menu-form-group">
-                        <div class="menu-form-item">
-                            <label class="menu-form-item-label" style="width: 80px;">菜单名称</label>
+                    <div class="form-group">
+                        <div class="form-item">
+                            <label class="form-item-label" style="width: 80px;">菜单名称</label>
                             <div class="ivu-form-item-content" style="margin-left: 80px;">
                                 <div class="ivu-input-wrapper ivu-input-type">
                                     <i class="ivu-icon ivu-icon-load-c ivu-load-loop ivu-input-icon ivu-input-icon-validate"></i>
@@ -77,8 +77,8 @@
                             </div>
                         </div>
 
-                        <div class="menu-form-item">
-                            <label class="menu-form-item-label" style="width: 80px;">菜单内容</label>
+                        <div class="form-item">
+                            <label class="form-item-label" style="width: 80px;">菜单内容</label>
                             <div class="ivu-form-item-content" style="margin-left: 80px;">
                                 <div class="ivu-radio-group">
                                     <Radio-group v-model="showMenuContentType" @on-change="radio_label_selected">
@@ -91,10 +91,11 @@
                         </div>
                     </div>
 
-                    <div class="menu-content-container">
-                        <div class="menu-content" v-show="showMenuContentType===1" style="display: none;">
-                            <div style="height: 240px; border: 1px solid #e7e7eb">
-                                <div class="tabs-box" style="height: 40px; border-bottom: 1px solid #e7e7eb">
+                    <div class="msg-content-container">
+                        <!--发送消息-->
+                        <div class="msg-content" v-show="showMenuContentType==1">
+                            <div class="content">
+                                <div class="nav-box" style="height: 40px; border-bottom: 1px solid #e7e7eb">
                                     <div style="width: 420px;">
                                         <ul class="tabs" style="line-height: 38px; height: 38px; text-align: center; font-size: 14px;">
                                             <li class="item" :class="[{selected:showMenuContentMsgType===1}]" @click="msgContentTabNav(1)">
@@ -116,10 +117,89 @@
                                         </ul>
                                     </div>
                                 </div>
+                                <!--tabs div-->
+                                <div class="tab-panel">
+                                    <!--图文-->
+                                    <div class="inner" v-show="showMenuContentMsgType===1">
+                                        <div class="content-box">
+                                            <div class="item">
+                                                <Icon type="android-add" class="icon"></Icon>
+                                                <div class="font">从素材库中选择</div>
+                                            </div>
+                                            <div class="item position-r">
+                                                <div class="cover">
+                                                    <div class="item">
+                                                        <Icon type="compose" class="icon"></Icon>
+                                                        <div class="font">自建图文</div>
+                                                    </div>
+                                                    <div class="item">
+                                                        <Icon type="android-share-alt" class="icon"></Icon>
+                                                        <div class="font">分享图文</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--图片-->
+                                    <div class="inner" v-show="showMenuContentMsgType===2">
+                                        <div class="content-box">
+                                            <div class="item">
+                                                <Icon type="android-add" class="icon"></Icon>
+                                                <div class="font">从素材库中选择</div>
+                                            </div>
+                                            <div class="item">
+                                                <Icon type="image" class="icon"></Icon>
+                                                <div class="font">上传图片</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--语音-->
+                                    <div class="inner" v-show="showMenuContentMsgType===3">
+                                        <div class="content-box">
+                                            <div class="item">
+                                                <Icon type="android-add" class="icon"></Icon>
+                                                <div class="font">从素材库中选择</div>
+                                            </div>
+                                            <div class="item">
+                                                <Icon type="android-microphone" class="icon"></Icon>
+                                                <div class="font">新建语音</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--视频-->
+                                    <div class="inner" v-show="showMenuContentMsgType===4">
+                                        <div class="content-box">
+                                            <div class="item">
+                                                <Icon type="android-add" class="icon"></Icon>
+                                                <div class="font">从素材库中选择</div>
+                                            </div>
+                                            <div class="item">
+                                                <Icon type="ios-videocam" class="icon"></Icon>
+                                                <div class="font">新建视频</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
                         </div>
-
+                        <!--跳转网页-->
+                        <div class="msg-content" v-show="showMenuContentType==2">
+                            <div class="form-item" style="padding: 15px;">
+                                <label class="form-item-label" style="width: 80px;">页面地址</label>
+                                <div class="ivu-form-item-content" style="margin-left: 80px;">
+                                    <div class="ivu-input-wrapper ivu-input-type">
+                                        <i class="ivu-icon ivu-icon-load-c ivu-load-loop ivu-input-icon ivu-input-icon-validate"></i>
+                                        <input type="text" placeholder="请填写链接地址" class="ivu-input" style="width: 250px">
+                                        <p>从公众号图文消息中选择</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--跳转小程序 其它-->
+                        <div class="msg-content bind-app" v-show="showMenuContentType==3">
+                            <p class="desc">自定义菜单可跳转已绑定的小程序，本公众号尚未绑定小程序。</p>
+                            <a href="https://mp.weixin.qq.com/cgi-bin/wxopen?action=list&amp;token=515462925&amp;lang=zh_CN" class="btn btn_default">前往绑定</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -375,7 +455,7 @@
                 "activeMenuItemIndex":'',
                 "showDelBtnType":'', //1:delMenu 2:delMenuItem
                 "showMenuContentType": 1, //1:发送消息 2:跳转链接 3:小程序
-                "showMenuContentMsgType":1, //1:图文信息 2:图片 3:语音 4:视频
+                "showMenuContentMsgType": 1, //1:图文信息 2:图片 3:语音 4:视频
                 stringNumberTips: '字数不超过4个汉字或8个字母',
 
             }
@@ -408,7 +488,7 @@
                     //补全数据,无数据也要为空
                     this.menu_data_completing();
                     //判断是否有下级子菜单
-                    console.log(this.menu.button,123)
+                    console.log(this.menu.button,this.activeMenuIndex)
                 }else{
                     alert('最多3个一级菜单');
                 }
@@ -496,12 +576,11 @@
             },
             //设置菜单内容类型
             setType:function (type) {
-                console.log(this.activeMenuIndex);
-                if(this.activeMenuType() == 1){
+                if(this.activeMenuType == 1){
                     this.menu.button[this.activeMenuIndex].type = type;
-                }else if(this.activeMenuType() == 2){
+                }else if(this.activeMenuType == 2){
                     this.menu.button[this.activeMenuIndex].sub_button[this.activeMenuItemIndex].type = type;
-                } else if(this.activeMenuType() == 3) {
+                } else if(this.activeMenuType == 3) {
 
                 }
             },
