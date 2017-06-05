@@ -53,7 +53,7 @@
             <!--手机模块END-->
             <!--编辑表单区域-->
             <div class="right-box">
-                <div class="editor-inner">
+                <div class="editor-inner" v-show="activeMenuIndex > 0 || activeMenuIndex === 0 || activeMenuItemIndex > 0 || activeMenuIndex === 0 ">
                     <div class="menu-title-bar">
                         <h4 class="title">菜单名称</h4>
                         <div class="delete">
@@ -201,6 +201,11 @@
                             <a href="https://mp.weixin.qq.com/cgi-bin/wxopen?action=list&amp;token=515462925&amp;lang=zh_CN" class="btn btn_default">前往绑定</a>
                         </div>
                     </div>
+                </div>
+
+
+                <div class="editor-inner-notice" v-show="menu.button.length == 0">
+                    请点击左侧菜单进行编辑操作
                 </div>
             </div>
         </div>
