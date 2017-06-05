@@ -27,7 +27,7 @@
                                                     </span>
                                                 </a>
                                             </li>
-                                            <li class='js_addMenuBox' v-if="isSet(menu.button[activeMenuIndex].sub_button)&&btn.sub_button.length>=0&&btn.sub_button.length < 5">
+                                            <li v-if="isSet(menu.button[activeMenuIndex].sub_button)&&btn.sub_button.length>=0&&btn.sub_button.length < 5">
                                                 <a href="javascript:void(0);"  title="最多添加5个子菜单" @click="menu_item_add()" draggable="false">
                                                     <span class="sub_pre_menu_inner">
                                                         <i class="icon14_menu_add"></i>
@@ -39,8 +39,8 @@
                                         <i class="arrow arrow_in"></i>
                                     </div>
                                 </li>
-                                <li class="js_addMenuBox pre_menu_item grid_item no_extra size1of1">
-                                    <a href="javascript:void(0);" v-if="isSet(menu.button)?(menu.button.length>=0&&menu.button.length<3):false" @click="menu_add()" :class="[{pre_menu_link: activeMenuIndex===''}]" class="js_addL1Btn" title="最多添加3个一级菜单" draggable="false">
+                                <li class="pre_menu_item grid_item no_extra size1of1">
+                                    <a href="javascript:void(0);" v-if="isSet(menu.button)?(menu.button.length>=0&&menu.button.length<3):false" @click="menu_add()" :class="[{pre_menu_link: activeMenuIndex===''}]" title="最多添加3个一级菜单" draggable="false">
                                         <i class="icon14_menu_add"></i>
                                         <span>添加菜单</span>
                                     </a>
@@ -204,7 +204,7 @@
                 </div>
 
 
-                <div class="editor-inner-notice" v-show="menu.button.length == 0">
+                <div class="editor-inner-notice" v-show="menu.button.length == 0 || activeMenuIndex===''">
                     请点击左侧菜单进行编辑操作
                 </div>
             </div>
@@ -441,7 +441,7 @@
         data(){
             return{
                 platform: 0,
-                publicName: '实时预览',
+                publicName: '永川优生活',
                 menu:{
                     "button":[
                         {"type":"click","name":"歌手简介","key":"V1001_TODAY_SINGER","url":"","sub_button":[]},
@@ -471,6 +471,7 @@
         mounted() {
             //判断检查是否有平台号
             this.platform = window.localStorage.getItem('platformNumber')
+            //服务器上拖取最新数据
         },
         methods: {
         	//变量状态检测判断
@@ -669,7 +670,7 @@
             //消息内容选项
             msgContentTabNav(val) {
                 this.showMenuContentMsgType = val;
-            },
+            }
         }
     }
 </script>
