@@ -209,6 +209,11 @@
                 </div>
             </div>
         </div>
+        <Row type="flex" justify="center" align="middle" style="margin-top: 20px;">
+            <Button type="info" style="margin-right: 20px;">保存</Button>
+            <Button type="success" style="margin-right: 20px;">保存并同步</Button>
+            <Button type="warning">清空菜单</Button>
+        </Row>
     </div>
 </template>
 
