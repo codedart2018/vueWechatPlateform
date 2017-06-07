@@ -11,7 +11,213 @@
 .position-r {
     position: relative;
 }
+//菜单预览区域
+.menu-setting-area {
+    margin: 0;
 
+    .preview-area {
+        float: left;
+        margin-right: 12px;
+        position: relative;
+
+        .mobile-menu-preview {
+            position: relative;
+            width: 317px;
+            height: 580px;
+            background: transparent url(https://res.wx.qq.com/mpres/htmledition/images/bg/bg_mobile_head_default2968da.png) no-repeat 0 0;
+            background-position: 0 0;
+            border: 1px solid #e7e7eb;
+
+            .mobile-hd {
+                color: #fff;
+                text-align: center;
+                padding-top: 30px;
+                font-size: 15px;
+                width: auto;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                word-wrap: normal;
+                margin: 0 30px;
+            }
+
+            .mobile-bd {
+                .pre-menu-list {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    border-top: 1px solid #e7e7eb;
+                    background: transparent url(https://res.wx.qq.com/mpres/htmledition/images/bg/bg_mobile_foot_default2968da.png) no-repeat 0 0;
+                    background-position: 0 0;
+                    background-repeat: no-repeat;
+                    padding-left: 43px;
+
+                    .icon-menu-add {
+                        background: url(https://res.wx.qq.com/mpres/zh_CN/htmledition/comm_htmledition/style/page/menu/index_z354723.png) 0 -18px no-repeat;
+                    }
+
+                    .sort-gray {
+                        margin-top: -4px;
+                        display: none;
+                    }
+
+                    .grid-item {
+                        float: left;
+                    }
+
+                    .no-extra.grid-item {
+                        float: none;
+                        width: auto;
+                        overflow: hidden;
+                    }
+
+                    .pre-menu-item {
+                        position: relative;
+                        float: left;
+                        line-height: 50px;
+                        text-align: center;
+
+                        a {
+                            display: block;
+                            width: auto;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            word-wrap: normal;
+                            color: #616161;
+                            text-decoration: none;
+                        }
+
+                        .icon-menu-dot {
+                            background: url(https://res.wx.qq.com/mpres/zh_CN/htmledition/comm_htmledition/style/page/menu/index_z354723.png) 0 -36px no-repeat;
+                            width: 7px;
+                            height: 7px;
+                            vertical-align: middle;
+                            display: inline-block;
+                            margin-right: 2px;
+                            margin-top: -2px;
+                        }
+
+                        .pre-menu-link {
+                            border: 1px solid #44b549;
+                            line-height: 48px;
+                            background-color: #fff;
+                            color: #44b549;
+                        }
+                    }
+                }
+            }
+        }
+
+        .sub-pre-menu-box {
+            position: absolute;
+            bottom: 60px;
+            left: 0;
+            width: 100%;
+            background-color: #fafafa;
+
+            .sub-pre-menu-list li {
+                line-height: 44px;
+                border: 1px solid transparent;
+                margin: 0 -1px -1px;
+
+                a {
+                    padding: 0 .5em;
+
+                    .sub-pre-menu-inner {
+                        display: block;
+                        border-top: 1px solid #e7e7eb;
+                        width: auto;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        word-wrap: normal;
+                        cursor: pointer;
+                    }
+                }
+            }
+            li:first-child a .sub-pre-menu-inner {
+                border-top-width: 0;
+            }
+
+            li.current {
+                background-color: #fff;
+                border: 1px solid #44b549;
+                position: relative;
+                z-index: 1;
+                line-height: 44px;
+            }
+
+            //三角形
+            .arrow-out {
+                bottom: -6px;
+                display: inline-block;
+                width: 0;
+                height: 0;
+                border-width: 6px;
+                border-style: dashed;
+                border-color: transparent;
+                border-bottom-width: 0;
+                border-top-color: #d0d0d0;
+                border-top-style: solid;
+            }
+
+            .arrow {
+                position: absolute;
+                left: 50%;
+                margin-left: -6px;
+            }
+
+            .arrow-in {
+                bottom: -5px;
+                display: inline-block;
+                width: 0;
+                height: 0;
+                border-width: 6px;
+                border-style: dashed;
+                border-color: transparent;
+                border-bottom-width: 0;
+                border-top-color: #fafafa;
+                border-top-style: solid;
+            }
+        }
+
+        .icon-common.sort-gray {
+            background: url(https://res.wx.qq.com/mpres/zh_CN/htmledition/comm_htmledition/style/base/base_z3560fc.png) 0 -4779px no-repeat;
+        }
+        .icon-common {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            display: inline-block;
+            line-height: 100px;
+            overflow: hidden;
+        }
+
+        .size1of1 {
+            width: 100%;
+        }
+
+        .size1of3 {
+            width: 33.33%;
+        }
+
+        .dn {
+            display: none;
+        }
+
+        .icon-menu-add {
+            background: url(https://res.wx.qq.com/mpres/zh_CN/htmledition/comm_htmledition/style/page/menu/index_z354723.png) 0 0 no-repeat;
+            width: 14px;
+            height: 14px;
+            vertical-align: middle;
+            display: inline-block;
+            margin-top: -2px;
+        }
+    }
+}
+//右边区域
 .right-box {
     flex: 1;
     position: relative;
@@ -81,10 +287,10 @@
         }
 
         .msg-content-container {
-            border: 1px solid #e7e7eb;
 
             .msg-content {
                 background-color: #fff;
+                border: 1px solid #e7e7eb;
 
                 .content {
                     height: auto;
@@ -242,9 +448,22 @@
 
 }
 
-//
 //我爱你，无论世界多污秽，有多少虚伪不纯粹
 //都有我在你身边
 //拼死给你一方碧海蓝天
 
 //有时候我希望你的一生，能被拍成一部漫长的电影 ，我就比你晚出生一千年，一辈子只做一件事。独自坐在影院里，对着屏幕用我的一生把你的一生慢慢看完。 夜，我爱你！
+
+//你给我每一次，都是新鲜！我对你的依恋更加明显。就在我们每次亲吻的瞬间，我就在也无法离开你的身边！我爱你，夜
+
+//是你给了故事的开头，太过惊心动魄，也让我忘了看，我们的结局是老死不相往来，没联络。再见
+
+//我这一生有过两次重要的决择，一次是睡觉前的先闭左眼还是先闭右眼，一次是清晨醒来睁开眼的时候先睁开左眼还是先睁开右眼。
+
+//我爱你，无论我们在这个日子，是否在一起！我也知道，爱一个人是劫。有人动后重生，有人再劫难道。
+
+//想打张白条给你，上面就写着，我欠你一生温柔，一世呵护！分期一万年！我爱你，夜
+
+//我爱你，愿往后的时光都是崭新的去记录，去寻找，去做梦，愿我们都能成为自己想成为的人。
+
+//如果此生只能给你拥抱和不放开你的手，你愿不愿意跟我走
