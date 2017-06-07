@@ -275,9 +275,8 @@
         },
         components: {},
         mounted() {
-            //判断检查是否有平台号
             this.platform = window.localStorage.getItem('platformNumber')
-            //服务器上拖取最新数据
+            //服务器上拖取菜单数据
         },
         methods: {
             //变量状态检测判断

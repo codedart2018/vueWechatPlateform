@@ -64,6 +64,15 @@ export default new Router({
                     group: 'wechat'
                 },
                 component: resolve => require(['./pages/wechat/menu'], resolve),
+            },
+            {
+                path: '/wechat/fans',
+                name: 'wechatFans',
+                meta: {
+                    title: '粉丝管理',
+                    group: 'wechat'
+                },
+                component: resolve => require(['./pages/wechat/fans'], resolve),
             }]
         },
         {
