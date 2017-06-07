@@ -274,11 +274,16 @@
             }
         },
         components: {},
-        mounted() {
-            this.platform = window.localStorage.getItem('platformNumber')
-            //服务器上拖取菜单数据
-        },
         methods: {
+        	//服务器拉取数据
+            getData() {
+            	//todo 参数临时写死
+                this.request("MerchantWxMenu", {mch_id: 1, platform_id: 800000}, true).then((res) => {
+                    if(res.status) {
+                        this.menu = res.data
+                    }
+                })
+            },
             //变量状态检测判断
             isSet(variable) {
                 if (typeof(variable) != 'undefined') {
@@ -298,7 +303,7 @@
                     this.activeMenuName = '菜单名称'
                     this.showDelBtnType = 1
                     //补全数据,无数据也要为空
-                    this.menu_data_completing()
+                    this.menuDataCompleting()
                     //判断是否有下级子菜单
                     console.log(this.menu.button, this.activeMenuIndex)
                 } else {
@@ -319,7 +324,7 @@
                     this.activeMenuItemName = '子菜单名称'
                     this.showDelBtnType = 2
                     //补全数据,无数据也要为空
-                    this.menu_data_completing()
+                    this.menuDataCompleting()
                 } else {
                     alert('最多5个二级菜单')
                 }
@@ -332,7 +337,7 @@
                 this.activeMenuItemName = ''
                 this.activeMenuItemIndex = ''
                 //补全数据,无数据也要为空
-                this.menu_data_completing()
+                this.menuDataCompleting()
                 if (this.menu.button[this.activeMenuIndex].sub_button.length > 0) {
                     this.showMenuContentType = ''
                 } else {
@@ -345,7 +350,7 @@
                 this.activeMenuItemName = name
                 this.activeMenuItemIndex = index
                 //补全数据,无数据也要为空
-                this.menu_data_completing()
+                this.menuDataCompleting()
                 if (this.activeMenuIndex > 0 || this.activeMenuIndex === 0) {
                     if (this.menu.button[this.activeMenuIndex].sub_button.length > 0) {
                         this.showMenuContentType = this.activeMenuBtnType()
@@ -412,7 +417,7 @@
                 }
             },
             //数据补全方法
-            menu_data_completing() {
+            menuDataCompleting() {
                 for (var i = 0; i < this.menu.button.length; i++) {
                     if (!('type' in this.menu.button[i])) {
                         this.menu.button[i].type = 'click'
@@ -492,6 +497,11 @@
             msgContentTabNav(val) {
                 this.showMenuContentMsgType = val
             }
-        }
+        },
+        mounted() {
+            this.platform = window.localStorage.getItem('platformNumber')
+            //服务器上拖取菜单数据
+            this.getData();
+        },
     }
 </script>
