@@ -97,6 +97,7 @@
                     </div>
                     <!--微信分组-->
                     <div class="box-content flex" v-if="$route.meta.group == 'wechat'">
+                        <check-platform></check-platform>
                         <div class="menu-box">
                             <div class="tip"><router-link to="/">公众号管理中心</router-link></div>
                             <div class="sub-menu">
@@ -120,14 +121,6 @@
                                         <Menu-item name="2-1">素材管理</Menu-item>
                                         <Menu-item name="2-2">文章分类</Menu-item>
                                         <Menu-item name="2-2">文章列表</Menu-item>
-                                    </Submenu>
-                                    <Submenu name="3">
-                                        <template slot="title">
-                                            <Icon type="ios-people"></Icon>
-                                            短信管理
-                                        </template>
-                                        <Menu-item name="3-1">新增用户</Menu-item>
-                                        <Menu-item name="3-2">活跃用户</Menu-item>
                                     </Submenu>
                                     <Submenu name="4">
                                         <template slot="title">
@@ -181,6 +174,7 @@
     import CommonHeader from "./header.vue"
     import CommonMain from "./main.vue"
     import WechatMain from "../wechat/main.vue"
+    import CheckPlatform from "../common/check.vue"
 
     export default {
         data () {
@@ -191,7 +185,8 @@
         components: {
             CommonHeader,
             CommonMain,
-            WechatMain
+            WechatMain,
+            CheckPlatform
         },
         mounted() {
             console.log(this.$route)
