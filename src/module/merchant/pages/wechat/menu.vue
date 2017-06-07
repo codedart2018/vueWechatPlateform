@@ -250,6 +250,7 @@
             return {
                 platform: 0,
                 publicName: '永川优生活',
+                /** 原数组 作为参考用
                 menu: {
                     "button": [
                         {"type": "click", "name": "优生活", "key": "V1001_TODAY_SINGER", "url": "", "sub_button": []},
@@ -262,14 +263,16 @@
                         }
                     ]
                 },
-                "new_menu": {'button': []},
-                "activeMenuName": '',
-                "activeMenuIndex": '',
-                "activeMenuItemName": '',
-                "activeMenuItemIndex": '',
-                "showDelBtnType": '', //1:delMenu 2:delMenuItem
-                "showMenuContentType": 1, //1:发送消息 2:跳转链接 3:小程序
-                "showMenuContentMsgType": 1, //1:图文信息 2:图片 3:语音 4:视频
+                 **/
+                menu: {button: {}},
+//                "new_menu": {'button': []},
+                activeMenuName: '',
+                activeMenuIndex: '',
+                activeMenuItemName: '',
+                activeMenuItemIndex: '',
+                showDelBtnType: '', //1:delMenu 2:delMenuItem
+                showMenuContentType: 1, //1:发送消息 2:跳转链接 3:小程序
+                showMenuContentMsgType: 1, //1:图文信息 2:图片 3:语音 4:视频
                 stringNumberTips: '字数不超过4个汉字或8个字母',
             }
         },
@@ -280,7 +283,7 @@
             	//todo 参数临时写死
                 this.request("MerchantWxMenu", {mch_id: 1, platform_id: 800000}, true).then((res) => {
                     if(res.status) {
-                        this.menu = res.data
+                        this.menu.button = res.data
                     }
                 })
             },
