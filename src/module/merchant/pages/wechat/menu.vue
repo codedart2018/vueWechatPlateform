@@ -235,7 +235,7 @@
             </div>
         </div>
         <Row type="flex" justify="center" align="middle" style="margin-top: 20px;">
-            <Button type="info" style="margin-right: 20px;">保存</Button>
+            <Button type="info" style="margin-right: 20px;" @click="save">保存</Button>
             <Button type="success" style="margin-right: 20px;">保存并同步</Button>
             <Button type="warning">清空菜单</Button>
         </Row>
@@ -412,11 +412,11 @@
             },
             //设置菜单内容类型
             setType: function (type) {
-                if (this.activeMenuType == 1) {
+                if (this.activeMenuType() == 1) {
                     this.menu.button[this.activeMenuIndex].type = type
-                } else if (this.activeMenuType == 2) {
+                } else if (this.activeMenuType() == 2) {
                     this.menu.button[this.activeMenuIndex].sub_button[this.activeMenuItemIndex].type = type
-                } else if (this.activeMenuType == 3) {
+                } else if (this.activeMenuType() == 3) {
                 }
             },
             //数据补全方法
@@ -499,6 +499,16 @@
             //消息内容选项
             msgContentTabNav(val) {
                 this.showMenuContentMsgType = val
+            },
+            //保存菜单数据
+            save() {
+            	this.request('MerchantWxMenuSave', this.menu, true).then((res) => {
+            		if(res.status) {
+                        this.getData();
+                    }
+                }).catch((error) => {
+
+                })
             }
         },
         mounted() {

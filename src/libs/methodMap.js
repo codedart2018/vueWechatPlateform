@@ -103,6 +103,8 @@ const methodMap = {
     MerchantPublicList: {url: '/merchant/public_signal/index', method: 'get'},
     /** 微信菜单获取 **/
     MerchantWxMenu: {url: '/merchant/we_chat_menu/index', method: 'get'},
+    /** 保存微信菜单 **/
+    MerchantWxMenuSave: {url: '/merchant/we_chat_menu/save', method: 'post'},
 }
 
 export default methodMap
