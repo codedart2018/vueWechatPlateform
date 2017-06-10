@@ -81,11 +81,14 @@
                                 <div class="ivu-input-wrapper ivu-input-type">
                                     <i class="ivu-icon ivu-icon-load-c ivu-load-loop ivu-input-icon ivu-input-icon-validate"></i>
                                     <input type="text" placeholder="请填写菜单名称" class="ivu-input" style="width: 250px"
+                                           maxlength="maxLength"
                                            v-if="activeMenuType() == 1 && isSet(menu.button[activeMenuIndex])"
-                                           v-model="menu.button[activeMenuIndex].name">
+                                           v-model="menu.button[activeMenuIndex].name" @keyup="inputName($event)">
                                     <input type="text" placeholder="请填写菜单名称" class="ivu-input" style="width: 250px"
+                                           maxlength="maxLength"
                                            v-if="activeMenuType() == 2 && isSet(menu.button[activeMenuIndex].sub_button[activeMenuItemIndex])"
-                                           v-model="menu.button[activeMenuIndex].sub_button[activeMenuItemIndex].name">
+                                           v-model="menu.button[activeMenuIndex].sub_button[activeMenuItemIndex].name"
+                                           @keyup="inputName($event)">
                                     <p>{{stringNumberTips}}</p>
                                 </div>
                             </div>
@@ -100,6 +103,7 @@
                                         <Radio label="1">发送消息</Radio>
                                         <Radio label="2">跳转网页</Radio>
                                         <Radio label="3">跳转小程序</Radio>
+                                        <Radio label="4">自定义</Radio>
                                     </Radio-group>
                                 </div>
                             </div>
@@ -225,6 +229,17 @@
                             <a href="https://mp.weixin.qq.com/cgi-bin/wxopen?action=list&amp;token=515462925&amp;lang=zh_CN"
                                class="btn btn_default">前往绑定</a>
                         </div>
+                        <!--自定义事件-->
+                        <div class="msg-content bind-app" v-show="showMenuContentType==4">
+                            <Radio-group v-model="customizeEvent" @on-change="radioLabelSelected">
+                                <Radio label="1">扫码推事件</Radio>
+                                <Radio label="2">扫码带提示</Radio>
+                                <Radio label="3">系统拍照发图</Radio>
+                                <Radio label="4">拍照或者相册发图</Radio>
+                                <Radio label="4">微信相册发图器</Radio>
+                                <Radio label="4">地理位置选择器</Radio>
+                            </Radio-group>
+                        </div>
                     </div>
                 </div>
 
@@ -251,7 +266,7 @@
                 platform: 0,
                 publicName: '永川优生活',
                 /** 原数组 作为参考用
-                menu: {
+                 menu: {
                     "button": [
                         {"type": "click", "name": "优生活", "key": "V1001_TODAY_SINGER", "url": "", "sub_button": []},
                         {
@@ -274,15 +289,16 @@
                 showMenuContentType: 1, //1:发送消息 2:跳转链接 3:小程序
                 showMenuContentMsgType: 1, //1:图文信息 2:图片 3:语音 4:视频
                 stringNumberTips: '字数不超过4个汉字或8个字母',
+                customizeEvent: '' //自定义事件
             }
         },
         components: {},
         methods: {
-        	//服务器拉取数据
+            //服务器拉取数据
             getData() {
-            	//todo 参数临时写死
+                //todo 参数临时写死
                 this.request("MerchantWxMenu", {mch_id: 1, platform_id: 800000}, true).then((res) => {
-                    if(res.status) {
+                    if (res.status) {
                         this.menu.button = res.data
                     }
                 })
@@ -502,13 +518,16 @@
             },
             //保存菜单数据
             save() {
-            	this.request('MerchantWxMenuSave', this.menu, true).then((res) => {
-            		if(res.status) {
+                this.request('MerchantWxMenuSave', this.menu, true).then((res) => {
+                    if (res.status) {
                         this.getData();
                     }
                 }).catch((error) => {
-
                 })
+            },
+            //键盘事件 检测是是否有多输入菜单文字
+            inputName(e) {
+
             }
         },
         mounted() {
