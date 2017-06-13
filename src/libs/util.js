@@ -10,7 +10,9 @@ Util.title = function (title) {
 //打印日志
 Util.log = function (title) {
     if (!Util.logSwitch) return;
+    console.log("------------------logStart------------------")
     console.log(title)
+    console.log("------------------logEnd------------------")
 }
 
 export default Util;
