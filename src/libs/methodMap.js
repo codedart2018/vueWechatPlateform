@@ -105,6 +105,8 @@ const methodMap = {
     MerchantWxMenu: {url: '/merchant/we_chat_menu/index', method: 'get'},
     /** 保存微信菜单 **/
     MerchantWxMenuSave: {url: '/merchant/we_chat_menu/save', method: 'post'},
+    /** 保存并同步数据 **/
+    MerchantWxMenuSync: {url: '/merchant/we_chat_menu/sync', method: 'post'},
 }
 
 export default methodMap

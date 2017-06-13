@@ -251,7 +251,7 @@
         </div>
         <Row type="flex" justify="center" align="middle" style="margin-top: 20px;">
             <Button type="info" style="margin-right: 20px;" @click="save">保存</Button>
-            <Button type="success" style="margin-right: 20px;">保存并同步</Button>
+            <Button type="success" style="margin-right: 20px;" @click="sync">保存并同步</Button>
             <Button type="warning">清空菜单</Button>
         </Row>
 
@@ -518,6 +518,15 @@
             },
             //保存菜单数据
             save() {
+                this.request('MerchantWxMenuSave', this.menu, true).then((res) => {
+                    if (res.status) {
+                        this.getData();
+                    }
+                }).catch((error) => {
+                })
+            },
+            //保存并同步数据
+            sync() {
                 this.request('MerchantWxMenuSave', this.menu, true).then((res) => {
                     if (res.status) {
                         this.getData();

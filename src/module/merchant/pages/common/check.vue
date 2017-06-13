@@ -19,8 +19,8 @@
             //判断检查是否有平台号
             this.platform = window.localStorage.getItem('platformNumber')
             if(!this.platform) {
-                this.$Message.error('公众号平台切换失败!');
-                this.$router.push({ path: '/'})
+                //this.$Message.error('公众号平台切换失败!');
+                //this.$router.push({ path: '/'})
             }
         }
     }
