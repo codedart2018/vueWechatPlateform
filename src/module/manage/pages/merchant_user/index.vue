@@ -18,7 +18,7 @@
             </Col>
         </Row>
         <Row class="mb-15">
-            <Table :context="self" :columns="columns" :data="list"></Table>
+            <Table :columns="columns" :data="list"></Table>
         </Row>
         <Row type="flex" justify="end">
             <Page :total="total" :page-size="pageSize" :current="pageNumber" show-total show-elevator @on-change="changePage"></Page>
@@ -40,8 +40,6 @@
     export default {
         data () {
             return {
-                //render 里使用 如果没有此this 会导致找不到方法而报错
-                self: this,
                 columns: [
                     {
                         title: 'ID',
@@ -62,10 +60,16 @@
                         key: 'is_main',
                         width: 120,
                         align: 'center',
-                        render (row) {
-                            const color = row.is_main == 1 ? 'green' : '';
-                            const text = row.is_main == 1 ? '是' : '否';
-                            return `<tag type="dot" color="${color}">${text}</tag>`;
+                        render: (h, params) => {
+                            const row = params.row;
+                            const color = row.is_main == 1 ? 'green' : 'red'
+                            const text = row.is_main == 1 ? '是' : '否'
+                            return h('Tag', {
+                                props: {
+                                    type: 'dot',
+                                    color: color
+                                }
+                            }, text);
                         }
                     },
                     {
@@ -73,8 +77,8 @@
                         key: 'create_time',
                         width: 135,
                         align: 'center',
-                        render (row) {
-                            return "<span>{{ row.create_time | formatDate('yyyy-MM-dd h:m') }}</span>"
+                        render: (h, params) => {
+                            return h('span',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {

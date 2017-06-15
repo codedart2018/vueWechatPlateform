@@ -7,8 +7,10 @@ import './assets/style/common/customize.less' // 定制公共 less
 import Toast from '../../libs/toast/' // 定制吐司
 import Util from '../../libs/util' // 工具
 import Http from '../../libs/http' //请求工具
+import Plugin from '../../libs/plugin/formatDate' //插件
 import '../../libs/filter' //过滤器
 
+Vue.use(Plugin)
 Vue.use(Toast)
 Vue.use(Http)
 Vue.use(IView)

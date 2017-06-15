@@ -38,7 +38,7 @@
             </Col>
         </Row>
         <Row class="mb-15">
-            <Table :context="self" :columns="columns" :data="list"></Table>
+            <Table :columns="columns" :data="list"></Table>
         </Row>
         <Row type="flex" justify="end">
             <Page :total="total" :page-size="pageSize" :current="pageNumber" show-total show-elevator @on-change="changePage"></Page>
@@ -224,22 +224,20 @@
                 if ((this.addModal || value) && (value.length < 6 || value.length > 32)) {
                     callback(new Error('密码长度6-32个字符'))
                 }
-                callback();
+                callback()
             }
 
             const validateMobile = (rule, value, callback) => {
                 if (value) {
                     let reg = /^1[34578]\d{9}$/;
                     if (!reg.test(value)) {
-                        callback(new Error('手机号码格式不正确'));
+                        callback(new Error('手机号码格式不正确'))
                     }
                 }
                 callback();
             }
 
             return {
-                //render 里使用 如果没有此this 会导致找不到方法而报错
-                self: this,
                 columns: [
                     {
                         title: 'ID',
@@ -275,12 +273,18 @@
                     {
                         title: '状态',
                         key: 'status',
-                        width: 80,
+                        width: 120,
                         align: 'center',
-                        render (row) {
-                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red';
-                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除';
-                            return `<tag type="dot" style="padding-right: 3px" color="${color}" title="${text}"></tag>`;
+                        render: (h, params) => {
+                            const row = params.row;
+                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red'
+                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除'
+                            return h('Tag', {
+                                props: {
+                                    type: 'dot',
+                                    color: color
+                                }
+                            }, text);
                         }
                     },
                     {
@@ -293,11 +297,11 @@
                         key: 'last_login_time',
                         width: 135,
                         align: 'center',
-                        render (row) {
-                        	if(row.last_login_time == 0) {
-                                return "<span>从未登陆</span>"
+                        render: (h, params) => {
+                        	if(params.row.last_login_time == 0) {
+                                return h('Tag', "从未登陆")
                             }
-                            return "<span>{{ row.last_login_time | formatDate('yyyy-MM-dd h:m') }}</span>"
+                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {
@@ -311,8 +315,8 @@
                         key: 'create_time',
                         width: 135,
                         align: 'center',
-                        render (row) {
-                            return "<span>{{ row.create_time | formatDate('yyyy-MM-dd h:m') }}</span>"
+                        render: (h, params) => {
+                            return h('span',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {
@@ -320,8 +324,8 @@
                         key: 'update_time',
                         align: 'center',
                         width: 135,
-                        render (row) {
-                            return "<span>{{ row.update_time | formatDate('yyyy-MM-dd h:m') }}</span>"
+                        render: (h, params) => {
+                            return h('span',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {
@@ -329,8 +333,34 @@
                         key: 'operation',
                         width: 140,
                         align: 'center',
-                        render (row, column, index) {
-                            return `<i-button type="primary" size="small" @click="edit(${index})">查看</i-button> <i-button type="success" size="small" @click="restPassword(${row.id})"><Icon type="key"></Icon> 重置</i-button>`;
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.edit(params.index)
+                                        }
+                                    }
+                                }, '查看'),
+                                h('Button', {
+                                    props: {
+                                        type: 'success',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.restPassword(params.row.id)
+                                        }
+                                    }
+                                }, '重置')
+                            ]);
                         }
                     }
                 ],

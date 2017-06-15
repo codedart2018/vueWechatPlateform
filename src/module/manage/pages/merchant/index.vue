@@ -39,7 +39,7 @@
             </Col>
         </Row>
         <Row class="mb-15">
-            <Table :context="self" :columns="columns" :data="list"></Table>
+            <Table :columns="columns" :data="list"></Table>
         </Row>
         <Row type="flex" justify="end">
             <Page :total="total" :page-size="pageSize" :current="pageNumber" show-total show-elevator @on-change="changePage"></Page>
@@ -113,8 +113,6 @@
             return {
             	//权限数据
             	auth: {},
-                //render 里使用 如果没有此this 会导致找不到方法而报错
-                self: this,
                 columns: [
                     {
                         title: 'ID',
@@ -156,10 +154,16 @@
                         key: 'status',
                         width: 120,
                         align: 'center',
-                        render (row) {
-                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red';
-                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除';
-                            return `<tag type="dot" color="${color}">${text}</tag>`;
+                        render: (h, params) => {
+                            const row = params.row;
+                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red'
+                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除'
+                            return h('Tag', {
+                                props: {
+                                    type: 'dot',
+                                    color: color
+                                }
+                            }, text);
                         }
                     },
                     {
@@ -167,10 +171,12 @@
                         key: 'validity',
                         width: 135,
                         align: 'center',
-                        render (row) {
-                            let data = "{{ row.validity | formatDate('yyyy-MM-dd h:m') }}"
-                            const text = row.validity == 0 ? '长期有效' : data;
-                            return `${text}`;
+                        render: (h, params) => {
+                            const row = params.row;
+                            if(row.validity == 0){
+                                return h('span', "长期有效");
+                            }
+                            return h('div',this.$formatDate(row.validity, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {
@@ -178,8 +184,8 @@
                         key: 'create_time',
                         width: 135,
                         align: 'center',
-                        render (row) {
-                            return "<span>{{ row.create_time | formatDate('yyyy-MM-dd h:m') }}</span>"
+                        render: (h, params) => {
+                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {
@@ -187,8 +193,8 @@
                         key: 'update_time',
                         width: 135,
                         align: 'center',
-                        render (row) {
-                            return "<span>{{ row.update_time | formatDate('yyyy-MM-dd h:m') }}</span>"
+                        render: (h, params) => {
+                            return h('div',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {
@@ -196,8 +202,38 @@
                         key: 'operation',
                         width: 200,
                         align: 'center',
-                        render (row, column, index) {
-                            return `<i-button type="primary" size="small" v-if="auth.MERCHANT_VIEW" @click="view(${row.id})">查看</i-button> <i-button type="primary" size="small" @click="del(${index}, ${row.id})">切换商户</i-button>`;
+//                        render (row, column, index) {
+//                            return `<i-button type="primary" size="small" v-if="auth.MERCHANT_VIEW" @click="view(${row.id})">查看</i-button>
+//                                    <i-button type="primary" size="small" v-if="auth.MERCHANT_CHANGE" @click="del(${index}, ${row.id})">切换商户</i-button>`;
+//                        },
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.view(params.index)
+                                        }
+                                    }
+                                }, '查看'),
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+
+                                        }
+                                    }
+                                }, '切换商户')
+                            ]);
                         }
                     }
                 ],

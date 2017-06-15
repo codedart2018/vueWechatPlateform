@@ -31,7 +31,7 @@
             </Col>
         </Row>
         <Row class="mb-15">
-            <Table :context="self" :columns="columns" :data="list"></Table>
+            <Table :columns="columns" :data="list"></Table>
         </Row>
         <Row type="flex" justify="end">
             <Page :total="total" :page-size="pageSize" :current="pageNumber" show-total show-elevator @on-change="changePage"></Page>
@@ -52,8 +52,6 @@
     export default {
         data () {
             return {
-                //render 里使用 如果没有此this 会导致找不到方法而报错
-                self: this,
                 columns: [
                     {
                         title: 'ID',
@@ -74,10 +72,16 @@
                         key: 'status',
                         width: 120,
                         align: 'center',
-                        render (row) {
-                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red';
-                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除';
-                            return `<tag type="dot" color="${color}">${text}</tag>`;
+                        render: (h, params) => {
+                            const row = params.row;
+                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red'
+                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除'
+                            return h('Tag', {
+                                props: {
+                                    type: 'dot',
+                                    color: color
+                                }
+                            }, text);
                         }
                     },
                     {
@@ -85,8 +89,8 @@
                         key: 'create_time',
                         width: 135,
                         align: 'center',
-                        render (row) {
-                            return "<span>{{ row.create_time | formatDate('yyyy-MM-dd h:m') }}</span>"
+                        render: (h, params) => {
+                            return h('span',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {
@@ -94,8 +98,8 @@
                         key: 'update_time',
                         width: 135,
                         align: 'center',
-                        render (row) {
-                            return "<span>{{ row.update_time | formatDate('yyyy-MM-dd h:m') }}</span>"
+                        render: (h, params) => {
+                            return h('span',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {
@@ -103,8 +107,34 @@
                         key: 'operation',
                         width: 140,
                         align: 'center',
-                        render (row, column, index) {
-                            return `<i-button type="primary" size="small" @click="edit(${row.id})">编辑</i-button> <i-button type="error" size="small" @click="del(${index}, ${row.id})">删除</i-button>`;
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.edit(params.row.id)
+                                        }
+                                    }
+                                }, '编辑'),
+                                h('Button', {
+                                    props: {
+                                        type: 'error',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.del(params.index, params.row.id)
+                                        }
+                                    }
+                                }, '删除')
+                            ]);
                         }
                     }
                 ],

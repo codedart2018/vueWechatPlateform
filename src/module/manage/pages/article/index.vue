@@ -73,10 +73,16 @@
                         key: 'status',
                         width: 120,
                         align: 'center',
-                        render (row) {
-                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red';
-                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除';
-                            return `<tag type="dot" color="${color}">${text}</tag>`;
+                        render: (h, params) => {
+                            const row = params.row;
+                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red'
+                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除'
+                            return h('Tag', {
+                                props: {
+                                    type: 'dot',
+                                    color: color
+                                }
+                            }, text);
                         }
                     },
                     {
@@ -84,8 +90,8 @@
                         key: 'create_time',
                         width: 135,
                         align: 'center',
-                        render (row) {
-                            return "<span>{{ row.create_time | formatDate('yyyy-MM-dd h:m') }}</span>"
+                        render: (h, params) => {
+                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {
@@ -93,8 +99,8 @@
                         key: 'update_time',
                         width: 135,
                         align: 'center',
-                        render (row) {
-                            return "<span>{{ row.update_time | formatDate('yyyy-MM-dd h:m') }}</span>"
+                        render: (h, params) => {
+                            return h('div',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {
