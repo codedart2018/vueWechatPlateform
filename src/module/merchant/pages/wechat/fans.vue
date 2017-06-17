@@ -88,7 +88,37 @@
                     },
                     {
                         title: '操作',
-                        key: 'address'
+                        align: 'center',
+                        width: 135,
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.edit(params.index)
+                                        }
+                                    }
+                                }, '同步'),
+                                h('Button', {
+                                    props: {
+                                        type: 'success',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.restPassword(params.row.id)
+                                        }
+                                    }
+                                }, '重置')
+                            ]);
+                        }
                     }
                 ],
                 list: [
