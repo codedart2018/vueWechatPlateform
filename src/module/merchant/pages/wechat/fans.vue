@@ -1,6 +1,6 @@
 <!--粉丝-->
 <template>
-    <Table :columns="columns10" :data="data9"></Table>
+    <Table :columns="columns" :data="list"></Table>
 </template>
 <script>
     import tableRow from './fans-table.vue'
@@ -8,7 +8,8 @@
         components: { tableRow },
         data () {
             return {
-                columns10: [
+                //列表数据
+                columns: [
                     {
                         type: 'expand',
                         width: 50,
@@ -21,19 +22,69 @@
                         }
                     },
                     {
-                        title: '姓名',
-                        key: 'name'
+                        title: '呢称',
+                        key: 'nickname'
                     },
                     {
-                        title: '年龄',
-                        key: 'age'
+                        title: '头像',
+                        render: (h, params) => {
+                            return h('img', {
+                                // 正常的 HTML 特性
+                                attrs: {
+                                    src: params.row.headimgurl + '64',
+                                    title: params.row.nickname
+                                },
+                                style: {
+                                	marginTop: "5px",
+                                    width: "38px",
+                                    height: "38px"
+                                },
+                            })
+                        }
                     },
                     {
-                        title: '地址',
+                        title: '性别',
+                        render: (h, params) => {
+                        	if(params.row.sex == 1) {
+                                return h('span', '男')
+                            } else if(params.row.sex == 2) {
+                                return h('span', '女')
+                            } else {
+                                return h('span', '未知')
+                            }
+                        }
+                    },
+                    {
+                        title: '分组',
+                        key: 'address'
+                    },
+                    {
+                        title: '标签',
+                        key: 'address'
+                    },
+                    {
+                        title: '关注时间',
+                        width: 135,
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('span',this.$formatDate(params.row.subscribe_time, 'yyyy-MM-dd h:m'))
+                        }
+                    },
+                    {
+                        title: '注册时间',
+                        key: 'address',
+                        width: 135,
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('span',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
+                        }
+                    },
+                    {
+                        title: '操作',
                         key: 'address'
                     }
                 ],
-                data9: [
+                list: [
                     {
                         name: '王小明',
                         age: 18,
@@ -80,6 +131,25 @@
                     }
                 ]
             }
+        },
+        methods: {
+            //获取数据
+            getData (params) {
+                if (!params) params = {page: 1, mch_id: 1, platform_id: 800000}
+                this.request('MerchantWxFans', params, true).then((res) => {
+                    if(res.status) {
+                        //列表数据
+                        this.list = res.data.list
+                    } else {
+                        //列表数据
+                        this.list = []
+                    }
+                })
+            },
+        },
+        mounted() {
+            //服务端获取数据
+            this.getData();
         }
     }
 </script>

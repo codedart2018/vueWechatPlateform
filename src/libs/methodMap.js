@@ -107,6 +107,8 @@ const methodMap = {
     MerchantWxMenuSave: {url: '/merchant/we_chat_menu/save', method: 'post'},
     /** 保存并同步数据 **/
     MerchantWxMenuSync: {url: '/merchant/we_chat_menu/sync', method: 'post'},
+    /** 获取微信粉丝 **/
+    MerchantWxFans: {url: '/merchant/we_chat_fans/index', method: 'get'},
 }
 
 export default methodMap

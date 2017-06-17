@@ -73,6 +73,15 @@ export default new Router({
                     group: 'wechat'
                 },
                 component: resolve => require(['./pages/wechat/fans'], resolve),
+            },
+            {
+                path: '/wechat/message',
+                name: 'wechatMessage',
+                meta: {
+                    title: '消息管理',
+                    group: 'wechat'
+                },
+                component: resolve => require(['./pages/wechat/message'], resolve),
             }]
         },
         {

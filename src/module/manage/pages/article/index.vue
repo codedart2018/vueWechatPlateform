@@ -30,7 +30,7 @@
             </Col>
         </Row>
         <Row class="mb-15">
-            <Table :context="self" :columns="columns" :data="list"></Table>
+            <Table :columns="columns" :data="list"></Table>
         </Row>
         <Row type="flex" justify="end">
             <Page :total="total" :page-size="pageSize" :current="pageNumber" show-total show-elevator @on-change="changePage"></Page>
@@ -51,8 +51,6 @@
     export default {
         data () {
             return {
-                //render 里使用 如果没有此this 会导致找不到方法而报错
-                self: this,
                 columns: [
                     {
                         title: 'ID',

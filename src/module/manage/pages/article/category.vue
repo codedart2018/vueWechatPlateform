@@ -17,7 +17,7 @@
             </Col>
         </Row>
         <Row class="mb-15">
-            <Table :context="self" :columns="columns" :data="list"></Table>
+            <Table :columns="columns" :data="list"></Table>
         </Row>
         <Row type="flex" justify="end">
         </Row>
@@ -101,8 +101,6 @@
     export default {
         data () {
             return {
-                //render 里使用 如果没有此this 会导致找不到方法而报错
-                self: this,
                 columns: [
                     {
                         title: 'ID',
@@ -115,7 +113,6 @@
                     },
                     {
                         title: '状态',
-                        key: 'status',
                         width: 120,
                         align: 'center',
                         render: (h, params) => {
@@ -132,7 +129,6 @@
                     },
                     {
                         title: '添加时间',
-                        key: 'create_time',
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
@@ -141,7 +137,6 @@
                     },
                     {
                         title: '更新时间',
-                        key: 'update_time',
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
