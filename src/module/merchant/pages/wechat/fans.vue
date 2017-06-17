@@ -1,6 +1,13 @@
 <!--粉丝-->
 <template>
-    <Table :columns="columns" :data="list"></Table>
+    <div>
+        <Row class="mb-15">
+            <Table :columns="columns" :data="list"></Table>
+        </Row>
+        <Row type="flex" justify="end">
+            <Page :total="total" :page-size="pageSize" :current="pageNumber" show-total show-elevator @on-change="changePage"></Page>
+        </Row>
+    </div>
 </template>
 <script>
     import tableRow from './fans-table.vue'
@@ -129,7 +136,13 @@
                         movie: '倩女幽魂',
                         music: '演员'
                     }
-                ]
+                ],
+                //总共数据多少条
+                total: 0,
+                //每页多少条数据
+                pageSize: 1,
+                //当前页码
+                pageNumber: 1,
             }
         },
         methods: {
@@ -140,9 +153,17 @@
                     if(res.status) {
                         //列表数据
                         this.list = res.data.list
+                        //总页数
+                        this.total = res.data.count
+                        //每页多少条数据
+                        this.pageSize = res.data.size
                     } else {
                         //列表数据
                         this.list = []
+                        //总页数
+                        this.total = 0
+                        //每页多少条数据
+                        this.pageSize = 0
                     }
                 })
             },
