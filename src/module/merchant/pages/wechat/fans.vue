@@ -18,6 +18,10 @@
                 //列表数据
                 columns: [
                     {
+                        type: 'selection',
+                        width: 55,
+                    },
+                    {
                         type: 'expand',
                         width: 50,
                         render: (h, params) => {
@@ -116,7 +120,7 @@
                                             this.restPassword(params.row.id)
                                         }
                                     }
-                                }, '重置')
+                                }, '消息')
                             ]);
                         }
                     }
@@ -196,6 +200,16 @@
                         this.pageSize = 0
                     }
                 })
+            },
+            //分页切换页码
+            changePage (page) {
+                this.pageNumber = page
+                let search = this.formSearch
+                let query = Object.assign({page: page }, search)
+                //分页
+                this.$router.push({ name: this.$router.currentRoute.name, query: query})
+                //获取最新数据
+                this.getData({page: page, params: search})
             },
         },
         mounted() {
