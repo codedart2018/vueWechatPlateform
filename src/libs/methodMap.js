@@ -109,6 +109,9 @@ const methodMap = {
     MerchantWxMenuSync: {url: '/merchant/we_chat_menu/sync', method: 'post'},
     /** 获取微信粉丝 **/
     MerchantWxFans: {url: '/merchant/we_chat_fans/index', method: 'get'},
+    /** 获取微信粉丝分组 **/
+    MerchantWxFansGroup: {url: '/merchant/we_chat_fans/get_group', method: 'get'},
+    
 }
 
 export default methodMap

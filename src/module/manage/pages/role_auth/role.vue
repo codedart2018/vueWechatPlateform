@@ -23,7 +23,7 @@
             &nbsp;
             </Col>
             <Col span="6" class="text-align-right">
-                <Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加角色</Button></Button>
+                <Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加角色</Button>
             </Col>
         </Row>
         <Row class="mb-15">

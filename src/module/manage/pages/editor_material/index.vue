@@ -27,7 +27,7 @@
             &nbsp;
             </Col>
             <Col span="6" class="text-align-right">
-                <router-link to="/editor_material/add_material"><Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加素材</Button></Button></router-link>
+                <router-link to="/editor_material/add_material"><Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加素材</Button></router-link>
             </Col>
         </Row>
         <Row class="mb-15">

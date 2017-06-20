@@ -6,17 +6,10 @@
                 <Form-item label="文章名称：">
                     <Input v-model="formSearch.keywords" placeholder="请输入文章关键词"></Input>
                 </Form-item>
-                <Form-item label="文章分类：">
+                <Form-item label="标签分类：">
                     <Select v-model="formSearch.c_id" placeholder="请选择" style="width:90px">
                         <Option value="">请选择</Option>
                         <Option v-for="item in cate" :value="item.id" :key="item.id">{{ item.name }}</Option>
-                    </Select>
-                </Form-item>
-                <Form-item label="文章状态：">
-                    <Select v-model="formSearch.status" placeholder="请选择" style="width:90px">
-                        <Option value="">请选择</Option>
-                        <Option value="1">正常</Option>
-                        <Option value="0">删除</Option>
                     </Select>
                 </Form-item>
                 <Form-item :label-width="1">
@@ -26,7 +19,7 @@
             &nbsp;
             </Col>
             <Col span="6" class="text-align-right">
-            <router-link to="/article/add"><Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加文章</Button></Button></router-link>
+            <router-link to="/article/add"><Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加标签</Button></router-link>
             </Col>
         </Row>
         <Row class="mb-15">

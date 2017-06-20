@@ -1,8 +1,28 @@
 <!--粉丝-->
 <template>
     <div>
+        <Form :model="formSearch" :label-width="80" inline label-position="right">
+            <Form-item label="用户呢称：" style="margin-bottom: 15px;">
+                <Input v-model="formSearch.keywords" placeholder="请输入用户呢称"></Input>
+            </Form-item>
+            <Form-item label="标签分类：" style="margin-bottom: 15px;">
+                <Select v-model="formSearch.c_id" placeholder="请选择" style="width:100px">
+                    <Option value="">请选择</Option>
+                    <Option v-for="item in group" :value="item.id" :key="item.id">{{ item.name }}</Option>
+                </Select>
+            </Form-item>
+            <Form-item :label-width="1" style="margin-bottom: 15px;">
+                <Button type="primary" @click="search('formSearch')" icon="ios-search">搜索</Button>
+            </Form-item>
+        </Form>
         <Row class="mb-15">
-            <Table :columns="columns" :data="list"></Table>
+            <Button type="info">打标签</Button>
+            <Button type="warning">加入黑名单</Button>
+            <Button type="success">批量同步</Button>
+            <Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加文章</Button>
+        </Row>
+        <Row class="mb-15">
+            <Table :columns="columns" :data="list" @on-selection-change="onSelectChange"></Table>
         </Row>
         <Row type="flex" justify="end">
             <Page :total="total" :page-size="pageSize" :current="pageNumber" show-total show-elevator @on-change="changePage"></Page>
@@ -126,50 +146,6 @@
                     }
                 ],
                 list: [
-                    {
-                        name: '王小明',
-                        age: 18,
-                        address: '北京市朝阳区芍药居',
-                        job: '数据工程师',
-                        interest: '羽毛球',
-                        birthday: '1991-05-14',
-                        book: '乔布斯传',
-                        movie: '致命魔术',
-                        music: 'I Cry'
-                    },
-                    {
-                        name: '张小刚',
-                        age: 25,
-                        address: '北京市海淀区西二旗',
-                        job: '数据科学家',
-                        interest: '排球',
-                        birthday: '1989-03-18',
-                        book: '我的奋斗',
-                        movie: '罗马假日',
-                        music: 'My Heart Will Go On'
-                    },
-                    {
-                        name: '李小红',
-                        age: 30,
-                        address: '上海市浦东新区世纪大道',
-                        job: '数据产品经理',
-                        interest: '网球',
-                        birthday: '1992-01-31',
-                        book: '赢',
-                        movie: '乔布斯',
-                        music: 'Don’t Cry'
-                    },
-                    {
-                        name: '周小伟',
-                        age: 26,
-                        address: '深圳市南山区深南大道',
-                        job: '数据分析师',
-                        interest: '桌球，跑步',
-                        birthday: '1988-7-25',
-                        book: '红楼梦',
-                        movie: '倩女幽魂',
-                        music: '演员'
-                    }
                 ],
                 //总共数据多少条
                 total: 0,
@@ -177,6 +153,12 @@
                 pageSize: 1,
                 //当前页码
                 pageNumber: 1,
+                //搜索表单
+                formSearch: {},
+                //分组数据
+                group: [],
+                //被选中的数据
+                selectData: []
             }
         },
         methods: {
@@ -201,6 +183,16 @@
                     }
                 })
             },
+            //获取分组
+            getGroup() {
+                this.request('MerchantWxFansGroup', {}).then((res) => {
+                    if(res.status) {
+                        this.group = res.data
+                    } else {
+                        this.list = []
+                    }
+                })
+            },
             //分页切换页码
             changePage (page) {
                 this.pageNumber = page
@@ -211,10 +203,25 @@
                 //获取最新数据
                 this.getData({page: page, params: search})
             },
+            //获取被选择ID
+            onSelectChange(selection) {
+                if(typeof(selection) == 'object' && selection.length > 0) {
+                    //每次处理一次为空
+                	this.selectData = []
+                    //循环处理数据
+                    for (var value of selection) {
+                        this.selectData.push(value.id)
+                    }
+                } else {
+                    this.selectData = []
+                }
+            }
         },
         mounted() {
             //服务端获取数据
-            this.getData();
+            this.getData()
+            //接取分组数据
+            this.getGroup()
         }
     }
 </script>

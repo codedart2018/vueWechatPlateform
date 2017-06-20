@@ -35,7 +35,7 @@
             </Form>
             </Col>
             <Col span="6" class="text-align-right">
-            <Button type="primary" @click="addModal = true" v-if="auth.ADD_MERCHANT"><Icon type="plus-round"></Icon>&nbsp;添加商户</Button></Button>
+            <Button type="primary" @click="addModal = true" v-if="auth.ADD_MERCHANT"><Icon type="plus-round"></Icon>&nbsp;添加商户</Button>
             </Col>
         </Row>
         <Row class="mb-15">
