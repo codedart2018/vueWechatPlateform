@@ -1,6 +1,6 @@
 /**
  * Created by truncate on 2017/3/28.
- * 请求地址API
+ * 请求地址API 说明打？号的表示有问题或者不确定
  */
 
 const methodMap = {
@@ -109,12 +109,14 @@ const methodMap = {
     MerchantWxMenuSync: {url: '/merchant/we_chat_menu/sync', method: 'post'},
     /** 获取微信粉丝 **/
     MerchantWxFans: {url: '/merchant/we_chat_fans/index', method: 'get'},
-    /** 获取微信粉丝分组 **/
+    /** 获取微信粉丝分组 ? **/
     MerchantWxFansGroup: {url: '/merchant/we_chat_fans/get_group', method: 'get'},
     /** 单个微信用户粉丝同步 **/
     MerchantWxFansSync: {url: '/merchant/we_chat_fans/sync', method: 'post'},
-    /** 把微信用户移入黑名单 **/
+    /** 把微信用户移入黑名单 ? **/
     MerchantWxFansSetBlack: {url: '/merchant/we_chat_fans/set_black', method: 'post'},
+    /** 微信消息列表 **/
+    MerchantWxMessage: {url: '/merchant/we_chat_message/index', method: 'get'},
     
     
 }
