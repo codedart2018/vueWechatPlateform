@@ -117,6 +117,8 @@ const methodMap = {
     MerchantWxFansSetBlack: {url: '/merchant/we_chat_fans/set_black', method: 'post'},
     /** 微信消息列表 **/
     MerchantWxMessage: {url: '/merchant/we_chat_message/index', method: 'get'},
+    /** 微信消息发送回复 **/
+    MerchantWxSendMessage: {url: '/merchant/we_chat_message/send_message', method: 'post'},
     
     
 }

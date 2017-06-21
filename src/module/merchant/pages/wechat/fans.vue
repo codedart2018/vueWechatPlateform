@@ -22,7 +22,7 @@
             <Button type="success" @click="setBlack">移出黑名单</Button>
             <Button type="success" @click="batchSync">批量同步</Button>
         </Row>
-        <Row class="mb-15">
+        <Row class="mb-15 table-no-padding-left">
             <Table :columns="columns" :data="list" @on-selection-change="onSelectChange"></Table>
         </Row>
         <Row type="flex" justify="end">
@@ -55,7 +55,7 @@
                     },
                     {
                         title: ' ',
-                        width: 60,
+                        width: 50,
                         align: 'center',
                         render: (h, params) => {
                             return h('img', {
