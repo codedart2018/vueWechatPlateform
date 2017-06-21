@@ -111,6 +111,11 @@ const methodMap = {
     MerchantWxFans: {url: '/merchant/we_chat_fans/index', method: 'get'},
     /** 获取微信粉丝分组 **/
     MerchantWxFansGroup: {url: '/merchant/we_chat_fans/get_group', method: 'get'},
+    /** 单个微信用户粉丝同步 **/
+    MerchantWxFansSync: {url: '/merchant/we_chat_fans/sync', method: 'post'},
+    /** 把微信用户移入黑名单 **/
+    MerchantWxFansSetBlack: {url: '/merchant/we_chat_fans/set_black', method: 'post'},
+    
     
 }
 

@@ -5,21 +5,22 @@
             <Form-item label="用户呢称：" style="margin-bottom: 15px;">
                 <Input v-model="formSearch.keywords" placeholder="请输入用户呢称"></Input>
             </Form-item>
-            <Form-item label="标签分类：" style="margin-bottom: 15px;">
-                <Select v-model="formSearch.c_id" placeholder="请选择" style="width:100px">
-                    <Option value="">请选择</Option>
-                    <Option v-for="item in group" :value="item.id" :key="item.id">{{ item.name }}</Option>
-                </Select>
-            </Form-item>
+            <!--<Form-item label="标签分类：" style="margin-bottom: 15px;">-->
+                <!--<Select v-model="formSearch.c_id" placeholder="请选择" style="width:100px">-->
+                    <!--<Option value="">请选择</Option>-->
+                    <!--<Option v-for="item in group" :value="item.id" :key="item.id">{{ item.name }}</Option>-->
+                <!--</Select>-->
+            <!--</Form-item>-->
             <Form-item :label-width="1" style="margin-bottom: 15px;">
                 <Button type="primary" @click="search('formSearch')" icon="ios-search">搜索</Button>
             </Form-item>
         </Form>
         <Row class="mb-15">
-            <Button type="info">打标签</Button>
-            <Button type="warning">加入黑名单</Button>
-            <Button type="success">批量同步</Button>
-            <Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加文章</Button>
+            <!--<Button type="info">打标签</Button>-->
+            <!--<Button type="primary"><Icon type="plus-round"></Icon>&nbsp;添加标签</Button>-->
+            <Button type="warning" @click="setBlack">加入黑名单</Button>
+            <Button type="success" @click="setBlack">移出黑名单</Button>
+            <Button type="success" @click="batchSync">批量同步</Button>
         </Row>
         <Row class="mb-15">
             <Table :columns="columns" :data="list" @on-selection-change="onSelectChange"></Table>
@@ -43,7 +44,7 @@
                     },
                     {
                         type: 'expand',
-                        width: 50,
+                        width: 30,
                         render: (h, params) => {
                             return h(tableRow, {
                                 props: {
@@ -53,11 +54,9 @@
                         }
                     },
                     {
-                        title: '呢称',
-                        key: 'nickname'
-                    },
-                    {
-                        title: '头像',
+                        title: ' ',
+                        width: 60,
+                        align: 'center',
                         render: (h, params) => {
                             return h('img', {
                                 // 正常的 HTML 特性
@@ -66,7 +65,7 @@
                                     title: params.row.nickname
                                 },
                                 style: {
-                                	marginTop: "5px",
+                                    marginTop: "5px",
                                     width: "38px",
                                     height: "38px"
                                 },
@@ -74,7 +73,14 @@
                         }
                     },
                     {
+                        title: '呢称',
+                        key: 'nickname',
+                        align: 'left'
+                    },
+                    {
                         title: '性别',
+                        width: 60,
+                        align: 'center',
                         render: (h, params) => {
                         	if(params.row.sex == 1) {
                                 return h('span', '男')
@@ -85,13 +91,20 @@
                             }
                         }
                     },
+//                    {
+//                        title: '分组',
+//                        key: 'address'
+//                    },
+//                    {
+//                        title: '标签',
+//                        key: 'address'
+//                    },
                     {
-                        title: '分组',
-                        key: 'address'
+                        title: '城市',
+                        key: 'city'
                     },
                     {
-                        title: '标签',
-                        key: 'address'
+                    	title: '互动'
                     },
                     {
                         title: '关注时间',
@@ -126,7 +139,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.edit(params.index)
+                                            this.sync(params.row.openid)
                                         }
                                     }
                                 }, '同步'),
@@ -137,7 +150,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.restPassword(params.row.id)
+                                            this.sync(params.row.openid)
                                         }
                                     }
                                 }, '消息')
@@ -158,7 +171,9 @@
                 //分组数据
                 group: [],
                 //被选中的数据
-                selectData: []
+                selectData: [],
+                //批量被选中的openid
+                selectDataOpenid: []
             }
         },
         methods: {
@@ -208,20 +223,52 @@
                 if(typeof(selection) == 'object' && selection.length > 0) {
                     //每次处理一次为空
                 	this.selectData = []
+                    this.selectDataOpenid = []
                     //循环处理数据
                     for (var value of selection) {
                         this.selectData.push(value.id)
+                        this.selectDataOpenid.push(value.openid)
                     }
                 } else {
                     this.selectData = []
+                    this.selectDataOpenid = []
                 }
+            },
+            //单个用户数据同步
+            sync(openid) {
+            	if(!openid) this.$message.error('错误的openid,无法同步用户数据')
+                this.request('MerchantWxFansSync', {openid: openid, type: 1}, '同步中...').then((res) => {
+                	if(res.status) {
+                		this.$Message.success(res.msg)
+                    } else {
+                		this.$Message.error(res.msg)
+                    }
+                })
+            },
+            //批量同步
+            batchSync() {
+
+            },
+            //加入黑名单
+            setBlack() {
+                if(this.selectData.length < 1) {
+                    this.$Message.error("请选择一个粉丝")
+                    return
+                }
+                this.request('MerchantWxFansSetBlack', {data: this.selectDataOpenid}, '加入黑名单中...').then((res) => {
+                    if(res.status) {
+                        this.$Message.success(res.msg)
+                    } else {
+                        this.$Message.error(res.msg)
+                    }
+                })
             }
         },
         mounted() {
             //服务端获取数据
             this.getData()
-            //接取分组数据
-            this.getGroup()
+            //接取分组数据 暂时未用
+            //this.getGroup()
         }
     }
 </script>

@@ -21,8 +21,10 @@ Http.install = function (Vue) {
      */
     Vue.prototype.request = function (method, opts, toast) {
         //如果有给 toast 参数则显示 loading 加载数据
-        if(toast) {
-            Vue.prototype.$loading("加载中")
+        if(toast && typeof (toast) == 'boolean') {
+            Vue.prototype.$loading("加载中...")
+        } else if(toast && typeof (toast) == 'string') {
+            Vue.prototype.$loading(toast)
         }
         let m = methodMap[method]
         if (m) {
