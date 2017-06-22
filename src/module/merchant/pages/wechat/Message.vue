@@ -35,7 +35,17 @@
             <p>
                 <Input v-model="replyContent" type="textarea" :rows="4" placeholder="请输入回复内容,最多600个字符..."></Input>
             </p>
-            <p></p>
+            <div v-for="item in emoji">
+
+            </div>
+            <p>
+                <ul class="emotions">
+                    <li class="emotions_item" v-for="(item, index) in emoji">
+                        <span class="icon_emotion_sprite" @click="changeEmoji(item)" v-bind:style="{ backgroundPositionX: 0, backgroundPositionY: setPositionY(index) + 'px' }"></span>
+                    </li>
+                </ul>
+            </p>
+            <p style="padding-top: 10px; text-align: right">还可以输入<em>597</em>字, 按下Ctrl+Shift键发送</p>
             <div slot="footer">
                 <Button type="primary" @click="reply">发送</Button>
             </div>
@@ -48,6 +58,37 @@
         margin-bottom: 0px;
         vertical-align: top;
         zoom: 1;
+    }
+
+    .emotions {
+        width: 481px;
+        margin-top: 10px;
+        overflow: hidden;
+        border-top: 1px solid #dddee1;
+        border-right: 1px solid #dddee1;
+        background-color: #e7e7eb;
+    }
+
+    .emotions_item {
+        float: left;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        font-size: 0;
+        text-align: center;
+        border-bottom: 1px solid #dddee1;
+        border-left: 1px solid #dddee1;
+        background-color: #fff;
+    }
+    .icon_emotion_sprite {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+        display: inline-block;
+        background: transparent url(../../../../assets/images/emotions.png) no-repeat 0 0;
+        -webkit-background-size: 20px auto;
+        background-size: 20px auto;
     }
 </style>
 
@@ -172,11 +213,13 @@
                 //搜索表单
                 formSearch: {},
                 //回复消息modal
-                replyModal: false,
+                replyModal: true,
                 //回复被选中数据信息
                 replyData: [],
                 //回复内容
-                replyContent: ''
+                replyContent: '',//'<img src="/mpres/zh_CN/htmledition/comm_htmledition/images/pic/common/pic_blank.gif" class="icon_emotion_single icon_smiley_0" alt="mo-[微笑]">'
+                emoji: ["[撇嘴]", "[色]", "[发呆]", "[得意]", "[流泪]", "[害羞]", "[闭嘴]", "[睡]", "[大哭]", "[尴尬]", "[发怒]", "[调皮]", "[呲牙]", "[惊讶]", "[难过]", "[冷汗]", "[抓狂]", "[吐]", "[偷笑]", "[愉快]", "[白眼]", "[傲慢]", "[困]", "[惊恐]", "[流汗]", "[憨笑]", "[悠闲]", "[奋斗]", "[咒骂]", "[疑问]", "[嘘]", "[晕]", "[衰]", "[骷髅]", "[敲打]", "[再见]", "[擦汗]", "[抠鼻]", "[鼓掌]", "[坏笑]", "[左哼哼]", "[右哼哼]", "[哈欠]", "[鄙视]", "[委屈]", "[快哭了]", "[阴险]", "[亲亲]", "[可怜]", "[菜刀]", "[西瓜]", "[啤酒]", "[咖啡]", "[猪头]", "[玫瑰]", "[凋谢]", "[嘴唇]", "[爱心]", "[心碎]", "[蛋糕]", "[炸弹]", "[便便]", "[月亮]", "[太阳]", "[拥抱]", "[强]", "[弱]", "[握手]", "[胜利]", "[抱拳]", "[勾引]", "[拳头]", "[OK]", "[跳跳]", "[发抖]", "[怄火]", "[转圈]", "😄", "😷", "😂", "😝", "😳", "😱", "😔", "😒", "[嘿哈]", "[捂脸]", "[奸笑]", "[机智]", "[皱眉]", "[耶]", "👻", "🙏", "💪", "🎉", "[礼物]", "[红包]", "[鸡]"],
+                positionY: 1
             }
         },
         methods: {
@@ -230,6 +273,18 @@
                         this.$Message.error(res.msg)
                     }
                 })
+            },
+            //属性计算方法
+            setPositionY(index) {
+                if(index == 0) {
+                	return 0
+                } else {
+                    return -(index * 20)
+                }
+            },
+            //点击获得选中的值
+            changeEmoji(value) {
+
             }
         },
         components:{
@@ -241,3 +296,4 @@
         }
     }
 </script>
+
