@@ -2,10 +2,12 @@
     <div>
         <Card dis-hover>
             <Row>
-                <Col span="12">
                 <Form ref="formField" :model="formField" :rules="ruleValidate" :label-width="80">
                     <Form-item label="文章标题" prop="title" style="width: 400px;">
                         <Input v-model="formField.title" placeholder="请输入姓名"></Input>
+                    </Form-item>
+                    <Form-item label="副标题" prop="subtitle" style="width: 400px;">
+                        <Input v-model="formField.subtitle" placeholder="50字内的副标题"></Input>
                     </Form-item>
                     <Form-item label="文章分类" prop="cate_id" style="width: 400px;">
                         <Select v-model="formField.cate_id" placeholder="请选择">
@@ -21,11 +23,20 @@
                             <Button type="ghost" icon="ios-cloud-upload-outline">上传文件</Button>
                         </Upload>
                     </Form-item>
-                    <Form-item label="外链地址" prop="rel_url" style="width: 400px;">
-                        <Input v-model="formField.rel_url" placeholder="请输入姓名"></Input>
+                    <Form-item label="关键词" prop="keyword" style="width: 400px;">
+                        <Input v-model="formField.keyword" placeholder="多个关键词请用 空格 分隔"></Input>
+                    </Form-item>
+                    <Form-item label="内容简要" prop="description" style="width: 400px; height: 116px;">
+                        <Input v-model="formField.description" type="textarea" placeholder="填写250个字符内的简要内容..."  :autosize="{minRows: 5}"></Input>
                     </Form-item>
                     <Form-item label="文章内容" prop="content">
                         <UEditor ref="editor" @ready="editorReady" v-model="formField.content" :config="config" style="line-height: normal"></UEditor>
+                    </Form-item>
+                    <Form-item label="作者" prop="author" style="width: 400px;">
+                        <Input v-model="formField.author" placeholder="作者默认公众号名称"></Input>
+                    </Form-item>
+                    <Form-item label="外链地址" prop="rel_url" style="width: 400px;">
+                        <Input v-model="formField.rel_url" placeholder="请输入姓名"></Input>
                     </Form-item>
                     <Form-item label="文章排序" prop="sort" style="width: 400px;">
                         <Input v-model="formField.sort" placeholder="排序只能是数字"></Input>
@@ -42,7 +53,6 @@
                         <Button type="ghost" @click="goBack" style="margin-left: 8px">返回</Button>
                     </Form-item>
                 </Form>
-                </Col>
             </Row>
         </Card>
     </div>
@@ -51,12 +61,13 @@
 <script>
     import UEditor from '@/components/editor'
 
-    export default{
-        data(){
-            return{
+    export default {
+        data () {
+            return {
                 //编辑器配置
                 config: {
                     initialFrameHeight: 450, // 高度
+                    initialFrameWidth: '90%',
                     toolbars: [["undo","redo","bold","italic","forecolor","backcolor","paragraph","fontfamily","fontsize","autotypeset",'insertorderedlist',"lineheight","inserttable","removeformat",'insertvideo','link',"insertimage","justifyleft","justifycenter","justifyright",'justifyjustify', "indent",'source']],
                     zIndex: 0, // 编辑器层级
                     charset:"utf-8", //编码
@@ -70,12 +81,10 @@
                 formField: {
                     title: '',
                     subtitle: '',
-                    author: '',
+                    description: '',
                     cate_id: '',
                     rel_url: '',
                     thumbnail: '',
-                    description: '',
-                    keyword: '',
                     status: "1",
                     content: ''
                 },
@@ -108,7 +117,7 @@
             handleSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.request('AdminArticleAdd', this.formField).then((res) => {
+                        this.request('ArchivesAdd', this.formField).then((res) => {
                             if(res.status) {
                                 this.$Message.success(res.msg);
                                 this.$router.go(-1)
@@ -126,26 +135,18 @@
             },
             //获得分类数据
             getCate() {
-                this.request('AdminCategoryList', {type: 1}, true).then((res) => {
+                this.request('ArchivesCategoryList', {type: 1}, true).then((res) => {
                     if(res.status) {
                         this.cate = res.data
                     }
                 })
             },
-            //获取数据
-            getData(instance) {
-                let id = this.$route.params.id
-                this.apiGet('/api/article/edit',{id: id}).then((res) => {
-                    if(res.status) {
-                        this.formField = res.data
-                        instance.execCommand('insertHtml', res.data.content)
-                        instance.addListener('contentChange', () => {
-                            this.formField.content = instance.getContent();
-                        });
-                    } else {
-                        this.$Message.error(res.msg)
-                    }
-                })
+            //初始化编辑器
+            editorReady(instance) {
+                instance.setContent('');
+                instance.addListener('contentChange', () => {
+                    this.formField.content = instance.getContent();
+                });
             },
             //后退海阔天空
             goBack() {
@@ -161,7 +162,6 @@
         },
         components: {
             UEditor
-        },
-
+        }
     }
 </script>

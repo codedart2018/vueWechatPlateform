@@ -25,9 +25,7 @@
                             <Input v-model="formField.rel_url" placeholder="请输入姓名"></Input>
                         </Form-item>
                         <Form-item label="文章内容" prop="content">
-                            <div style="line-height: normal">
-                                <UEditor ref="editor" @ready="editorReady" v-model="formField.content" :config="config"></UEditor>
-                            </div>
+                            <UEditor ref="editor" @ready="editorReady" v-model="formField.content" :config="config" style="line-height: normal"></UEditor>
                         </Form-item>
                         <Form-item label="文章排序" prop="sort" style="width: 400px;">
                             <Input v-model="formField.sort" placeholder="排序只能是数字"></Input>

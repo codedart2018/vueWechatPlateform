@@ -96,13 +96,31 @@ export default new Router({
                 component: resolve => require(['./pages/wechat/message-view'], resolve),
             },
             {
-                path: '/archives/category/',
+                path: '/archives/category',
                 name: 'archivesCategory',
                 meta: {
                     title: '资讯分类',
                     group: 'wechat'
                 },
                 component: resolve => require(['./pages/archives/category'], resolve),
+            },
+            {
+                path: '/archives/index/',
+                name: 'archivesIndex',
+                meta: {
+                    title: '资讯列表',
+                    group: 'wechat'
+                },
+                component: resolve => require(['./pages/archives/index'], resolve),
+            },
+            {
+                path: '/archives/add',
+                name: 'archivesAdd',
+                meta: {
+                    title: '资讯添加',
+                    group: 'wechat'
+                },
+                component: resolve => require(['./pages/archives/add'], resolve),
             }]
         },
         {

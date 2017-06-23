@@ -125,6 +125,12 @@ const methodMap = {
     ArchivesCategoryList: {url: '/merchant/archives_category/index', method: 'get'},
     /** 资讯文章分类添加 **/
     ArchivesCategoryAdd: {url: '/merchant/archives_category/add', method: 'post'},
+    /** 文章列表 **/
+    ArchivesList: {url: '/merchant/archives/index', method: 'get'},
+    /** 保存文章 **/
+    ArchivesAdd: {url: '/merchant/archives/add', method: 'post'},
+    /** 保存文章 **/
+    ArchivesEdit: {url: '/merchant/archives/edit', method: 'post'},
     
     
 }

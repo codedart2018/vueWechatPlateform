@@ -119,8 +119,8 @@
                                             文章管理
                                         </template>
                                         <Menu-item name="2-1">素材管理</Menu-item>
-                                        <Menu-item name="2-2"><router-link to="/archives/category/" style="color: #657180;">文章分类</router-link></Menu-item>
-                                        <Menu-item name="2-3">文章列表</Menu-item>
+                                        <Menu-item name="2-2"><router-link to="/archives/category" style="color: #657180;">文章分类</router-link></Menu-item>
+                                        <Menu-item name="2-3"><router-link to="/archives/index" style="color: #657180;">文章列表</router-link></Menu-item>
                                     </Submenu>
                                     <Submenu name="4">
                                         <template slot="title">
