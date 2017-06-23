@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Row class="mb-15">
+        <Row>
             <Col span="18" class="search">
             <Form :model="formSearch" :label-width="80" inline label-position="right">
                 <Form-item label="分类名称：">
@@ -21,7 +21,6 @@
         </Row>
         <Row type="flex" justify="end">
         </Row>
-
 
         <!--添加 Modal 对话框-->
         <Modal v-model="addModal" title="添加分类" class-name="customize-modal-center" @on-cancel="modalCancel()">
@@ -97,7 +96,6 @@
 </style>
 
 <script>
-    // todo 后期处理分类列表展现
     export default {
         data () {
             return {
@@ -216,8 +214,8 @@
                 addModal: false,
                 //编辑 modal
                 editModal: false,
-                //计数器
-                tally: 0
+                //计数器 用于搜索拉数据的时候使用
+                tally: 0,
             }
         },
         methods: {
@@ -229,10 +227,10 @@
             handleReset (name) {
                 this.$refs[name].resetFields();
             },
-            //获取数据
+            //获取分类数据
             getData (params) {
                 if (!params) params = {page: 1}
-                this.request('AdminCategoryList', params, true).then((res) => {
+                this.request('ArchivesCategoryList', params, true).then((res) => {
                     if(res.status) {
                         //列表数据
                         this.list = res.data
@@ -250,7 +248,7 @@
             addSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AdminCategoryAdd", this.addForm)
+                        this.save("ArchivesCategoryAdd", this.addForm)
                     } else {
                         this.$Message.error('表单验证失败!')
                     }
@@ -260,7 +258,7 @@
             editSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AdminCategoryEdit", this.editForm)
+                        this.save("ArchivesCategoryEdit", this.editForm)
                     } else {
                         this.$Message.error('表单验证失败!')
                     }
@@ -280,7 +278,7 @@
                     content: '<p>你确定要删除?删除后不可恢复!</p>',
                     loading: true,
                     onOk: () => {
-                        this.request('AdminCategoryDelete', {id, id}).then((res) => {
+                        this.request('ArchivesCategoryDelete', {id, id}).then((res) => {
                             if(res.status) {
                                 this.$Message.info(res.msg)
                                 this.$Modal.remove();

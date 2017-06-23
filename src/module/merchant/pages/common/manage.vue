@@ -108,10 +108,10 @@
                                             微信管理
                                         </template>
                                         <Menu-item name="1-1"><router-link to="/wechat/fans" style="color: #657180;">粉丝管理</router-link></Menu-item>
-                                        <Menu-item name="1-2"> <router-link to="/wechat/message" style="color: #657180;">消息管理</router-link></Menu-item>
-                                        <Menu-item name="1-3"> <router-link to="/public/bind" style="color: #657180;">自动回复</router-link></Menu-item>
-                                        <Menu-item name="1-4"> <router-link to="/public/bind" style="color: #657180;">消息群发</router-link></Menu-item>
-                                        <Menu-item name="1-5"> <router-link to="/wechat/menu" style="color: #657180;">自定义菜单</router-link></Menu-item>
+                                        <Menu-item name="1-2"><router-link to="/wechat/message" style="color: #657180;">消息管理</router-link></Menu-item>
+                                        <Menu-item name="1-3"><router-link to="/public/bind" style="color: #657180;">自动回复</router-link></Menu-item>
+                                        <Menu-item name="1-4"><router-link to="/public/bind" style="color: #657180;">消息群发</router-link></Menu-item>
+                                        <Menu-item name="1-5"><router-link to="/wechat/menu" style="color: #657180;">自定义菜单</router-link></Menu-item>
                                     </Submenu>
                                     <Submenu name="2">
                                         <template slot="title">
@@ -119,8 +119,8 @@
                                             文章管理
                                         </template>
                                         <Menu-item name="2-1">素材管理</Menu-item>
-                                        <Menu-item name="2-2">文章分类</Menu-item>
-                                        <Menu-item name="2-2">文章列表</Menu-item>
+                                        <Menu-item name="2-2"><router-link to="/archives/category/" style="color: #657180;">文章分类</router-link></Menu-item>
+                                        <Menu-item name="2-3">文章列表</Menu-item>
                                     </Submenu>
                                     <Submenu name="4">
                                         <template slot="title">

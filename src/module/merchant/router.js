@@ -22,7 +22,8 @@ export default new Router({
                     group: 'manage'
                 },
                 component: resolve => require(['./pages/setting/personal'], resolve),
-            },{
+            },
+            {
                 path: '/setting/merchant',
                 name: 'merchant',
                 meta: {
@@ -30,7 +31,8 @@ export default new Router({
                     group: 'manage'
                 },
                 component: resolve => require(['./pages/setting/merchant'], resolve),
-            },{
+            },
+            {
                 path: '/public/list',
                 name: 'public',
                 meta: {
@@ -38,7 +40,8 @@ export default new Router({
                     group: 'manage'
                 },
                 component: resolve => require(['./pages/public/list'], resolve),
-            },{
+            },
+            {
                 path: '/public/bind',
                 name: 'bind',
                 meta: {
@@ -82,6 +85,24 @@ export default new Router({
                     group: 'wechat'
                 },
                 component: resolve => require(['./pages/wechat/message'], resolve),
+            },
+            {
+                path: '/wechat/message_view/:id?',
+                name: 'wechatMessageView',
+                meta: {
+                    title: '消息详情',
+                    group: 'wechat'
+                },
+                component: resolve => require(['./pages/wechat/message-view'], resolve),
+            },
+            {
+                path: '/archives/category/',
+                name: 'archivesCategory',
+                meta: {
+                    title: '资讯分类',
+                    group: 'wechat'
+                },
+                component: resolve => require(['./pages/archives/category'], resolve),
             }]
         },
         {

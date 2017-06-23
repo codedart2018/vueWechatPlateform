@@ -119,6 +119,12 @@ const methodMap = {
     MerchantWxMessage: {url: '/merchant/we_chat_message/index', method: 'get'},
     /** 微信消息发送回复 **/
     MerchantWxSendMessage: {url: '/merchant/we_chat_message/send_message', method: 'post'},
+    /** 微信消息详情列表 **/
+    MerchantWxMessageListView: {url: '/merchant/we_chat_message/list_view', method: 'get'},
+    /** 资讯文章分类列表 **/
+    ArchivesCategoryList: {url: '/merchant/archives_category/index', method: 'get'},
+    /** 资讯文章分类添加 **/
+    ArchivesCategoryAdd: {url: '/merchant/archives_category/add', method: 'post'},
     
     
 }

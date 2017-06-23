@@ -19,7 +19,7 @@
             &nbsp;
             </Col>
             <Col span="6" class="text-align-right">
-            <router-link to="/article/add"><Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加标签</Button></router-link>
+            <router-link to="/article/add"><Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加文章</Button></router-link>
             </Col>
         </Row>
         <Row class="mb-15">
@@ -214,7 +214,7 @@
             },
             //获得分类数据
             getCate() {
-                this.request('AdminCategoryList', {type: 1}, true).then((res) => {
+                this.request('AdminCategoryList', {}).then((res) => {
                     if(res.status) {
                         this.cate = res.data
                     }
