@@ -139,7 +139,13 @@
  
  ![vue 微信编辑器](./demo/images/wx-editor1.jpg) 
  
- ![vue 微信编辑器](./demo/images/wx-editor2.jpg)
+ ![vue 微信编辑器](./demo/images/wx-editor2.jpg) 
+ 
+ ![vue 商户平台管理中心](./demo/images/manage.jpg) 
+ 
+ ![vue 微信消息回复](./demo/images/message.jpg) 
+ 
+ ![vue 微信菜单](./demo/images/wx-menu.jpg)
  
  #### vue 百度编辑器
  ![vue 百度编辑器](./demo/images/editor.jpg)
