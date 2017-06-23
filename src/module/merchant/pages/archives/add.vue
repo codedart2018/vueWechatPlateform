@@ -30,7 +30,7 @@
                         <Input v-model="formField.description" type="textarea" placeholder="填写250个字符内的简要内容..."  :autosize="{minRows: 5}"></Input>
                     </Form-item>
                     <Form-item label="文章内容" prop="content">
-                        <UEditor ref="editor" @ready="editorReady" v-model="formField.content" :config="config" style="line-height: normal"></UEditor>
+                        <wx-ediotr ref="content" v-model="formField.content"></wx-ediotr>
                     </Form-item>
                     <Form-item label="作者" prop="author" style="width: 400px;">
                         <Input v-model="formField.author" placeholder="作者默认公众号名称"></Input>
@@ -59,22 +59,11 @@
 </template>
 
 <script>
-    import UEditor from '@/components/editor'
+    import WxEditor from '@/components/wx-editor.vue'
 
     export default {
         data () {
             return {
-                //编辑器配置
-                config: {
-                    initialFrameHeight: 450, // 高度
-                    initialFrameWidth: '90%',
-                    toolbars: [["undo","redo","bold","italic","forecolor","backcolor","paragraph","fontfamily","fontsize","autotypeset",'insertorderedlist',"lineheight","inserttable","removeformat",'insertvideo','link',"insertimage","justifyleft","justifycenter","justifyright",'justifyjustify', "indent",'source']],
-                    zIndex: 0, // 编辑器层级
-                    charset:"utf-8", //编码
-                    saveInterval: 5000,
-                    autoHeightEnabled: false,
-                    enableAutoSave: false
-                },
                 //分类数据
                 cate: [],
                 //表单字段
@@ -115,6 +104,7 @@
         },
         methods: {
             handleSubmit (name) {
+                this.formField.content = this.$refs.content.content
                 this.$refs[name].validate((valid) => {
                     if (valid) {
                         this.request('ArchivesAdd', this.formField).then((res) => {
@@ -141,13 +131,6 @@
                     }
                 })
             },
-            //初始化编辑器
-            editorReady(instance) {
-                instance.setContent('');
-                instance.addListener('contentChange', () => {
-                    this.formField.content = instance.getContent();
-                });
-            },
             //后退海阔天空
             goBack() {
                 this.$router.go(-1)
@@ -161,7 +144,7 @@
             this.getCate()
         },
         components: {
-            UEditor
+            'wx-ediotr': WxEditor
         }
     }
 </script>
