@@ -121,6 +121,15 @@ export default new Router({
                     group: 'wechat'
                 },
                 component: resolve => require(['./pages/archives/add'], resolve),
+            },
+            {
+                path: '/archives/test',
+                name: 'archivesTest',
+                meta: {
+                    title: '资讯添加',
+                    group: 'wechat'
+                },
+                component: resolve => require(['./pages/archives/test'], resolve),
             }]
         },
         {
