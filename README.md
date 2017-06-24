@@ -10,6 +10,7 @@
 > 加微信请先打赏（不介意加QQ） \
 > ![微信联系人](./demo/images/wechat_contacts.jpg)
  
+### 演示地址: http://www.daimatu.cn
 
 ### 前台:
    > vue-cli \

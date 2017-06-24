@@ -10,12 +10,14 @@ import Util from '../../libs/util' // 工具
 import Http from '../../libs/http' //请求工具
 import Plugin from '../../libs/plugin/formatDate' //插件
 import '../../libs/filter' //过滤器
+import Api from '../../libs/api'
 
 Vue.use(Toast)
 Vue.use(Http)
 Vue.use(IView)
 Vue.use(Plugin)
 Vue.config.productionTip = false
+window.Api = Api
 
 Router.beforeEach(({meta, path}, from, next) => {
     Util.title(meta.title);

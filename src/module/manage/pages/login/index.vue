@@ -57,6 +57,7 @@
     import {canvas} from '../../../../libs/canvas/star'
     import {mapActions} from 'vuex'
     import {sessionRouters, filterRouters} from '../../router'
+
     export default {
         beforeCreate: function () {
         	//todo 后期更改成flex box 自适应
@@ -69,7 +70,7 @@
             next(vm => {
                 // 通过 `vm` 访问组件实例'
                 //解决进入路由不刷新验证码问题
-                vm.verifyUrl = '/api/login/code?v=' + Math.random() * 1000
+                vm.verifyUrl = Api.domain + '/api/login/code?v=' + Math.random() * 1000
             })
         },
         data() {
