@@ -69,13 +69,9 @@
                 //表单字段
                 formField: {
                     title: '',
-                    subtitle: '',
                     author: '',
                     cate_id: '',
-                    rel_url: '',
                     thumbnail: '',
-                    description: '',
-                    keyword: '',
                     status: "1",
                     content: ''
                 },

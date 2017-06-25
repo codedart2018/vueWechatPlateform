@@ -1,4 +1,3 @@
-<!--抱着对你的思念入眠 化成如花一般的梦-->
 <template>
     <div>
         <Card dis-hover>
@@ -33,7 +32,7 @@
                         <Input v-model="formField.description" type="textarea" placeholder="填写250个字符内的简要内容..." :autosize="{minRows: 5}"></Input>
                     </Form-item>
                     <Form-item label="文章内容" prop="content">
-                        <wx-editor ref="content" v-model="formField.content"></wx-editor>
+                        <wx-editor ref="content" :initContent="formField.content"></wx-editor>
                     </Form-item>
                     <Form-item label="作者" prop="author" style="width: 400px;">
                         <Input v-model="formField.author" placeholder="作者默认公众号名称"></Input>
@@ -63,53 +62,48 @@
 
 <script>
     import WxEditor from '@/components/wx-editor.vue'
-    export default {
-        data () {
-            return {
+
+    export default{
+        data(){
+            return{
                 //分类数据
                 cate: [],
                 //表单字段
                 formField: {
-                    title: '',
-                    subtitle: '',
-                    description: '',
-                    cate_id: '',
-                    thumbnail: '',
-                    status: "1",
-                    content: ''
+                	content: ''
                 },
+                content: '',
                 //验证规则
                 ruleValidate: {
                     title: [
-                        {required: true, message: '文章标题不能为空', trigger: 'blur'},
-                        {type: 'string', min: 2, message: '文章名称不能少于2个字符', trigger: 'blur'},
-                        {type: 'string', max: 50, message: '文章名称不能大于50个字符', trigger: 'blur'}
+                        { required: true, message: '文章标题不能为空', trigger: 'blur' },
+                        { type: 'string', min: 2, message: '文章名称不能少于2个字符', trigger: 'blur' },
+                        { type: 'string', max: 50, message: '文章名称不能大于50个字符', trigger: 'blur' }
                     ],
                     rel_url: [
-                        {type: 'url', message: '外链地址不正确', trigger: 'blur'}
+                        { type: 'url', message: '外链地址不正确', trigger: 'blur' }
                     ],
                     cate_id: [
-                        {required: true, message: '请选择文章分类', trigger: 'change'}
+                        { required: true, message: '请选择文章分类', trigger: 'change' }
                     ],
                     status: [
-                        {required: true, message: '请选择状态', trigger: 'change'}
+                        { required: true, message: '请选择状态', trigger: 'change' }
                     ],
                     content: [
-                        {required: true, message: '请编写文章内容', trigger: 'change'}
+                        { required: true, message: '请编写文章内容', trigger: 'change' }
                     ],
                     sort: [
-                        {type: 'string', message: '排序只能数字', trigger: 'blur', pattern: /^[0-9]+$/}
+                        { type: 'string', message: '排序只能数字', trigger: 'blur', pattern: /^[0-9]+$/}
                     ]
                 }
             }
         },
         methods: {
             handleSubmit (name) {
-                this.formField.content = this.$refs.content.content
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.request('ArchivesAdd', this.formField).then((res) => {
-                            if (res.status) {
+                        this.request('AdminArticleAdd', this.formField).then((res) => {
+                            if(res.status) {
                                 this.$Message.success(res.msg);
                                 this.$router.go(-1)
                             } else {
@@ -127,8 +121,19 @@
             //获得分类数据
             getCate() {
                 this.request('ArchivesCategoryList', {type: 1}, true).then((res) => {
-                    if (res.status) {
+                    if(res.status) {
                         this.cate = res.data
+                    }
+                })
+            },
+            //获取数据
+            getData() {
+                let id = this.$route.params.id
+                this.apiGet('/merchant/archives/edit',{id: id}).then((res) => {
+                    if(res.status) {
+                        this.formField = res.data
+                    } else {
+                        this.$Message.error(res.msg)
                     }
                 })
             },
@@ -138,15 +143,16 @@
             },
             //上传成功要执行的方法
             uploadSuccess() {
+
             }
         },
         mounted() {
             this.getCate()
+            this.getData()
         },
         components: {
             'wx-editor': WxEditor
-        }
+        },
+
     }
 </script>
-
-<!--./letsencrypt-auto certonly --renew-by-default --email myxingke@126.com -d dev.pay.daimatu.cn-->

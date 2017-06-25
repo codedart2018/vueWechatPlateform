@@ -123,6 +123,15 @@ export default new Router({
                 component: resolve => require(['./pages/archives/add'], resolve),
             },
             {
+                path: '/archives/edit/:id?',
+                name: 'archivesEdit',
+                meta: {
+                    title: '资讯修改',
+                    group: 'wechat'
+                },
+                component: resolve => require(['./pages/archives/edit'], resolve),
+            },
+            {
                 path: '/archives/test',
                 name: 'archivesTest',
                 meta: {

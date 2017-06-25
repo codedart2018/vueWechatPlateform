@@ -6,7 +6,7 @@
                 <Form-item label="文章名称：">
                     <Input v-model="formSearch.keywords" placeholder="请输入文章关键词"></Input>
                 </Form-item>
-                <Form-item label="标签分类：">
+                <Form-item label="资讯分类：">
                     <Select v-model="formSearch.c_id" placeholder="请选择" style="width:90px">
                         <Option value="">请选择</Option>
                         <Option v-for="item in cate" :value="item.id" :key="item.id">{{ item.name }}</Option>
@@ -181,7 +181,7 @@
                 })
             },
             edit(id) {
-                this.$router.push({ path: '/article/edit/' + id, params: { id: id }})
+                this.$router.push({ path: '/archives/edit/' + id, params: { id: id }})
             },
             //删除素材数据
             del (index, id) {
