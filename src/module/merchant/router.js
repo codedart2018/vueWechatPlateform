@@ -139,6 +139,15 @@ export default new Router({
                     group: 'wechat'
                 },
                 component: resolve => require(['./pages/archives/edit'], resolve),
+            },
+            {
+                path: '/website/index',
+                name: 'websiteIndex',
+                meta: {
+                    title: '微网站设置',
+                    group: 'wechat'
+                },
+                component: resolve => require(['./pages/website/index'], resolve),
             }]
         },
         {

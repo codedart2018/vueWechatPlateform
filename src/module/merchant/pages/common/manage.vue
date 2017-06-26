@@ -107,7 +107,7 @@
                                             <Icon type="android-apps"></Icon>
                                             应用管理
                                         </template>
-                                        <Menu-item name="0-1"><router-link to="/wechat/fans" style="color: #657180;">微网站</router-link></Menu-item>
+                                        <Menu-item name="0-1"><router-link to="/website/index" style="color: #657180;">微网站</router-link></Menu-item>
                                     </Submenu>
                                     <Submenu name="1">
                                         <template slot="title">
