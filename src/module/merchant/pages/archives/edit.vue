@@ -157,7 +157,6 @@
             },
             //保存数据同步微信
             syncWeChat(name) {
-            	if(this.formField.is_sync != 0) this.$Message.error("已经同步过了")
                 this.formField.content = this.$refs.content.content
                 this.$refs[name].validate((valid) => {
                     if (valid) {
