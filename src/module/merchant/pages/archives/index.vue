@@ -57,12 +57,11 @@
                     {
                         title: '所属分类',
                         key: 'cate_name',
-                        width: 200
+                        width: 150
                     },
                     {
                         title: '状态',
-                        key: 'status',
-                        width: 120,
+                        width: 90,
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
@@ -77,9 +76,25 @@
                         }
                     },
                     {
+                        title: '同步',
+                        width: 80,
+                        align: 'center',
+                        render: (h, params) => {
+                            const row = params.row;
+                            const color = row.is_sync ? 'green' : 'yellow'
+                            const text = row.is_sync ? '是' : '否'
+                            return h('Tag', {
+                                props: {
+                                    type: 'dot',
+                                    color: color
+                                }
+                            }, text);
+                        }
+                    },
+                    {
                         title: '添加时间',
                         key: 'create_time',
-                        width: 135,
+                        width: 115,
                         align: 'center',
                         render: (h, params) => {
                             return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
@@ -88,7 +103,7 @@
                     {
                         title: '更新时间',
                         key: 'update_time',
-                        width: 135,
+                        width: 115,
                         align: 'center',
                         render: (h, params) => {
                             return h('div',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'))
@@ -97,10 +112,24 @@
                     {
                         title: '操作',
                         key: 'operation',
-                        width: 140,
+                        width: 150,
                         align: 'center',
                         render: (h, params) => {
                             return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'success',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.edit(params.row.id)
+                                        }
+                                    }
+                                }, '评论'),
                                 h('Button', {
                                     props: {
                                         type: 'primary',

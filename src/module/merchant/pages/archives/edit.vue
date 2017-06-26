@@ -50,9 +50,17 @@
                         </Radio-group>
                     </Form-item>
                     <Form-item>
-                        <Button type="primary" @click="handleSubmit('formField')">提交</Button>
-                        <Button type="ghost" @click="handleReset('formField')" style="margin-left: 8px">重置</Button>
-                        <Button type="ghost" @click="goBack" style="margin-left: 8px">返回</Button>
+                        <Row>
+                            <Col span="16">
+                                <Button type="primary" @click="handleSubmit('formField')">提交保存</Button>
+                                <Button type="ghost" @click="handleReset('formField')" style="margin-left: 8px">重置表单</Button>
+                            </Col>
+                            <Col span="8">
+                                <Button type="info" @click="syncWeChat('formField')">保存同步微信</Button>
+                                <Button type="success" style="margin-left: 8px">保存并群发</Button>
+                                <Button type="ghost" @click="goBack" style="margin-left: 8px">返回</Button>
+                            </Col>
+                        </Row>
                     </Form-item>
                 </Form>
             </Row>
@@ -70,7 +78,8 @@
                 cate: [],
                 //表单字段
                 formField: {
-                	content: ''
+                	content: '',
+                    status: 1
                 },
                 //验证规则
                 ruleValidate: {
@@ -145,6 +154,25 @@
             //上传成功要执行的方法
             uploadSuccess() {
 
+            },
+            //保存数据同步微信
+            syncWeChat(name) {
+            	if(this.formField.is_sync != 0) this.$Message.error("已经同步过了")
+                this.formField.content = this.$refs.content.content
+                this.$refs[name].validate((valid) => {
+                    if (valid) {
+                        this.request('ArchivesSaveSyncMaterialNews', this.formField).then((res) => {
+                            if(res.status) {
+                                this.$Message.success(res.msg)
+                                this.$router.go(-1)
+                            } else {
+                                this.$Message.error(res.msg)
+                            }
+                        })
+                    } else {
+                        this.$Message.error('表单验证失败!')
+                    }
+                })
             }
         },
         mounted() {

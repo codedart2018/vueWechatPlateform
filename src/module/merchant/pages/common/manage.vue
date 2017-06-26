@@ -102,6 +102,13 @@
                             <div class="tip"><router-link to="/">公众号管理中心</router-link></div>
                             <div class="sub-menu">
                                 <Menu width="auto" style="position: static;" accordion>
+                                    <Submenu name="0">
+                                        <template slot="title">
+                                            <Icon type="android-apps"></Icon>
+                                            应用管理
+                                        </template>
+                                        <Menu-item name="0-1"><router-link to="/wechat/fans" style="color: #657180;">微网站</router-link></Menu-item>
+                                    </Submenu>
                                     <Submenu name="1">
                                         <template slot="title">
                                             <Icon type="chatbubbles"></Icon>
@@ -116,9 +123,9 @@
                                     <Submenu name="2">
                                         <template slot="title">
                                             <Icon type="stats-bars"></Icon>
-                                            文章管理
+                                            文章素材
                                         </template>
-                                        <Menu-item name="2-1"><router-link to="/archives/test" style="color: #657180;">素材管理</router-link></Menu-item>
+                                        <Menu-item name="2-1"><router-link to="/archives/material" style="color: #657180;">素材管理</router-link></Menu-item>
                                         <Menu-item name="2-2"><router-link to="/archives/category" style="color: #657180;">文章分类</router-link></Menu-item>
                                         <Menu-item name="2-3"><router-link to="/archives/index" style="color: #657180;">文章列表</router-link></Menu-item>
                                     </Submenu>

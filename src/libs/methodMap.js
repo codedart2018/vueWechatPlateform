@@ -131,6 +131,8 @@ const methodMap = {
     ArchivesAdd: {url: '/merchant/archives/add', method: 'post'},
     /** 保存文章 **/
     ArchivesEdit: {url: '/merchant/archives/edit', method: 'post'},
+    /** 保存同步文章（图文消息）**/
+    ArchivesSaveSyncMaterialNews: {url: '/merchant/archives/sync_material', method: 'post'},
     
     
 }

@@ -51,9 +51,17 @@
                         </Radio-group>
                     </Form-item>
                     <Form-item>
-                        <Button type="primary" @click="handleSubmit('formField')">提交</Button>
-                        <Button type="ghost" @click="handleReset('formField')" style="margin-left: 8px">重置</Button>
-                        <Button type="ghost" @click="goBack" style="margin-left: 8px">返回</Button>
+                        <Row>
+                            <Col span="16">
+                            <Button type="primary" @click="handleSubmit('formField')">提交保存</Button>
+                            <Button type="ghost" @click="handleReset('formField')" style="margin-left: 8px">重置表单</Button>
+                            </Col>
+                            <Col span="8">
+                            <Button type="info" @click="syncWeChat('formField')">保存同步微信</Button>
+                            <Button type="success" style="margin-left: 8px">保存并群发</Button>
+                            <Button type="ghost" @click="goBack" style="margin-left: 8px">返回</Button>
+                            </Col>
+                        </Row>
                     </Form-item>
                 </Form>
             </Row>
@@ -138,6 +146,24 @@
             },
             //上传成功要执行的方法
             uploadSuccess() {
+            },
+            //保存数据同步微信
+            syncWeChat(name) {
+                this.formField.content = this.$refs.content.content
+                this.$refs[name].validate((valid) => {
+                    if (valid) {
+                        this.request('ArchivesSaveSyncMaterialNews', this.formField).then((res) => {
+                            if(res.status) {
+                                this.$Message.success(res.msg)
+                                this.$router.go(-1)
+                            } else {
+                                this.$Message.error(res.msg)
+                            }
+                        })
+                    } else {
+                        this.$Message.error('表单验证失败!')
+                    }
+                })
             }
         },
         mounted() {
