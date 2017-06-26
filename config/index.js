@@ -8,24 +8,6 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      //后台
-      '/api': {
-          target: 'http://api.daimatu.cn/',
-          changeOrigin: true,
-          pathRewrite: {
-              '^/api': '/api'
-          }
-      },
-      //商户平台
-      '/merchant': {
-          target: 'http://api.daimatu.cn/',
-          changeOrigin: true,
-          pathRewrite: {
-              '^/merchant': '/merchant'
-          }
-      }
-    },
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
