@@ -102,16 +102,16 @@
                 this.formField.content = this.$refs.content.content
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.request('AdminArticleAdd', this.formField).then((res) => {
+                        this.request('ArchivesEdit', this.formField).then((res) => {
                             if(res.status) {
-                                this.$Message.success(res.msg);
+                                this.$Message.success(res.msg)
                                 this.$router.go(-1)
                             } else {
-                                this.$Message.error(res.msg);
+                                this.$Message.error(res.msg)
                             }
                         })
                     } else {
-                        this.$Message.error('表单验证失败!');
+                        this.$Message.error('表单验证失败!')
                     }
                 })
             },
@@ -132,7 +132,6 @@
                 this.apiGet('/merchant/archives/edit',{id: id}).then((res) => {
                     if(res.status) {
                         this.formField = res.data
-                        console.log("step:1")
                         this.$refs.content.insertHtml(res.data.content)
                     } else {
                         this.$Message.error(res.msg)
@@ -151,7 +150,6 @@
         mounted() {
             this.getCate()
             this.getData()
-            console.log("step:2")
         },
         components: {
             'wx-editor': WxEditor

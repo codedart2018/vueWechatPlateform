@@ -101,6 +101,12 @@
             }
         },
         methods: {
+            //初始化编辑器
+            editorReady(instance) {
+                instance.addListener('contentChange', () => {
+                    this.formField.content = instance.getContent();
+                });
+            },
             handleSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {

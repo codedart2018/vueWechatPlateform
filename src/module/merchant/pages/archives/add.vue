@@ -110,14 +110,14 @@
                     if (valid) {
                         this.request('ArchivesAdd', this.formField).then((res) => {
                             if (res.status) {
-                                this.$Message.success(res.msg);
+                                this.$Message.success(res.msg)
                                 this.$router.go(-1)
                             } else {
-                                this.$Message.error(res.msg);
+                                this.$Message.error(res.msg)
                             }
                         })
                     } else {
-                        this.$Message.error('表单验证失败!');
+                        this.$Message.error('表单验证失败!')
                     }
                 })
             },
