@@ -16,6 +16,11 @@ export default new Router({
             path: '/test',
             name: 'Test',
             component: resolve => require(['./Test'], resolve)
+        },
+        {
+            path: '/map',
+            name: 'Map',
+            component: resolve => require(['./Map'], resolve)
         }
     ]
 })

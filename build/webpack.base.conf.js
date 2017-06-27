@@ -13,6 +13,9 @@ module.exports = {
   //   app: './src/main.js',
   // },
   entry: utils.getEntries('./src/module/**/*.js'),
+  externals: {
+    "BMap": "BMap"
+  },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
