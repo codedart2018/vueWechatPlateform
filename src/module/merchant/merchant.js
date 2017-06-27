@@ -15,6 +15,13 @@ Vue.use(Toast)
 Vue.use(Http)
 Vue.use(IView)
 
+import BaiduMap from 'vue-baidu-map'
+
+Vue.use(BaiduMap, {
+    // ak 是在百度地图开发者平台申请的密钥 详见 http://lbsyun.baidu.com/apiconsole/key */
+    ak: '5202126d38c010ca90e79bd0f5d25b14'
+})
+
 Vue.config.productionTip = false
 
 Router.beforeEach(({meta, path}, from, next) => {

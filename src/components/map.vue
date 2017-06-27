@@ -116,11 +116,11 @@
                 default: '天安门'
             },
             enl: {
-            	type: Number,
+                type: Number,
                 default: 1
             },
             is_click: {
-            	type: Number,
+                type: Number,
                 default: 1
             }
         },
@@ -142,34 +142,25 @@
                 map.enableContinuousZoom(true);
 
                 /** 地图导航 **/
-                // 添加带有定位的导航控件
+                    // 添加带有定位的导航控件
                 var navigationControl = new BMap.NavigationControl({
-                    // 靠左上角位置
-                    anchor: BMAP_ANCHOR_TOP_LEFT,
-                    // LARGE类型
-                    type: BMAP_NAVIGATION_CONTROL_LARGE,
-                    // 启用显示定位
-                    enableGeolocation: true
-                });
+                        // 靠左上角位置
+                        anchor: BMAP_ANCHOR_TOP_LEFT,
+                        // LARGE类型
+                        type: BMAP_NAVIGATION_CONTROL_LARGE,
+                        // 启用显示定位
+                        enableGeolocation: true
+                    });
                 map.addControl(navigationControl);
                 /** 地图导航 **/
 
                 /** 全景地图 **/
                 //覆盖区域图层
-                map.addTileLayer(new BMap.PanoramaCoverageLayer());
-                var stCtrl = new BMap.PanoramaControl(); //构造全景控件
-                stCtrl.setOffset(new BMap.Size(20, 20));
-                map.addControl(stCtrl);//添加全景控件
+//                map.addTileLayer(new BMap.PanoramaCoverageLayer());
+//                var stCtrl = new BMap.PanoramaControl(); //构造全景控件
+//                stCtrl.setOffset(new BMap.Size(20, 20));
+//                map.addControl(stCtrl);//添加全景控件
                 /** 全景地图 **/
-
-                /** 鼠标拖拽 **/
-                if(this.enl) {
-                    var myDrag = new BMapLib.RectangleZoom(map, {
-                        followText: "拖拽鼠标进行操作"
-                    });
-                   // myDrag.open();  //开启拉框放大
-                }
-                /** 鼠标拖拽 **/
 
                 /** 是否开启坐标识取 **/
                 if(this.is_click) {
