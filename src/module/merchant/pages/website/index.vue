@@ -29,7 +29,7 @@
                             <Input v-model="formField.zip" placeholder="请填写邮政编码"></Input>
                         </Form-item>
                         <Form-item label="地图坐标" prop="location">
-                            <Button type="ghost" icon="location">点击获取</Button>
+                            <Button type="ghost" icon="location" @click="modal10 = true">点击获取</Button>
                         </Form-item>
                         <Form-item label="网站介绍" prop="desc">
                             <Input v-model="formField.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}"
@@ -46,12 +46,24 @@
                 <Tab-pane label="其它" icon="android-options">其它</Tab-pane>
             </Tabs>
         </Card>
+
+        <!--地图modal 对话框-->
+        <Modal
+            title="坐标获取"
+            v-model="modal10"
+            class-name="vertical-center-modal"
+            width="700">
+            <bd-map></bd-map>
+        </Modal>
+        <!--地图modal 对话框-->
     </div>
 </template>
 <style>
 
 </style>
 <script>
+    import BdMap from '@/components/map.vue'
+
     export default{
         data () {
             return {
@@ -82,7 +94,8 @@
                     desc: [
                         {type: 'string', min: 20, message: '介绍不能少于20字', trigger: 'blur'}
                     ]
-                }
+                },
+                modal10: false,
             }
         },
         methods: {
@@ -99,6 +112,8 @@
                 this.$refs[name].resetFields();
             }
         },
-        components: {}
+        components: {
+            'bd-map': BdMap,
+        }
     }
 </script>

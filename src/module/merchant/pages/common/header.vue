@@ -10,7 +10,7 @@
                 <span class="simple-text user-name">baide</span>
             </a>
             <span class="divide-icon pull-left">|</span>
-            <a href="/app/logout" class="logout-btn">退出</a>
+            <a href="javascript: void(0);" class="logout-btn">退出</a>
             <div class="clearfix"></div>
         </div>
         <div class="feedback-panel">
@@ -29,6 +29,24 @@
 </template>
 
 <script>
-    export default{}
+    export default{
+        data () {
+            return {
+                info: '',
+            }
+        },
+        methods: {
+        	//退出方法
+            signOut() {
+
+            }
+        },
+        components: {
+
+        },
+        mounted() {
+
+        }
+    }
 </script>
 
