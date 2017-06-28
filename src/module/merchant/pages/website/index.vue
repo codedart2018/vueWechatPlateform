@@ -30,7 +30,8 @@
                                 <Input v-model="formField.zip" placeholder="请填写邮政编码"></Input>
                             </Form-item>
                             <Form-item label="地图坐标" prop="location">
-                                <Button type="ghost" icon="location" @click="modal10 = true">点击获取</Button>
+                                <Button type="ghost" icon="location" @click="getLocation">点击获取</Button>
+                                <span style="padding-left: 15px;">{{formField.location}}</span>
                             </Form-item>
                             <Form-item label="网站介绍" prop="desc">
                                 <Input v-model="formField.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}"
@@ -51,8 +52,8 @@
             </Tabs>
         </Card>
         <!--地图modal 对话框 自带modal 有问题 重新写一个-->
-        <div class="map">
-            <bd-map></bd-map>
+        <div class="map" v-if="show">
+            <bd-map v-on:coordinate="watchLocation"></bd-map>
         </div>
         <!--地图modal 对话框-->
     </div>
@@ -67,7 +68,7 @@
         left: 0;
         bottom: 0;
         right: 0;
-        margin: auto
+        margin: auto;
     }
 </style>
 <script>
@@ -103,7 +104,7 @@
                         {type: 'string', min: 20, message: '介绍不能少于20字', trigger: 'blur'}
                     ]
                 },
-                modal10: false,
+                show: false,
             }
         },
         methods: {
@@ -118,10 +119,25 @@
             },
             handleReset (name) {
                 this.$refs[name].resetFields();
+            },
+            //打开模态窗口
+            getLocation() {
+            	this.show = true
+            },
+            //监听数据变化
+            watchLocation: function (location){
+            	this.formField.location = location
+            }
+        },
+        //数据监听
+        watch: {
+            'formField.location' (to, from) {
+            	this.show = false
+                console.log(to, from)
             }
         },
         components: {
             'bd-map': BdMap,
-        }
+        },
     }
 </script>

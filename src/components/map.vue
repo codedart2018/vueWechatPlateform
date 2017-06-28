@@ -92,7 +92,8 @@
                 },
                 message: '',
                 show: false,
-                map: {}
+                map: {},
+                coordinate: '',
             }
         },
         props: {
@@ -115,14 +116,10 @@
                 type: String,
                 default: '天安门'
             },
-            enl: {
-                type: Number,
-                default: 1
-            },
             is_click: {
                 type: Number,
                 default: 1
-            }
+            },
         },
         mounted() {
             this.ready();
@@ -135,7 +132,7 @@
                 //map.centerAndZoom("渝中区", 12);
                 map.centerAndZoom(new BMap.Point(106.559693, 29.561139),12);
                 //设置地图默认的鼠标指针样式
-                map.setDefaultCursor("url('bird.cur')");
+                //map.setDefaultCursor("url('bird.cur')");
                 //启用滚轮放大缩小，默认禁用
                 map.enableScrollWheelZoom(true);
                 //启用地图惯性拖拽，默认禁用
@@ -164,16 +161,19 @@
 
                 /** 是否开启坐标识取 **/
                 if(this.is_click) {
-                    map.addEventListener("click", this.coordinates);
+                    map.addEventListener("click", this.click);
                 }
             },
-            coordinates(e) {
-                this.show = true
+            click(e) {
+                //this.show = true
                 this.message = "您拾取了坐标：" + e.point.lng + ", " + e.point.lat;
+                this.coordinate = e.point.lng + "," + e.point.lat;
+                //this.$emit('childjian', this.coordinate)
+                this.$emit('coordinate',this.coordinate);
             },
             close() {
                 this.show = false
-            }
+            },
         }
     }
 </script>
