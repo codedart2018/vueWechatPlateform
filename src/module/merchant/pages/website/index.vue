@@ -11,7 +11,7 @@
                                 </Form-item>
                                 <Form-item label="网站LOGO" prop="logo">
                                     <Upload action="//jsonplaceholder.typicode.com/posts/" success="uploadSuccess">
-                                        <Button type="ghost" icon="ios-cloud-upload-outline">上传文件</Button>
+                                        <Button type="ghost" icon="ios-cloud-upload-outline">上传Logo</Button>
                                     </Upload>
                                 </Form-item>
                                 <Form-item label="站点分类" prop="cate_id" style="width: 400px;">
@@ -159,7 +159,6 @@
                         this.request('MerchantWebsiteSave', this.formField).then((res) => {
                             if (res.status) {
                                 this.$Message.success(res.msg)
-                                this.$router.go(-1)
                             } else {
                                 this.$Message.error(res.msg)
                             }

@@ -176,3 +176,4 @@
 </script>
 
 <!--./letsencrypt-auto certonly --renew-by-default --email myxingke@126.com -d dev.pay.daimatu.cn-->
+<!--./letsencrypt-auto certonly --renew-by-default --email myxingke@126.com -d www.daimatu.cn-->

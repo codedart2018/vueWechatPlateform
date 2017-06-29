@@ -10,7 +10,7 @@
                 <span class="simple-text user-name">baide</span>
             </a>
             <span class="divide-icon pull-left">|</span>
-            <a href="javascript: void(0);" class="logout-btn">退出</a>
+            <a href="javascript: void(0);" class="logout-btn" @click="modal = true">退出</a>
             <div class="clearfix"></div>
         </div>
         <div class="feedback-panel">
@@ -25,6 +25,20 @@
                 <li><a href="#/score">帮助</a></li>
             </ul>
         </div>
+
+        <!--modal 提示-->
+        <Modal v-model="modal" width="360">
+            <p slot="header" style="color:#f60;text-align:center">
+                <Icon type="information-circled"></Icon>
+                <span>温馨提示</span>
+            </p>
+            <div style="text-align:center">
+                <p>您确认要退出?退出后将无法操作哦!</p>
+            </div>
+            <div slot="footer">
+                <Button type="success" size="large" long :loading="modal_loading" @click="del">确认退出</Button>
+            </div>
+        </Modal>
     </div>
 </template>
 
@@ -33,12 +47,26 @@
         data () {
             return {
                 info: '',
+                modal: false,
+                modal_loading: false,
             }
         },
         methods: {
         	//退出方法
             signOut() {
-
+                alert(333)
+            },
+            del () {
+                this.modal_loading = true;
+                setTimeout(() => {
+                    this.modal_loading = false;
+                    this.modal = false;
+                    //处理一系列数据
+                    window.localStorage.removeItem('merchantLogin')
+                    window.localStorage.removeItem('merchantToken')
+                    this.$Message.success('退出成功');
+                    this.$router.push({path: '/login'})
+                }, 1500);
             }
         },
         components: {

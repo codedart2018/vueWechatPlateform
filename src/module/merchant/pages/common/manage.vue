@@ -99,7 +99,7 @@
                     <div class="box-content flex" v-if="$route.meta.group == 'wechat'">
                         <check-platform></check-platform>
                         <div class="menu-box">
-                            <div class="tip"><router-link to="/">公众号管理中心</router-link></div>
+                            <div class="tip"><router-link to="/wechat/main">公众号管理中心</router-link></div>
                             <div class="sub-menu">
                                 <Menu width="auto" style="position: static;" accordion>
                                     <Submenu name="0">
