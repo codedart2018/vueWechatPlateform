@@ -30,12 +30,6 @@
                     <Form-item label="分类名称" prop="name">
                         <Input v-model="addForm.name" placeholder="请填写分类名称" style="width:200px"></Input>
                     </Form-item>
-                    <Form-item label="所属分类" prop="pid">
-                        <Select v-model="addForm.pid" style="width:200px">
-                            <Option value="0">顶级分类</Option>
-                            <Option v-for="(item, index) in cate" :value="item.id" :key="index">{{ item._name }}</Option>
-                        </Select>
-                    </Form-item>
                     <Form-item label="分类排序" prop="sort">
                         <Input v-model="addForm.sort" placeholder="数字越大排序越前" style="width:200px"></Input>
                     </Form-item>
@@ -77,8 +71,6 @@
                 <Button type="ghost" @click="modalCancel()" style="margin-left: 8px">取消</Button>
             </div>
         </Modal>
-
-
     </div>
 </template>
 
@@ -102,13 +94,11 @@
                     },
                     {
                         title: '分类名称',
-                        render: (h, params) => {
-                            const row = params.row;
-                            if(row._name) {
-                                return h('span', row._name);
-                            }
-                            return h('span', row.name);
-                        }
+                        key: 'name',
+                    },
+                    {
+                        title: '站点数量',
+                        key: 'count',
                     },
                     {
                         title: '状态',
@@ -184,7 +174,6 @@
                 cate: [],
                 addForm: {
                     name: '',
-                    pid: '',
                     status: 1,
                     sort: ''
                 },
@@ -195,9 +184,6 @@
                     name: [
                         { required: true, message: '分类名称不能为空', trigger: 'blur' },
                         { type: 'string', min: 2, message: '分类名称不能少于2个字符', trigger: 'blur' }
-                    ],
-                    pid: [
-                        { required: true, message: '请选择所属分类', trigger: 'blur' }
                     ],
                     sort: [
                         { type: 'string', message: '排序只能数字', trigger: 'blur', pattern: /^[0-9]+$/}
@@ -243,7 +229,7 @@
             addSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AdminCategoryAdd", this.addForm)
+                        this.save("AdminWebsiteAddCategory", this.addForm)
                     } else {
                         this.$Message.error('表单验证失败!')
                     }
@@ -253,7 +239,7 @@
             editSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AdminCategoryEdit", this.editForm)
+                        this.save("AdminWebsiteEditCategory", this.editForm)
                     } else {
                         this.$Message.error('表单验证失败!')
                     }
@@ -265,7 +251,7 @@
                 //获取原数据
                 this.editForm = this.list[index]
             },
-            //删除角色数据
+            //删除分类数据
             remove (index, id) {
                 this.$Modal.confirm({
                     title: '温馨提示',

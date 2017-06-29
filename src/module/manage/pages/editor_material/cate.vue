@@ -249,7 +249,7 @@
                 //获取原数据
                 this.editForm = this.list[index]
             },
-            //删除角色数据
+            //删除分类数据
             del (index, id) {
                 this.$Modal.confirm({
                     title: '温馨提示',

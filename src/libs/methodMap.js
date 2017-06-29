@@ -88,8 +88,16 @@ const methodMap = {
     AdminArticleEdit: {url: '/api/article/edit', method: 'post'},
     /** 微站分类 **/
     AdminWebsiteCategory: {url: '/api/website/category', method: 'get'},
-    /** 微站分类 **/
+    /** 添加微站分类 **/
     AdminWebsiteAddCategory: {url: '/api/website/add_category', method: 'post'},
+    /** 修改微站分类 **/
+    AdminWebsiteEditCategory: {url: '/api/website/edit_category', method: 'post'},
+    /** 删除微站分类 **/
+    AdminWebsiteDeleteCategory: {url: '/api/website/delete_category', method: 'post'},
+    /** 微站列表 **/
+    AdminWebsiteIndex: {url: '/api/website/index', method: 'get'},
+    /** 锁定解锁微站 **/
+    AdminWebsiteLock: {url: '/api/website/lock', method: 'post'},
     
     // /** 以下接口为商户平台接口 以下接口地址没有走后台验证 **/
     /** 商户平台登陆中心 **/

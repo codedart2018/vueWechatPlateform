@@ -2,39 +2,44 @@
     <div>
         <Row class="mb-15">
             <Col span="18" class="search">
-                <Form :model="formSearch" :label-width="80" inline label-position="right">
-                    <Form-item label="素材名称：">
-                        <Input v-model="formSearch.keywords" placeholder="请输入角色名称关键词"></Input>
-                    </Form-item>
-                    <Form-item label="素材分类：">
-                        <Select v-model="formSearch.c_id" placeholder="请选择" style="width:90px">
-                            <Option value="">请选择</Option>
-                            <Option v-for="item in cate" :value="item.id" :key="item.id">{{ item.name }}</Option>
-                        </Select>
-                    </Form-item>
-                    <Form-item label="素材状态：">
-                        <Select v-model="formSearch.status" placeholder="请选择" style="width:90px">
-                            <Option value="">请选择</Option>
-                            <Option value="1">正常</Option>
-                            <Option value="0">锁定</Option>
-                            <Option value="-1">删除</Option>
-                        </Select>
-                    </Form-item>
-                    <Form-item :label-width="1">
-                        <Button type="primary" @click="search('formSearch')" icon="ios-search">搜索</Button>
-                    </Form-item>
-                </Form>
+            <Form :model="formSearch" :label-width="80" inline label-position="right">
+                <Form-item label="素材名称：">
+                    <Input v-model="formSearch.keywords" placeholder="请输入角色名称关键词"></Input>
+                </Form-item>
+                <Form-item label="素材分类：">
+                    <Select v-model="formSearch.c_id" placeholder="请选择" style="width:90px">
+                        <Option value="">请选择</Option>
+                        <Option v-for="item in cate" :value="item.id" :key="item.id">{{ item.name }}</Option>
+                    </Select>
+                </Form-item>
+                <Form-item label="素材状态：">
+                    <Select v-model="formSearch.status" placeholder="请选择" style="width:90px">
+                        <Option value="">请选择</Option>
+                        <Option value="1">正常</Option>
+                        <Option value="0">锁定</Option>
+                        <Option value="-1">删除</Option>
+                    </Select>
+                </Form-item>
+                <Form-item :label-width="1">
+                    <Button type="primary" @click="search('formSearch')" icon="ios-search">搜索</Button>
+                </Form-item>
+            </Form>
             &nbsp;
             </Col>
             <Col span="6" class="text-align-right">
-                <router-link to="/editor_material/add_material"><Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加素材</Button></router-link>
+            <router-link to="/editor_material/add_material">
+                <Button type="primary" @click="addModal = true">
+                    <Icon type="plus-round"></Icon>&nbsp;添加素材
+                </Button>
+            </router-link>
             </Col>
         </Row>
         <Row class="mb-15">
             <Table :columns="columns" :data="list"></Table>
         </Row>
         <Row type="flex" justify="end">
-            <Page :total="total" :page-size="pageSize" :current="pageNumber" show-total show-elevator @on-change="changePage"></Page>
+            <Page :total="total" :page-size="pageSize" :current="pageNumber" show-total show-elevator
+                  @on-change="changePage"></Page>
         </Row>
     </div>
 </template>
@@ -90,7 +95,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('span',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
+                            return h('span', this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {
@@ -99,7 +104,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('span',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'))
+                            return h('span', this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {
@@ -161,9 +166,9 @@
             changePage (page) {
                 this.pageNumber = page
                 let search = this.formSearch
-                let query = Object.assign({page: page }, search)
+                let query = Object.assign({page: page}, search)
                 //分页
-                this.$router.push({ name: this.$router.currentRoute.name, query: query})
+                this.$router.push({name: this.$router.currentRoute.name, query: query})
                 //获取最新数据
                 this.getData({page: page, params: search})
             },
@@ -171,7 +176,7 @@
             getData (params) {
                 if (!params) params = {page: 1}
                 this.request('EditorMaterial', params, true).then((res) => {
-                    if(res.status) {
+                    if (res.status) {
                         //列表数据
                         this.list = res.data.list
                         //总页数
@@ -189,7 +194,7 @@
                 })
             },
             edit(id) {
-                this.$router.push({ path: '/editor_material/edit_material/' + id, params: { id: id }})
+                this.$router.push({path: '/editor_material/edit_material/' + id, params: {id: id}})
             },
             //删除素材数据
             del (index, id) {
@@ -200,7 +205,7 @@
                     loading: true,
                     onOk: () => {
                         this.request('AdminDelEditorMaterial', {id, id}).then((res) => {
-                            if(res.status) {
+                            if (res.status) {
                                 this.$Message.info(res.msg)
                                 this.$Modal.remove();
                                 this.list[index].status = -1
@@ -218,12 +223,12 @@
                 this.pageNumber = page
                 let search = this.formSearch
                 //if(JSON.stringify(search) == "{}") return
-                this.getData({ params : search })
+                this.getData({params: search})
             },
             //获得分类数据
             getCate() {
                 this.request('AdminEditorMaterialCate', {type: 1}, true).then((res) => {
-                    if(res.status) {
+                    if (res.status) {
                         this.cate = res.data
                     }
                 })

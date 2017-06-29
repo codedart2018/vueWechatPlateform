@@ -19,14 +19,19 @@
             &nbsp;
             </Col>
             <Col span="6" class="text-align-right">
-            <router-link to="/article/add"><Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加文章</Button></router-link>
+            <router-link to="/article/add">
+                <Button type="primary" @click="addModal = true">
+                    <Icon type="plus-round"></Icon>&nbsp;添加文章
+                </Button>
+            </router-link>
             </Col>
         </Row>
         <Row class="mb-15">
             <Table :columns="columns" :data="list"></Table>
         </Row>
         <Row type="flex" justify="end">
-            <Page :total="total" :page-size="pageSize" :current="pageNumber" show-total show-elevator @on-change="changePage"></Page>
+            <Page :total="total" :page-size="pageSize" :current="pageNumber" show-total show-elevator
+                  @on-change="changePage"></Page>
         </Row>
     </div>
 </template>
@@ -82,7 +87,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
+                            return h('div', this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {
@@ -91,7 +96,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('div',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'))
+                            return h('div', this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {
@@ -153,9 +158,9 @@
             changePage (page) {
                 this.pageNumber = page
                 let search = this.formSearch
-                let query = Object.assign({page: page }, search)
+                let query = Object.assign({page: page}, search)
                 //分页
-                this.$router.push({ name: this.$router.currentRoute.name, query: query})
+                this.$router.push({name: this.$router.currentRoute.name, query: query})
                 //获取最新数据
                 this.getData({page: page, params: search})
             },
@@ -163,7 +168,7 @@
             getData (params) {
                 if (!params) params = {page: 1}
                 this.request('AdminArticleList', params, true).then((res) => {
-                    if(res.status) {
+                    if (res.status) {
                         //列表数据
                         this.list = res.data.list
                         //总页数
@@ -181,10 +186,10 @@
                 })
             },
             edit(id) {
-                this.$router.push({ path: '/article/edit/' + id, params: { id: id }})
+                this.$router.push({path: '/article/edit/' + id, params: {id: id}})
             },
-            //删除素材数据
-            del (index, id) {
+            //删除文章数据
+            remove (index, id) {
                 this.$Modal.confirm({
                     title: '温馨提示',
                     width: 300,
@@ -192,7 +197,7 @@
                     loading: true,
                     onOk: () => {
                         this.request('AdminDelEditorMaterial', {id, id}).then((res) => {
-                            if(res.status) {
+                            if (res.status) {
                                 this.$Message.info(res.msg)
                                 this.$Modal.remove();
                                 this.list[index].status = -1
@@ -210,12 +215,12 @@
                 this.pageNumber = page
                 let search = this.formSearch
                 //if(JSON.stringify(search) == "{}") return
-                this.getData({ params : search })
+                this.getData({params: search})
             },
             //获得分类数据
             getCate() {
                 this.request('AdminCategoryList', {}).then((res) => {
-                    if(res.status) {
+                    if (res.status) {
                         this.cate = res.data
                     }
                 })
