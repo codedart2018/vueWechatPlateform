@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Row>
+        <Row class="mb-15">
             <Col span="18" class="search">
             <Form :model="formSearch" :label-width="80" inline label-position="right">
                 <Form-item label="分类名称：">
@@ -13,7 +13,7 @@
             &nbsp;
             </Col>
             <Col span="6" class="text-align-right">
-                <Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加分类</Button>
+            <Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加分类</Button>
             </Col>
         </Row>
         <Row class="mb-15">
@@ -21,6 +21,7 @@
         </Row>
         <Row type="flex" justify="end">
         </Row>
+
 
         <!--添加 Modal 对话框-->
         <Modal v-model="addModal" title="添加分类" class-name="customize-modal-center" @on-cancel="modalCancel()">
@@ -59,12 +60,6 @@
                 <Form ref="editForm" :model="editForm" :rules="ruleValidate" :label-width="80">
                     <Form-item label="分类名称" prop="name">
                         <Input v-model="editForm.name" placeholder="请填写分类名称" style="width:200px"></Input>
-                    </Form-item>
-                    <Form-item label="所属分类" prop="pid">
-                        <Select v-model="editForm.pid" style="width:200px">
-                            <Option value="0">顶级分类</Option>
-                            <Option v-for="(item, index) in cate" :value="item.id" :key="index">{{ item._name }}</Option>
-                        </Select>
                     </Form-item>
                     <Form-item label="分类排序" prop="sort">
                         <Input v-model="editForm.sort" placeholder="数字越大排序越前" style="width:200px"></Input>
@@ -214,8 +209,8 @@
                 addModal: false,
                 //编辑 modal
                 editModal: false,
-                //计数器 用于搜索拉数据的时候使用
-                tally: 0,
+                //计数器
+                tally: 0
             }
         },
         methods: {
@@ -227,10 +222,10 @@
             handleReset (name) {
                 this.$refs[name].resetFields();
             },
-            //获取分类数据
+            //获取数据
             getData (params) {
                 if (!params) params = {page: 1}
-                this.request('ArchivesCategoryList', params, true).then((res) => {
+                this.request('AdminWebsiteCategory', params, true).then((res) => {
                     if(res.status) {
                         //列表数据
                         this.list = res.data
@@ -248,7 +243,7 @@
             addSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("ArchivesCategoryAdd", this.addForm)
+                        this.save("AdminCategoryAdd", this.addForm)
                     } else {
                         this.$Message.error('表单验证失败!')
                     }
@@ -258,7 +253,7 @@
             editSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("ArchivesCategoryEdit", this.editForm)
+                        this.save("AdminCategoryEdit", this.editForm)
                     } else {
                         this.$Message.error('表单验证失败!')
                     }
@@ -278,7 +273,7 @@
                     content: '<p>你确定要删除?删除后不可恢复!</p>',
                     loading: true,
                     onOk: () => {
-                        this.request('ArchivesCategoryDelete', {id, id}).then((res) => {
+                        this.request('AdminCategoryDelete', {id, id}).then((res) => {
                             if(res.status) {
                                 this.$Message.info(res.msg)
                                 this.$Modal.remove();

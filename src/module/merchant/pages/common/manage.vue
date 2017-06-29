@@ -57,7 +57,7 @@
                                     </Submenu>
                                     <Submenu name="6">
                                         <template slot="title">
-                                            <Icon type="ios-gear-outline"></Icon>
+                                            <Icon type="gear-a"></Icon>
                                             个人设置
                                         </template>
                                         <Menu-item name="6-1"><router-link to="/setting/personal" style="color: #657180;">资料修改</router-link></Menu-item>
@@ -122,7 +122,7 @@
                                     </Submenu>
                                     <Submenu name="2">
                                         <template slot="title">
-                                            <Icon type="stats-bars"></Icon>
+                                            <Icon type="ios-compose-outline"></Icon>
                                             文章素材
                                         </template>
                                         <Menu-item name="2-1"><router-link to="/archives/material" style="color: #657180;">素材管理</router-link></Menu-item>
@@ -131,13 +131,20 @@
                                     </Submenu>
                                     <Submenu name="4">
                                         <template slot="title">
-                                            <Icon type="ios-people"></Icon>
-                                            消息工单
+                                            <Icon type="android-bookmark"></Icon>
+                                            营销活动
                                         </template>
-                                        <Menu-item name="4-1">新增用户</Menu-item>
-                                        <Menu-item name="4-2">活跃用户</Menu-item>
+                                        <Menu-item name="4-1">活动列表</Menu-item>
+                                        <Menu-item name="4-2">添加活动</Menu-item>
                                     </Submenu>
                                     <Submenu name="5">
+                                        <template slot="title">
+                                            <Icon type="gear-a"></Icon>
+                                            平台设置
+                                        </template>
+                                        <Menu-item name="5-1">平台设置</Menu-item>
+                                    </Submenu>
+                                    <Submenu name="6">
                                         <template slot="title">
                                             <Icon type="settings"></Icon>
                                             <a href="" style="color: #657180;">定制中心</a>

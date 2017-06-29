@@ -86,7 +86,10 @@ const methodMap = {
     AdminArticleAdd: {url: '/api/article/add', method: 'post'},
     /** 保存文章 **/
     AdminArticleEdit: {url: '/api/article/edit', method: 'post'},
-    
+    /** 微站分类 **/
+    AdminWebsiteCategory: {url: '/api/website/category', method: 'get'},
+    /** 微站分类 **/
+    AdminWebsiteAddCategory: {url: '/api/website/add_category', method: 'post'},
     
     // /** 以下接口为商户平台接口 以下接口地址没有走后台验证 **/
     /** 商户平台登陆中心 **/
@@ -134,7 +137,12 @@ const methodMap = {
     /** 保存同步文章（图文消息）**/
     ArchivesSaveSyncMaterialNews: {url: '/merchant/archives/sync_material', method: 'post'},
     
-    
+    /** 平台商户微网站站点获取 **/
+    MerchantWebsite: {url: '/merchant/website/plat_form_website', method: 'get'},
+    /** 平台商户微网站站点获取 **/
+    MerchantWebsiteCate: {url: '/merchant/website/category', method: 'get'},
+    /** 平台商户微站数据保存 **/
+    MerchantWebsiteSave: {url: '/merchant/website/save', method: 'post'},
 }
 
 export default methodMap

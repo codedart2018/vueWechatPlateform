@@ -20,10 +20,10 @@
             <div>
                 <Form ref="addForm" :model="addForm" :rules="ruleValidate" :label-width="80">
                     <Form-item label="分类名称" prop="name">
-                        <Input v-model="addForm.name" placeholder="请填写角色名称"></Input>
+                        <Input v-model="addForm.name" placeholder="请填写分类名称"></Input>
                     </Form-item>
                     <Form-item label="分类图标" prop="icon">
-                        <Input v-model="addForm.icon" placeholder="请填写角色名称"></Input>
+                        <Input v-model="addForm.icon" placeholder="请填写分类图标"></Input>
                     </Form-item>
                     <Form-item label="分类状态" prop="status">
                         <Radio-group v-model="addForm.status">
@@ -45,10 +45,10 @@
             <div>
                 <Form ref="editForm" :model="editForm" :rules="ruleValidate" :label-width="80">
                     <Form-item label="分类名称" prop="name">
-                        <Input v-model="editForm.name" placeholder="请填写角色名称"></Input>
+                        <Input v-model="editForm.name" placeholder="请填写分类名称"></Input>
                     </Form-item>
                     <Form-item label="分类图标" prop="icon">
-                        <Input v-model="editForm.icon" placeholder="请填写角色名称"></Input>
+                        <Input v-model="editForm.icon" placeholder="请填写分类图标"></Input>
                     </Form-item>
                     <Form-item label="分类状态" prop="status">
                         <Radio-group v-model="editForm.status">

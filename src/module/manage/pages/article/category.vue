@@ -28,7 +28,7 @@
             <div>
                 <Form ref="addForm" :model="addForm" :rules="ruleValidate" :label-width="80">
                     <Form-item label="分类名称" prop="name">
-                        <Input v-model="addForm.name" placeholder="请填写角色名称" style="width:200px"></Input>
+                        <Input v-model="addForm.name" placeholder="请填写分类名称" style="width:200px"></Input>
                     </Form-item>
                     <Form-item label="所属分类" prop="pid">
                         <Select v-model="addForm.pid" style="width:200px">
@@ -59,7 +59,7 @@
             <div>
                 <Form ref="editForm" :model="editForm" :rules="ruleValidate" :label-width="80">
                     <Form-item label="分类名称" prop="name">
-                        <Input v-model="editForm.name" placeholder="请填写角色名称" style="width:200px"></Input>
+                        <Input v-model="editForm.name" placeholder="请填写分类名称" style="width:200px"></Input>
                     </Form-item>
                     <Form-item label="所属分类" prop="pid">
                         <Select v-model="editForm.pid" style="width:200px">
