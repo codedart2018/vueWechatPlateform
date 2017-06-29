@@ -55,7 +55,7 @@
                     <Icon type="android-menu"></Icon>
                 </div>
 
-                <Menu width="auto" theme="dark" >
+                <Menu width="auto" theme="dark" accordion>
                     <Submenu :name="index" v-for="(item, index) in $router.options.routes" :key="item.id" v-if="item.display == 1">
                         <template slot="title">
                             <Icon :type="item.icon"></Icon>
