@@ -123,7 +123,7 @@
         	//获取数据
             getData(instance) {
                 let id = this.$route.params.id
-                this.apiGet('/api/editor_material/edit_material',{id: id}).then((res) => {
+                this.apiGet('/manage/editor_material/edit_material',{id: id}).then((res) => {
                     if(res.status) {
                     	this.status = true
                     	this.formField = res.data

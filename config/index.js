@@ -29,11 +29,11 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
         //后台
-        '/api': {
+        '/manage': {
             target: 'http://www.hphp.cn/',
             changeOrigin: true,
             pathRewrite: {
-                '^/api': '/api'
+                '^/manage': '/manage'
             }
         },
         //商户平台

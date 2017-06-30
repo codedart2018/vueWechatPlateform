@@ -36,7 +36,7 @@
                 <p>您确认要退出?退出后将无法操作哦!</p>
             </div>
             <div slot="footer">
-                <Button type="success" size="large" long :loading="modal_loading" @click="del">确认退出</Button>
+                <Button type="success" size="large" long :loading="modal_loading" @click="signOut">确认退出</Button>
             </div>
         </Modal>
     </div>
@@ -52,11 +52,8 @@
             }
         },
         methods: {
-        	//退出方法
-            signOut() {
-                alert(333)
-            },
-            del () {
+            //退出方法
+            signOut () {
                 this.modal_loading = true;
                 setTimeout(() => {
                     this.modal_loading = false;
@@ -69,11 +66,8 @@
                 }, 1500);
             }
         },
-        components: {
-
-        },
+        components: {},
         mounted() {
-
         }
     }
 </script>
