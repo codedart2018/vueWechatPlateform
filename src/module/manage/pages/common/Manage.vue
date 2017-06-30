@@ -85,6 +85,22 @@
                 </transition>
             </section>
         </div>
+
+
+        <!--modal 提示-->
+        <Modal v-model="modal" width="360">
+            <p slot="header" style="color:#f60;text-align:center">
+                <Icon type="information-circled"></Icon>
+                <span>温馨提示</span>
+            </p>
+            <div style="text-align:center">
+                <p>您确认要退出?退出后将无法操作哦!</p>
+            </div>
+            <div slot="footer">
+                <Button type="success" size="large" long :loading="modal_loading" @click="signOut">确认退出</Button>
+            </div>
+        </Modal>
+
     </div>
 </template>
 
@@ -106,7 +122,9 @@
                 transitionName: 'slide-left',
                 user: {},
                 navOne: '',
-                navTwo: ''
+                navTwo: '',
+                modal: false,
+                modal_loading: false,
             }
         },
         beforeMount() {
@@ -125,14 +143,7 @@
             ...mapActions(['delMainMenu', 'userOut']),
             topRightDropDown(name) {
                 if (name == 'out') {
-                    let menu = this.$store.state.MainMenu.mainMenu
-                    let new_router = filterRouters(this.$router.options.routes, menu)
-                    this.$router.options.routes = new_router
-                    //删除登陆的一切信息
-                    this.delMainMenu(this)
-                    this.userOut(this)
-                    this.$router.push({path: '/login'})
-                    this.$Message.success("退出成功")
+                    this.modal = true
                 }
             },
             //编程式导航
@@ -141,6 +152,22 @@
                 //todo 这个要二次才显示正确 后面解决
                 //this.navOne = this.$router.options.routes[params[0]].name
                 //this.navTwo = this.$route.name
+            },
+            //退出方法
+            signOut () {
+                this.modal_loading = true;
+                setTimeout(() => {
+                    this.modal_loading = false;
+                    this.modal = false;
+                    let menu = this.$store.state.MainMenu.mainMenu
+                    let new_router = filterRouters(this.$router.options.routes, menu)
+                    this.$router.options.routes = new_router
+                    //删除登陆的一切信息
+                    this.delMainMenu(this)
+                    this.userOut(this)
+                    this.$router.push({path: '/login'})
+                    this.$Message.success("退出成功")
+                }, 1500);
             }
         },
         components: {
