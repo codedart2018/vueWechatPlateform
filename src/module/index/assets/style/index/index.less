@@ -1,0 +1,360 @@
+/**
+ * Created by truncate on 2017/6/30.
+ * Author: 带鞋拖地
+ * QQ: 327056088
+ *
+ * 《寄人》· 张泌
+ * 别梦依依到谢家，小廊回合曲阑斜。
+ * 锄多情只有春庭月，犹为离人照落花。
+ */
+.navigation-bar {
+    border-width: 0px;
+    background: none;
+    margin: 0px;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    min-height: 70px;
+
+    .container {
+        width: 100%;
+        min-height: 70px;
+        max-width: 1200px;
+        position: relative;
+        z-index: 999;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+
+        .bar {
+            display: flex;
+            height: 70px;
+
+            .left {
+                width: 380px;
+                //background: #dedede;
+
+                .ul-bar {
+                    flex: 1;
+                    list-style: none;
+                    padding-left: 0;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    height: 70px;
+
+                    li {
+                        position: relative;
+                        box-flex: 1;
+
+                        a {
+                            display: block;
+                            height: 70px;
+                            line-height: 70px;
+                            align-items: center;
+                            color: #fff;
+                            font-size: 15px;
+                            padding: 0 10px;
+                        }
+                        a:hover {
+                            height: 70px;
+                            line-height: 70px;
+                            color: #49b44f;
+                            background: #222;
+                        }
+
+                        .ivu-dropdown-menu li:hover {
+                            color: #495060;
+                            background: #dedede;
+                        }
+                    }
+                }
+            }
+
+            .right {
+                flex: 1;
+                display: flex;
+                //background: #dedede;
+
+                .ul-bar {
+                    flex: 1;
+                    list-style: none;
+                    padding-left: 0;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: row-reverse;
+                    height: 70px;
+
+                    li {
+                        position: relative;
+                        box-flex: 1;
+                        min-width: 100px;
+                        text-align: center;
+
+                        a {
+                            position: relative;
+                            display: block;
+                            height: 70px;
+                            line-height: 70px;
+                            align-items: center;
+                            color: #fff;
+                            font-size: 15px;
+                            padding: 0 10px;
+
+                            span {
+                                width: 20px;
+                                height: 12px;
+                                background: url(../../images/qrcode-scan.png) no-repeat center center;
+                                display: inline-block;
+                            }
+                        }
+
+                        a:hover {
+                            height: 70px;
+                            line-height: 70px;
+                            color: #49b44f;
+                            background: #222;
+                        }
+
+                        .ivu-dropdown-menu li:hover {
+                            color: #495060;
+                            background: #dedede;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+}
+
+.navigation-bar:hover {
+    background-color: #111;
+}
+
+//小三角
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+.center-bar {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin: 0 auto;
+    width: 1170px;
+
+    ul.container {
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        li {
+            font-size: 20px;
+            line-height: 34px;
+            text-align: center;
+            border-right: 1px solid #d2d2d2;
+            min-width: 195px;
+
+            i {
+                background: rgba(0, 0, 0, 0) url(../../images/icon.png) repeat scroll 0 0;
+                display: inline-block;
+                height: 34px;
+                vertical-align: top;
+                width: 34px;
+                margin-right: 8px;
+            }
+        }
+
+        li.f1 i {
+            background-position: -4px -44px;
+        }
+
+        li.f2 i {
+            background-position: -39px -44px;
+        }
+
+        li.f3 i {
+            background-position: -72px -44px;
+        }
+
+        li.f4 i {
+            background-position: -107px -44px;
+        }
+
+        li.f5 i {
+            background-position: -142px -44px;
+        }
+
+        li.f6 i {
+            background-position: -177px -44px;
+        }
+    }
+}
+
+.body-box {
+    background: #f2f2f2 url(../../images/container-bg.png) no-repeat center center;
+
+    .container {
+        overflow: hidden;
+        min-height: 500px;
+        position: relative;
+        padding: 0px;
+        width: 1200px;
+        margin: 0 auto;
+
+        #intro {
+            margin-top: 80px;
+            text-align: center;
+
+            p {
+                color: #999;
+                font-size: 14px;
+                font-weight: 200;
+            }
+
+            h2 {
+                font-size: 32px;
+                color: #000;
+                font-weight: 200;
+            }
+
+            .get-start {
+                width: 115px;
+                margin: 15px auto ;
+                position: relative;
+                height: 42px;
+
+                .apply-entry {
+                    display: inline-block;
+                    background-color: #54b61c;
+                    height: 40px;
+                    width: 115px;
+                    line-height: 40px;
+                    font-size: 16px;
+                    color: #fff;
+                    cursor: pointer;
+                    border-radius: 2px;
+                    position: absolute;
+                    z-index: 999;
+                    top: 0px;
+                    left: 0px;
+                    font-weight: 100;
+                }
+            }
+
+            .product-brief {
+                width: 905px;
+                margin: 50px auto 0;
+
+                .product-brief-item {
+                    width: 210px;
+
+                    a {
+                        display: inline-block;
+                        margin-top: 15px;
+                        font-size: 12px;
+                        color: #999;
+                        border-bottom: 1px solid #999;
+                        font-weight: 200;
+                    }
+
+                    i {
+                        display: inline-block;
+                        background: url(../../images/arrow-gray.png) no-repeat;
+                        width: 9px;
+                        height: 5px;
+                        margin-right: 5px;
+                        vertical-align: middle;
+                        margin-top: -3px;
+                    }
+
+                    h3.brief-title {
+                        font-size: 16px;
+                        color: #333333;
+                        font-weight: 400;
+                    }
+
+                    p.detail {
+                        margin-top: 5px;
+                        color: #666;
+                        text-align: left;
+                        font-weight: 200;
+                    }
+                }
+
+                .marketing-brief {
+
+                    em {
+                        display: inline-block;
+                        width: 30px;
+                        height: 30px;
+                        background-color: #ffab0a;
+                        border-radius: 50%;
+                        margin-bottom: 5px;
+                    }
+                }
+
+                .pay-sulotion-brief {
+                    em {
+                        display: inline-block;
+                        width: 30px;
+                        height: 30px;
+                        background-color: #1cb669;
+                        position: relative;
+                        border-radius: 50%;
+                        margin-bottom: 5px;
+                    }
+
+                    em:after {
+                        content: "";
+                        display: inline-block;
+                        position: absolute;
+                        background-color: #fff;
+                        width: 14px;
+                        height: 14px;
+                        border-radius: 50%;
+                        top: 50%;
+                        left: 50%;
+                        margin-top: -7px;
+                        margin-left: -7px;
+                    }
+                }
+
+                .wx-crm-brief {
+                    em {
+                        display: inline-block;
+                        width: 0px;
+                        height: 0px;
+                        border-left: 15px solid transparent;
+                        border-right: 15px solid transparent;
+                        border-top: 25px solid #419794;
+                        margin-bottom: 5px;
+                        margin-top: 5px;
+                    }
+                }
+            }
+
+            .product-brief .product-brief-item.pay-sulotion-brief {
+                margin-left: 137.5px;
+                margin-right: 137.5px;
+            }
+
+            .fn-left {
+                float: left;
+                display: inline;
+            }
+        }
+    }
+}
+

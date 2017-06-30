@@ -42,7 +42,7 @@
             next(vm => {
                 // 通过 `vm` 访问组件实例'
                 //解决进入路由不刷新验证码问题
-                vm.verifyUrl = '/api/login/code?v=' + Math.random() * 1000
+                vm.verifyUrl = '/manage/login/code?v=' + Math.random() * 1000
             })
         },
         data(){
@@ -92,7 +92,7 @@
             refreshVerify() {
                 this.verifyUrl = ''
                 setTimeout(() => {
-                    this.verifyUrl = '/api/login/code?v=' + Math.random() * 1000
+                    this.verifyUrl = '/manage/login/code?v=' + Math.random() * 1000
                 }, 500)
             }
         },

@@ -1,0 +1,101 @@
+//iview 公共 less
+@import '~iview/src/styles/index.less';
+
+a {
+    color: #FFFFFF;
+}
+a:hover {
+    color: #FFFFFF;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.ng-mb-15 {
+    margin-bottom: -15px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.bp203 {
+    border: 1px solid #dedede;
+    padding: 20px;
+    border-radius: 3px
+}
+
+.label-color {
+    color: #737373
+}
+
+/** 商户额外登陆 css **/
+.merchant-login{
+    .ivu-input {
+        height: 50px;
+    }
+
+    .ivu-btn-primary {
+        display: inline-block;
+        padding: 10px 24px;
+        margin: 0px;
+        font-size: 18px;
+        line-height: 24px;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        color: #ffffff;
+        background-color: #27A9E3;
+        border-radius: 5px;
+        border: none;
+        -webkit-appearance: none;
+        outline: none;
+        width: 100%;
+    }
+
+    .ivu-form-item:nth-child(3) {
+        position: relative;
+    }
+    .ivu-form-item:nth-child(3) .ivu-input {
+        width: 130px;
+    }
+}
+/** 菜单选中高亮灰色 **/
+.menu-box {
+    .ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu) {
+        background: #f0f1f1;
+    }
+}
+
+/** 格式掉一些td前padding **/
+.table-no-padding-left {
+    table > tbody > tr > td:nth-child(2) > div{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    table > tbody > tr > td:nth-child(3) > div{
+        padding-left: 0px;
+    }
+}
+
+/** 搜索额外样式 **/
+.search .ivu-form-item {
+    margin-bottom: 0px;
+    vertical-align: top;
+    zoom: 1;
+}
+/** padding 过宽 **/
+.ivu-table-cell {
+    padding-left: 8px;
+    padding-right: 8px;
+}
