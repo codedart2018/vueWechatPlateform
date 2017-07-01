@@ -90,7 +90,7 @@
                 }
                 let reg = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
                 if (!reg.test(value)) {
-                    callback(new Error('验证码中能中文数字'));
+                    callback(new Error('验证码只能中英文数字'));
                 } else {
                     callback();
                 }
