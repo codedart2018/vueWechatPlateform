@@ -86,8 +86,20 @@
                         key: 'operation',
                         width: 110,
                         align: 'center',
-                        render (row, column, index) {
-                            return `<i-button type="warning" size="small" @click="restPassword(${row.id})"><Icon type="key"></Icon> 重置密码</i-button>`;
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'warning',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.restPassword(params.row.id)
+                                        }
+                                    }
+                                }, '重置密码'),
+                            ]);
                         }
                     }
                 ],

@@ -4,7 +4,7 @@
         <nav class="navigation-bar">
             <div class="container">
                 <Row>
-                    <Col span="5">logo</Col>
+                    <Col span="5">代码兔微信公众号第三方管理平台</Col>
                     <Col span="19">
                         <div class="bar">
                             <div class="left">
@@ -13,7 +13,7 @@
                                     <li class="dropdown">
                                         <Dropdown>
                                             <a href="javascript:void(0)">
-                                                hover 触发
+                                                解决方案
                                                 <Icon type="arrow-down-b"></Icon>
                                             </a>
                                             <Dropdown-menu slot="list">
@@ -25,15 +25,15 @@
                                             </Dropdown-menu>
                                         </Dropdown>
                                     </li>
-                                    <li><a href="#">经典案例</a></li>
                                     <li><a href="">关于我们</a></li>
                                 </ul>
                             </div>
                             <div class="right">
                                 <div style="width: 120px;"></div>
                                 <ul class="ul-bar">
-                                    <li><a href="./manage.html">登陆</a></li>
-                                    <li><a href="./merchant.html">注册</a></li>
+                                    <li><a href="./manage.html">后台</a></li>
+                                    <li><a href="./merchant.html">登陆</a></li>
+                                    <li><a href="./merchant.html#/register">注册</a></li>
                                     <li><a href="#">关注我们<span></span></a></li>
                                     <li class="dropdown">
                                         <Dropdown>
@@ -62,16 +62,16 @@
         <div>
             <Carousel autoplay v-model="value2">
                 <Carousel-item>
-                    <div class="demo-carousel">1</div>
+                    <div class="carousel">1</div>
                 </Carousel-item>
                 <Carousel-item>
-                    <div class="demo-carousel">2</div>
+                    <div class="carousel">2</div>
                 </Carousel-item>
                 <Carousel-item>
-                    <div class="demo-carousel">3</div>
+                    <div class="carousel">3</div>
                 </Carousel-item>
                 <Carousel-item>
-                    <div class="demo-carousel">4</div>
+                    <div class="carousel">4</div>
                 </Carousel-item>
             </Carousel>
         </div>
@@ -93,7 +93,7 @@
                     <div class="text-brief">
                         <h2>轻巧、智能的公众号服务系统</h2>
                         <div class="get-start">
-                            <a class="apply-entry" href="">立即注册</a>
+                            <a class="apply-entry" href="./merchant.html#/register">立即注册</a>
                         </div>
                         <p>新用户享15天免费试用权</p>
                     </div>
@@ -132,22 +132,64 @@
                 </div>
             </div>
         </div>
+        <!--合作伙伴-->
+        <div id="partner">
+            <div class="partner-wrap">
+                <h3>合作伙伴</h3>
+                <ul class="fn-clear">
+                    <li>
+                        <a href="http://www.qcloud.com/event/cdn_wx_main.html" title="腾讯云" target="_blank">
+                            <img src="">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--页脚-->
+        <div id="footer">
+            <div class="footer-wrap">
+                <div class="copyright">
+                    <em class="logo"></em>
+                    <div class="copyright-info">
+                        <p>渝ICP备08102562号-6</p>
+                        <p>© 2017 代码兔微信平台</p>
+                    </div>
+                </div>
+                <div class="rest">
+                    <div class="help">
+                        <h3>帮助</h3>
+                        <ul>
+                            <li><a href="" target="_blank">帮助中心</a></li>
+                            <li><a href="" target="_blank">服务价格</a></li>
+                            <li><a href="" target="_blank">用户协议</a></li>
+                        </ul>
+                    </div>
+                    <div class="hot-functions">
+                        <h3>热门应用</h3>
+                        <ul>
+                            <li><a href="" target="_blank">微暗号</a></li>
+                            <li><a href="" target="_blank">微表单</a></li>
+                        </ul>
+                    </div>
+                    <div class="about">
+                        <h3>关于</h3>
+                        <ul>
+                            <li><a href="" target="_blank">关于我们</a></li>
+                            <li><a href="" target="_blank">联系我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </template>
-
+<!--晨-->
+<!--华灯未眠晨未曦-->
+<!--细雨烟云两岸坪-->
+<!--闻莹林间啼声脆-->
+<!--遥望山尖闺梦人-->
 <style scoped>
-    .demo-carousel {
-        height: 500px;
-        line-height: 500px;
-        text-align: center;
-        color: #fff;
-        font-size: 20px;
-        background: #506b9e;
-    }
-
-
-
 
 
 </style>

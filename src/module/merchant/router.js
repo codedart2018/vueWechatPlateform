@@ -160,6 +160,16 @@ export default new Router({
             component: resolve => require(['./pages/login/index'], resolve),
             display: 0,
         },
+        {
+            path: '/register', // 注册
+            name: 'register',
+            meta: {
+                title: '商户注册中心',
+                routeAuth: false
+            },
+            component: resolve => require(['./pages/register/index'], resolve),
+            display: 0,
+        },
     ]
 })
 //苏格拉底 --》 伯拉图 --》 亚里士多德--》 亚里山大--》阿基米德
