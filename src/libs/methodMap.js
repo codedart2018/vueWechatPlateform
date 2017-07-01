@@ -102,9 +102,9 @@ const methodMap = {
     // /** 以下接口为商户平台接口 以下接口地址没有走后台验证 **/
     /** 商户平台登陆中心 **/
     MerchantLogin: {url: '/merchant/passport/login', method: 'post'},
-    /** 商记注册 **/
+    /** 商户注册 **/
     MerchantRegister: {url: '/merchant/passport/register', method: 'post'},
-    /** 用户退出 **/
+    /** 商户退出 **/
     MerchantSignOut: {url: '/merchant/passport/sign_out', method: 'post'},
     /** 获取某个用户详情 **/
     MerchantUserView: {url: '/merchant/user/view', method: 'get'},
