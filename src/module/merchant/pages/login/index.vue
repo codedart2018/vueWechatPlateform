@@ -6,17 +6,20 @@
                 <div class="welcome">欢迎登陆代码兔商户管理平台</div>
                 <Form ref="formLogin" :model="formLogin" :rules="ruleValidate" inline class="form">
                     <Form-item prop="account">
-                        <Input type="text" v-model="formLogin.account" placeholder="帐号 / 手机号" @on-enter="handleSubmit('formLogin')">
+                        <Input type="text" v-model="formLogin.account" placeholder="帐号 / 手机号"
+                               @on-enter="handleSubmit('formLogin')">
                         <Icon type="person" slot="prepend" class="icon"></Icon>
                         </Input>
                     </Form-item>
                     <Form-item prop="password">
-                        <Input type="password" v-model="formLogin.password" placeholder="请填写密码" @on-enter="handleSubmit('formLogin')">
+                        <Input type="password" v-model="formLogin.password" placeholder="请填写密码"
+                               @on-enter="handleSubmit('formLogin')">
                         <Icon type="locked" slot="prepend" class="icon"></Icon>
                         </Input>
                     </Form-item>
                     <Form-item prop="code">
-                        <Input type="text" v-model="formLogin.code" placeholder="请填写验证码" @on-enter="handleSubmit('formLogin')"></Input>
+                        <Input type="text" v-model="formLogin.code" placeholder="请填写验证码"
+                               @on-enter="handleSubmit('formLogin')"></Input>
                         <img :src="verifyUrl" @click="refreshVerify()" class="code-img" title="点击切换验证码">
                     </Form-item>
                     <Form-item>
@@ -35,9 +38,8 @@
 
 <script>
     import {mapActions} from 'vuex'
-
     export default{
-    	//watch 监听不到用它来
+        //watch 监听不到用它来
         //https://router.vuejs.org/zh-cn/advanced/navigation-guards.html 文档地址 标记组件内的钩子
         beforeRouteEnter (to, from, next) {
             next(vm => {
@@ -47,7 +49,7 @@
             })
         },
         data(){
-            return{
+            return {
                 formLogin: {
                     account: '',
                     password: '',
@@ -55,16 +57,16 @@
                 },
                 ruleValidate: {
                     account: [
-                        { required: true, message: '请填写帐号', trigger: 'blur' },
-                        { type: 'string', min: 3, message: '帐号长度不能低于3位', trigger: 'blur' }
+                        {required: true, message: '请填写帐号', trigger: 'blur'},
+                        {type: 'string', min: 3, message: '帐号长度不能低于3位', trigger: 'blur'}
                     ],
                     password: [
-                        { required: true, message: '请填写密码', trigger: 'blur' },
-                        { type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur' }
+                        {required: true, message: '请填写密码', trigger: 'blur'},
+                        {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'}
                     ],
                     code: [
-                        { required: true, message: '验证码不能为空', trigger: 'blur' },
-                        { type: 'string', message: '验证码只能英文数字', trigger: 'blur', pattern: /^[a-z0-9A-Z]+$/ }
+                        {required: true, message: '验证码不能为空', trigger: 'blur'},
+                        {type: 'string', message: '验证码只能英文数字', trigger: 'blur', pattern: /^[a-z0-9A-Z]+$/}
                     ]
                 },
                 verifyUrl: '',
@@ -104,15 +106,11 @@
             //设置cookie
             set(name, value, days) {
                 var d = new Date;
-                d.setTime(d.getTime() + 24*60*60*1000*days);
+                d.setTime(d.getTime() + 24 * 60 * 60 * 1000 * days);
                 window.document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
             },
         },
-        watch: {
-
-        },
-        components:{
-
-        }
+        watch: {},
+        components: {}
     }
 </script>
