@@ -29,19 +29,19 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
         //后台
-        '/manage': {
+        '/admin': {
             target: 'http://www.hphp.cn/',
             changeOrigin: true,
             pathRewrite: {
-                '^/manage': '/manage'
+                '^/admin': '/admin'
             }
         },
         //商户平台
-        '/merchant': {
+        '/merchants': {
             target: 'http://www.hphp.cn/',
             changeOrigin: true,
             pathRewrite: {
-                '^/merchant': '/merchant'
+                '^/merchants': '/merchants'
             }
         }
     },

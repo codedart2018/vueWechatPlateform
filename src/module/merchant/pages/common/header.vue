@@ -43,6 +43,7 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
     export default{
         data () {
             return {
@@ -54,6 +55,7 @@
             }
         },
         methods: {
+            ...mapActions(['merchantOut']),
             //退出方法
             signOut () {
                 this.modalLoading = true;
@@ -61,11 +63,10 @@
                     this.modalLoading = false;
                     this.modal = false;
                     //处理一系列数据
-                    window.localStorage.removeItem('merchantInfo')
-                    window.localStorage.removeItem('merchantToken')
+                    this.merchantOut(this)
                     this.$Message.success('退出成功');
                     this.$router.push({path: '/login'})
-                }, 1500);
+                }, 1000);
             }
         },
         components: {},

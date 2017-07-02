@@ -34,6 +34,7 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
 
     export default{
     	//watch 监听不到用它来
@@ -42,7 +43,7 @@
             next(vm => {
                 // 通过 `vm` 访问组件实例'
                 //解决进入路由不刷新验证码问题
-                vm.verifyUrl = '/manage/login/code?v=' + Math.random() * 1000
+                vm.verifyUrl = '/merchants/passport/code?v=' + Math.random() * 1000
             })
         },
         data(){
@@ -70,15 +71,19 @@
             }
         },
         methods: {
+            ...mapActions(['merchantLogin']),
             handleSubmit(name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
                         this.request('MerchantLogin', this.formLogin).then((res) => {
                             if (res.status) {
+                                let user = res.data.user
+                                let merchant = res.data.merchant
+                                this.merchantLogin({
+                                    user,
+                                    merchant
+                                })
                                 this.$Message.success("登陆成功")
-                                window.localStorage.setItem('merchantInfo', JSON.stringify(res.data.info))
-                                window.localStorage.setItem('merchantToken', JSON.stringify(res.data.info.token))
-                                this.set('hello', 'world', 1)
                                 this.$router.push({path: '/'})
                             } else {
                                 this.$Message.error(res.msg)
@@ -93,10 +98,11 @@
             refreshVerify() {
                 this.verifyUrl = ''
                 setTimeout(() => {
-                    this.verifyUrl = '/manage/login/code?v=' + Math.random() * 1000
+                    this.verifyUrl = '/merchants/passport/code?v=' + Math.random() * 1000
                 }, 500)
             },
-            set: function (name, value, days) {
+            //设置cookie
+            set(name, value, days) {
                 var d = new Date;
                 d.setTime(d.getTime() + 24*60*60*1000*days);
                 window.document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();

@@ -536,7 +536,7 @@
                 })
             },
             authGo(id) {
-                this.$router.push({ path: '/manage/authorize/' + id, params: { id: id }})
+                this.$router.push({ path: '/admin/authorize/' + id, params: { id: id }})
             },
             //头像
             handleView (name) {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import Router from './router.js' //路由地址
-import Store from './vuex/store/index'
+//import Store from './vuex/store/index'
 import IView from 'iview' //Iview
 import 'iview/dist/styles/iview.css' // 使用 IVIEW CSS
 import './assets/style/common/common.less' // 定制公共 less
@@ -35,7 +35,7 @@ Router.beforeEach(({meta, path}, from, next) => {
 new Vue({
     el: '#app',
     router: Router,
-    store: Store,
+    //store: Store,
     template: '<App/>',
     components: {App}
 })

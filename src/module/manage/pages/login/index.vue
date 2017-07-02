@@ -70,7 +70,7 @@
             next(vm => {
                 // 通过 `vm` 访问组件实例'
                 //解决进入路由不刷新验证码问题
-                vm.verifyUrl = '/manage/login/code?v=' + Math.random() * 1000
+                vm.verifyUrl = '/admin/login/code?v=' + Math.random() * 1000
             })
         },
         data() {
@@ -90,7 +90,7 @@
                 }
                 let reg = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
                 if (!reg.test(value)) {
-                    callback(new Error('验证码只能中英文数字'));
+                    callback(new Error('验证码只能中文数字'));
                 } else {
                     callback();
                 }
@@ -169,7 +169,7 @@
             refreshVerify() {
                 this.verifyUrl = ''
                 setTimeout(() => {
-                    this.verifyUrl = '/manage/login/code?v=' + Math.random() * 1000
+                    this.verifyUrl = '/admin/login/code?v=' + Math.random() * 1000
                 }, 500)
             }
         },

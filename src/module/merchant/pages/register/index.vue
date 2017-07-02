@@ -96,7 +96,7 @@
             next(vm => {
                 // 通过 `vm` 访问组件实例'
                 //解决进入路由不刷新验证码问题
-                vm.verifyUrl = '/merchant/passport/code?v=' + Math.random() * 1000
+                vm.verifyUrl = '/merchants/passport/code?v=' + Math.random() * 1000
             })
         },
         data () {
@@ -218,7 +218,7 @@
             refreshVerify() {
                 this.verifyUrl = ''
                 setTimeout(() => {
-                    this.verifyUrl = '/merchant/passport/code?v=' + Math.random() * 1000
+                    this.verifyUrl = '/merchants/passport/code?v=' + Math.random() * 1000
                 }, 500)
             },
             switchType(type) {

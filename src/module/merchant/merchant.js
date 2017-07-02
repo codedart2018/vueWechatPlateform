@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import Router from './router.js' //路由地址
+import Store from './vuex/store/index'
 import IView from 'iview' //Iview
 import 'iview/dist/styles/iview.css' // 使用 IVIEW CSS
 import './assets/style/common/customize.less' // 定制公共 less
@@ -21,8 +22,10 @@ Router.beforeEach(({meta, path}, from, next) => {
     Util.title(meta.title)
     let auth = meta.routeAuth == false ? false : true
     //获取用户是否登陆
+    let user = window.localStorage.getItem('merchantUser');
+    let info = window.localStorage.getItem('merchantInfo');
     let token = window.localStorage.getItem('merchantToken');
-    if (auth && !token && path != '/login') {
+    if (auth && !token && !user && !info && path != '/login') {
         next({path: '/login'})
     } else if (path == '/login' && token) {
         next({path: '/'})
@@ -33,6 +36,7 @@ Router.beforeEach(({meta, path}, from, next) => {
 new Vue({
     el: '#app',
     router: Router,
+    store: Store,
     template: '<App/>',
     components: {App}
 })

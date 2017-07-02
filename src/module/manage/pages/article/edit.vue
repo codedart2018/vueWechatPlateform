@@ -137,7 +137,7 @@
             //获取数据
             getData(instance) {
                 let id = this.$route.params.id
-                this.apiGet('/manage/article/edit',{id: id}).then((res) => {
+                this.apiGet('/admin/article/edit',{id: id}).then((res) => {
                     if(res.status) {
                         this.formField = res.data
                         instance.execCommand('insertHtml', res.data.content)

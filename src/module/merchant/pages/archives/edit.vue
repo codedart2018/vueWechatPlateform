@@ -138,7 +138,7 @@
             //获取数据
             getData() {
                 let id = this.$route.params.id
-                this.apiGet('/merchant/archives/edit',{id: id}).then((res) => {
+                this.apiGet('/merchants/archives/edit',{id: id}).then((res) => {
                     if(res.status) {
                         this.formField = res.data
                         this.$refs.content.insertHtml(res.data.content)
