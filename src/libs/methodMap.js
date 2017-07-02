@@ -116,6 +116,8 @@ const methodMap = {
     MerchantInfoSave: {url: '/merchant/merchant/save', method: 'post'},
     /** 商户公众号列表 **/
     MerchantPublicList: {url: '/merchant/public_signal/index', method: 'get'},
+    /** 公众号平台切换 **/
+    MerchantPublicSwitch: {url: '/merchant/public_signal/switch', method: 'get'},
     /** 微信菜单获取 **/
     MerchantWxMenu: {url: '/merchant/we_chat_menu/index', method: 'get'},
     /** 保存微信菜单 **/

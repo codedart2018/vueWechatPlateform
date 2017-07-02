@@ -7,6 +7,9 @@
 <script>
 
     export default{
+        beforeMount(){
+        	console.log(2333)
+        },
         data(){
             return{
                 platform: ''

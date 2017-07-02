@@ -76,8 +76,9 @@
                         this.request('MerchantLogin', this.formLogin).then((res) => {
                             if (res.status) {
                                 this.$Message.success("登陆成功")
-                                window.localStorage.setItem('merchantLogin', JSON.stringify(res.data.info))
+                                window.localStorage.setItem('merchantInfo', JSON.stringify(res.data.info))
                                 window.localStorage.setItem('merchantToken', JSON.stringify(res.data.info.token))
+                                this.set('hello', 'world', 1)
                                 this.$router.push({path: '/'})
                             } else {
                                 this.$Message.error(res.msg)
@@ -94,7 +95,12 @@
                 setTimeout(() => {
                     this.verifyUrl = '/manage/login/code?v=' + Math.random() * 1000
                 }, 500)
-            }
+            },
+            set: function (name, value, days) {
+                var d = new Date;
+                d.setTime(d.getTime() + 24*60*60*1000*days);
+                window.document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+            },
         },
         watch: {
 

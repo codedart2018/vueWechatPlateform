@@ -36,6 +36,9 @@ AxiosInst.interceptors.request.use((config) => {
 //响应拦截器
 AxiosInst.interceptors.response.use((response) => {
     //对响应数据做些事
+    if(response.data.status == false && response.data.code == 1000) {
+        //废弃
+    }
     return response;
 },(error) => {
     //请求错误时做些事

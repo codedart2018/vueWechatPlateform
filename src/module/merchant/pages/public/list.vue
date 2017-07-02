@@ -76,10 +76,15 @@
                                     },
                                     on: {
                                         click: () => {
-                                            //todo 切换过去的时候先保存一份public_signal号在vuex数据里面后面的操作全在里面
-                                            //把平台号写到 localStorage
-                                            window.localStorage.setItem('platformNumber', params.row.id)
-                                            this.$router.push({ path: '/wechat/main' })
+                                            this.request("MerchantPublicSwitch", {id: params.row.id}, true).then((res) => {
+                                                if(res.status) {
+                                                    //todo 切换过去的时候先保存一份public_signal号在vuex数据里面后面的操作全在里面
+                                                    window.localStorage.setItem('platformNumber', params.row.id)
+                                                    this.$router.push({ path: '/wechat/main' })
+                                                } else {
+                                                    this.$Message.error(res.msg)
+                                                }
+                                            })
                                         }
                                     }
                                 }, '管理'),
@@ -108,6 +113,8 @@
                 this.request("MerchantPublicList", {mch_id: 1}, true).then((res) => {
                     if(res.status) {
                     	this.data = res.data
+                    } else {
+                        this.$Message.error(res.msg)
                     }
                 })
             }

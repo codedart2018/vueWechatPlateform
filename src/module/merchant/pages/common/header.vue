@@ -36,7 +36,7 @@
                 <p>您确认要退出?退出后将无法操作哦!</p>
             </div>
             <div slot="footer">
-                <Button type="success" size="large" long :loading="modal_loading" @click="signOut">确认退出</Button>
+                <Button type="success" size="large" long :loading="modalLoading" @click="signOut">确认退出</Button>
             </div>
         </Modal>
     </div>
@@ -48,18 +48,20 @@
             return {
                 info: '',
                 modal: false,
-                modal_loading: false,
+                modalLoading: false,
+                merchantInfo: window.localStorage.getItem("merchantInfo"),
+                merchantToken: window.localStorage.getItem("merchantToken")
             }
         },
         methods: {
             //退出方法
             signOut () {
-                this.modal_loading = true;
+                this.modalLoading = true;
                 setTimeout(() => {
-                    this.modal_loading = false;
+                    this.modalLoading = false;
                     this.modal = false;
                     //处理一系列数据
-                    window.localStorage.removeItem('merchantLogin')
+                    window.localStorage.removeItem('merchantInfo')
                     window.localStorage.removeItem('merchantToken')
                     this.$Message.success('退出成功');
                     this.$router.push({path: '/login'})
@@ -68,7 +70,10 @@
         },
         components: {},
         mounted() {
-        }
+        },
+        watch: {
+
+        },
     }
 </script>
 
