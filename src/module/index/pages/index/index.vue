@@ -4,7 +4,11 @@
         <nav class="navigation-bar">
             <div class="container">
                 <Row>
-                    <Col span="5">代码兔微信公众号第三方管理平台</Col>
+                    <Col span="5">
+                        <div class="logo">
+
+                        </div>
+                    </Col>
                     <Col span="19">
                         <div class="bar">
                             <div class="left">

@@ -167,7 +167,7 @@
                     this.userOut(this)
                     this.$router.push({path: '/login'})
                     this.$Message.success("退出成功")
-                }, 1500);
+                }, 1000);
             }
         },
         components: {
