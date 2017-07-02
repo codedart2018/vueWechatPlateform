@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Table border :columns="columns7" :data="data"></Table>
+        <Table border :columns="columns" :data="data"></Table>
     </div>
 </template>
 <script>
@@ -9,7 +9,7 @@
         data () {
             return {
                 that: this,
-                columns7: [
+                columns: [
                     {
                         title: '平台号',
                         width: 100,
@@ -76,15 +76,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.request("MerchantPublicSwitch", {id: params.row.id}, true).then((res) => {
-                                                if(res.status) {
-                                                    //todo 切换过去的时候先保存一份public_signal号在vuex数据里面后面的操作全在里面
-                                                    window.localStorage.setItem('platformNumber', params.row.id)
-                                                    this.$router.push({ path: '/wechat/main' })
-                                                } else {
-                                                    this.$Message.error(res.msg)
-                                                }
-                                            })
+                                            this.show(params.index, params.row.id)
                                         }
                                     }
                                 }, '管理'),
@@ -117,7 +109,28 @@
                         this.$Message.error(res.msg)
                     }
                 })
-            }
+            },
+            show (index, id) {
+                this.$Modal.confirm({
+                    title: '温馨提示',
+                    content: `您确定要切换到：《${this.data[index].public_name}》平台吗?`,
+                    onOk: () => {
+                        this.request("MerchantPublicSwitch", {id: id}, true).then((res) => {
+                            if(res.status) {
+                                //todo 切换过去的时候先保存一份public_signal号在vuex数据里面后面的操作全在里面
+                                window.localStorage.setItem('platformNumber', id)
+                                this.$Message.success("切换成功...")
+                                this.$router.push({ path: '/wechat/main' })
+                            } else {
+                                this.$Message.error(res.msg)
+                            }
+                        })
+                    },
+                    onCancel: () => {
+                        this.$Message.info('您取消了切换');
+                    }
+                })
+            },
         },
         mounted() {
             //服务端获取数据
