@@ -66,17 +66,23 @@
         <div>
             <Carousel autoplay v-model="value2">
                 <Carousel-item>
-                    <div class="carousel">1</div>
+                    <div class="carousel">
+                        <img src="../../assets/images/banner1.jpg" alt="First slide">
+                    </div>
                 </Carousel-item>
                 <Carousel-item>
-                    <div class="carousel">2</div>
+                    <div class="carousel">
+                        <img src="../../assets/images/banner2.jpg" alt="First slide">
+                    </div>
                 </Carousel-item>
                 <Carousel-item>
-                    <div class="carousel">3</div>
+                    <div class="carousel">
+                        <img src="../../assets/images/banner3.jpg" alt="First slide">
+                    </div>
                 </Carousel-item>
-                <Carousel-item>
-                    <div class="carousel">4</div>
-                </Carousel-item>
+                <!--<Carousel-item>-->
+                    <!--<div class="carousel">4</div>-->
+                <!--</Carousel-item>-->
             </Carousel>
         </div>
         <!--幻灯片结束-->
