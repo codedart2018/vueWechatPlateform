@@ -110,6 +110,7 @@ Http.install = function (Vue) {
         }
         if(data.code == 2000 && data.status == false) {
             this.$Message.error(data.msg)
+            window.localStorage.removeItem('merchantUser')
             window.localStorage.removeItem('merchantInfo')
             window.localStorage.removeItem('merchantToken')
             setTimeout(() => closeLoading(), 800)

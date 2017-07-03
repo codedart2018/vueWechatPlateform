@@ -118,6 +118,8 @@ const methodMap = {
     MerchantPublicList: {url: '/merchants/public_signal/index', method: 'get'},
     /** 公众号平台切换 **/
     MerchantPublicSwitch: {url: '/merchants/public_signal/switch', method: 'get'},
+    /** 微信公众号绑定 **/
+    MerchantPublicBind: {url: '/merchants/public_signal/bind', method: 'get'},
     /** 微信菜单获取 **/
     MerchantWxMenu: {url: '/merchants/we_chat_menu/index', method: 'get'},
     /** 保存微信菜单 **/
