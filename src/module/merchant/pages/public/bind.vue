@@ -25,7 +25,7 @@
                     <span style="padding-left: 10px;">我已阅读上述绑定说明</span>
                 </div>
                 <div class="button">
-                    <Button :type="type" size="large" style="width: 200px;" @click="bind">一键绑定授权</Button>
+                    <Button :type="type" size="large" style="width: 200px;" :loading="loading" @click="bind">一键绑定授权</Button>
                 </div>
             </div>
 
@@ -39,7 +39,8 @@
         data () {
             return {
                 isSwitch: false,
-                type: 'default'
+                type: 'default',
+                loading: false,
             }
         },
         methods: {
@@ -55,14 +56,13 @@
                     this.$Message.info('请先同意授权说明');
                     return false;
                 }
-                this.request('MerchantPublicBind', {}, '跳转中...').then((res) => {
-                    if (res.status) {
-                        window.open(res.data.url);
-                        this.$Message.success("请在打开的新页面中授权");
-                    } else {
-                        this.$Message.error(res.msg)
-                    }
-                })
+                //临时域名
+                window.open(Api.auth_call_back + "/merchants/public_signal/bind");
+                this.$Message.success("请注意是否有打开新的授权页面");
+                this.loading = true
+                setTimeout(() => {
+                    this.loading = false
+                }, 5000);
             }
         },
         components:{

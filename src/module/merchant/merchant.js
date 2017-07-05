@@ -10,6 +10,8 @@ import Util from '../../libs/util' // 工具
 import Http from '../../libs/http' //请求工具
 import Plugin from '../../libs/plugin/formatDate' //插件
 import '../../libs/filter' //过滤器
+import Api from '../../libs/api'
+window.Api = Api
 
 Vue.use(Plugin)
 Vue.use(Toast)
