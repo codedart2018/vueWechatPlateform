@@ -13,8 +13,8 @@
                 <p>2、在<span class="red">【开发&gt;基本配置】</span>建议取消其他同类第三方授权</p>
                 <p>3、请点击下方“<span class="red">一键授权绑定</span>”，<span class="red">扫描</span>显示的二维码</p>
                 <p>4、关注您自己的微信公众号并发送“<span class="red">绑定平台</span>”四个字</p>
-                <p>5、收到&nbsp;<span class="red" style="font-size:12px;">恭喜您已经成功绑定到无限智能的代码兔微信公众平台</span>&nbsp;说明绑定成功</p>
-                <p>6、<span class="red" style="font-size:12px;">如果没有弹出打开新页面，请检查是否被拦截了</span></p>
+                <p>5、收到&nbsp;<span class="red">恭喜您已经成功绑定到无限智能的代码兔微信公众平台</span>&nbsp;说明绑定成功</p>
+                <p>6、<span class="red">如果没有弹出打开新页面，请检查是否被拦截了</span></p>
             </div>
             <div class="footer">
                 <div class="confirm">
