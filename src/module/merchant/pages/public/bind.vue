@@ -56,7 +56,6 @@
                     this.$Message.info('请先同意授权说明');
                     return false;
                 }
-                //临时域名
                 window.open(Api.auth_call_back + "/merchants/public_signal/bind");
                 this.$Message.success("请注意是否有打开新的授权页面");
                 this.loading = true
