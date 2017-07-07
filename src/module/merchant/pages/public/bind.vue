@@ -30,6 +30,19 @@
             </div>
 
         </div>
+        <Modal v-model="modal" width="360">
+            <p slot="header" style="color:#f60;text-align:center">
+                <Icon type="information-circled"></Icon>
+                <span>确认绑定</span>
+            </p>
+            <div style="text-align:center">
+                <p>如果授权绑定提成成功后将跳转公众号列表去!</p>
+                <p>如果未来授权成功,请联系我们!</p>
+            </div>
+            <div slot="footer">
+                <Button type="success" size="large" long :loading="modalLoading" @click="confirm">确认授权成功</Button>
+            </div>
+        </Modal>
     </Row>
 </template>
 
@@ -41,6 +54,8 @@
                 isSwitch: false,
                 type: 'default',
                 loading: false,
+                modal: false,
+                modalLoading: false,
             }
         },
         methods: {
@@ -58,10 +73,19 @@
                 }
                 window.open(Api.auth_call_back + "/merchants/public_signal/bind");
                 this.$Message.success("请注意是否有打开新的授权页面");
-                this.loading = true
+                this.loading = true;
+                this.modal = true;
                 setTimeout(() => {
                     this.loading = false
-                }, 5000);
+                }, 1000);
+            },
+            confirm() {
+                this.modal_loading = true;
+                setTimeout(() => {
+                    this.modalLoading = false;
+                    this.modal = false;
+                    this.$router.push({path: '/public/list'})
+                }, 1000);
             }
         },
         components:{

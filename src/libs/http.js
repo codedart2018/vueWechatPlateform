@@ -1,6 +1,7 @@
 /**
  * Created by truncate on 2017/4/19.
  * 网络请求插件 引入了toast 加载提示
+ * 想打张白条给你，上面就写着，我欠你一生温柔，一世呵护！分期一万年！我爱你，夜！
  */
 
 import methodMap from './methodMap'

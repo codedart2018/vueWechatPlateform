@@ -43,6 +43,7 @@
 </template>
 
 <script>
+    ///你给我每一次，都是新鲜！我对你的依恋更加明显。就在我们每次亲吻的瞬间，我就在也无法离开你的身边！
     import {mapActions} from 'vuex'
     export default{
         data () {

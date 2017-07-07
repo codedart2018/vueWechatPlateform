@@ -20,7 +20,7 @@ const config = {
     //返回数据类型
     responseType: 'json',
 }
-
+//那年乱世如麻，愿你们来世拥有锦绣年华.此生无悔入华夏，来世还在种花家
 const AxiosInst = axios.create(config);
 
 //请求拦截器

@@ -1,6 +1,7 @@
 /**
  * Created by truncate on 2017/4/24.
  * Vue 过滤器
+ * 如果此生只能给你拥抱和不放开你的手，你愿不愿意跟我走...
  */
 import Vue from 'vue'
 

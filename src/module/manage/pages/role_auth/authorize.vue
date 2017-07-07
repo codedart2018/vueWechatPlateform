@@ -144,7 +144,7 @@
             },
             //反转所有
             reversal(index, select) {
-            	//todo 我TMD 就不知道为什么第一个元素是空的
+            	//我TMD 就不知道为什么第一个元素是空的
                 if(this.rules && this.rules[0] == "") {
                     this.rules.splice(0, 1);
                 }

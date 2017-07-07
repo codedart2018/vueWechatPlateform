@@ -396,6 +396,9 @@
                     }
                 }
             },
+            //鹰酱：如果过不去，我们就回不了家了
+            //弹幕：可是你们过去了，我们就没有家了
+            //删除子菜单
             menuItemDel() {
                 if (this.menu.button[this.activeMenuIndex].sub_button.length <= 5 && this.menu.button[this.activeMenuIndex].sub_button.length > 0) {
                     if (this.activeMenuItemIndex == this.menu.button[this.activeMenuIndex].sub_button.length - 1) {
