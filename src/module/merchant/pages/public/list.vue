@@ -4,12 +4,23 @@
     </div>
 </template>
 <script>
-
+    import tableRow from './list-table.vue'
     export default {
         data () {
             return {
                 that: this,
                 columns: [
+                    {
+                        type: 'expand',
+                        width: 30,
+                        render: (h, params) => {
+                            return h(tableRow, {
+                                props: {
+                                    row: params.row
+                                }
+                            })
+                        }
+                    },
                     {
                         title: '平台号',
                         width: 100,

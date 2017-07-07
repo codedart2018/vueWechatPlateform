@@ -209,6 +209,7 @@
                     this.$Message.error('请选择一个粉丝回复消息!')
                     return
                 }
+
                 if (!content || this.$refs.reply.wordsNumber < 0) {
                     this.$Message.error('请填写600字以内的消息内容!')
                     return
