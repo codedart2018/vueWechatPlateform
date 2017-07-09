@@ -51,6 +51,15 @@ export default new Router({
                 component: resolve => require(['./pages/public/bind'], resolve),
             },
             {
+                path: '/expense/bills',
+                name: 'expenseBills',
+                meta: {
+                    title: '消费明细',
+                    group: 'manage'
+                },
+                component: resolve => require(['./pages/expense/bills'], resolve),
+            },
+            {
                 path: '/wechat/main',
                 name: 'wechatManage',
                 meta: {

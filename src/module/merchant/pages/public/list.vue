@@ -8,7 +8,7 @@
     export default {
         data () {
             return {
-                that: this,
+//                that: this,
                 columns: [
                     {
                         type: 'expand',
@@ -38,11 +38,30 @@
                     },
                     {
                         title: '公众号名称',
-                        key: 'public_name'
+                        key: 'public_name',
+                        align: 'center'
                     },
                     {
                         title: '粉丝数量',
-                        key: 'id'
+                        key: 'id',
+                        align: 'center'
+                    },
+                    {
+                        title: '帐号类型',
+                        align: 'center',
+                        width: 120,
+                        render: (h, params) => {
+                        	const row = params.row;
+                        	const txt = (row.service_type == 1 || row.service_type == 0) ? "订阅号" : "服务号";
+                        	const verify = row.verify_type == -1 ? '未认证' : row.verify_type == 0 ? '已认证' : '其它认证';
+                            return h('div', {
+                                style: {
+                                    textAlign: 'left'
+                                },
+                            },[
+                                h('span', txt + '(' + verify + ')')
+                            ]);
+                        }
                     },
                     {
                         title: '状态',
@@ -73,7 +92,7 @@
                     {
                         title: '操作',
                         key: 'action',
-                        width: 150,
+                        width: 110,
                         align: 'center',
                         render: (h, params) => {
                             return h('div', [
