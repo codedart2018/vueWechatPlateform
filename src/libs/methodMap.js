@@ -118,8 +118,10 @@ const methodMap = {
     MerchantPublicList: {url: '/merchants/public_signal/index', method: 'get'},
     /** 公众号平台切换 **/
     MerchantPublicSwitch: {url: '/merchants/public_signal/switch', method: 'get'},
-    /** 资金明细 **/
+    /** 资金明细列表 **/
     MerchantFinanceBills: {url: '/merchants/expense/bills', method: 'get'},
+    /** 资金明细 **/
+    MerchantFinanceBillsDetail: {url: '/merchants/expense/bills_detail', method: 'get'},
     /** 微信公众号绑定 **/
     MerchantPublicBind: {url: '/merchants/public_signal/bind', method: 'get'},
     /** 微信菜单获取 **/

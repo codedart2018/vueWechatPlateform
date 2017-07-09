@@ -54,10 +54,19 @@ export default new Router({
                 path: '/expense/bills',
                 name: 'expenseBills',
                 meta: {
-                    title: '消费明细',
+                    title: '消费明细列表',
                     group: 'manage'
                 },
                 component: resolve => require(['./pages/expense/bills'], resolve),
+            },
+            {
+                path: '/expense/bills_detail/:id?',
+                name: 'expenseBillsDetail',
+                meta: {
+                    title: '消费明细详情',
+                    group: 'manage'
+                },
+                component: resolve => require(['./pages/expense/bills-detail'], resolve),
             },
             {
                 path: '/wechat/main',
@@ -96,13 +105,13 @@ export default new Router({
                 component: resolve => require(['./pages/wechat/message'], resolve),
             },
             {
-                path: '/wechat/message_view/:id?',
-                name: 'wechatMessageView',
+                path: '/wechat/message_detail/:id?',
+                name: 'wechatMessageDetail',
                 meta: {
                     title: '消息详情',
                     group: 'wechat'
                 },
-                component: resolve => require(['./pages/wechat/message-view'], resolve),
+                component: resolve => require(['./pages/wechat/message-detail'], resolve),
             },
             {
                 path: '/archives/material/:type?',

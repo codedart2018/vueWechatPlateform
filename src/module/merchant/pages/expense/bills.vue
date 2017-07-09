@@ -182,7 +182,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.show(params.index, params.row.id)
+                                            this.detail(params.row.id)
                                         }
                                     }
                                 }, '详情'),
@@ -252,11 +252,17 @@
                 var timestamp = Date.parse(new Date(v));
                 this.formSearch.start_date = timestamp;
                 console.log(timestamp);
-            }
+            },
+            //详情路由跳转
+            detail(id) {
+                this.$router.push({ path: '/expense/bills_detail/' + id, params: { id: id }})
+            },
         },
         mounted() {
             //服务端获取数据
             this.getData();
         }
+
+
     }
 </script>

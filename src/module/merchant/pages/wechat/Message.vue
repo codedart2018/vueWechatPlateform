@@ -134,7 +134,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.view(params.row.id)
+                                            this.detail(params.row.id)
                                         }
                                     }
                                 }, '详情'),
@@ -231,9 +231,9 @@
                 })
             },
             //详情路由跳转
-            view(id) {
+            detail(id) {
             	//这儿到时候直接传用户的身份ID 后台不用再进行一次查找用户身份信息
-                this.$router.push({ path: '/wechat/message_view/' + id, params: { id: id }})
+                this.$router.push({ path: '/wechat/message_detail/' + id, params: { id: id }})
             },
         },
         components: {
