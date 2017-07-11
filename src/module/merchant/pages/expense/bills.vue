@@ -3,9 +3,9 @@
         <Row>
             <Form :model="formSearch" :label-width="80" inline label-position="right">
                 <Form-item label="时间范围：">
-                    <Date-picker type="date" placeholder="开始日期" v-model="formSearch.start_date" @on-change="changeDate" style="width: 120px"></Date-picker>
+                    <Date-picker type="date" placeholder="开始日期" v-model="formSearch.start_date" @on-change="changeStartDate" style="width: 120px"></Date-picker>
                     <span>-</span>
-                    <Date-picker type="date" placeholder="结束日期" v-model="formSearch.end_date" :options="options3" style="width: 120px"></Date-picker>
+                    <Date-picker type="date" placeholder="结束日期" v-model="formSearch.end_date" @on-change="changeEndDate" style="width: 120px"></Date-picker>
                 </Form-item>
                 <Form-item label="订单类型：">
                     <Select v-model="formSearch.order_type" placeholder="请选择" style="width:100px">
@@ -201,12 +201,13 @@
                 //搜索表单
                 formSearch: {},
                 //设置结束时间
-                options3: {
+                banDate: {
                     disabledDate (date) {
-                    	return false;
                         return date && date.valueOf() < Date.now() - 86400000;
                     }
                 },
+                changeStartTime: Date.parse(new Date()),
+                changeEndTime: Date.parse(new Date()),
             }
         },
         methods: {
@@ -248,10 +249,16 @@
                 let search = this.formSearch;
                 this.getData({ params : search });
             },
-            changeDate(v) {
-                var timestamp = Date.parse(new Date(v));
-                this.formSearch.start_date = timestamp;
-                console.log(timestamp);
+            changeStartDate(v) {
+                Date.parse(new Date(v));
+            },
+            changeEndDate(v) {
+                const time = Date.parse(new Date(v));
+                if(time < this.changeStartTime) {
+                    this.$Message.error('结束时间不能大于开始时间');
+//                    this.formSearch.end_date = '2016-07-01';
+                    return false;
+                }
             },
             //详情路由跳转
             detail(id) {
@@ -260,7 +267,7 @@
         },
         mounted() {
             //服务端获取数据
-            this.getData();
+            this.getData()
         }
 
 

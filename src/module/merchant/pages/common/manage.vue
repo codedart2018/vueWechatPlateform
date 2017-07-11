@@ -30,22 +30,22 @@
                                         <Menu-item name="2-1"><router-link to="/expense/bills" style="color: #657180;">资金明细</router-link></Menu-item>
                                         <Menu-item name="2-2"><router-link to="/expense/integral" style="color: #657180;">积分明细</router-link></Menu-item>
                                     </Submenu>
-                                    <Submenu name="3">
-                                        <template slot="title">
-                                            <Icon type="ios-people"></Icon>
-                                            短信管理
-                                        </template>
-                                        <Menu-item name="3-1">新增用户</Menu-item>
-                                        <Menu-item name="3-2">活跃用户</Menu-item>
-                                    </Submenu>
-                                    <Submenu name="4">
-                                        <template slot="title">
-                                            <Icon type="ios-people"></Icon>
-                                            消息工单
-                                        </template>
-                                        <Menu-item name="4-1">新增用户</Menu-item>
-                                        <Menu-item name="4-2">活跃用户</Menu-item>
-                                    </Submenu>
+                                    <!--<Submenu name="3">-->
+                                        <!--<template slot="title">-->
+                                            <!--<Icon type="ios-people"></Icon>-->
+                                            <!--短信管理-->
+                                        <!--</template>-->
+                                        <!--<Menu-item name="3-1">新增用户</Menu-item>-->
+                                        <!--<Menu-item name="3-2">活跃用户</Menu-item>-->
+                                    <!--</Submenu>-->
+                                    <!--<Submenu name="4">-->
+                                        <!--<template slot="title">-->
+                                            <!--<Icon type="ios-people"></Icon>-->
+                                            <!--消息工单-->
+                                        <!--</template>-->
+                                        <!--<Menu-item name="4-1">新增用户</Menu-item>-->
+                                        <!--<Menu-item name="4-2">活跃用户</Menu-item>-->
+                                    <!--</Submenu>-->
                                     <Submenu name="5">
                                         <template slot="title">
                                             <Icon type="stats-bars"></Icon>
