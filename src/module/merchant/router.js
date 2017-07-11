@@ -69,6 +69,15 @@ export default new Router({
                 component: resolve => require(['./pages/expense/bills-detail'], resolve),
             },
             {
+                path: '/expense/integral',
+                name: 'expenseIntegral',
+                meta: {
+                    title: '积分明细列表',
+                    group: 'manage'
+                },
+                component: resolve => require(['./pages/expense/integral'], resolve),
+            },
+            {
                 path: '/wechat/main',
                 name: 'wechatManage',
                 meta: {

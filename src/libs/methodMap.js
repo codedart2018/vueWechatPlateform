@@ -122,6 +122,8 @@ const methodMap = {
     MerchantFinanceBills: {url: '/merchants/expense/bills', method: 'get'},
     /** 资金明细 **/
     MerchantFinanceBillsDetail: {url: '/merchants/expense/bills_detail', method: 'get'},
+    /** 积分明细 **/
+    MerchantFinanceIntegral: {url: '/merchants/expense/integral', method: 'get'},
     /** 微信公众号绑定 **/
     MerchantPublicBind: {url: '/merchants/public_signal/bind', method: 'get'},
     /** 微信菜单获取 **/

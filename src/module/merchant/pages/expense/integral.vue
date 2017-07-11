@@ -7,21 +7,11 @@
                     <span>-</span>
                     <Date-picker type="date" placeholder="结束日期" v-model="formSearch.end_date" @on-change="changeEndDate" style="width: 120px"></Date-picker>
                 </Form-item>
-                <Form-item label="订单类型：">
-                    <Select v-model="formSearch.order_type" placeholder="请选择" style="width:100px">
+                <Form-item label="类型：">
+                    <Select v-model="formSearch.type" placeholder="请选择" style="width:100px">
                         <Option value="">请选择</Option>
-                        <Option value="1">新购</Option>
-                        <Option value="2">续费</Option>
-                        <Option value="3">充值</Option>
-                        <Option value="4">退款</Option>
-                    </Select>
-                </Form-item>
-                <Form-item label="支付状态：">
-                    <Select v-model="formSearch.is_pay" placeholder="请选择" style="width:100px">
-                        <Option value="">请选择</Option>
-                        <Option value="0">未支付</Option>
-                        <Option value="1">已支付</Option>
-                        <Option value="2">作废</Option>
+                        <Option value="1">增加</Option>
+                        <Option value="2">扣除</Option>
                     </Select>
                 </Form-item>
                 <Form-item :label-width="1">
@@ -50,7 +40,7 @@
             return {
                 columns: [
                     {
-                        title: '订单号',
+                        title: '编号',
                         align: 'left',
                         width: 130,
                         render: (h, params) => {
@@ -59,11 +49,11 @@
                                 style: {
                                     textAlign: 'left'
                                 },
-                            }, row.order_sn);
+                            }, row.id);
                         }
                     },
                     {
-                        title: '产品',
+                        title: '说明',
                         align: 'left',
                         render: (h, params) => {
                             const row = params.row;
@@ -71,25 +61,19 @@
                                 style: {
                                     textAlign: 'left'
                                 },
-                            }, row.commodity_name);
+                            }, row.describe);
                         }
                     },
                     {
-                        title: '订单类型',
+                        title: '类型',
                         align: 'center',
                         width: 70,
                         render: (h, params) => {
                             const row = params.row;
-                            if(row.order_type == 1) {
-                                var txt = "新购";
-                            } else if(row.order_type == 2) {
-                                var txt = "续费";
-                            } else if(row.order_type == 3) {
-                                var txt = "充值";
-                            } else if(row.order_type == 4) {
-                                var txt = "退款";
+                            if(row.type == 1) {
+                                var txt = "增加";
                             } else {
-                                var txt = "其它";
+                                var txt = "扣除";
                             }
                             return h('div', {
                                 style: {
@@ -99,45 +83,16 @@
                         }
                     },
                     {
-                        title: '状态',
-                        key: 'status',
-                        width: 60,
+                        title: '积分',
                         align: 'center',
+                        width: 70,
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.is_pay == 1 ? 'green' : row.is_pay == 0 ? 'gray' : '#b30000'
-                            const text = row.is_pay == 1 ? '已支付' : row.is_pay == 0 ? '未支付' : '作废'
-                            return h('span', {
+                            return h('div', {
                                 style: {
-                                    color: color
-                                }
-                            }, text)
-                        }
-                    },
-                    {
-                        title: '原始金额',
-                        width: 80,
-                        align: 'center',
-                        render: (h, params) => {
-                            const row = params.row;
-                            return h('span', {
-                                style: {
-                                    color: "#F90 !important"
-                                }
-                            }, '￥' + row.original_amount)
-                        }
-                    },
-                    {
-                        title: '实付金额',
-                        width: 80,
-                        align: 'center',
-                        render: (h, params) => {
-                            const row = params.row;
-                            return h('span', {
-                                style: {
-                                    color: "#F90 !important"
-                                }
-                            }, '￥' + row.pay_amount)
+                                    textAlign: 'center'
+                                },
+                            }, row.score);
                         }
                     },
                     {
@@ -149,44 +104,6 @@
                             return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m:s'));
                         }
                     },
-                    {
-                        title: '支付时间',
-                        key: 'create_time',
-                        width: 140,
-                        align: 'center',
-                        render: (h, params) => {
-                        	if(params.row.pay_time == 0) {
-                        		var txt = '';
-                            } else {
-                                var txt = this.$formatDate(params.row.pay_time, 'yyyy-MM-dd h:m:s');
-                            }
-                            return h('div', txt);
-                        }
-                    },
-                    {
-                        title: '操作',
-                        key: 'action',
-                        width: 60,
-                        align: 'center',
-                        render: (h, params) => {
-                            return h('div', [
-                                h('Button', {
-                                    props: {
-                                        type: 'primary',
-                                        size: 'small'
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.detail(params.row.id)
-                                        }
-                                    }
-                                }, '详情'),
-                            ]);
-                        }
-                    }
                 ],
                 //列表数据
                 list: [],
@@ -212,7 +129,7 @@
             //获得数据
             getData (params) {
                 if (!params) params = {page: 1}
-                this.request('MerchantFinanceBills', params, true).then((res) => {
+                this.request('MerchantFinanceIntegral', params, true).then((res) => {
                     if(res.status) {
                         //列表数据
                         this.list = res.data.list
@@ -254,14 +171,9 @@
                 const time = Date.parse(new Date(v));
                 if(time < this.changeStartTime) {
                     this.$Message.error('结束时间不能大于开始时间');
-//                    this.formSearch.end_date = '2016-07-01';
                     return false;
                 }
-            },
-            //详情路由跳转
-            detail(id) {
-                this.$router.push({ path: '/expense/bills_detail/' + id, params: { id: id }})
-            },
+            }
         },
         mounted() {
             //服务端获取数据
