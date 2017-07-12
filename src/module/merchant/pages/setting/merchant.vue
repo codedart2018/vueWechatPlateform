@@ -112,7 +112,7 @@
             },
             //获取商户信息
             getData() {
-                this.request("MerchantView", {id : 1}, true).then((res) => {
+                this.request("MerchantDetail", {id : this.$store.state.Merchant.merchant.id}, true).then((res) => {
                     if(res.status) {
                         this.data = res.data
                     } else {
@@ -120,7 +120,7 @@
                         this.$router.go(-1)
                     }
                 }).catch((err) => {
-
+                    this.$Message.error(err);
                 })
             }
         },

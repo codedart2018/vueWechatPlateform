@@ -132,18 +132,18 @@
                 this.request('MerchantFinanceIntegral', params, true).then((res) => {
                     if(res.status) {
                         //列表数据
-                        this.list = res.data.list
-                        //总页数
-                        this.total = res.data.count
-                        //每页多少条数据
-                        this.pageSize = res.data.size
+                        this.list = res.data.list;
+                        //总页数;
+                        this.total = res.data.count;
+                        //每页多少条数据;
+                        this.pageSize = res.data.size;
                     } else {
-                        //列表数据
-                        this.list = []
-                        //总页数
-                        this.total = 0
-                        //每页多少条数据
-                        this.pageSize = 0
+                        //列表数据;
+                        this.list = [];
+                        //总页数;
+                        this.total = 0;
+                        //每页多少条数据;
+                        this.pageSize = 0;
                     }
                 })
             },
@@ -177,7 +177,7 @@
         },
         mounted() {
             //服务端获取数据
-            this.getData()
+            this.getData();
         }
 
 

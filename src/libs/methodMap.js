@@ -49,7 +49,7 @@ const methodMap = {
     /** 添加商户 **/
     AdminAddMerchant: {url: '/admin/merchant/add', method: 'post'},
     /** 查看商户 **/
-    AdminMerchantView: {url: '/admin/merchant/view', method: 'get'},
+    AdminMerchantDetail: {url: '/admin/merchant/detail', method: 'get'},
     /** 商户用户列表 **/
     MerchantUser: {url: '/admin/merchant_user/index', method: 'get'},
     /** 重置商户用户密码 **/
@@ -98,6 +98,8 @@ const methodMap = {
     AdminWebsiteIndex: {url: '/admin/website/index', method: 'get'},
     /** 锁定解锁微站 **/
     AdminWebsiteLock: {url: '/admin/website/lock', method: 'post'},
+    /** 银行帐号设置 **/
+    AdminSystemBank: {url: '/admin/system/bank_account', method: 'post'},
     
     // /** 以下接口为商户平台接口 以下接口地址没有走后台验证 **/
     /** 商户平台登陆中心 **/
@@ -111,7 +113,7 @@ const methodMap = {
     /** 商户用户个人资料修改 **/
     MerchantUserEdit: {url: '/merchants/user/edit', method: 'post'},
     /** 获取商户详情资料 **/
-    MerchantView: {url: '/merchants/merchant/view', method: 'get'},
+    MerchantDetail: {url: '/merchants/merchant/detail', method: 'get'},
     /** 保存商户资料 **/
     MerchantInfoSave: {url: '/merchants/merchant/save', method: 'post'},
     /** 商户公众号列表 **/

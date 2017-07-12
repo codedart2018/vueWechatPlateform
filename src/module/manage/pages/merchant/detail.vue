@@ -194,9 +194,9 @@
             handleReset (name) {
                 this.$refs[name].resetFields();
             },
-            getData (params) {
+            getData () {
                 let id = this.$route.params.id
-                this.request('AdminMerchantView', {id: id}, true).then((res) => {
+                this.request('AdminMerchantDetail', {id: id}, true).then((res) => {
                     if(res.status) {
                         //数据
                         this.data = res.data
