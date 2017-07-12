@@ -53,7 +53,12 @@ Http.install = function (Vue) {
      * @param data 请求数据
      * @returns {Promise}
      */
-    Vue.prototype.apiPost = function(url, data) {
+    Vue.prototype.apiPost = function(url, data, toast = false) {
+        if(toast && typeof (toast) == 'boolean') {
+            Vue.prototype.$loading("加载中...")
+        } else if(toast && typeof (toast) == 'string') {
+            Vue.prototype.$loading(toast)
+        }
         return new Promise((resolve, reject) => {
             AxiosInst.post(url, data).then((response) => {
                 Vue.prototype.response(response.data)
@@ -73,7 +78,12 @@ Http.install = function (Vue) {
      * @param data 请求数据
      * @returns {Promise}
      */
-    Vue.prototype.apiGet = function(url, data) {
+    Vue.prototype.apiGet = function(url, data, toast = false) {
+        if(toast && typeof (toast) == 'boolean') {
+            Vue.prototype.$loading("加载中...")
+        } else if(toast && typeof (toast) == 'string') {
+            Vue.prototype.$loading(toast)
+        }
         return new Promise((resolve, reject) => {
             AxiosInst.get(url, {
                 params: data
