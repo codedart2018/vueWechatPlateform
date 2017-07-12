@@ -27,7 +27,7 @@
                                             <Icon type="stats-bars"></Icon>
                                             财务中心
                                         </template>
-                                        <Menu-item name="2-1"><router-link to="/expense/bills" style="color: #657180;">帐户总览</router-link></Menu-item>
+                                        <Menu-item name="2-1"><router-link to="/expense/account" style="color: #657180;">帐户总览</router-link></Menu-item>
                                         <Menu-item name="2-2"><router-link to="/expense/bills" style="color: #657180;">资金明细</router-link></Menu-item>
                                         <Menu-item name="2-3"><router-link to="/expense/integral" style="color: #657180;">积分明细</router-link></Menu-item>
                                     </Submenu>

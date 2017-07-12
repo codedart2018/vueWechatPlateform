@@ -51,6 +51,15 @@ export default new Router({
                 component: resolve => require(['./pages/public/bind'], resolve),
             },
             {
+                path: '/expense/account',
+                name: 'expenseAccount',
+                meta: {
+                    title: '帐户概览',
+                    group: 'manage'
+                },
+                component: resolve => require(['./pages/expense/account'], resolve),
+            },
+            {
                 path: '/expense/bills',
                 name: 'expenseBills',
                 meta: {
