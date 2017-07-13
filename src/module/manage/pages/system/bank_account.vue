@@ -142,8 +142,7 @@
             //拉取数据
             getData () {
                 this.apiGet('/admin/system/bank_account', {}, '获取中...').then((res) => {
-                	//.length > 0
-                    if (res.status && res.data) {
+                    if (res.status && res.data && typeof res.data.length != 'number') {
                         this.formDynamic.amounts = res.data.amounts;
                         this.formDynamic.desc = res.data.desc;
                         this.formDynamic.pay_type = res.data.pay_type;

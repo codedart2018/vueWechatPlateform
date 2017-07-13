@@ -160,6 +160,8 @@ const methodMap = {
     ArchivesEdit: {url: '/merchants/archives/edit', method: 'post'},
     /** 保存同步文章（图文消息）**/
     ArchivesSaveSyncMaterialNews: {url: '/merchants/archives/sync_material', method: 'post'},
+    /** 充值设置  银行帐号信息 **/
+    MerchantConfigBank: {url: '/merchants/system_config/get_banks', method: 'get'},
     
     /** 平台商户微网站站点获取 **/
     MerchantWebsite: {url: '/merchants/website/plat_form_website', method: 'get'},
