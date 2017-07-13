@@ -19,17 +19,17 @@
                                             <Icon type="chatbubbles"></Icon>
                                             公众号
                                         </template>
-                                        <Menu-item name="1-1"><router-link to="/public/list" style="color: #657180;">公众号列表</router-link></Menu-item>
-                                        <Menu-item name="1-2"> <router-link to="/public/bind" style="color: #657180;">快速绑定</router-link></Menu-item>
+                                        <Menu-item name="1-1"><router-link to="/public/list">公众号列表</router-link></Menu-item>
+                                        <Menu-item name="1-2"> <router-link to="/public/bind">快速绑定</router-link></Menu-item>
                                     </Submenu>
                                     <Submenu name="2">
                                         <template slot="title">
                                             <Icon type="stats-bars"></Icon>
                                             财务中心
                                         </template>
-                                        <Menu-item name="2-1"><router-link to="/expense/account" style="color: #657180;">帐户总览</router-link></Menu-item>
-                                        <Menu-item name="2-2"><router-link to="/expense/bills" style="color: #657180;">资金明细</router-link></Menu-item>
-                                        <Menu-item name="2-3"><router-link to="/expense/integral" style="color: #657180;">积分明细</router-link></Menu-item>
+                                        <Menu-item name="2-1"><router-link to="/expense/account">帐户总览</router-link></Menu-item>
+                                        <Menu-item name="2-2"><router-link to="/expense/bills">资金明细</router-link></Menu-item>
+                                        <Menu-item name="2-3"><router-link to="/expense/integral">积分明细</router-link></Menu-item>
                                     </Submenu>
                                     <!--<Submenu name="3">-->
                                         <!--<template slot="title">-->
@@ -52,7 +52,7 @@
                                             <Icon type="stats-bars"></Icon>
                                             商户管理
                                         </template>
-                                        <Menu-item name="5-1"><router-link to="/setting/merchant" style="color: #657180;">商户信息</router-link></Menu-item>
+                                        <Menu-item name="5-1"><router-link to="/setting/merchant">商户信息</router-link></Menu-item>
                                         <Menu-item name="5-2">活跃分析</Menu-item>
                                         <Menu-item name="5-3">时段分析</Menu-item>
                                     </Submenu>
@@ -61,9 +61,9 @@
                                             <Icon type="gear-a"></Icon>
                                             个人设置
                                         </template>
-                                        <Menu-item name="6-1"><router-link to="/setting/personal" style="color: #657180;">资料修改</router-link></Menu-item>
-                                        <Menu-item name="6-2"><router-link to="/personal" style="color: #657180;">登陆日志</router-link></Menu-item>
-                                        <Menu-item name="6-3"><router-link to="/personal" style="color: #657180;">操作日志</router-link></Menu-item>
+                                        <Menu-item name="6-1"><router-link to="/setting/personal">资料修改</router-link></Menu-item>
+                                        <Menu-item name="6-2"><router-link to="/personal">登陆日志</router-link></Menu-item>
+                                        <Menu-item name="6-3"><router-link to="/personal">操作日志</router-link></Menu-item>
                                     </Submenu>
                                     <Submenu name="7">
                                         <template slot="title">
@@ -86,8 +86,8 @@
                                 <div>
                                     <div style="height: 70px; display: flex; align-items: center">
                                         <Breadcrumb>
-                                            <Breadcrumb-item href="/">Home</Breadcrumb-item>
-                                            <Breadcrumb-item href="/components/breadcrumb">Components</Breadcrumb-item>
+                                            <Breadcrumb-item>Home</Breadcrumb-item>
+                                            <Breadcrumb-item>Components</Breadcrumb-item>
                                             <Breadcrumb-item>Breadcrumb</Breadcrumb-item>
                                         </Breadcrumb>
                                     </div>
@@ -108,27 +108,27 @@
                                             <Icon type="android-apps"></Icon>
                                             应用管理
                                         </template>
-                                        <Menu-item name="0-1"><router-link to="/website/index" style="color: #657180;">微网站</router-link></Menu-item>
+                                        <Menu-item name="0-1"><router-link to="/website/index">微网站</router-link></Menu-item>
                                     </Submenu>
                                     <Submenu name="1">
                                         <template slot="title">
                                             <Icon type="chatbubbles"></Icon>
                                             微信管理
                                         </template>
-                                        <Menu-item name="1-1"><router-link to="/wechat/fans" style="color: #657180;">粉丝管理</router-link></Menu-item>
-                                        <Menu-item name="1-2"><router-link to="/wechat/message" style="color: #657180;">消息管理</router-link></Menu-item>
-                                        <Menu-item name="1-3"><router-link to="/public/bind" style="color: #657180;">自动回复</router-link></Menu-item>
-                                        <Menu-item name="1-4"><router-link to="/public/bind" style="color: #657180;">消息群发</router-link></Menu-item>
-                                        <Menu-item name="1-5"><router-link to="/wechat/menu" style="color: #657180;">自定义菜单</router-link></Menu-item>
+                                        <Menu-item name="1-1"><router-link to="/wechat/fans">粉丝管理</router-link></Menu-item>
+                                        <Menu-item name="1-2"><router-link to="/wechat/message">消息管理</router-link></Menu-item>
+                                        <Menu-item name="1-3"><router-link to="/public/bind">自动回复</router-link></Menu-item>
+                                        <Menu-item name="1-4"><router-link to="/public/bind">消息群发</router-link></Menu-item>
+                                        <Menu-item name="1-5"><router-link to="/wechat/menu">自定义菜单</router-link></Menu-item>
                                     </Submenu>
                                     <Submenu name="2">
                                         <template slot="title">
                                             <Icon type="ios-compose-outline"></Icon>
                                             文章素材
                                         </template>
-                                        <Menu-item name="2-1"><router-link to="/archives/material" style="color: #657180;">素材管理</router-link></Menu-item>
-                                        <Menu-item name="2-2"><router-link to="/archives/category" style="color: #657180;">文章分类</router-link></Menu-item>
-                                        <Menu-item name="2-3"><router-link to="/archives/index" style="color: #657180;">文章列表</router-link></Menu-item>
+                                        <Menu-item name="2-1"><router-link to="/archives/material">素材管理</router-link></Menu-item>
+                                        <Menu-item name="2-2"><router-link to="/archives/category">文章分类</router-link></Menu-item>
+                                        <Menu-item name="2-3"><router-link to="/archives/index">文章列表</router-link></Menu-item>
                                     </Submenu>
                                     <Submenu name="4">
                                         <template slot="title">

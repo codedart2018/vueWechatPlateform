@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
 
 Vue.use(Router)
 
@@ -37,7 +36,8 @@ export default new Router({
                 name: 'public',
                 meta: {
                     title: '公众号列表',
-                    group: 'manage'
+                    group: 'manage',
+                    navigation: ['公众号', '公众号列表']
                 },
                 component: resolve => require(['./pages/public/list'], resolve),
             },

@@ -8,7 +8,6 @@
     export default {
         data () {
             return {
-//                that: this,
                 columns: [
                     {
                         type: 'expand',
@@ -134,9 +133,9 @@
             getData() {
                 this.request("MerchantPublicList", {mch_id: 1}, true).then((res) => {
                     if(res.status) {
-                    	this.data = res.data
+                    	this.data = res.data;
                     } else {
-                        this.$Message.error(res.msg)
+                        this.$Message.error(res.msg);
                     }
                 })
             },
@@ -148,11 +147,11 @@
                         this.request("MerchantPublicSwitch", {id: id}, true).then((res) => {
                             if(res.status) {
                                 //todo 切换过去的时候先保存一份public_signal号在vuex数据里面后面的操作全在里面
-                                window.localStorage.setItem('platformNumber', id)
-                                this.$Message.success("切换成功...")
-                                this.$router.push({ path: '/wechat/main' })
+                                window.localStorage.setItem('platformNumber', id);
+                                this.$Message.success("切换成功...");
+                                this.$router.push({ path: '/wechat/main' });
                             } else {
-                                this.$Message.error(res.msg)
+                                this.$Message.error(res.msg);
                             }
                         })
                     },
@@ -165,6 +164,7 @@
         mounted() {
             //服务端获取数据
             this.getData();
+            console.log(this.$route)
         }
     }
 </script>
