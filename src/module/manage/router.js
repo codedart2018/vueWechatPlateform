@@ -46,7 +46,7 @@ const router =[
         display: 0
     },
     ...sessionRouters(Menu)
-]
+];
 
 /**
  * 后置追加路由 注通配路由应该最后加入
@@ -64,7 +64,7 @@ const afterRouter = [
         component: NotFound,
         display: 0
     }
-]
+];
 
 /**
  * 导出路由
@@ -73,8 +73,6 @@ export default new Router({
     //这里从后台取出路由来
     routes: router.concat(afterRouter)
 })
-
-
 
 /**
  * 导出循环处理结果

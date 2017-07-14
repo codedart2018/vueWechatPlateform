@@ -17,10 +17,10 @@
                                     <Submenu :name="index" v-for="(item, index) in routes" :key="item.id" v-if="item.display == 1 && item.group == 'manage'">
                                         <template slot="title">
                                             <Icon :type="item.icon"></Icon>
-                                            {{item.alias_name}}
+                                            {{item.name}}
                                         </template>
                                         <Menu-item v-bind:name="(index+9999)*(key+1)" v-for="(child, key) in item.children" :key="child.id" v-if="child.display == 1 && item.group == 'manage'" class="menu-item">
-                                            <router-link :to="child.path">{{child.alias_name}}</router-link>
+                                            <router-link :to="child.path">{{child.name}}</router-link>
                                         </Menu-item>
                                     </Submenu>
                                 </Menu>
@@ -81,9 +81,8 @@
                                 <div>
                                     <div style="height: 70px; display: flex; align-items: center">
                                         <Breadcrumb>
-                                            <Breadcrumb-item>Home</Breadcrumb-item>
-                                            <Breadcrumb-item>Components</Breadcrumb-item>
-                                            <Breadcrumb-item>Breadcrumb</Breadcrumb-item>
+                                            <Breadcrumb-item>管理中心</Breadcrumb-item>
+                                            <Breadcrumb-item v-for="(item, index) in $route.meta.navigation" v-if="$route.meta.navigation.length > 0" :key="index">{{item}}</Breadcrumb-item>
                                         </Breadcrumb>
                                     </div>
                                     <router-view></router-view>

@@ -81,24 +81,9 @@
                     if (valid) {
                         this.request('MerchantLogin', this.formLogin).then((res) => {
                             if (res.status) {
+                            	//console.log(res.data.menu);
                                 this.merchantMenu(res.data.menu);
-                            	//获得原始路由
-                                let old_routes = this.$router.options.routes;
-                                //做一次路由清空
-                                //this.$router.options.routes = [];
-                                //this.$router.addRoutes([]);
-                                //做一次路由清空结束
-                                //console.log(old_routes);
-                                //console.log(this.$router);
-                                //做老旧路由和后台取出路由拼接
-                                //let new_routes = old_routes.concat(res.data.menu);
-                                //console.log(new_routes)
-                                //return;
-                                //追加路由菜单
-                                //let routes = sessionRouters(new_routes);
                                 let routes = sessionRouters(res.data.menu);
-                                //console.log(routes);
-                                //console.log(this.$router);
                                 for (let route of routes) {
                                     this.$router.options.routes.push(route);
                                 }

@@ -38,7 +38,7 @@
                         <div class="title">充值金额</div>
                         <div class="option-box">
                             <Radio-group v-model="money">
-                                <Radio :label="item" style="padding: 5px 10px;" v-for="(item, index) of configs.amounts">{{item}}元</Radio>
+                                <Radio :label="item" style="padding: 5px 10px;" v-for="(item, index) of configs.amounts" :key="index">{{item}}元</Radio>
                                 <Radio label="0" style="padding: 5px 10px;"><Input v-model="customize_money"
                                                                                    placeholder="请输入充值金额"
                                                                                    style="width: 120px"></Input>&nbsp;&nbsp;元

@@ -313,7 +313,8 @@ function eachMenu(menu = [], routes = []) {
                 display: item.display,
                 meta: {
                     group: item.group,
-                    title: item.name
+                    title: item.name,
+                    navigation: item.navigation
                 },
                 component: resolve => require([`${item.component}.vue`], resolve)// todo 不知道为毛最后不加字符串一直警告，真TMD烦人
             };

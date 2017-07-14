@@ -9,12 +9,13 @@
                 </div>
             </div>
             <div class="content">
-                <p>1、登陆微信公众平台，链接地址：<a class="blue" href="https://mp.weixin.qq.com/" target="_blank" style="color: #999999;: #dedede">https://mp.weixin.qq.com/</a></p>
-                <p>2、在<span class="red">【开发&gt;基本配置】</span>建议取消其他同类第三方授权</p>
-                <p>3、请点击下方“<span class="red">一键授权绑定</span>”，<span class="red">扫描</span>显示的二维码</p>
-                <p>4、关注您自己的微信公众号并发送“<span class="red">绑定平台</span>”四个字</p>
-                <p>5、收到&nbsp;<span class="red">恭喜您已经成功绑定到无限智能的代码兔微信公众平台</span>&nbsp;说明绑定成功</p>
-                <p>6、<span class="red">如果没有弹出打开新页面，请检查是否被拦截了</span></p>
+                <p>1、为了更好的服务目前我们只支持已认证的订阅号和已认证的服务号接入。暂不支持未认证的公众号接入，谢谢理解</p>
+                <p>2、登陆微信公众平台，链接地址：<a class="red" href="https://mp.weixin.qq.com/" target="_blank">https://mp.weixin.qq.com/</a></p>
+                <p>3、在<span class="red">【开发&gt;基本配置】</span>关闭服务器配置选项和取消其他同类第三方平台授权,以兔服务冲突</p>
+                <p>4、请点击下方“<span class="red">一键授权绑定</span>”，<span class="red">扫描</span>显示的二维码</p>
+                <p>5、关注您自己的微信公众号并发送“<span class="red">绑定平台</span>”四个字</p>
+                <p>6、收到&nbsp;<span class="red">恭喜您已经成功绑定到无限智能的代码兔微信公众平台</span>&nbsp;说明绑定成功</p>
+                <p>7、<span class="red">如果没有弹出打开新页面，请检查是否被拦截了</span></p>
             </div>
             <div class="footer">
                 <div class="confirm">
@@ -25,7 +26,7 @@
                     <span style="padding-left: 10px;">我已阅读上述绑定说明</span>
                 </div>
                 <div class="button">
-                    <Button :type="type" size="large" style="width: 200px;" :loading="loading" @click="bind">一键绑定授权</Button>
+                    <Button size="large" style="width: 200px;" :loading="loading" @click="bind">一键绑定授权</Button>
                 </div>
             </div>
 
