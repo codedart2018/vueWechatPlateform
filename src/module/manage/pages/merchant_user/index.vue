@@ -128,7 +128,7 @@
             },
             getData (params) {
                 if (!params) params = {page: 1}
-                this.request('MerchantUser', params, true).then((res) => {
+                this.request('AdminMerchantUser', params, true).then((res) => {
                     if(res.status) {
                         //列表数据
                         this.list = res.data.list
@@ -159,7 +159,7 @@
                     content: '<p>你确定要重置密码为[123456]?</p>',
                     loading: true,
                     onOk: () => {
-                        this.request('MerchantUserRestPassWord', {id, id}).then((res) => {
+                        this.request('AdminMerchantUserRestPassWord', {id, id}).then((res) => {
                             if(res.status) {
                                 this.$Message.success(res.msg)
                                 this.$Modal.remove();

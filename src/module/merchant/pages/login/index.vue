@@ -38,6 +38,8 @@
 
 <script>
     import {mapActions} from 'vuex'
+    import {sessionRouters, filterRouters} from '../../router'
+
     export default{
         //watch 监听不到用它来
         //https://router.vuejs.org/zh-cn/advanced/navigation-guards.html 文档地址 标记组件内的钩子
@@ -73,35 +75,57 @@
             }
         },
         methods: {
-            ...mapActions(['merchantLogin']),
+            ...mapActions(['merchantLogin', 'merchantMenu']),
             handleSubmit(name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
                         this.request('MerchantLogin', this.formLogin).then((res) => {
                             if (res.status) {
-                                let user = res.data.user
-                                let merchant = res.data.merchant
+                                this.merchantMenu(res.data.menu);
+                            	//获得原始路由
+                                let old_routes = this.$router.options.routes;
+                                //做一次路由清空
+                                //this.$router.options.routes = [];
+                                //this.$router.addRoutes([]);
+                                //做一次路由清空结束
+                                //console.log(old_routes);
+                                //console.log(this.$router);
+                                //做老旧路由和后台取出路由拼接
+                                //let new_routes = old_routes.concat(res.data.menu);
+                                //console.log(new_routes)
+                                //return;
+                                //追加路由菜单
+                                //let routes = sessionRouters(new_routes);
+                                let routes = sessionRouters(res.data.menu);
+                                //console.log(routes);
+                                //console.log(this.$router);
+                                for (let route of routes) {
+                                    this.$router.options.routes.push(route);
+                                }
+                                this.$router.addRoutes(routes);
+                                let user = res.data.user;
+                                let merchant = res.data.merchant;
                                 this.merchantLogin({
                                     user,
                                     merchant
                                 })
-                                this.$Message.success("登陆成功")
-                                this.$router.push({path: '/'})
+                                this.$Message.success("登陆成功");
+                                this.$router.push({path: '/'});
                             } else {
-                                this.$Message.error(res.msg)
+                                this.$Message.error(res.msg);
                             }
                         })
                     } else {
-                        this.$Message.error('表单验证失败!')
+                        this.$Message.error('表单验证失败!');
                     }
                 })
             },
             //刷新切换验证码
             refreshVerify() {
-                this.verifyUrl = ''
+                this.verifyUrl = '';
                 setTimeout(() => {
-                    this.verifyUrl = '/merchants/passport/code?v=' + Math.random() * 1000
-                }, 500)
+                    this.verifyUrl = '/merchants/passport/code?v=' + Math.random() * 1000;
+                }, 500);
             },
             //设置cookie
             set(name, value, days) {

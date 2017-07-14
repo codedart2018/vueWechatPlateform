@@ -51,9 +51,13 @@ const methodMap = {
     /** 查看商户 **/
     AdminMerchantDetail: {url: '/admin/merchant/detail', method: 'get'},
     /** 商户用户列表 **/
-    MerchantUser: {url: '/admin/merchant_user/index', method: 'get'},
+    AdminMerchantUser: {url: '/admin/merchant_user/index', method: 'get'},
     /** 重置商户用户密码 **/
-    MerchantUserRestPassWord: {url: '/admin/merchant_user/reset_password', method: 'post'},
+    AdminMerchantUserRestPassWord: {url: '/admin/merchant_user/reset_password', method: 'post'},
+    /** 商户权限节点列表 **/
+    AdminMerchantRule: {url: '/admin/merchant_auth/rule', method: 'get'},
+    /** 商户添加权限节点 **/
+    AdminMerchantAddRule: {url: '/admin/merchant_auth/add_rule', method: 'post'},
     /** 编辑器素材列表 **/
     EditorMaterial: {url: '/admin/editor_material/index', method: 'get'},
     /** 添加编辑器素材 **/
@@ -108,16 +112,18 @@ const methodMap = {
     MerchantRegister: {url: '/merchants/passport/register', method: 'post'},
     /** 商户退出 **/
     MerchantSignOut: {url: '/merchants/passport/sign_out', method: 'post'},
-    /** 获取某个用户详情 **/
+    /** 获取某个用户详情 notice:未添加到节点**/
     MerchantUserView: {url: '/merchants/user/view', method: 'get'},
-    /** 商户用户个人资料修改 **/
+    /** 商户用户个人资料修改 notice:未添加到节点**/
     MerchantUserEdit: {url: '/merchants/user/edit', method: 'post'},
-    /** 获取商户详情资料 **/
+    /** 获取商户详情资料 notice:未添加到节点**/
     MerchantDetail: {url: '/merchants/merchant/detail', method: 'get'},
-    /** 保存商户资料 **/
+    /** 保存商户资料 notice:未添加到节点**/
     MerchantInfoSave: {url: '/merchants/merchant/save', method: 'post'},
     /** 商户公众号列表 **/
     MerchantPublicList: {url: '/merchants/public_signal/index', method: 'get'},
+    /** 微信公众号绑定 **/
+    MerchantPublicBind: {url: '/merchants/public_signal/bind', method: 'get'},
     /** 公众号平台切换 **/
     MerchantPublicSwitch: {url: '/merchants/public_signal/switch', method: 'get'},
     /** 资金明细列表 **/
@@ -126,13 +132,13 @@ const methodMap = {
     MerchantFinanceBillsDetail: {url: '/merchants/expense/bills_detail', method: 'get'},
     /** 积分明细 **/
     MerchantFinanceIntegral: {url: '/merchants/expense/integral', method: 'get'},
-    /** 微信公众号绑定 **/
-    MerchantPublicBind: {url: '/merchants/public_signal/bind', method: 'get'},
+    /** 充值设置  银行帐号信息 **/
+    MerchantConfigBank: {url: '/merchants/system_config/get_banks', method: 'get'},
     /** 微信菜单获取 **/
     MerchantWxMenu: {url: '/merchants/we_chat_menu/index', method: 'get'},
     /** 保存微信菜单 **/
     MerchantWxMenuSave: {url: '/merchants/we_chat_menu/save', method: 'post'},
-    /** 保存并同步数据 **/
+    /** 保存并同步菜单数据 **/
     MerchantWxMenuSync: {url: '/merchants/we_chat_menu/sync', method: 'post'},
     /** 获取微信粉丝 **/
     MerchantWxFans: {url: '/merchants/we_chat_fans/index', method: 'get'},
@@ -147,7 +153,7 @@ const methodMap = {
     /** 微信消息发送回复 **/
     MerchantWxSendMessage: {url: '/merchants/we_chat_message/send_message', method: 'post'},
     /** 微信消息详情列表 **/
-    MerchantWxMessageListView: {url: '/merchants/we_chat_message/list_view', method: 'get'},
+    MerchantWxMessageListDetail: {url: '/merchants/we_chat_message/list_detail', method: 'get'},
     /** 资讯文章分类列表 **/
     ArchivesCategoryList: {url: '/merchants/archives_category/index', method: 'get'},
     /** 资讯文章分类添加 **/
@@ -158,14 +164,13 @@ const methodMap = {
     ArchivesAdd: {url: '/merchants/archives/add', method: 'post'},
     /** 保存文章 **/
     ArchivesEdit: {url: '/merchants/archives/edit', method: 'post'},
-    /** 保存同步文章（图文消息）**/
+    /** 保存同步文章（图文消息）notice:未添加到节点**/
     ArchivesSaveSyncMaterialNews: {url: '/merchants/archives/sync_material', method: 'post'},
-    /** 充值设置  银行帐号信息 **/
-    MerchantConfigBank: {url: '/merchants/system_config/get_banks', method: 'get'},
+
     
     /** 平台商户微网站站点获取 **/
     MerchantWebsite: {url: '/merchants/website/plat_form_website', method: 'get'},
-    /** 平台商户微网站站点获取 **/
+    /** 平台商户微网站站点分类获取 **/
     MerchantWebsiteCate: {url: '/merchants/website/category', method: 'get'},
     /** 平台商户微站数据保存 **/
     MerchantWebsiteSave: {url: '/merchants/website/save', method: 'post'},

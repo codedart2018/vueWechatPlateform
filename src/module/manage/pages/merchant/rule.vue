@@ -2,42 +2,42 @@
     <div>
         <Row class="mb-15">
             <Col span="18" class="search">
-                <Form :model="formSearch" :label-width="80" inline label-position="right">
-                    <Form-item label="节点名称：">
-                        <Input v-model="formSearch.keywords" placeholder="请输入节点名称关键词"></Input>
-                    </Form-item>
-                    <Form-item label="添加日期：">
-                        <Date-picker type="date" placeholder="选择日期" v-model="formSearch.date"></Date-picker>
-                    </Form-item>
-                    <Form-item label="是否显示：">
-                        <Select v-model="formSearch.display" placeholder="请选择">
-                            <Option value="">请选择</Option>
-                            <Option value="1">显示</Option>
-                            <Option value="0">隐藏</Option>
-                        </Select>
-                    </Form-item>
-                    <Form-item label="节点认证：">
-                        <Select v-model="formSearch.auth" placeholder="请选择">
-                            <Option value="">请选择</Option>
-                            <Option value="1">认证</Option>
-                            <Option value="0">拒绝</Option>
-                        </Select>
-                    </Form-item>
-                    <Form-item label="节点状态：">
-                        <Select v-model="formSearch.status" placeholder="请选择">
-                            <Option value="">请选择</Option>
-                            <Option value="1">正常</Option>
-                            <Option value="0">锁定</Option>
-                            <Option value="-1">删除</Option>
-                        </Select>
-                    </Form-item>
-                    <Form-item :label-width="1">
-                        <Button type="primary" @click="search('formSearch')" icon="ios-search">搜索</Button>
-                    </Form-item>
-                </Form>
+            <Form :model="formSearch" :label-width="80" inline label-position="right">
+                <Form-item label="节点名称：">
+                    <Input v-model="formSearch.keywords" placeholder="请输入节点名称关键词"></Input>
+                </Form-item>
+                <Form-item label="添加日期：">
+                    <Date-picker type="date" placeholder="选择日期" v-model="formSearch.date"></Date-picker>
+                </Form-item>
+                <Form-item label="是否显示：">
+                    <Select v-model="formSearch.display" placeholder="请选择">
+                        <Option value="">请选择</Option>
+                        <Option value="1">显示</Option>
+                        <Option value="0">隐藏</Option>
+                    </Select>
+                </Form-item>
+                <Form-item label="节点认证：">
+                    <Select v-model="formSearch.auth" placeholder="请选择">
+                        <Option value="">请选择</Option>
+                        <Option value="1">认证</Option>
+                        <Option value="0">拒绝</Option>
+                    </Select>
+                </Form-item>
+                <Form-item label="节点状态：">
+                    <Select v-model="formSearch.status" placeholder="请选择">
+                        <Option value="">请选择</Option>
+                        <Option value="1">正常</Option>
+                        <Option value="0">锁定</Option>
+                        <Option value="-1">删除</Option>
+                    </Select>
+                </Form-item>
+                <Form-item :label-width="1">
+                    <Button type="primary" @click="search('formSearch')" icon="ios-search">搜索</Button>
+                </Form-item>
+            </Form>
             </Col>
             <Col span="6" class="text-align-right">
-                <Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加节点</Button>
+            <Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加节点</Button>
             </Col>
         </Row>
         <Row class="mb-15">
@@ -56,6 +56,13 @@
                             <Option value="">请选择</Option>
                             <Option value="0">根节点</Option>
                             <Option v-for="item in modules" :value="item.id" :key="item.id">{{ item.name }}</Option>
+                        </Select>
+                    </Form-item>
+                    <Form-item label="所属分组" prop="group">
+                        <Select v-model="addForm.group" placeholder="请选择">
+                            <Option value="">请选择</Option>
+                            <Option value="manage">管理中心</Option>
+                            <Option value="wechat">微信中心</Option>
                         </Select>
                     </Form-item>
                     <Form-item label="节点名称" prop="name">
@@ -131,6 +138,13 @@
                             <Option value="">请选择</Option>
                             <Option value="0">根节点</Option>
                             <Option v-for="item in modules" :value="item.id" :key="item.id">{{ item.name }}</Option>
+                        </Select>
+                    </Form-item>
+                    <Form-item label="所属分组" prop="group">
+                        <Select v-model="editForm.group" placeholder="请选择">
+                            <Option value="">请选择</Option>
+                            <Option value="manage">管理中心</Option>
+                            <Option value="wechat">微信中心</Option>
                         </Select>
                     </Form-item>
                     <Form-item label="节点名称" prop="name">
@@ -253,6 +267,10 @@
                         width: 120,
                     },
                     {
+                        title: 'URL',
+                        key: 'url'
+                    },
+                    {
                         title: 'PATH',
                         key: 'path',
                         width: 200,
@@ -261,12 +279,6 @@
                         title: '组件路径',
                         key: 'component',
                         width: 200,
-                        align: 'center'
-                    },
-                    {
-                        title: '组件路径',
-                        key: 'component',
-                        width: 300,
                         align: 'center'
                     },
                     {
@@ -377,8 +389,9 @@
                 pageNumber: 1,
                 //添加表单
                 addForm: {
-                	pid: '',
+                    pid: '',
                     name: '',
+                    group: '',
                     icon: '',
                     controller: '',
                     action: '',
@@ -395,6 +408,9 @@
                 ruleValidate: {
                     pid: [
                         { required: true, message: '请选择模块', trigger: 'blur' },
+                    ],
+                    group: [
+                        { required: true, message: '请选择分组', trigger: 'blur' },
                     ],
                     name: [
                         { required: true, message: '节点名称不能为空', trigger: 'blur' },
@@ -433,7 +449,7 @@
             addSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AddRule", this.addForm);
+                        this.save("AdminMerchantAddRule", this.addForm);
                     } else {
                         this.$Message.error('表单验证失败!');
                     }
@@ -455,7 +471,7 @@
             },
             //分页切换页码
             changePage (page) {
-            	this.pageNumber = page;
+                this.pageNumber = page;
                 let search = this.formSearch;
                 let query = Object.assign({page: page }, search);
                 //分页
@@ -465,7 +481,7 @@
             },
             getData (params) {
                 if (!params) params = {page: 1};
-                this.request('GetRule', params, true).then((res) => {
+                this.request('AdminMerchantRule', params, true).then((res) => {
                     if(res.status) {
                         let list = res.data.list;
                         if(list) {
@@ -519,7 +535,7 @@
             },
             //表单搜索
             search() {
-            	let page = 1;
+                let page = 1;
                 this.pageNumber = page;
                 let search = this.formSearch;
                 this.getData({ params : search });
@@ -531,7 +547,7 @@
                 this.request(url, data).then((res) => {
                     if (res.status) {
                         this.addModal = false;
-                        this.editModal = false;
+                        this.editModal = false
                         this.$Message.success(res.msg);
                         //重置数据
                         this.$refs['addForm'].resetFields();
@@ -547,11 +563,6 @@
         mounted() {
             //服务端获取数据
             this.getData();
-            //console.log(Object.assign(page, this.formSearch));
-            //console.log(this.$route.query)
-            //console.info(this.$router.options.routes)
-            //console.log('deviceid: ' + this.$route.params.page)
-            //console.log('deviceid: ' + this.$route)
         }
     }
 </script>

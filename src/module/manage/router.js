@@ -1,22 +1,22 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Manage from './pages/common/manage'
-import Test from './pages/common/Test'
-import NotFound from './pages/common/404'  //404 未找到页面
-import Login from './pages/login/index'  //404 未找到页面
+import Vue from 'vue';
+import Router from 'vue-router';
+import Manage from './pages/common/manage';
+import Test from './pages/common/Test';
+import NotFound from './pages/common/404';  //404 未找到页面
+import Login from './pages/login/index';  //404 未找到页面
 
-Vue.use(Router)
+Vue.use(Router);
 
 /**
  * 获取token
  */
-let token = window.localStorage.getItem('token')
+let token = window.localStorage.getItem('token');
 if(token) {
     //取出菜单
-    let mainMenu = window.localStorage.getItem('mainMenu')
-    var Menu = mainMenu ? typeof (JSON.parse(mainMenu) == "object") ? JSON.parse(mainMenu) : [] : []
+    let mainMenu = window.localStorage.getItem('mainMenu');
+    var Menu = mainMenu ? typeof (JSON.parse(mainMenu) == "object") ? JSON.parse(mainMenu) : [] : [];
 } else {
-    var Menu = []
+    var Menu = [];
 }
 
 /**
@@ -26,7 +26,7 @@ if(token) {
  */
 const router =[
     {
-        path: '',
+        path: '/',
         name: 'Manage',
         component: Manage,
     },
@@ -66,6 +66,9 @@ const afterRouter = [
     }
 ]
 
+/**
+ * 导出路由
+ */
 export default new Router({
     //这里从后台取出路由来
     routes: router.concat(afterRouter)
@@ -80,8 +83,8 @@ export default new Router({
  * @returns {Array}
  */
 export function sessionRouters(menu = [], routes = []) {
-    routes = eachMenu(menu)
-    return routes
+    routes = eachMenu(menu);
+    return routes;
 }
 
 /**
@@ -92,8 +95,7 @@ export function sessionRouters(menu = [], routes = []) {
  * todo 后期来处理一级导航可以不填组件地址
  */
 function eachMenu(menu = [], routes = []) {
-    //console.log(router)
-    if(menu.length <= 0) return routes
+    if(menu.length <= 0) return routes;
     for (let item of menu){
         if(item.path && item.component) {
             let arr = {
@@ -107,29 +109,28 @@ function eachMenu(menu = [], routes = []) {
                 component: resolve => require([`${item.component}.vue`], resolve)// todo 不知道为毛最后不加字符串一直警告，真TMD烦人
             };
             
-            //参数处理 todo 之前理解错了 地址栏参数获取是query
+            //参数处理 之前理解错了 地址栏参数获取是query
             if(item.params) {
                 let last_str = item.path.charAt(item.path.length - 1);
-                let tmp_str = ''
+                let tmp_str = '';
                 for(let p of item.params.split(",")) {
-                    tmp_str += "/:" + p + "?"
+                    tmp_str += "/:" + p + "?";
                 }
                 if(last_str == "/") {
-                    arr.path = arr.path + tmp_str.substr(1)
+                    arr.path = arr.path + tmp_str.substr(1);
                 } else {
-                    arr.path = arr.path + tmp_str
+                    arr.path = arr.path + tmp_str;
                 }
             }
             
             //递归子菜单
             if(item.children && item.children.length != 0) {
-                arr.children = eachMenu(item.children)
+                arr.children = eachMenu(item.children);
             }
-            routes.push(arr)
+            routes.push(arr);
         }
     }
-    
-    return routes
+    return routes;
 }
 
 /**
@@ -138,18 +139,18 @@ function eachMenu(menu = [], routes = []) {
  * @param routes 要过滤的路由
  */
 export function filterRouters(old = [], routes = []) {
-    if(old.length == 0 || routes.length == 0) return []
-    var new_routes = []
+    if(old.length == 0 || routes.length == 0) return [];
+    let new_routes = [];
     //for (let [index, route] of new Map(old.map((item, i) => [i, item]))) {}
     for (let route of old){
         for(let tmp of routes) {
             if(!route.id && route.id != tmp.id) {
-                new_routes.push(route)
-                break
+                new_routes.push(route);
+                break;
             }
         }
     }
-    return new_routes
+    return new_routes;
 }
 
 

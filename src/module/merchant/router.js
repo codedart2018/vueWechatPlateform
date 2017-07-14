@@ -1,9 +1,76 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 
-Vue.use(Router)
+Vue.use(Router);
 
+/**
+ * 获取token
+ */
+let token = window.localStorage.getItem('merchantToken');
+if(token) {
+    //取出菜单
+    let mainMenu = window.localStorage.getItem('merchantMenu');
+    var Menu = mainMenu ? typeof (JSON.parse(mainMenu) == "object") ? JSON.parse(mainMenu) : [] : [];
+} else {
+    var Menu = [];
+}
+
+/**
+ * 默认路由
+ * @type {[*]}
+ */
+const router =[
+    {
+        path: '/',
+        name: 'manage',
+        meta: {
+            title: '管理中心',
+            group: 'manage'
+        },
+        component: resolve => require(['./pages/common/manage'], resolve),
+        children: [
+            {
+                path: '/wechat/main',
+                name: 'wechatMain',
+                meta: {
+                    title: '微信公众号平台',
+                    group: 'wechat'
+                },
+                component: resolve => require(['./pages/wechat/manage'], resolve),
+            }
+        ]
+    },
+    {
+        path: '/login', //登录
+        name: 'login',
+        meta: {
+            title: '商户登陆中心',
+            routeAuth: false
+        },
+        component: resolve => require(['./pages/login/index'], resolve),
+        display: 0,
+    },
+    {
+        path: '/register', // 注册
+        name: 'register',
+        meta: {
+            title: '商户注册中心',
+            routeAuth: false
+        },
+        component: resolve => require(['./pages/register/index'], resolve),
+        display: 0,
+    },
+    ...sessionRouters(Menu)
+];
+
+
+/**
+ * 导出路由
+ */
 export default new Router({
+    //导出处理后的路由
+    routes: router
+    /**
     routes: [
         {
             path: '/',
@@ -54,7 +121,7 @@ export default new Router({
                 path: '/expense/account',
                 name: 'expenseAccount',
                 meta: {
-                    title: '帐户概览',
+                    title: '帐户总览',
                     group: 'manage'
                 },
                 component: resolve => require(['./pages/expense/account'], resolve),
@@ -150,7 +217,7 @@ export default new Router({
                 component: resolve => require(['./pages/archives/category'], resolve),
             },
             {
-                path: '/archives/index/',
+                path: '/archives/index',
                 name: 'archivesIndex',
                 meta: {
                     title: '资讯列表',
@@ -207,6 +274,89 @@ export default new Router({
             display: 0,
         },
     ]
+     **/
 })
 //苏格拉底 --》 伯拉图 --》 亚里士多德--》 亚里山大--》阿基米德
 //                        加律略
+
+/**
+ * 导出循环处理结果
+ * @param menu 菜单
+ * @param routes 路由
+ * @returns {Array}
+ */
+export function sessionRouters(menu = [], routes = []) {
+    routes = eachMenu(menu);
+    return routes;
+}
+
+/**
+ * 动态循环菜单
+ * @param menu 菜单
+ * @param routes 路由
+ * @returns {Array}
+ */
+function eachMenu(menu = [], routes = []) {
+    if(menu.length <= 0) return routes;
+    for (let item of menu){
+        if(item.path && item.component) {
+            //分组
+            let arr = {
+                id: item.id,
+                icon: item.icon,
+                name: item.name + (item.id * Math.floor(Math.random()*99+1)), //防止name重名实际并没卵用，只是为了不让控制台出现警告而已
+                alias_name: item.name, //做个别名来 不用name 防止冲突
+                group: item.group,
+                pid: item.pid,
+                path: item.path,
+                url: item.url,
+                display: item.display,
+                meta: {
+                    group: item.group,
+                    title: item.name
+                },
+                component: resolve => require([`${item.component}.vue`], resolve)// todo 不知道为毛最后不加字符串一直警告，真TMD烦人
+            };
+            
+            //参数处理 地址栏参数获取是query
+            if(item.params) {
+                let last_str = item.path.charAt(item.path.length - 1);
+                let tmp_str = '';
+                for(let p of item.params.split(",")) {
+                    tmp_str += "/:" + p + "?";
+                }
+                if(last_str == "/") {
+                    arr.path = arr.path + tmp_str.substr(1);
+                } else {
+                    arr.path = arr.path + tmp_str;
+                }
+            }
+            
+            //递归子菜单
+            if(item.children && item.children.length != 0) {
+                arr.children = eachMenu(item.children);
+            }
+            routes.push(arr);
+        }
+    }
+    return routes;
+}
+
+/**
+ * 导出过滤路由结果
+ * @param old 原路由
+ * @param routes 要过滤的路由
+ */
+export function filterRouters(old = [], routes = []) {
+    if(old.length == 0 || routes.length == 0) return [];
+    let new_routes = [];
+    for (let route of old){
+        for(let tmp of routes) {
+            if(!route.id && route.id != tmp.id) {
+                new_routes.push(route);
+                break;
+            }
+        }
+    }
+    return new_routes;
+}

@@ -7,19 +7,20 @@
  * 黄四娘家花满蹊，千朵万朵压枝低。
  * 留连戏蝶时时舞，自在娇莺恰恰啼。
  */
-import Vue from 'vue'
-import Vuex from 'vuex'
-import * as actions from '../actions'
-import * as getters from '../getters'
-import Merchant from '../modules/merchant'
-
-Vue.use(Vuex)
+import Vue from 'vue';
+import Vuex from 'vuex';
+import * as actions from '../actions';
+import * as getters from '../getters';
+import Merchant from '../modules/merchant';
+import NavigationMenu from '../modules/menu';
+Vue.use(Vuex);
 
 export default new Vuex.Store({
     strict: process.env.NODE_ENV !== 'production', //在非生产环境下，使用严格模式
     actions,
     getters,
     modules: {
-        Merchant
+        Merchant,
+        NavigationMenu
     }
 })

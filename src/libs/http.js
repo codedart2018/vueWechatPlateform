@@ -119,11 +119,18 @@ Http.install = function (Vue) {
             setTimeout(() => closeLoading(), 800)
             return false
         }
+        //商户端错误码
         if(data.code == 2000 && data.status == false) {
             this.$Message.error(data.msg)
             window.localStorage.removeItem('merchantUser')
             window.localStorage.removeItem('merchantInfo')
             window.localStorage.removeItem('merchantToken')
+            setTimeout(() => closeLoading(), 800)
+            return false
+        }
+        //没有权限
+        if(data['code'] == 1001) {
+            this.$Message.error(data['msg'])
             setTimeout(() => closeLoading(), 800)
             return false
         }

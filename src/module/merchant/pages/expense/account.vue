@@ -103,7 +103,8 @@
                 type1: true,
                 type2: false,
                 configs: {
-                    banks: []
+                    banks: [],
+                    pay_type: {}
                 },
 
                 columns1: [
@@ -167,7 +168,6 @@
                 this.request("MerchantConfigBank", {}, false).then((res) => {
                     if (res.status) {
                     	this.configs = res.data;
-                    	console.log(this.configs.pay_type[0])
                     }
                 }).catch((err) => {
                     this.$Message.error(err);

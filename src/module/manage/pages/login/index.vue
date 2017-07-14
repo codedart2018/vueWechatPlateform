@@ -61,16 +61,16 @@
     export default {
         beforeCreate: function () {
         	//todo 后期更改成flex box 自适应
-            document.getElementsByTagName("body")[0].className = "login_body"
+            document.getElementsByTagName("body")[0].className = "login_body";
             //计算屏幕高度宽度 让其自适应
-            document.getElementsByTagName('body')[0].style.width = window.innerWidth + 'px'
-            document.getElementsByTagName('body')[0].style.height = window.innerHeight + 'px'
+            document.getElementsByTagName('body')[0].style.width = window.innerWidth + 'px';
+            document.getElementsByTagName('body')[0].style.height = window.innerHeight + 'px';
         },
         beforeRouteEnter (to, from, next) {
             next(vm => {
                 // 通过 `vm` 访问组件实例'
                 //解决进入路由不刷新验证码问题
-                vm.verifyUrl = '/admin/login/code?v=' + Math.random() * 1000
+                vm.verifyUrl = '/admin/login/code?v=' + Math.random() * 1000;
             })
         },
         data() {
@@ -79,7 +79,7 @@
                     callback(new Error('请输入密码'));
                 } else {
                     if (value.length < 6 || value.length > 32) {
-                        callback(new Error('密码长度6-32个字符'))
+                        callback(new Error('密码长度6-32个字符'));
                     }
                     callback();
                 }
@@ -123,64 +123,64 @@
         methods: {
             ...mapActions(['mainMenu', 'userLogin', 'auth']),
             showAccount() {
-                this.scan = true
-                this.account = false
+                this.scan = true;
+                this.account = false;
             },
             showScan() {
-                this.account = true
-                this.scan = false
+                this.account = true;
+                this.scan = false;
             },
             handleSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
                         this.request('Login', this.formValidate).then((res) => {
                             if (res.status) {
-                                this.mainMenu(res.data.menu)
+                                this.mainMenu(res.data.menu);
                                 //追加路由菜单
-                                let routes = sessionRouters(res.data.menu)
+                                let routes = sessionRouters(res.data.menu);
                                 //重新追加权限路由
                                 for (let route of routes) {
-                                    this.$router.options.routes.push(route)
+                                    this.$router.options.routes.push(route);
                                 }
-                                this.$router.addRoutes(routes)
-                                this.$Message.success("登陆成功")
+                                this.$router.addRoutes(routes);
+                                this.$Message.success("登陆成功");
                                 //验证通过
-                                this.login_loading = true
-                                let user_info = res.data.user_info
-                                let token = res.data.token
+                                this.login_loading = true;
+                                let user_info = res.data.user_info;
+                                let token = res.data.token;
                                 this.userLogin({
                                     user_info,
                                     token
                                 })
-                                this.auth(res.data.alias)
-                                this.$router.push({path: '/'})
+                                this.auth(res.data.alias);
+                                this.$router.push({path: '/'});
                             } else {
-                                this.$Message.error(res.msg)
+                                this.$Message.error(res.msg);
                             }
                         })
                     } else {
-                        this.$Message.error('表单验证失败!')
+                        this.$Message.error('表单验证失败!');
                     }
                 })
             },
             handleReset (name) {
-                this.$refs[name].resetFields()
+                this.$refs[name].resetFields();
             },
             refreshVerify() {
-                this.verifyUrl = ''
+                this.verifyUrl = '';
                 setTimeout(() => {
-                    this.verifyUrl = '/admin/login/code?v=' + Math.random() * 1000
-                }, 500)
+                    this.verifyUrl = '/admin/login/code?v=' + Math.random() * 1000;
+                }, 500);
             }
         },
         //挂载执行
         mounted() {
-            canvas()
+            canvas();
         },
         components: {},
         beforeDestroy: function () {
             //销毁移除
-            document.body.removeAttribute("class", "login_body")
+            document.body.removeAttribute("class", "login_body");
         }
     }
 </script>

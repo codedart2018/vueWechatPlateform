@@ -35,3 +35,22 @@ export const merchantOut = ({ commit }) => {
         merchant: {}
     })
 }
+
+/**
+ * 保存菜单
+ * @param commit
+ * @param menu
+ */
+export const merchantMenu = ({ commit }, menu) => {
+    if(menu) {
+        commit(types.MERCHANT_MENU, menu)
+    }
+}
+
+/**
+ * 删除左侧菜单
+ * @param commit
+ */
+export const deleteMerchantMenu = ({ commit }) => {
+    commit(types.DELETE_MERCHANT_MENU, {})
+}

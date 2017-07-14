@@ -12,3 +12,7 @@
 export const MERCHANT_LOGIN = 'MERCHANT_LOGIN';
 /** 商户退出 **/
 export const MERCHANT_OUT = 'MERCHANT_OUT';
+/** 菜单 **/
+export const MERCHANT_MENU = 'MERCHANT_MENU';
+/** 删除菜单 **/
+export const DELETE_MERCHANT_MENU = 'DELETE_MERCHANT_MENU';
