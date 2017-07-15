@@ -37,8 +37,8 @@
 </template>
 
 <script>
-    import {mapActions} from 'vuex'
-    import {sessionRouters, filterRouters} from '../../router'
+    import {mapActions} from 'vuex';
+    import {sessionRouters, filterRouters} from '../../router';
 
     export default{
         //watch 监听不到用它来
@@ -47,7 +47,7 @@
             next(vm => {
                 // 通过 `vm` 访问组件实例'
                 //解决进入路由不刷新验证码问题
-                vm.verifyUrl = '/merchants/passport/code?v=' + Math.random() * 1000
+                vm.verifyUrl = '/merchants/passport/code?v=' + Math.random() * 1000;
             })
         },
         data(){

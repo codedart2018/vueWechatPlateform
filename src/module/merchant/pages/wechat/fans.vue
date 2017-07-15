@@ -83,11 +83,11 @@
                         align: 'center',
                         render: (h, params) => {
                         	if(params.row.sex == 1) {
-                                return h('span', '男')
+                                return h('span', '男');
                             } else if(params.row.sex == 2) {
-                                return h('span', '女')
+                                return h('span', '女');
                             } else {
-                                return h('span', '未知')
+                                return h('span', '未知');
                             }
                         }
                     },
@@ -111,7 +111,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('span',this.$formatDate(params.row.subscribe_time, 'yyyy-MM-dd h:m'))
+                            return h('span',this.$formatDate(params.row.subscribe_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -120,7 +120,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('span',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
+                            return h('span',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -139,7 +139,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.sync(params.row.openid)
+                                            this.sync(params.row.openid);
                                         }
                                     }
                                 }, '同步'),
@@ -150,7 +150,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.sync(params.row.openid)
+                                            this.sync(params.row.openid);
                                         }
                                     }
                                 }, '消息')
@@ -179,22 +179,22 @@
         methods: {
             //获取数据
             getData (params) {
-                if (!params) params = {page: 1, mch_id: 1, platform_id: 800000}
+                if (!params) params = {page: 1, mch_id: this.$store.state.Merchant.merchant.id, platform_id: this.$store.state.Merchant.platform.id};
                 this.request('MerchantWxFans', params, true).then((res) => {
                     if(res.status) {
                         //列表数据
-                        this.list = res.data.list
+                        this.list = res.data.list;
                         //总页数
-                        this.total = res.data.count
+                        this.total = res.data.count;
                         //每页多少条数据
-                        this.pageSize = res.data.size
+                        this.pageSize = res.data.size;
                     } else {
                         //列表数据
-                        this.list = []
+                        this.list = [];
                         //总页数
-                        this.total = 0
+                        this.total = 0;
                         //每页多少条数据
-                        this.pageSize = 0
+                        this.pageSize = 0;
                     }
                 })
             },
@@ -202,46 +202,46 @@
             getGroup() {
                 this.request('MerchantWxFansGroup', {}).then((res) => {
                     if(res.status) {
-                        this.group = res.data
+                        this.group = res.data;
                     } else {
-                        this.list = []
+                        this.list = [];
                     }
                 })
             },
             //分页切换页码
             changePage (page) {
-                this.pageNumber = page
-                let search = this.formSearch
-                let query = Object.assign({page: page }, search)
+                this.pageNumber = page;
+                let search = this.formSearch;
+                let query = Object.assign({page: page }, search);
                 //分页
-                this.$router.push({ name: this.$router.currentRoute.name, query: query})
+                this.$router.push({ name: this.$router.currentRoute.name, query: query});
                 //获取最新数据
-                this.getData({page: page, params: search})
+                this.getData({page: page, params: search});
             },
             //获取被选择ID
             onSelectChange(selection) {
                 if(typeof(selection) == 'object' && selection.length > 0) {
                     //每次处理一次为空
-                	this.selectData = []
-                    this.selectDataOpenid = []
+                	this.selectData = [];
+                    this.selectDataOpenid = [];
                     //循环处理数据
                     for (var value of selection) {
-                        this.selectData.push(value.id)
-                        this.selectDataOpenid.push(value.openid)
+                        this.selectData.push(value.id);
+                        this.selectDataOpenid.push(value.openid);
                     }
                 } else {
-                    this.selectData = []
-                    this.selectDataOpenid = []
+                    this.selectData = [];
+                    this.selectDataOpenid = [];
                 }
             },
             //单个用户数据同步
             sync(openid) {
-            	if(!openid) this.$message.error('错误的openid,无法同步用户数据')
+            	if(!openid) this.$message.error('错误的openid,无法同步用户数据');
                 this.request('MerchantWxFansSync', {openid: openid, type: 1}, '同步中...').then((res) => {
                 	if(res.status) {
-                		this.$Message.success(res.msg)
+                		this.$Message.success(res.msg);
                     } else {
-                		this.$Message.error(res.msg)
+                		this.$Message.error(res.msg);
                     }
                 })
             },
@@ -252,21 +252,21 @@
             //加入黑名单
             setBlack() {
                 if(this.selectData.length < 1) {
-                    this.$Message.error("请选择一个粉丝")
-                    return
+                    this.$Message.error("请选择一个粉丝");
+                    return false;
                 }
                 this.request('MerchantWxFansSetBlack', {data: this.selectDataOpenid}, '加入黑名单中...').then((res) => {
                     if(res.status) {
-                        this.$Message.success(res.msg)
+                        this.$Message.success(res.msg);
                     } else {
-                        this.$Message.error(res.msg)
+                        this.$Message.error(res.msg);
                     }
                 })
             }
         },
         mounted() {
             //服务端获取数据
-            this.getData()
+            this.getData();
             //接取分组数据 暂时未用
             //this.getGroup()
         }

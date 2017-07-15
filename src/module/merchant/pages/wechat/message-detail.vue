@@ -24,7 +24,7 @@
         methods: {
             //获取数据
             getData (params) {
-                if (!params) params = {page: 1, mch_id: 1, platform_id: 800000}
+                if (!params) params = {page: 1, mch_id: this.$store.state.Merchant.merchant.id, platform_id: this.$store.state.Merchant.platform.id}
                 this.request('MerchantWxMessageListView', params, true).then((res) => {
                     if (res.status) {
                         //列表数据

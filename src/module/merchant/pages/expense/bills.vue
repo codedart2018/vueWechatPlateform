@@ -105,8 +105,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.is_pay == 1 ? 'green' : row.is_pay == 0 ? 'gray' : '#b30000'
-                            const text = row.is_pay == 1 ? '已支付' : row.is_pay == 0 ? '未支付' : '作废'
+                            const color = row.is_pay == 1 ? 'green' : row.is_pay == 0 ? 'gray' : '#b30000';
+                            const text = row.is_pay == 1 ? '已支付' : row.is_pay == 0 ? '未支付' : '作废';
                             return h('span', {
                                 style: {
                                     color: color
@@ -124,7 +124,7 @@
                                 style: {
                                     color: "#F90 !important"
                                 }
-                            }, '￥' + row.original_amount)
+                            }, '￥' + row.original_amount);
                         }
                     },
                     {
@@ -137,7 +137,7 @@
                                 style: {
                                     color: "#F90 !important"
                                 }
-                            }, '￥' + row.pay_amount)
+                            }, '￥' + row.pay_amount);
                         }
                     },
                     {
@@ -180,7 +180,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.detail(params.row.id)
+                                            this.detail(params.row.id);
                                         }
                                     }
                                 }, '详情'),
@@ -215,18 +215,18 @@
                 this.request('MerchantFinanceBills', params, true).then((res) => {
                     if(res.status) {
                         //列表数据
-                        this.list = res.data.list
+                        this.list = res.data.list;
                         //总页数
-                        this.total = res.data.count
+                        this.total = res.data.count;
                         //每页多少条数据
-                        this.pageSize = res.data.size
+                        this.pageSize = res.data.size;
                     } else {
                         //列表数据
-                        this.list = []
+                        this.list = [];
                         //总页数
-                        this.total = 0
+                        this.total = 0;
                         //每页多少条数据
-                        this.pageSize = 0
+                        this.pageSize = 0;
                     }
                 })
             },
@@ -260,12 +260,12 @@
             },
             //详情路由跳转
             detail(id) {
-                this.$router.push({ path: '/expense/bills_detail/' + id, params: { id: id }})
+                this.$router.push({ path: '/expense/bills_detail/' + id, params: { id: id }});
             },
         },
         mounted() {
             //服务端获取数据
-            this.getData()
+            this.getData();
         }
 
 

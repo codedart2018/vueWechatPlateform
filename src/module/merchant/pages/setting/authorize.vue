@@ -212,6 +212,7 @@
         mounted() {
             //获取数据
             this.getData();
+            console.log(this.$store.state.Merchant.platform.id);
         },
         components: {}
     }

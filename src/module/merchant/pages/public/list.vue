@@ -131,7 +131,7 @@
         methods: {
             //获得数据
             getData() {
-                this.request("MerchantPublicList", {mch_id: 1}, true).then((res) => {
+                this.request("MerchantPublicList", {mch_id: this.$store.state.Merchant.merchant.id}, true).then((res) => {
                     if(res.status) {
                     	this.data = res.data;
                     } else {

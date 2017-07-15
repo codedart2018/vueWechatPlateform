@@ -106,9 +106,9 @@
 
 <script>
     //引入公共 main
-    import CommonMain from "./main.vue"
-    import {mapActions, mapGetters} from 'vuex'
-    import {filterRouters} from '../../router'
+    import CommonMain from "./main.vue";
+    import {mapActions, mapGetters} from 'vuex';
+    import {filterRouters} from '../../router';
 
     export default {
         beforeCreate: function () {
@@ -131,7 +131,7 @@
 
         },
         mounted() {
-            this.user = this.$store.state.User.user_info
+            this.user = this.$store.state.User.user_info;
             //console.log(this.$route.path)
             //console.log(this.$router.options.routes)
             //this.$loading('加载中')
@@ -143,12 +143,12 @@
             ...mapActions(['delMainMenu', 'userOut']),
             topRightDropDown(name) {
                 if (name == 'out') {
-                    this.modal = true
+                    this.modal = true;
                 }
             },
             //编程式导航
             goPath(name, params) {
-                this.$router.push({ name: name })
+                this.$router.push({ name: name });
                 //todo 这个要二次才显示正确 后面解决
                 //this.navOne = this.$router.options.routes[params[0]].name
                 //this.navTwo = this.$route.name
@@ -159,14 +159,14 @@
                 setTimeout(() => {
                     this.modal_loading = false;
                     this.modal = false;
-                    let menu = this.$store.state.MainMenu.mainMenu
-                    let new_router = filterRouters(this.$router.options.routes, menu)
-                    this.$router.options.routes = new_router
+                    let menu = this.$store.state.MainMenu.mainMenu;
+                    let new_router = filterRouters(this.$router.options.routes, menu);
+                    this.$router.options.routes = new_router;
                     //删除登陆的一切信息
-                    this.delMainMenu(this)
-                    this.userOut(this)
-                    this.$router.push({path: '/login'})
-                    this.$Message.success("退出成功")
+                    this.delMainMenu(this);
+                    this.userOut(this);
+                    this.$router.push({path: '/login'});
+                    this.$Message.success("退出成功");
                 }, 1000);
             }
         },
@@ -176,9 +176,9 @@
         // watch $route 决定使用哪种过渡
         watch: {
             '$route' (to, from) {
-                const toDepth = to.path.split('/').length
-                const fromDepth = from.path.split('/').length
-                this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+                const toDepth = to.path.split('/').length;
+                const fromDepth = from.path.split('/').length;
+                this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
             }
         },
         beforeDestroy: function () {

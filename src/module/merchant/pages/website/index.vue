@@ -84,7 +84,7 @@
     }
 </style>
 <script>
-    import BdMap from '@/components/map.vue'
+    import BdMap from '@/components/map.vue';
     export default{
         data () {
 
@@ -92,7 +92,7 @@
                 if (value) {
                     let reg = /^1[34578]\d{9}$/;
                     if (!reg.test(value)) {
-                        callback(new Error('电话号码格式不正确'))
+                        callback(new Error('电话号码格式不正确'));
                     }
                 }
                 callback();
@@ -102,7 +102,7 @@
                 if (value) {
                     let reg = /^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/;
                     if (!reg.test(value)) {
-                        callback(new Error('手机号码格式不正确'))
+                        callback(new Error('手机号码格式不正确'));
                     }
                 }
                 callback();
@@ -158,9 +158,9 @@
                     if (valid) {
                         this.request('MerchantWebsiteSave', this.formField).then((res) => {
                             if (res.status) {
-                                this.$Message.success(res.msg)
+                                this.$Message.success(res.msg);
                             } else {
-                                this.$Message.error(res.msg)
+                                this.$Message.error(res.msg);
                             }
                         })
                     } else {
@@ -173,38 +173,38 @@
             },
             //获得数据
             getData() {
-                this.request("MerchantWebsite", {mch_id: 1}, true).then((res) => {
+                this.request("MerchantWebsite", {mch_id: this.$store.state.Merchant.merchant.id}, true).then((res) => {
                     if(res.status) {
-                        this.formField = res.data
+                        this.formField = res.data;
                     }
                 })
             },
             getCate() {
                 this.request("MerchantWebsiteCate", {}).then((res) => {
                     if(res.status) {
-                        this.cate = res.data
+                        this.cate = res.data;
                     }
                 })
             },
             //打开模态窗口
             getLocation() {
-            	this.show = true
+            	this.show = true;
             },
             //监听数据变化
             watchLocation: function (location){
-            	this.formField.location = location
+            	this.formField.location = location;
             }
         },
         mounted() {
             //服务端获取数据
-            this.getData()
-            this.getCate()
+            this.getData();
+            this.getCate();
         },
         //数据监听
         watch: {
             'formField.location' (to, from) {
-            	this.show = false
-                console.log(to, from)
+            	this.show = false;
+                console.log(to, from);
             }
         },
         components: {

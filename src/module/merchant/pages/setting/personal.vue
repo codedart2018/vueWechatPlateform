@@ -51,50 +51,49 @@
         methods: {
             handleSubmit (name) {
             	if(this.subCount > 2) {
-                    this.$Message.error('不允许多次提交修改')
+                    this.$Message.error('不允许多次提交修改');
                 } else {
                     this.$refs[name].validate((valid) => {
                         if (valid) {
                             this.request("MerchantUserEdit", this.form).then((res) => {
                                 if(res.status) {
-                                    this.subCount++
-                                    this.$Message.success(res.msg)
+                                    this.subCount++;
+                                    this.$Message.success(res.msg);
                                 } else {
-                                    this.$Message.error(res.msg)
+                                    this.$Message.error(res.msg);
                                 }
                             }).catch(err => {
-                                console.log(err)
-                                this.$Message.error('系统服务错误')
+                                this.$Message.error('系统服务错误!' + err);
                             })
                         } else {
-                            this.$Message.error('表单验证失败!')
+                            this.$Message.error('表单验证失败!');
                         }
                     })
                 }
             },
             handleReset (name) {
-                this.$refs[name].resetFields()
+                this.$refs[name].resetFields();
             },
             //获得当前用户数据
             getData() {
                 this.request("MerchantUserDetail", {id: 1}, true).then((res) => {
                 	if(res.status) {
-                		this.form = res.data
+                		this.form = res.data;
                     } else {
-                		this.$router.go(-1)
+                		this.$router.go(-1);
                     }
                 }).catch((err => {
-                    this.$router.go(-1)
+                    this.$router.go(-1);
                 }))
             },
             //返回
             go() {
-            	this.$router.go(-1)
+            	this.$router.go(-1);
             }
         },
         mounted() {
             //服务端获取数据
-            this.getData()
+            this.getData();
         }
     }
 </script>

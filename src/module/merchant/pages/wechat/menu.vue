@@ -297,36 +297,36 @@
             //服务器拉取数据
             getData() {
                 //todo 参数临时写死
-                this.request("MerchantWxMenu", {mch_id: 1, platform_id: 800000}, true).then((res) => {
+                this.request("MerchantWxMenu", {mch_id: this.$store.state.Merchant.merchant.id, platform_id: this.$store.state.Merchant.platform.id}, true).then((res) => {
                     if (res.status) {
-                        this.menu.button = res.data
+                        this.menu.button = res.data;
                     }
                 })
             },
             //变量状态检测判断
             isSet(variable) {
                 if (typeof(variable) != 'undefined') {
-                    return true
+                    return true;
                 } else {
-                    return false
+                    return false;
                 }
             },
             //添加一级菜单
             menuAdd() {
                 if (this.menu.button.length < 3) {
-                    this.showMenuContentType = 1
-                    this.activeMenuItemIndex = ''
-                    this.activeMenuItemName = ''
-                    this.menu.button.push({"type": "click", "name": "菜单名称", "key": "", "url": "", "sub_button": []})
-                    this.activeMenuIndex = this.menu.button.length - 1
-                    this.activeMenuName = '菜单名称'
-                    this.showDelBtnType = 1
+                    this.showMenuContentType = 1;
+                    this.activeMenuItemIndex = '';
+                    this.activeMenuItemName = '';
+                    this.menu.button.push({"type": "click", "name": "菜单名称", "key": "", "url": "", "sub_button": []});
+                    this.activeMenuIndex = this.menu.button.length - 1;
+                    this.activeMenuName = '菜单名称';
+                    this.showDelBtnType = 1;
                     //补全数据,无数据也要为空
-                    this.menuDataCompleting()
+                    this.menuDataCompleting();
                     //判断是否有下级子菜单
-                    console.log(this.menu.button, this.activeMenuIndex)
+                    console.log(this.menu.button, this.activeMenuIndex);
                 } else {
-                    alert('最多3个一级菜单')
+                    alert('最多3个一级菜单');
                 }
             },
             //添加二级菜单
@@ -339,40 +339,40 @@
                         "url": "",
                         "sub_button": []
                     });
-                    this.activeMenuItemIndex = this.menu.button[this.activeMenuIndex].sub_button.length - 1
-                    this.activeMenuItemName = '子菜单名称'
-                    this.showDelBtnType = 2
+                    this.activeMenuItemIndex = this.menu.button[this.activeMenuIndex].sub_button.length - 1;
+                    this.activeMenuItemName = '子菜单名称';
+                    this.showDelBtnType = 2;
                     //补全数据,无数据也要为空
-                    this.menuDataCompleting()
+                    this.menuDataCompleting();
                 } else {
-                    alert('最多5个二级菜单')
+                    alert('最多5个二级菜单');
                 }
             },
             //当前菜单
             menuSelected(name, index) {
-                this.showDelBtnType = 1
-                this.activeMenuName = name
-                this.activeMenuIndex = index
-                this.activeMenuItemName = ''
-                this.activeMenuItemIndex = ''
+                this.showDelBtnType = 1;
+                this.activeMenuName = name;
+                this.activeMenuIndex = index;
+                this.activeMenuItemName = '';
+                this.activeMenuItemIndex = '';
                 //补全数据,无数据也要为空
                 this.menuDataCompleting()
                 if (this.menu.button[this.activeMenuIndex].sub_button.length > 0) {
-                    this.showMenuContentType = ''
+                    this.showMenuContentType = '';
                 } else {
-                    this.showMenuContentType = this.activeMenuBtnType()
+                    this.showMenuContentType = this.activeMenuBtnType();
                 }
             },
             //当前子菜单选中
             menuItemSelected(name, index) {
-                this.showDelBtnType = 2
-                this.activeMenuItemName = name
-                this.activeMenuItemIndex = index
+                this.showDelBtnType = 2;
+                this.activeMenuItemName = name;
+                this.activeMenuItemIndex = index;
                 //补全数据,无数据也要为空
-                this.menuDataCompleting()
+                this.menuDataCompleting();
                 if (this.activeMenuIndex > 0 || this.activeMenuIndex === 0) {
                     if (this.menu.button[this.activeMenuIndex].sub_button.length > 0) {
-                        this.showMenuContentType = this.activeMenuBtnType()
+                        this.showMenuContentType = this.activeMenuBtnType();
                     }
                 }
             },
@@ -380,19 +380,19 @@
             menuDel() {
                 if (this.menu.button.length <= 3 && this.menu.button.length > 0) {
                     if ((this.activeMenuIndex !== 0) && (this.activeMenuIndex == this.menu.button.length - 1)) {
-                        this.menu.button.splice(this.activeMenuIndex, 1)
-                        this.activeMenuIndex -= 1
+                        this.menu.button.splice(this.activeMenuIndex, 1);
+                        this.activeMenuIndex -= 1;
                     } else if (this.activeMenuIndex == 0) {
-                        this.menu.button.splice(this.activeMenuIndex, 1)
-                        this.activeMenuIndex = 0
+                        this.menu.button.splice(this.activeMenuIndex, 1);
+                        this.activeMenuIndex = 0;
                     } else {
                         this.menu.button.splice(this.activeMenuIndex, 1);
                     }
                     if (this.menu.button.length == 0) {
-                        this.activeMenuIndex = ''
-                        this.activeMenuName = ''
-                        this.activeMenuItemIndex = ''
-                        this.activeMenuItemName = ''
+                        this.activeMenuIndex = '';
+                        this.activeMenuName = '';
+                        this.activeMenuItemIndex = '';
+                        this.activeMenuItemName = '';
                     }
                 }
             },
@@ -402,39 +402,39 @@
             menuItemDel() {
                 if (this.menu.button[this.activeMenuIndex].sub_button.length <= 5 && this.menu.button[this.activeMenuIndex].sub_button.length > 0) {
                     if (this.activeMenuItemIndex == this.menu.button[this.activeMenuIndex].sub_button.length - 1) {
-                        this.menu.button[this.activeMenuIndex].sub_button.splice(this.activeMenuItemIndex, 1)
-                        this.activeMenuItemIndex -= 1
+                        this.menu.button[this.activeMenuIndex].sub_button.splice(this.activeMenuItemIndex, 1);
+                        this.activeMenuItemIndex -= 1;
                     } else if (this.activeMenuItemIndex == 0) {
-                        this.menu.button[this.activeMenuIndex].sub_button.splice(this.activeMenuItemIndex, 1)
-                        this.activeMenuItemIndex = 0
+                        this.menu.button[this.activeMenuIndex].sub_button.splice(this.activeMenuItemIndex, 1);
+                        this.activeMenuItemIndex = 0;
                     } else {
-                        this.menu.button[this.activeMenuIndex].sub_button.splice(this.activeMenuItemIndex, 1)
+                        this.menu.button[this.activeMenuIndex].sub_button.splice(this.activeMenuItemIndex, 1);
                     }
                     if (this.menu.button[this.activeMenuIndex].sub_button.length == 0) {
-                        this.activeMenuIndex = ''
-                        this.activeMenuName = ''
-                        this.activeMenuItemIndex = ''
-                        this.activeMenuItemName = ''
+                        this.activeMenuIndex = '';
+                        this.activeMenuName = '';
+                        this.activeMenuItemIndex = '';
+                        this.activeMenuItemName = '';
                     }
-                    this.showMenuContentType = this.activeMenuBtnType()
+                    this.showMenuContentType = this.activeMenuBtnType();
                 }
             },
             //菜单内容选项
             radioLabelSelected(val) {
                 if (val == 1) {
-                    this.setType('click')
+                    this.setType('click');
                 } else if (val == 2) {
-                    this.setType('view')
+                    this.setType('view');
                 } else if (val == 3) {
-                    this.setType('app')
+                    this.setType('app');
                 }
             },
             //设置菜单内容类型
             setType: function (type) {
                 if (this.activeMenuType() == 1) {
-                    this.menu.button[this.activeMenuIndex].type = type
+                    this.menu.button[this.activeMenuIndex].type = type;
                 } else if (this.activeMenuType() == 2) {
-                    this.menu.button[this.activeMenuIndex].sub_button[this.activeMenuItemIndex].type = type
+                    this.menu.button[this.activeMenuIndex].sub_button[this.activeMenuItemIndex].type = type;
                 } else if (this.activeMenuType() == 3) {
                 }
             },
@@ -442,36 +442,36 @@
             menuDataCompleting() {
                 for (var i = 0; i < this.menu.button.length; i++) {
                     if (!('type' in this.menu.button[i])) {
-                        this.menu.button[i].type = 'click'
+                        this.menu.button[i].type = 'click';
                     }
                     if (!('name' in this.menu.button[i])) {
-                        this.menu.button[i].name = ''
+                        this.menu.button[i].name = '';
                     }
                     if (!('key' in this.menu.button[i])) {
-                        this.menu.button[i].key = ''
+                        this.menu.button[i].key = '';
                     }
                     if (!('url' in this.menu.button[i])) {
-                        this.menu.button[i].url = ''
+                        this.menu.button[i].url = '';
                     }
                     if (!('sub_button' in this.menu.button[i])) {
-                        this.menu.button[i].sub_button = []
+                        this.menu.button[i].sub_button = [];
                     }
                     if (this.menu.button[i].sub_button.length > 0) {
                         for (var j = 0; j < this.menu.button[i].sub_button.length; j++) {
                             if (!('type' in this.menu.button[i].sub_button[j])) {
-                                this.menu.button[i].sub_button[j].type = 'click'
+                                this.menu.button[i].sub_button[j].type = 'click';
                             }
                             if (!('name' in this.menu.button[i].sub_button[j])) {
-                                this.menu.button[i].sub_button[j].name = ''
+                                this.menu.button[i].sub_button[j].name = '';
                             }
                             if (!('key' in this.menu.button[i].sub_button[j])) {
-                                this.menu.button[i].sub_button[j].key = ''
+                                this.menu.button[i].sub_button[j].key = '';
                             }
                             if (!('url' in this.menu.button[i].sub_button[j])) {
-                                this.menu.button[i].sub_button[j].url = ''
+                                this.menu.button[i].sub_button[j].url = '';
                             }
                             if (!('sub_button' in this.menu.button[i].sub_button[j])) {
-                                this.menu.button[i].sub_button[j].sub_button = []
+                                this.menu.button[i].sub_button[j].sub_button = [];
                             }
                         }
                     }
@@ -481,12 +481,12 @@
             activeMenuType() {
                 if (this.activeMenuIndex !== '' && this.activeMenuItemIndex !== '') {
                     //子菜单、二级菜单
-                    return 2
+                    return 2;
                 } else if (this.activeMenuIndex !== '' && this.activeMenuItemIndex === '') {
                     //一级菜单
-                    return 1
+                    return 1;
                 } else {
-                    return 0
+                    return 0;
                 }
             },
             //选中菜单类型
@@ -495,21 +495,21 @@
                     //一级菜单
                     switch (this.menu.button[this.activeMenuIndex].type) {
                         case 'click':
-                            return 1
+                            return 1;
                         case 'view':
-                            return 2
+                            return 2;
                         default:
-                            return 0
+                            return 0;
                     }
                 } else if (this.activeMenuType() === 2) {
                     //子菜单、二级菜单
                     switch (this.menu.button[this.activeMenuIndex].sub_button[this.activeMenuItemIndex].type) {
                         case 'click':
-                            return 1
+                            return 1;
                         case 'view':
-                            return 2
+                            return 2;
                         default:
-                            return 0
+                            return 0;
                     }
                 } else {
                     return ''
@@ -517,7 +517,7 @@
             },
             //消息内容选项
             msgContentTabNav(val) {
-                this.showMenuContentMsgType = val
+                this.showMenuContentMsgType = val;
             },
             //保存菜单数据
             save() {
@@ -543,7 +543,7 @@
             }
         },
         mounted() {
-            this.platform = window.localStorage.getItem('platformNumber')
+            this.platform = window.localStorage.getItem('platformNumber');
             //服务器上拖取菜单数据
             this.getData();
         },
