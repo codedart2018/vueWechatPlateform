@@ -77,7 +77,7 @@
             },
             //获得当前用户数据
             getData() {
-                this.request("MerchantUserView", {id: 1}, true).then((res) => {
+                this.request("MerchantUserDetail", {id: 1}, true).then((res) => {
                 	if(res.status) {
                 		this.form = res.data
                     } else {

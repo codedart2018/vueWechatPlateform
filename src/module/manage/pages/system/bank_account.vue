@@ -81,7 +81,7 @@
                 if (value) {
                     let reg = /^((\d+)(?!,\2(,|$)))(,(\d+)(?!,\5(,|$)))*$/;
                     if (!reg.test(value)) {
-                        callback(new Error('充值金额规则不正确'))
+                        callback(new Error('充值金额规则不正确'));
                     }
                 }
                 callback();
@@ -114,12 +114,12 @@
                     if (valid) {
                         this.request("AdminSystemBank", this.formDynamic, '保存中...').then((res) => {
                             if (res.status) {
-                                this.$Message.success(res.msg)
+                                this.$Message.success(res.msg);
                             } else {
-                                this.$Message.error(res.msg)
+                                this.$Message.error(res.msg);
                             }
                         }).catch((err) => {
-                            this.$Message.error('系统服务出错')
+                            this.$Message.error('系统服务出错');
                         })
                     } else {
                         this.$Message.error('表单验证失败!');

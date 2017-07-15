@@ -276,8 +276,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.display == 1 ? 'green' : 'red'
-                            const text = row.display == 1 ? '显示' : '隐藏'
+                            const color = row.display == 1 ? 'green' : 'red';
+                            const text = row.display == 1 ? '显示' : '隐藏';
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -293,8 +293,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.auth == 1 ? 'green' : 'red'
-                            const text = row.auth == 1 ? '认证' : '拒绝'
+                            const color = row.auth == 1 ? 'green' : 'red';
+                            const text = row.auth == 1 ? '认证' : '拒绝';
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -310,8 +310,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red'
-                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除'
+                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red';
+                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除';
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -326,7 +326,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
+                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -346,7 +346,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.edit(params.index)
+                                            this.edit(params.index);
                                         }
                                     }
                                 }, '查看'),
@@ -357,7 +357,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.del(params.index, params.row.id)
+                                            this.del(params.index, params.row.id);
                                         }
                                     }
                                 }, '删除')
@@ -433,7 +433,7 @@
             addSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AddRule", this.addForm);
+                        this.save("AdminAddRule", this.addForm);
                     } else {
                         this.$Message.error('表单验证失败!');
                     }
@@ -443,7 +443,7 @@
             editSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("EditRule", this.editForm);
+                        this.save("AdminEditRule", this.editForm);
                     } else {
                         this.$Message.error('表单验证失败!');
                     }
@@ -465,7 +465,7 @@
             },
             getData (params) {
                 if (!params) params = {page: 1};
-                this.request('GetRule', params, true).then((res) => {
+                this.request('AdminGetRule', params, true).then((res) => {
                     if(res.status) {
                         let list = res.data.list;
                         if(list) {
@@ -504,7 +504,7 @@
                     content: '<p>你确定要删除?删除后不可恢复!</p>',
                     loading: true,
                     onOk: () => {
-                        this.request('DelRule', {id, id}).then((res) => {
+                        this.request('AdminDelRule', {id, id}).then((res) => {
                             if(res.status) {
                                 this.$Message.info(res.msg);
                                 this.$Modal.remove();

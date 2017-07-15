@@ -57,7 +57,7 @@
 </template>
 
 <script>
-    import UEditor from '@/components/editor'
+    import UEditor from '@/components/editor';
 
     export default {
         data () {
@@ -118,13 +118,13 @@
                 })
             },
             handleReset (name) {
-                this.$refs[name].resetFields()
+                this.$refs[name].resetFields();
             },
             //获得分类数据
             getCate() {
                 this.request('AdminEditorMaterialCate', {type: 1}, true).then((res) => {
                     if(res.status) {
-                        this.cate = res.data
+                        this.cate = res.data;
                     }
                 })
             },
@@ -137,11 +137,11 @@
             },
             //后退海阔天空
             goBack() {
-                this.$router.go(-1)
+                this.$router.go(-1);
             }
         },
         mounted() {
-        	this.getCate()
+        	this.getCate();
         },
         components: {
             UEditor

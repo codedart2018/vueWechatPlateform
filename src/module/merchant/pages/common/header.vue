@@ -4,11 +4,10 @@
         <h1 class="logo"><a href="/">代码兔微信公众平台欢迎你</a></h1>
         <div class="top-panel">
             <span class="divide-icon pull-left">|</span>
-            <a class="user-info" href="#/user">
-                <img
-                    src="https://o1aa0tynl.qnssl.com/3ce66694636c4db500e0607cec87791e010fa3d8c2d5c609832af3979bb5e768?imageMogr2/crop/!87.99999999999999x88a5.000000000000013a0/thumbnail/120x120">
+            <router-link to="/setting/personal" class="user-info">
+                <img src="https://avatars.githubusercontent.com/u/12706830?v=3">
                 <span class="simple-text user-name">baide</span>
-            </a>
+            </router-link>
             <span class="divide-icon pull-left">|</span>
             <a href="javascript: void(0);" class="logout-btn" @click="modal = true">退出</a>
             <div class="clearfix"></div>

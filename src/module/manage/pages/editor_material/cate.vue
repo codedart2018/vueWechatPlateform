@@ -92,8 +92,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red'
-                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除'
+                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red';
+                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除';
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -108,7 +108,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('span',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
+                            return h('span',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -117,7 +117,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('span',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'))
+                            return h('span',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -137,7 +137,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.edit(params.index)
+                                            this.edit(params.index);
                                         }
                                     }
                                 }, '查看'),
@@ -148,7 +148,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.del(params.index, params.row.id)
+                                            this.del(params.index, params.row.id);
                                         }
                                     }
                                 }, '删除')
@@ -191,15 +191,15 @@
         methods: {
             //取消 modal
             modalCancel() {
-                this.editModal = false
+                this.editModal = false;
             },
             //添加数据
             addSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AddEditorMaterialCate", this.addForm)
+                        this.save("AddEditorMaterialCate", this.addForm);
                     } else {
-                        this.$Message.error('表单验证失败!')
+                        this.$Message.error('表单验证失败!');
                     }
                 })
             },
@@ -207,9 +207,9 @@
             editSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("EditEditorMaterialCate", this.editForm)
+                        this.save("EditEditorMaterialCate", this.editForm);
                     } else {
-                        this.$Message.error('表单验证失败!')
+                        this.$Message.error('表单验证失败!');
                     }
                 })
             },
@@ -219,35 +219,35 @@
             },
             //分页切换页码
             changePage (page) {
-                let search = this.formSearch
-                let query = Object.assign({page: page }, search)
+                let search = this.formSearch;
+                let query = Object.assign({page: page }, search);
                 //分页
-                this.$router.push({ name: this.$router.currentRoute.name, query: query})
+                this.$router.push({ name: this.$router.currentRoute.name, query: query});
                 //获取最新数据
-                this.getData({page: page, params: search})
+                this.getData({page: page, params: search});
             },
             getData (params) {
-                if (!params) params = {page: 1}
+                if (!params) params = {page: 1};
                 this.request('AdminEditorMaterialCate', params, true).then((res) => {
                     if(res.status) {
                         //列表数据
-                        this.list = res.data.list
+                        this.list = res.data.list;
                         //总页数
-                        this.total = res.data.count
+                        this.total = res.data.count;
                         //每页多少条数据
-                        this.pageSize = res.data.size
+                        this.pageSize = res.data.size;
                     } else {
-                        this.list = []
-                        this.total = 0
-                        this.pageSize = 0
+                        this.list = [];
+                        this.total = 0;
+                        this.pageSize = 0;
                     }
                 })
             },
             edit (index) {
                 //打开 modal 窗口
-                this.editModal = true
+                this.editModal = true;
                 //获取原数据
-                this.editForm = this.list[index]
+                this.editForm = this.list[index];
             },
             //删除分类数据
             del (index, id) {
@@ -259,11 +259,11 @@
                     onOk: () => {
                         this.request('AdminDelEditorMaterialCate', {id, id}).then((res) => {
                             if(res.status) {
-                                this.$Message.info(res.msg)
+                                this.$Message.info(res.msg);
                                 this.$Modal.remove();
-                                this.list[index].status = -1
+                                this.list[index].status = -1;
                             } else {
-                                this.$Message.error(res.msg)
+                                this.$Message.error(res.msg);
                             }
                         })
                     }
@@ -273,16 +273,16 @@
             save(url, data) {
                 this.request(url, data).then((res) => {
                     if (res.status) {
-                        this.addModal = false
-                        this.editModal = false
-                        this.$Message.success(res.msg)
+                        this.addModal = false;
+                        this.editModal = false;
+                        this.$Message.success(res.msg);
                         //重置数据
-                        this.$refs['addForm'].resetFields()
-                        this.$refs['editForm'].resetFields()
+                        this.$refs['addForm'].resetFields();
+                        this.$refs['editForm'].resetFields();
                         //重新拉取服务端数据
-                        this.getData()
+                        this.getData();
                     } else {
-                        this.$Message.error(res.msg)
+                        this.$Message.error(res.msg);
                         this.$Modal.remove();
                     }
                 })

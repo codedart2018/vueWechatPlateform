@@ -2,18 +2,20 @@
     <div>
         <Row class="mb-15">
             <Col span="18" class="search">
-            <Form :model="formSearch" :label-width="80" inline label-position="right">
-                <Form-item label="分类名称：">
-                    <Input v-model="formSearch.keywords" placeholder="请输入分类名称关键词"></Input>
-                </Form-item>
-                <Form-item :label-width="1">
-                    <Button type="primary" @click="search('formSearch')" icon="ios-search">搜索</Button>
-                </Form-item>
-            </Form>
-            &nbsp;
+                <Form :model="formSearch" :label-width="80" inline label-position="right">
+                    <Form-item label="分类名称：">
+                        <Input v-model="formSearch.keywords" placeholder="请输入分类名称关键词"></Input>
+                    </Form-item>
+                    <Form-item :label-width="1">
+                        <Button type="primary" @click="search('formSearch')" icon="ios-search">搜索</Button>
+                    </Form-item>
+                </Form>
+                &nbsp;
             </Col>
             <Col span="6" class="text-align-right">
-            <Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加分类</Button>
+                <Button type="primary" @click="addModal = true">
+                    <Icon type="plus-round"></Icon>&nbsp;添加分类
+                </Button>
             </Col>
         </Row>
         <Row class="mb-15">
@@ -21,7 +23,6 @@
         </Row>
         <Row type="flex" justify="end">
         </Row>
-
 
         <!--添加 Modal 对话框-->
         <Modal v-model="addModal" title="添加分类" class-name="customize-modal-center" @on-cancel="modalCancel()">
@@ -106,8 +107,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red'
-                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除'
+                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red';
+                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除';
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -121,7 +122,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
+                            return h('div', this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -129,7 +130,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('div',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'))
+                            return h('div', this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -149,7 +150,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.edit(params.index)
+                                            this.edit(params.index);
                                         }
                                     }
                                 }, '查看'),
@@ -160,7 +161,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.remove(params.index, params.row.id)
+                                            this.remove(params.index, params.row.id);
                                         }
                                     }
                                 }, '删除')
@@ -182,11 +183,11 @@
                 //验证规则
                 ruleValidate: {
                     name: [
-                        { required: true, message: '分类名称不能为空', trigger: 'blur' },
-                        { type: 'string', min: 2, message: '分类名称不能少于2个字符', trigger: 'blur' }
+                        {required: true, message: '分类名称不能为空', trigger: 'blur'},
+                        {type: 'string', min: 2, message: '分类名称不能少于2个字符', trigger: 'blur'}
                     ],
                     sort: [
-                        { type: 'string', message: '排序只能数字', trigger: 'blur', pattern: /^[0-9]+$/}
+                        {type: 'string', message: '排序只能数字', trigger: 'blur', pattern: /^[0-9]+$/}
                     ]
                 },
                 //搜索表单
@@ -202,7 +203,7 @@
         methods: {
             //取消 modal
             modalCancel() {
-                this.editModal = false
+                this.editModal = false;
             },
             //重置表单数据
             handleReset (name) {
@@ -212,16 +213,16 @@
             getData (params) {
                 if (!params) params = {page: 1}
                 this.request('AdminWebsiteCategory', params, true).then((res) => {
-                    if(res.status) {
+                    if (res.status) {
                         //列表数据
-                        this.list = res.data
-                        if(this.tally == 0) {
-                            this.cate = res.data
-                            this.tally++
+                        this.list = res.data;
+                        if (this.tally == 0) {
+                            this.cate = res.data;
+                            this.tally++;
                         }
                     } else {
                         //列表数据
-                        this.list = []
+                        this.list = [];
                     }
                 })
             },
@@ -229,9 +230,9 @@
             addSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AdminWebsiteAddCategory", this.addForm)
+                        this.save("AdminWebsiteAddCategory", this.addForm);
                     } else {
-                        this.$Message.error('表单验证失败!')
+                        this.$Message.error('表单验证失败!');
                     }
                 })
             },
@@ -239,17 +240,17 @@
             editSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AdminWebsiteEditCategory", this.editForm)
+                        this.save("AdminWebsiteEditCategory", this.editForm);
                     } else {
-                        this.$Message.error('表单验证失败!')
+                        this.$Message.error('表单验证失败!');
                     }
                 })
             },
             edit(index) {
                 //打开 modal 窗口
-                this.editModal = true
+                this.editModal = true;
                 //获取原数据
-                this.editForm = this.list[index]
+                this.editForm = this.list[index];
             },
             //删除分类数据
             remove (index, id) {
@@ -260,12 +261,12 @@
                     loading: true,
                     onOk: () => {
                         this.request('AdminCategoryDelete', {id, id}).then((res) => {
-                            if(res.status) {
-                                this.$Message.info(res.msg)
+                            if (res.status) {
+                                this.$Message.info(res.msg);
                                 this.$Modal.remove();
                                 this.list.splice(index, 1);
                             } else {
-                                this.$Message.error(res.msg)
+                                this.$Message.error(res.msg);
                                 this.$Modal.remove();
                             }
                         })
@@ -274,32 +275,32 @@
             },
             //表单搜索
             search() {
-                let page = 1
-                this.pageNumber = page
-                let search = this.formSearch
-                this.getData({ params : search })
+                let page = 1;
+                this.pageNumber = page;
+                let search = this.formSearch;
+                this.getData({params: search});
             },
             //保存数据方法
             save(url, data) {
                 this.request(url, data).then((res) => {
                     if (res.status) {
-                        this.addModal = false
-                        this.editModal = false
-                        this.$Message.success(res.msg)
+                        this.addModal = false;
+                        this.editModal = false;
+                        this.$Message.success(res.msg);
                         //重置数据
-                        this.$refs['addForm'].resetFields()
-                        this.$refs['editForm'].resetFields()
+                        this.$refs['addForm'].resetFields();
+                        this.$refs['editForm'].resetFields();
                         //重新拉取服务端数据
-                        this.getData()
+                        this.getData();
                     } else {
-                        this.$Message.error(res.msg)
+                        this.$Message.error(res.msg);
                     }
                 })
             }
         },
         mounted() {
             //服务端获取数据
-            this.getData()
+            this.getData();
         }
     }
 </script>

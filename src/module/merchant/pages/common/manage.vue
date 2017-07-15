@@ -79,7 +79,7 @@
                             </transition>
                             <transition :name="transitionName" v-if="$route.path != '/'">
                                 <div>
-                                    <div style="height: 70px; display: flex; align-items: center">
+                                    <div style="height: 14px; display: flex; align-items: center; line-height: 14px; margin-bottom: 20px;">
                                         <Breadcrumb>
                                             <Breadcrumb-item>管理中心</Breadcrumb-item>
                                             <Breadcrumb-item v-for="(item, index) in $route.meta.navigation" v-if="$route.meta.navigation.length > 0" :key="index">{{item}}</Breadcrumb-item>
@@ -183,7 +183,20 @@
 
                         <!--右边盒子-->
                         <div class="right-content">
-                            <router-view></router-view>
+                            <transition :name="transitionName" v-if="$route.path == '/'">
+                                <common-main></common-main>
+                            </transition>
+                            <transition :name="transitionName" v-if="$route.path != '/'">
+                                <div>
+                                    <div style="height: 14px; display: flex; align-items: center; line-height: 14px; margin-bottom: 20px;">
+                                        <Breadcrumb>
+                                            <Breadcrumb-item>微信公众号管理中心</Breadcrumb-item>
+                                            <Breadcrumb-item v-for="(item, index) in $route.meta.navigation" v-if="$route.meta.navigation.length > 0" :key="index">{{item}}</Breadcrumb-item>
+                                        </Breadcrumb>
+                                    </div>
+                                    <router-view></router-view>
+                                </div>
+                            </transition>
                         </div>
                     </div>
 

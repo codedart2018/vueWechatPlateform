@@ -74,8 +74,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red'
-                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除'
+                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red';
+                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除';
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -90,7 +90,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
+                            return h('div', this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -99,7 +99,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('div',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'))
+                            return h('div', this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -109,8 +109,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const type = row.status == 1 ? 'warning' : 'default'
-                            const text = row.status == 1 ? '锁定' : '解锁'
+                            const type = row.status == 1 ? 'warning' : 'default';
+                            const text = row.status == 1 ? '锁定' : '解锁';
                             return h('div', [
                                 h('Button', {
                                     props: {
@@ -122,7 +122,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            //this.edit(row.id)
+                                            //this.edit(row.id);
                                         }
                                     }
                                 }, '查看'),
@@ -133,7 +133,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.lock(params.index, row.id, row.status)
+                                            this.lock(params.index, row.id, row.status);
                                         }
                                     }
                                 }, text)
@@ -162,42 +162,42 @@
             },
             //分页切换页码
             changePage (page) {
-                this.pageNumber = page
-                let search = this.formSearch
-                let query = Object.assign({page: page }, search)
+                this.pageNumber = page;
+                let search = this.formSearch;
+                let query = Object.assign({page: page}, search);
                 //分页
-                this.$router.push({ name: this.$router.currentRoute.name, query: query})
+                this.$router.push({name: this.$router.currentRoute.name, query: query});
                 //获取最新数据
-                this.getData({page: page, params: search})
+                this.getData({page: page, params: search});
             },
             //获取数据
             getData (params) {
-                if (!params) params = {page: 1}
+                if (!params) params = {page: 1};
                 this.request('AdminWebsiteIndex', params, true).then((res) => {
-                    if(res.status) {
+                    if (res.status) {
                         //列表数据
-                        this.list = res.data.list
+                        this.list = res.data.list;
                         //总页数
-                        this.total = res.data.count
+                        this.total = res.data.count;
                         //每页多少条数据
-                        this.pageSize = res.data.size
+                        this.pageSize = res.data.size;
                     } else {
                         //列表数据
-                        this.list = []
+                        this.list = [];
                         //总页数
-                        this.total = 0
+                        this.total = 0;
                         //每页多少条数据
-                        this.pageSize = 0
+                        this.pageSize = 0;
                     }
                 })
             },
             edit(id) {
-                this.$router.push({ path: '/article/edit/' + id, params: { id: id }})
+                this.$router.push({path: '/article/edit/' + id, params: {id: id}});
             },
             //删除素材数据
             lock (index, id, status) {
-            	const msg = status == 0 ? '确定要解锁?' : '确定要锁定微站?'
-                const setStatus = status == 0 ? 1: 0;
+                const msg = status == 0 ? '确定要解锁?' : '确定要锁定微站?';
+                const setStatus = status == 0 ? 1 : 0;
                 this.$Modal.confirm({
                     title: '温馨提示',
                     width: 300,
@@ -205,13 +205,13 @@
                     loading: true,
                     onOk: () => {
                         this.request('AdminWebsiteLock', {id, id, status: setStatus}).then((res) => {
-                            if(res.status) {
-                            	const tipMsg = setStatus == 0 ? '锁定成功' : '解锁成功'
-                                this.$Message.info(tipMsg)
+                            if (res.status) {
+                                const tipMsg = setStatus == 0 ? '锁定成功' : '解锁成功';
+                                this.$Message.info(tipMsg);
                                 this.$Modal.remove();
-                                this.list[index].status = setStatus
+                                this.list[index].status = setStatus;
                             } else {
-                                this.$Message.error(res.msg)
+                                this.$Message.error(res.msg);
                                 this.$Modal.remove();
                             }
                         })
@@ -220,27 +220,26 @@
             },
             //表单搜索
             search() {
-                let page = 1
-                this.pageNumber = page
-                let search = this.formSearch
-                //if(JSON.stringify(search) == "{}") return
-                this.getData({ params : search })
+                let page = 1;
+                this.pageNumber = page;
+                let search = this.formSearch;
+                this.getData({params: search});
             },
             //获得分类数据
             getCate() {
                 this.request('AdminCategoryList', {}).then((res) => {
-                    if(res.status) {
-                        this.cate = res.data
+                    if (res.status) {
+                        this.cate = res.data;
                     }
                 })
             },
         },
         mounted() {
             //服务端获取数据
-            this.getData()
+            this.getData();
             //服务端分类数据
-            this.getCate()
-            console.log(JSON.stringify(this.formSearch))
+            this.getCate();
+            //console.log(JSON.stringify(this.formSearch));
         }
     }
 </script>

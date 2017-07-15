@@ -2,12 +2,12 @@
  * Created by truncate on 2017/3/27.
  */
 
-import * as types from '../mutation-types'
+import * as types from '../mutation-types';
 
 const state = {
     user_info: JSON.parse(window.localStorage.getItem('user_info')) || {},
     token: window.localStorage.getItem('token') || ''
-}
+};
 
 const mutations = {
     //登陆
@@ -24,9 +24,9 @@ const mutations = {
         state.user_info = {}
         state.token = ''
     }
-}
+};
 
 export default {
     state,
     mutations
-}
+};

@@ -56,7 +56,7 @@
 </template>
 
 <script>
-    import UEditor from '@/components/editor'
+    import UEditor from '@/components/editor';
 
     export default{
         data(){
@@ -125,15 +125,15 @@
                 let id = this.$route.params.id
                 this.apiGet('/admin/editor_material/edit_material',{id: id}).then((res) => {
                     if(res.status) {
-                    	this.status = true
-                    	this.formField = res.data
-                        instance.execCommand('insertHtml', res.data.content)
+                    	this.status = true;
+                    	this.formField = res.data;
+                        instance.execCommand('insertHtml', res.data.content);
                         instance.addListener('contentChange', () => {
                             this.formField.content = instance.getContent();
                         });
                         //this.$forceUpdate()
                     } else {
-                        this.$Message.error(res.msg)
+                        this.$Message.error(res.msg);
                     }
                 })
             },
@@ -141,7 +141,7 @@
             getCate() {
                 this.request('AdminEditorMaterialCate', {type: 1}, true).then((res) => {
                     if(res.status) {
-                        this.cate = res.data
+                        this.cate = res.data;
                     }
                 })
             },
@@ -153,14 +153,14 @@
             },
             //后退海阔天空
             goBack() {
-                this.$router.go(-1)
+                this.$router.go(-1);
             }
         },
         components:{
             UEditor
         },
         mounted() {
-            this.getCate()
+            this.getCate();
         }
     }
 </script>

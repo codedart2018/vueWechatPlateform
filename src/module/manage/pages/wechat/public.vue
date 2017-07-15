@@ -95,8 +95,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red'
-                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除'
+                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red';
+                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除';
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -111,7 +111,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
+                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -120,7 +120,7 @@
                         align: 'center',
                         width: 135,
                         render: (h, params) => {
-                            return h('div',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'))
+                            return h('div',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -140,7 +140,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.edit(params.index)
+                                            this.edit(params.index);
                                         }
                                     }
                                 }, '查看'),
@@ -151,7 +151,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.restPassword(params.row.id)
+                                            this.restPassword(params.row.id);
                                         }
                                     }
                                 }, '重置')
@@ -175,26 +175,26 @@
         methods: {
             //分页切换页码
             changePage (page) {
-                this.pageNumber = page
-                let search = this.formSearch
-                let query = Object.assign({page: page }, search)
+                this.pageNumber = page;
+                let search = this.formSearch;
+                let query = Object.assign({page: page }, search);
                 //分页
-                this.$router.push({ name: this.$router.currentRoute.name, query: query})
+                this.$router.push({ name: this.$router.currentRoute.name, query: query});
                 //获取最新数据
-                this.getData({page: page, params: search})
+                this.getData({page: page, params: search});
             },
             getData (params) {
-                if (!params) params = {page: 1}
+                if (!params) params = {page: 1};
                 this.request('AdminPublicList', params, true).then((res) => {
                     if(res.status) {
                         //列表数据
-                        this.list = res.data.list
+                        this.list = res.data.list;
                         //总页数
-                        this.total = res.data.count
+                        this.total = res.data.count;
                         //每页多少条数据
-                        this.pageSize = res.data.size
+                        this.pageSize = res.data.size;
                         //角色数据
-                        this.roles = res.data.role
+                        this.roles = res.data.role;
                     }
                 })
             },
@@ -208,10 +208,10 @@
                     onOk: () => {
                         this.request('RestPassword', {id, id}).then((res) => {
                             if(res.status) {
-                                this.$Message.success(res.msg)
+                                this.$Message.success(res.msg);
                                 this.$Modal.remove();
                             } else {
-                                this.$Message.error(res.msg)
+                                this.$Message.error(res.msg);
                                 this.$Modal.remove();
                             }
                         })
@@ -220,15 +220,15 @@
             },
             //表单搜索
             search() {
-                let page = 1
-                this.pageNumber = page
-                let search = this.formSearch
-                this.getData({ params : search })
+                let page = 1;
+                this.pageNumber = page;
+                let search = this.formSearch;
+                this.getData({ params : search });
             }
         },
         mounted() {
             //服务端获取数据
-            this.getData()
+            this.getData();
         },
         components: {
         },

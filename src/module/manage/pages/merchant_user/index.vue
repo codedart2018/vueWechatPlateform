@@ -62,8 +62,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.is_main == 1 ? 'green' : 'red'
-                            const text = row.is_main == 1 ? '是' : '否'
+                            const color = row.is_main == 1 ? 'green' : 'red';
+                            const text = row.is_main == 1 ? '是' : '否';
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -78,7 +78,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('span',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
+                            return h('span',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -95,7 +95,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.restPassword(params.row.id)
+                                            this.restPassword(params.row.id);
                                         }
                                     }
                                 }, '重置密码'),
@@ -118,28 +118,28 @@
         methods: {
             //分页切换页码
             changePage (page) {
-                this.pageNumber = page
-                let search = this.formSearch
-                let query = Object.assign({page: page }, search)
+                this.pageNumber = page;
+                let search = this.formSearch;
+                let query = Object.assign({page: page }, search);
                 //分页
-                this.$router.push({ name: this.$router.currentRoute.name, query: query})
+                this.$router.push({ name: this.$router.currentRoute.name, query: query});
                 //获取最新数据
-                this.getData({page: page, params: search})
+                this.getData({page: page, params: search});
             },
             getData (params) {
-                if (!params) params = {page: 1}
+                if (!params) params = {page: 1};
                 this.request('AdminMerchantUser', params, true).then((res) => {
                     if(res.status) {
                         //列表数据
-                        this.list = res.data.list
+                        this.list = res.data.list;
                         //总页数
-                        this.total = res.data.count
+                        this.total = res.data.count;
                         //每页多少条数据
-                        this.pageSize = res.data.size
+                        this.pageSize = res.data.size;
                     } else {
-                        this.list = []
-                        this.total = 0
-                        this.pageSize = 0
+                        this.list = [];
+                        this.total = 0;
+                        this.pageSize = 0;
                     }
                 }).catch((response) => {
 
@@ -147,9 +147,9 @@
             },
             //表单搜索
             search() {
-                this.pageNumber = 1
-                let search = this.formSearch
-                this.getData({ params : search })
+                this.pageNumber = 1;
+                let search = this.formSearch;
+                this.getData({ params : search });
             },
             //重置用户密码
             restPassword (id) {
@@ -161,10 +161,10 @@
                     onOk: () => {
                         this.request('AdminMerchantUserRestPassWord', {id, id}).then((res) => {
                             if(res.status) {
-                                this.$Message.success(res.msg)
+                                this.$Message.success(res.msg);
                                 this.$Modal.remove();
                             } else {
-                                this.$Message.error(res.msg)
+                                this.$Message.error(res.msg);
                                 this.$Modal.remove();
                             }
                         })

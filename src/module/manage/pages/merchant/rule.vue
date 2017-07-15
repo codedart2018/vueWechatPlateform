@@ -288,8 +288,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.display == 1 ? 'green' : 'red'
-                            const text = row.display == 1 ? '显示' : '隐藏'
+                            const color = row.display == 1 ? 'green' : 'red';
+                            const text = row.display == 1 ? '显示' : '隐藏';
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -305,8 +305,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.auth == 1 ? 'green' : 'red'
-                            const text = row.auth == 1 ? '认证' : '拒绝'
+                            const color = row.auth == 1 ? 'green' : 'red';
+                            const text = row.auth == 1 ? '认证' : '拒绝';
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -322,8 +322,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red'
-                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除'
+                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red';
+                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除';
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -338,7 +338,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
+                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -358,7 +358,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.edit(params.index)
+                                            this.edit(params.index);
                                         }
                                     }
                                 }, '查看'),
@@ -369,7 +369,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.del(params.index, params.row.id)
+                                            this.del(params.index, params.row.id);
                                         }
                                     }
                                 }, '删除')
@@ -547,7 +547,7 @@
                 this.request(url, data).then((res) => {
                     if (res.status) {
                         this.addModal = false;
-                        this.editModal = false
+                        this.editModal = false;
                         this.$Message.success(res.msg);
                         //重置数据
                         this.$refs['addForm'].resetFields();

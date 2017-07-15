@@ -3,7 +3,7 @@
  * vuex 方法
  */
 
-import * as types from '../mutation-types'
+import * as types from '../mutation-types';
 
 /**
  * 用户登陆
@@ -18,7 +18,7 @@ export const userLogin = ({ commit }, { user_info, token}) => {
             token: token
         })
     }
-}
+};
 
 /**
  * 用户退出
@@ -29,7 +29,7 @@ export const userOut = ({ commit }) => {
         user_info: {},
         token: ''
     })
-}
+};
 
 /**
  * 保存菜单
@@ -40,7 +40,7 @@ export const mainMenu = ({ commit }, menu) => {
     if(menu) {
         commit(types.MAIN_MENU, menu)
     }
-}
+};
 
 /**
  * 删除左侧菜单
@@ -49,8 +49,8 @@ export const mainMenu = ({ commit }, menu) => {
  */
 export const delMainMenu = ({ commit }) => {
     commit(types.DEL_MAIN_MENU, {})
-}
+};
 
 export const auth = ({ commit }, auth) => {
     commit(types.AUTH, auth)
-}
+};

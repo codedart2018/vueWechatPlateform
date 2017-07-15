@@ -156,8 +156,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red'
-                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除'
+                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red';
+                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除';
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -176,7 +176,7 @@
                             if(row.validity == 0){
                                 return h('span', "长期有效");
                             }
-                            return h('div',this.$formatDate(row.validity, 'yyyy-MM-dd h:m'))
+                            return h('div',this.$formatDate(row.validity, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -185,7 +185,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
+                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -194,7 +194,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('div',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'))
+                            return h('div',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -218,7 +218,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.view(params.index)
+                                            this.view(params.index);
                                         }
                                     }
                                 }, '查看'),
@@ -292,9 +292,9 @@
             addSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AdminAddMerchant", this.addForm)
+                        this.save("AdminAddMerchant", this.addForm);
                     } else {
-                        this.$Message.error('表单验证失败!')
+                        this.$Message.error('表单验证失败!');
                     }
                 })
             },
@@ -304,31 +304,31 @@
             },
             //分页切换页码
             changePage (page) {
-                this.pageNumber = page
-                let search = this.formSearch
-                let query = Object.assign({page: page }, search)
+                this.pageNumber = page;
+                let search = this.formSearch;
+                let query = Object.assign({page: page }, search);
                 //分页
-                this.$router.push({ name: this.$router.currentRoute.name, query: query})
+                this.$router.push({ name: this.$router.currentRoute.name, query: query});
                 //获取最新数据
-                this.getData({page: page, params: search})
+                this.getData({page: page, params: search});
             },
             getData (params) {
                 if (!params) params = {page: 1}
                 this.request('AdminMerchant', params, true).then((res) => {
                     if(res.status) {
                         //列表数据
-                        this.list = res.data.list
+                        this.list = res.data.list;
                         //总页数
-                        this.total = res.data.count
+                        this.total = res.data.count;
                         //每页多少条数据
-                        this.pageSize = res.data.size
+                        this.pageSize = res.data.size;
                     } else {
                         //列表数据
-                        this.list = []
+                        this.list = [];
                         //总页数
-                        this.total = 0
+                        this.total = 0;
                         //每页多少条数据
-                        this.pageSize = 0
+                        this.pageSize = 0;
                     }
                 }).catch((response) => {
 
@@ -336,32 +336,32 @@
             },
             //表单搜索
             search() {
-                this.pageNumber = 1
-                let search = this.formSearch
-                this.getData({ params : search })
+                this.pageNumber = 1;
+                let search = this.formSearch;
+                this.getData({ params : search });
             },
             //保存数据方法
             save(url, data) {
                 this.request(url, data).then((res) => {
                     if (res.status) {
-                        this.addModal = false
-                        this.$Message.success(res.msg)
+                        this.addModal = false;
+                        this.$Message.success(res.msg);
                         //重置数据
-                        this.$refs['addForm'].resetFields()
+                        this.$refs['addForm'].resetFields();
                         //重新拉取服务端数据
-                        this.getData()
+                        this.getData();
                     } else {
-                        this.$Message.error(res.msg)
+                        this.$Message.error(res.msg);
                     }
                 })
             },
             view(id) {
-                this.$router.push({ path: '/merchant/view/' + id, params: { id: id }})
+                this.$router.push({ path: '/merchant/view/' + id, params: { id: id }});
             }
         },
         mounted() {
-        	this.auth = this.$store.state.MainMenu.auth
-            console.log(this.auth)
+        	this.auth = this.$store.state.MainMenu.auth;
+            console.log(this.auth);
             //服务端获取数据
             this.getData();
         }

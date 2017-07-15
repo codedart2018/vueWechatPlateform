@@ -222,16 +222,16 @@
         data () {
             const validatePassword = (rule, value, callback) => {
                 if ((this.addModal || value) && (value.length < 6 || value.length > 32)) {
-                    callback(new Error('密码长度6-32个字符'))
+                    callback(new Error('密码长度6-32个字符'));
                 }
-                callback()
+                callback();
             }
 
             const validateMobile = (rule, value, callback) => {
                 if (value) {
                     let reg = /^1[34578]\d{9}$/;
                     if (!reg.test(value)) {
-                        callback(new Error('手机号码格式不正确'))
+                        callback(new Error('手机号码格式不正确'));
                     }
                 }
                 callback();
@@ -277,8 +277,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red'
-                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除'
+                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red';
+                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除';
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -299,9 +299,9 @@
                         align: 'center',
                         render: (h, params) => {
                         	if(params.row.last_login_time == 0) {
-                                return h('Tag', "从未登陆")
+                                return h('Tag', "从未登陆");
                             }
-                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
+                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -316,7 +316,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('span',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
+                            return h('span',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -325,7 +325,7 @@
                         align: 'center',
                         width: 135,
                         render: (h, params) => {
-                            return h('span',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'))
+                            return h('span',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -345,7 +345,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.edit(params.index)
+                                            this.edit(params.index);
                                         }
                                     }
                                 }, '查看'),
@@ -356,7 +356,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.restPassword(params.row.id)
+                                            this.restPassword(params.row.id);
                                         }
                                     }
                                 }, '重置')
@@ -434,15 +434,15 @@
         methods: {
             //取消 modal
             modalCancel() {
-                this.editModal = false
+                this.editModal = false;
             },
             //添加数据
             addSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AdminAddUser", this.addForm)
+                        this.save("AdminAddUser", this.addForm);
                     } else {
-                        this.$Message.error('表单验证失败!')
+                        this.$Message.error('表单验证失败!');
                     }
                 })
             },
@@ -450,9 +450,9 @@
             editSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AdminEditUser", this.editForm)
+                        this.save("AdminEditUser", this.editForm);
                     } else {
-                        this.$Message.error('表单验证失败!')
+                        this.$Message.error('表单验证失败!');
                     }
                 })
             },
@@ -462,34 +462,34 @@
             },
             //分页切换页码
             changePage (page) {
-                this.pageNumber = page
-                let search = this.formSearch
-                let query = Object.assign({page: page }, search)
+                this.pageNumber = page;
+                let search = this.formSearch;
+                let query = Object.assign({page: page }, search);
                 //分页
-                this.$router.push({ name: this.$router.currentRoute.name, query: query})
+                this.$router.push({ name: this.$router.currentRoute.name, query: query});
                 //获取最新数据
-                this.getData({page: page, params: search})
+                this.getData({page: page, params: search});
             },
             getData (params) {
-                if (!params) params = {page: 1}
+                if (!params) params = {page: 1};
                 this.request('AdminUser', params, true).then((res) => {
                     if(res.status) {
                         //列表数据
-                        this.list = res.data.list
+                        this.list = res.data.list;
                         //总页数
-                        this.total = res.data.count
+                        this.total = res.data.count;
                         //每页多少条数据
-                        this.pageSize = res.data.size
+                        this.pageSize = res.data.size;
                         //角色数据
-                        this.roles = res.data.role
+                        this.roles = res.data.role;
                     }
                 })
             },
             edit (index) {
                 //打开 modal 窗口
-                this.editModal = true
+                this.editModal = true;
                 //获取原数据
-                this.editForm = this.list[index]
+                this.editForm = this.list[index];
             },
             //重置用户密码
             restPassword (id) {
@@ -501,10 +501,10 @@
                     onOk: () => {
                         this.request('RestPassword', {id, id}).then((res) => {
                             if(res.status) {
-                                this.$Message.success(res.msg)
+                                this.$Message.success(res.msg);
                                 this.$Modal.remove();
                             } else {
-                                this.$Message.error(res.msg)
+                                this.$Message.error(res.msg);
                                 this.$Modal.remove();
                             }
                         })
@@ -513,25 +513,25 @@
             },
             //表单搜索
             search() {
-                let page = 1
-                this.pageNumber = page
-                let search = this.formSearch
-                this.getData({ params : search })
+                let page = 1;
+                this.pageNumber = page;
+                let search = this.formSearch;
+                this.getData({ params : search });
             },
             //保存数据方法
             save(url, data) {
                 this.request(url, data).then((res) => {
                     if (res.status) {
-                        this.addModal = false
-                        this.editModal = false
-                        this.$Message.success(res.msg)
+                        this.addModal = false;
+                        this.editModal = false;
+                        this.$Message.success(res.msg);
                         //重置数据
-                        this.$refs['addForm'].resetFields()
-                        this.$refs['editForm'].resetFields()
+                        this.$refs['addForm'].resetFields();
+                        this.$refs['editForm'].resetFields();
                         //重新拉取服务端数据
-                        this.getData()
+                        this.getData();
                     } else {
-                        this.$Message.error(res.msg)
+                        this.$Message.error(res.msg);
                     }
                 })
             },

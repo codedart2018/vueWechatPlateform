@@ -49,7 +49,7 @@
 </template>
 
 <script>
-    import UEditor from '@/components/editor'
+    import UEditor from '@/components/editor';
 
     export default{
         data(){
@@ -124,34 +124,34 @@
                 })
             },
             handleReset (name) {
-                this.$refs[name].resetFields()
+                this.$refs[name].resetFields();
             },
             //获得分类数据
             getCate() {
                 this.request('AdminCategoryList', {type: 1}, true).then((res) => {
                     if(res.status) {
-                        this.cate = res.data
+                        this.cate = res.data;
                     }
                 })
             },
             //获取数据
             getData(instance) {
-                let id = this.$route.params.id
+                let id = this.$route.params.id;
                 this.apiGet('/admin/article/edit',{id: id}).then((res) => {
                     if(res.status) {
-                        this.formField = res.data
-                        instance.execCommand('insertHtml', res.data.content)
+                        this.formField = res.data;
+                        instance.execCommand('insertHtml', res.data.content);
                         instance.addListener('contentChange', () => {
                             this.formField.content = instance.getContent();
                         });
                     } else {
-                        this.$Message.error(res.msg)
+                        this.$Message.error(res.msg);
                     }
                 })
             },
             //后退海阔天空
             goBack() {
-                this.$router.go(-1)
+                this.$router.go(-1);
             },
             //上传成功要执行的方法
             uploadSuccess() {
@@ -159,7 +159,7 @@
             }
         },
         mounted() {
-            this.getCate()
+            this.getCate();
         },
         components: {
             UEditor

@@ -1,49 +1,41 @@
 <template>
     <div>
+        <Alert show-icon closable>
+            温馨提示
+            <template slot="desc">
+                如果您是商户主登陆，你将拥有所有权限!同时为了方便您可以添加多个角色授予不同用户不同角色，不同角色的用户紧限于操作权限内的事宜。
+            </template>
+        </Alert>
+
         <Row class="mb-15">
-            <Col span="18" class="search">
-            <Form :model="formSearch" :label-width="80" inline label-position="right">
-                <Form-item label="分类名称：">
-                    <Input v-model="formSearch.keywords" placeholder="请输入分类名称关键词"></Input>
-                </Form-item>
-                <Form-item :label-width="1">
-                    <Button type="primary" @click="search('formSearch')" icon="ios-search">搜索</Button>
-                </Form-item>
-            </Form>
-            &nbsp;
+            <Col span="18" class="search"> &nbsp;
             </Col>
             <Col span="6" class="text-align-right">
-                <Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加分类</Button>
+            <Button type="primary" @click="addModal = true"><Icon type="plus-round"></Icon>&nbsp;添加角色</Button>
             </Col>
         </Row>
         <Row class="mb-15">
             <Table :columns="columns" :data="list"></Table>
         </Row>
         <Row type="flex" justify="end">
+            <Page :total="total" :page-size="pageSize" show-total show-elevator @on-change="changePage"></Page>
         </Row>
 
-
         <!--添加 Modal 对话框-->
-        <Modal v-model="addModal" title="添加分类" class-name="customize-modal-center" @on-cancel="modalCancel()">
+        <Modal v-model="addModal" title="添加角色" class-name="customize-modal-center" @on-cancel="modalCancel()">
             <div>
                 <Form ref="addForm" :model="addForm" :rules="ruleValidate" :label-width="80">
-                    <Form-item label="分类名称" prop="name">
-                        <Input v-model="addForm.name" placeholder="请填写分类名称" style="width:200px"></Input>
+                    <Form-item label="角色名称" prop="name">
+                        <Input v-model="addForm.name" placeholder="请填写角色名称"></Input>
                     </Form-item>
-                    <Form-item label="所属分类" prop="pid">
-                        <Select v-model="addForm.pid" style="width:200px">
-                            <Option value="0">顶级分类</Option>
-                            <Option v-for="(item, index) in cate" :value="item.id" :key="index">{{ item._name }}</Option>
-                        </Select>
-                    </Form-item>
-                    <Form-item label="分类排序" prop="sort">
-                        <Input v-model="addForm.sort" placeholder="数字越大排序越前" style="width:200px"></Input>
-                    </Form-item>
-                    <Form-item label="分类状态" prop="status">
+                    <Form-item label="角色状态" prop="status">
                         <Radio-group v-model="addForm.status">
                             <Radio label="1">正常</Radio>
                             <Radio label="0">锁定</Radio>
                         </Radio-group>
+                    </Form-item>
+                    <Form-item label="角色说明" prop="desc">
+                        <Input v-model="addForm.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="角色简要说明..."></Input>
                     </Form-item>
                 </Form>
             </div>
@@ -55,26 +47,20 @@
 
         <!--编辑 Modal 对话框-->
         <Modal v-model="editModal" class-name="customize-modal-center">
-            <div slot="header" class="ivu-modal-header-inner">编辑分类</div>
+            <div slot="header" class="ivu-modal-header-inner">编辑权限角色</div>
             <div>
                 <Form ref="editForm" :model="editForm" :rules="ruleValidate" :label-width="80">
-                    <Form-item label="分类名称" prop="name">
-                        <Input v-model="editForm.name" placeholder="请填写分类名称" style="width:200px"></Input>
+                    <Form-item label="角色名称" prop="name">
+                        <Input v-model="editForm.name" placeholder="请填写角色名称"></Input>
                     </Form-item>
-                    <Form-item label="所属分类" prop="pid">
-                        <Select v-model="editForm.pid" style="width:200px">
-                            <Option value="0">顶级分类</Option>
-                            <Option v-for="(item, index) in cate" :value="item.id" :key="index">{{ item._name }}</Option>
-                        </Select>
-                    </Form-item>
-                    <Form-item label="分类排序" prop="sort">
-                        <Input v-model="editForm.sort" placeholder="数字越大排序越前" style="width:200px"></Input>
-                    </Form-item>
-                    <Form-item label="分类状态" prop="status">
+                    <Form-item label="角色状态" prop="status">
                         <Radio-group v-model="editForm.status">
                             <Radio label="1">正常</Radio>
                             <Radio label="0">锁定</Radio>
                         </Radio-group>
+                    </Form-item>
+                    <Form-item label="角色说明" prop="desc">
+                        <Input v-model="editForm.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="角色说明..."></Input>
                     </Form-item>
                 </Form>
             </div>
@@ -83,8 +69,6 @@
                 <Button type="ghost" @click="modalCancel()" style="margin-left: 8px">取消</Button>
             </div>
         </Modal>
-
-
     </div>
 </template>
 
@@ -96,7 +80,9 @@
     }
 </style>
 
+
 <script>
+
     export default {
         data () {
             return {
@@ -104,26 +90,26 @@
                     {
                         title: 'ID',
                         key: 'id',
-                        width: 160
+                        width: 60
                     },
                     {
-                        title: '分类名称',
-                        render: (h, params) => {
-                            const row = params.row;
-                            if(row._name) {
-                                return h('span', row._name);
-                            }
-                            return h('span', row.name);
-                        }
+                        title: '角色名称',
+                        key: 'name',
+                        width: 200
+                    },
+                    {
+                        title: '角色简介',
+                        key: 'desc'
                     },
                     {
                         title: '状态',
+                        key: 'status',
                         width: 120,
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red';
-                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除';
+                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red'
+                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除'
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -134,27 +120,34 @@
                     },
                     {
                         title: '添加时间',
+                        key: 'create_time',
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'));
-                        }
-                    },
-                    {
-                        title: '更新时间',
-                        width: 135,
-                        align: 'center',
-                        render: (h, params) => {
-                            return h('div',this.$formatDate(params.row.update_time, 'yyyy-MM-dd h:m'));
+                            return h('div',this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
                         }
                     },
                     {
                         title: '操作',
                         key: 'operation',
-                        width: 140,
+                        width: 210,
                         align: 'center',
                         render: (h, params) => {
                             return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'success',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.authGo(params.row.id)
+                                        }
+                                    }
+                                }, '角色授权'),
                                 h('Button', {
                                     props: {
                                         type: 'primary',
@@ -165,7 +158,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.edit(params.index);
+                                            this.edit(params.index)
                                         }
                                     }
                                 }, '查看'),
@@ -176,7 +169,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.remove(params.index, params.row.id);
+                                            this.del(params.index, params.row.id)
                                         }
                                     }
                                 }, '删除')
@@ -186,37 +179,30 @@
                 ],
                 //列表数据
                 list: [],
-                //分类数据
-                cate: [],
+                //总共数据多少条
+                total: 0,
+                //每页多少条数据
+                pageSize: 1,
                 addForm: {
                     name: '',
-                    pid: '',
                     status: 1,
-                    sort: ''
+                    desc: ''
                 },
-                //编辑表单
-                editForm: {},
                 //验证规则
                 ruleValidate: {
                     name: [
-                        { required: true, message: '分类名称不能为空', trigger: 'blur' },
-                        { type: 'string', min: 2, message: '分类名称不能少于2个字符', trigger: 'blur' }
-                    ],
-                    pid: [
-                        { required: true, message: '请选择所属分类', trigger: 'blur' }
-                    ],
-                    sort: [
-                        { type: 'string', message: '排序只能数字', trigger: 'blur', pattern: /^[0-9]+$/}
+                        { required: true, message: '角色名称不能为空', trigger: 'blur' },
+                        { type: 'string', min: 2, message: '角色名称不能少于2个字符', trigger: 'blur' }
                     ]
                 },
                 //搜索表单
                 formSearch: {},
+                //编辑表单
+                editForm: {},
                 //添加 modal
                 addModal: false,
                 //编辑 modal
                 editModal: false,
-                //计数器
-                tally: 0
             }
         },
         methods: {
@@ -224,32 +210,12 @@
             modalCancel() {
                 this.editModal = false;
             },
-            //重置表单数据
-            handleReset (name) {
-                this.$refs[name].resetFields();
-            },
-            //获取数据
-            getData (params) {
-                if (!params) params = {page: 1};
-                this.request('AdminCategoryList', params, true).then((res) => {
-                    if(res.status) {
-                        //列表数据
-                        this.list = res.data;
-                        if(this.tally == 0) {
-                            this.cate = res.data;
-                            this.tally++;
-                        }
-                    } else {
-                        //列表数据
-                        this.list = [];
-                    }
-                })
-            },
             //添加数据
             addSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AdminCategoryAdd", this.addForm);
+                        this.addForm.mch_id = this.$store.state.Merchant.merchant.id;
+                        this.save("MerchantAuthAddRole", this.addForm);
                     } else {
                         this.$Message.error('表单验证失败!');
                     }
@@ -259,27 +225,55 @@
             editSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.save("AdminCategoryEdit", this.editForm);
+                        this.save("MerchantAuthEditRole", this.editForm);
                     } else {
                         this.$Message.error('表单验证失败!');
                     }
                 })
             },
-            edit(index) {
+            //重置表单数据
+            handleReset (name) {
+                this.$refs[name].resetFields();
+            },
+            //分页切换页码
+            changePage (page) {
+                let search = this.formSearch;
+                let query = Object.assign({page: page }, search);
+                //分页
+                this.$router.push({ name: this.$router.currentRoute.name, query: query});
+                //获取最新数据
+                this.getData({page: page, params: search});
+            },
+            getData (params) {
+                if (!params) params = {page: 1}
+                this.request('MerchantAuthRole', {mch_id: this.$store.state.Merchant.merchant.id}, true).then((res) => {
+                    if(res.status) {
+                        //列表数据
+                        this.list = res.data.list;
+                        //总页数
+                        this.total = res.data.count;
+                        //每页多少条数据
+                        this.pageSize = res.data.size;
+                    }
+                }).catch((response) => {
+
+                })
+            },
+            edit (index) {
                 //打开 modal 窗口
                 this.editModal = true;
                 //获取原数据
                 this.editForm = this.list[index];
             },
-            //删除分类数据
-            remove (index, id) {
+            //删除角色数据
+            del (index, id) {
                 this.$Modal.confirm({
                     title: '温馨提示',
                     width: 300,
                     content: '<p>你确定要删除?删除后不可恢复!</p>',
                     loading: true,
                     onOk: () => {
-                        this.request('AdminCategoryDelete', {id, id}).then((res) => {
+                        this.request('MerchantAuthDeleteRole', {id, id}).then((res) => {
                             if(res.status) {
                                 this.$Message.info(res.msg);
                                 this.$Modal.remove();
@@ -294,10 +288,7 @@
             },
             //表单搜索
             search() {
-                let page = 1;
-                this.pageNumber = page;
-                let search = this.formSearch;
-                this.getData({ params : search });
+
             },
             //保存数据方法
             save(url, data) {
@@ -315,6 +306,9 @@
                         this.$Message.error(res.msg);
                     }
                 })
+            },
+            authGo(id) {
+                this.$router.push({ path: '/setting/authorize/' + id, params: { id: id }});
             }
         },
         mounted() {

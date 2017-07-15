@@ -9,7 +9,6 @@ const methodMap = {
     EditMaterialType: {url: '/admin/common_api/edit_material_type', method: 'get'},
     /** 编辑器素材列表接口 **/
     EditMaterialList: {url: '/admin/common_api/edit_material_list', method: 'get'},
-    
     /** 登陆接口 **/
     Login: {url: '/admin/login/index', method: 'post'},
     /** 退出接口 **/
@@ -17,21 +16,21 @@ const methodMap = {
     /** 持续验证登陆 **/
     VerifyLogin: {url: '/admin/login/verify_login', method: 'post'},
     /** 权限节点接口 **/
-    GetRule: {url: '/admin/role_auth/rule', method: 'get'},
+    AdminGetRule: {url: '/admin/role_auth/rule', method: 'get'},
     /** 添加节点接口 **/
-    AddRule: {url: '/admin/role_auth/add_rule', method: 'post'},
+    AdminAddRule: {url: '/admin/role_auth/add_rule', method: 'post'},
     /** 编辑节点接口 **/
-    EditRule: {url: '/admin/role_auth/edit_rule', method: 'post'},
+    AdminEditRule: {url: '/admin/role_auth/edit_rule', method: 'post'},
     /** 删除节点接口 **/
-    DelRule: {url: '/admin/role_auth/delete_rule', method: 'post'},
+    AdminDelRule: {url: '/admin/role_auth/delete_rule', method: 'post'},
     /** 角色列表 **/
-    GetRole: {url: '/admin/role_auth/role', method: 'get'},
+    AdminGetRole: {url: '/admin/role_auth/role', method: 'get'},
     /** 添加角色 **/
     AdminAddRole: {url: '/admin/role_auth/add_role', method: 'post'},
     /** 编辑角色 **/
-    EditRole: {url: '/admin/role_auth/edit_role', method: 'post'},
+    AdminEditRole: {url: '/admin/role_auth/edit_role', method: 'post'},
     /** 删除角色 **/
-    DelRole: {url: '/admin/role_auth/delete_role', method: 'post'},
+    AdminDelRole: {url: '/admin/role_auth/delete_role', method: 'post'},
     /** 角色授权列表 **/
     Authorize: {url: '/admin/role_auth/authorize', method: 'get'},
     /** 保存角色授权 **/
@@ -58,6 +57,10 @@ const methodMap = {
     AdminMerchantRule: {url: '/admin/merchant_auth/rule', method: 'get'},
     /** 商户添加权限节点 **/
     AdminMerchantAddRule: {url: '/admin/merchant_auth/add_rule', method: 'post'},
+    /** 商户修改权限节点 **/
+    AdminMerchantEditRule: {url: '/admin/merchant_auth/edit_rule', method: 'post'},
+    /** 商户删除权限节点 **/
+    AdminMerchantDeleteRule: {url: '/admin/merchant_auth/delete_rule', method: 'post'},
     /** 编辑器素材列表 **/
     EditorMaterial: {url: '/admin/editor_material/index', method: 'get'},
     /** 添加编辑器素材 **/
@@ -104,7 +107,6 @@ const methodMap = {
     AdminWebsiteLock: {url: '/admin/website/lock', method: 'post'},
     /** 银行帐号设置 **/
     AdminSystemBank: {url: '/admin/system/bank_account', method: 'post'},
-    
     // /** 以下接口为商户平台接口 以下接口地址没有走后台验证 **/
     /** 商户平台登陆中心 **/
     MerchantLogin: {url: '/merchants/passport/login', method: 'post'},
@@ -112,13 +114,26 @@ const methodMap = {
     MerchantRegister: {url: '/merchants/passport/register', method: 'post'},
     /** 商户退出 **/
     MerchantSignOut: {url: '/merchants/passport/sign_out', method: 'post'},
+    //todo 后台过滤某些公共节点
     /** 获取某个用户详情 notice:未添加到节点**/
-    MerchantUserView: {url: '/merchants/user/view', method: 'get'},
+    MerchantUserDetail: {url: '/merchants/user/detail', method: 'get'},
     /** 商户用户个人资料修改 notice:未添加到节点**/
     MerchantUserEdit: {url: '/merchants/user/edit', method: 'post'},
-    /** 获取商户详情资料 notice:未添加到节点**/
+    /** 商户用户角色 **/
+    MerchantAuthRole: {url: '/merchants/user/role', method: 'get'},
+    /** 商户添加用户角色 **/
+    MerchantAuthAddRole: {url: '/merchants/user/add_role', method: 'post'},
+    /** 商户修改用户角色 **/
+    MerchantAuthEditRole: {url: '/merchants/user/edit_role', method: 'post'},
+    /** 商户删除用户角色 **/
+    MerchantAuthDeleteRole: {url: '/merchants/user/delete_role', method: 'post'},
+    /** 商户角色授权列表 **/
+    MerchantAuthorize: {url: '/merchants/user/authorize', method: 'get'},
+    /** 商户保存角色授权 **/
+    MerchantSaveAuth: {url: '/merchants/user/save_authorize', method: 'post'},
+    /** 获取商户详情资料 **/
     MerchantDetail: {url: '/merchants/merchant/detail', method: 'get'},
-    /** 保存商户资料 notice:未添加到节点**/
+    /** 保存商户资料 **/
     MerchantInfoSave: {url: '/merchants/merchant/save', method: 'post'},
     /** 商户公众号列表 **/
     MerchantPublicList: {url: '/merchants/public_signal/index', method: 'get'},
@@ -166,14 +181,12 @@ const methodMap = {
     ArchivesEdit: {url: '/merchants/archives/edit', method: 'post'},
     /** 保存同步文章（图文消息）notice:未添加到节点**/
     ArchivesSaveSyncMaterialNews: {url: '/merchants/archives/sync_material', method: 'post'},
-
-    
     /** 平台商户微网站站点获取 **/
     MerchantWebsite: {url: '/merchants/website/plat_form_website', method: 'get'},
     /** 平台商户微网站站点分类获取 **/
     MerchantWebsiteCate: {url: '/merchants/website/category', method: 'get'},
     /** 平台商户微站数据保存 **/
     MerchantWebsiteSave: {url: '/merchants/website/save', method: 'post'},
-}
+};
 
-export default methodMap
+export default methodMap;

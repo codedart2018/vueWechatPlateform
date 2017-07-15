@@ -199,13 +199,13 @@
                 this.request('AdminMerchantDetail', {id: id}, true).then((res) => {
                     if(res.status) {
                         //数据
-                        this.data = res.data
+                        this.data = res.data;
                     }
                 })
             },
             //后退海阔天空
             goBack() {
-                this.$router.go(-1)
+                this.$router.go(-1);
             }
         },
         mounted() {

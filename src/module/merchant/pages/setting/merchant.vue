@@ -95,15 +95,15 @@
                     if (valid) {
                     	this.request("MerchantInfoSave", this.data, true).then((res) => {
                             if(res.status) {
-                                this.$Message.success(res.msg)
+                                this.$Message.success(res.msg);
                             } else {
-                                this.$Message.error(res.msg)
+                                this.$Message.error(res.msg);
                             }
                         }).catch((err) => {
-                            this.$Message.error('系统服务出错')
+                            this.$Message.error('系统服务出错');
                         })
                     } else {
-                        this.$Message.error('表单验证失败!')
+                        this.$Message.error('表单验证失败!');
                     }
                 })
             },
@@ -114,10 +114,10 @@
             getData() {
                 this.request("MerchantDetail", {id : this.$store.state.Merchant.merchant.id}, true).then((res) => {
                     if(res.status) {
-                        this.data = res.data
+                        this.data = res.data;
                     } else {
                         this.$Message.error('商户信息获取失败!');
-                        this.$router.go(-1)
+                        this.$router.go(-1);
                     }
                 }).catch((err) => {
                     this.$Message.error(err);
@@ -126,7 +126,7 @@
         },
         mounted() {
         	//获取服务数据
-        	this.getData()
+        	this.getData();
         }
     }
 </script>

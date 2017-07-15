@@ -54,9 +54,9 @@
 </template>
 
 <script>
-    import {canvas} from '../../../../libs/canvas/star'
-    import {mapActions} from 'vuex'
-    import {sessionRouters, filterRouters} from '../../router'
+    import {canvas} from '../../../../libs/canvas/star';
+    import {mapActions} from 'vuex';
+    import {sessionRouters, filterRouters} from '../../router';
 
     export default {
         beforeCreate: function () {
