@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-    import tableRow from './list-table.vue'
+    import tableRow from './list-table.vue';
     export default {
         data () {
             return {
@@ -69,8 +69,8 @@
                         align: 'center',
                         render: (h, params) => {
                             const row = params.row;
-                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red'
-                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除'
+                            const color = row.status == 1 ? 'green' : row.status == 0 ? 'yellow' : 'red';
+                            const text = row.status == 1 ? '正常' : row.status == 0 ? '锁定' : '删除';
                             return h('Tag', {
                                 props: {
                                     type: 'dot',
@@ -105,7 +105,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.show(params.index, params.row.id)
+                                            this.show(params.index, params.row.id);
                                         }
                                     }
                                 }, '管理'),
@@ -117,7 +117,7 @@
                                     on: {
                                         click: () => {
                                         	//todo 切换过去的时候先保存一份public_signal号在vuex数据里面后面的操作全在里面
-                                            this.$router.push({ path: '/wechat/' + params.row.id })
+                                            this.$router.push({ path: '/wechat/' + params.row.id });
                                         }
                                     }
                                 }, '接口')
@@ -164,7 +164,7 @@
         mounted() {
             //服务端获取数据
             this.getData();
-            console.log(this.$route)
+            //console.log(this.$route);
         }
     }
 </script>

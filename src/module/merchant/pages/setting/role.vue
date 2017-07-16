@@ -130,7 +130,7 @@
                     {
                         title: '操作',
                         key: 'operation',
-                        width: 210,
+                        width: 170,
                         align: 'center',
                         render: (h, params) => {
                             return h('div', [

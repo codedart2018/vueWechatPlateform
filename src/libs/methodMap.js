@@ -119,6 +119,16 @@ const methodMap = {
     MerchantUserDetail: {url: '/merchants/user/detail', method: 'get'},
     /** 商户用户个人资料修改 notice:未添加到节点**/
     MerchantUserEdit: {url: '/merchants/user/edit', method: 'post'},
+    /** 商户用户列表（但不包括主帐号）**/
+    MerchantUserList: {url: '/merchants/user/list', method: 'get'},
+    /** 商户用户添加 **/
+    MerchantAddUser: {url: '/merchants/user/add_user', method: 'post'},
+    /** 商户用户修改 **/
+    MerchantEditUser: {url: '/merchants/user/edit_user', method: 'post'},
+    /** 商户用户密码重置 **/
+    MerchantRestUserPassword: {url: '/merchants/user/rest_password', method: 'post'},
+    /** 商户用户删除 **/
+    MerchantDeleteUser: {url: '/merchants/user/delete_user', method: 'post'},
     /** 商户用户角色 **/
     MerchantAuthRole: {url: '/merchants/user/role', method: 'get'},
     /** 商户添加用户角色 **/

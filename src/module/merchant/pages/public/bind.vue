@@ -85,7 +85,7 @@
                 setTimeout(() => {
                     this.modalLoading = false;
                     this.modal = false;
-                    this.$router.push({path: '/public/list'})
+                    this.$router.push({path: '/public/list'});
                 }, 1000);
             }
         },

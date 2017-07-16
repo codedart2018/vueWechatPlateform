@@ -4,7 +4,7 @@
             <Col span="18" class="search">
             <Form :model="formSearch" :label-width="80" inline label-position="right">
                 <Form-item label="素材名称：">
-                    <Input v-model="formSearch.keywords" placeholder="请输入角色名称关键词"></Input>
+                    <Input v-model="formSearch.keywords" placeholder="请输入素材名称关键词"></Input>
                 </Form-item>
                 <Form-item label="素材分类：">
                     <Select v-model="formSearch.c_id" placeholder="请选择" style="width:90px">

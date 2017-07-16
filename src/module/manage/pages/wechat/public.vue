@@ -14,7 +14,7 @@
                     </Select>
                 </Form-item>
                 <Form-item label="关键词：">
-                    <Input v-model="formSearch.keywords" placeholder="请输入角色名称关键词"></Input>
+                    <Input v-model="formSearch.keywords" placeholder="请输入公众号名称"></Input>
                 </Form-item>
                 <Form-item label="所属角色">
                     <Select v-model="formSearch.role_id" placeholder="请选择" style="width:100px">

@@ -98,7 +98,7 @@
                         width: 135,
                         align: 'center',
                         render: (h, params) => {
-                            return h('div', this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'))
+                            return h('div', this.$formatDate(params.row.create_time, 'yyyy-MM-dd h:m'));
                         }
                     },
                     {
@@ -118,9 +118,9 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.replyModal = true
-                                            this.replyData['id'] = params.row.id
-                                            this.replyData['openid'] = params.row.from_user_name
+                                            this.replyModal = true;
+                                            this.replyData['id'] = params.row.id;
+                                            this.replyData['openid'] = params.row.from_user_name;
                                         }
                                     }
                                 }, '回复'),
@@ -134,7 +134,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.detail(params.row.id)
+                                            this.detail(params.row.id);
                                         }
                                     }
                                 }, '详情'),
@@ -145,7 +145,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.del(params.index, params.row.id)
+                                            this.del(params.index, params.row.id);
                                         }
                                     }
                                 }, '删除')
@@ -172,47 +172,47 @@
         methods: {
             //获取数据
             getData (params) {
-                if (!params) params = {page: 1, mch_id: 1, platform_id: 800000}
+                if (!params) params = {page: 1, mch_id: this.$store.state.Merchant.merchant.id, platform_id: this.$store.state.Merchant.platform.id}
                 this.request('MerchantWxMessage', params, true).then((res) => {
                     if (res.status) {
                         //列表数据
-                        this.list = res.data.list
+                        this.list = res.data.list;
                         //总页数
-                        this.total = res.data.count
+                        this.total = res.data.count;
                         //每页多少条数据
-                        this.pageSize = res.data.size
+                        this.pageSize = res.data.size;
                     } else {
                         //列表数据
-                        this.list = []
+                        this.list = [];
                         //总页数
-                        this.total = 0
+                        this.total = 0;
                         //每页多少条数据
-                        this.pageSize = 0
+                        this.pageSize = 0;
                     }
                 })
             },
             //分页切换页码
             changePage (page) {
-                this.pageNumber = page
-                let search = this.formSearch
-                let query = Object.assign({page: page}, search)
+                this.pageNumber = page;
+                let search = this.formSearch;
+                let query = Object.assign({page: page}, search);
                 //分页
-                this.$router.push({name: this.$router.currentRoute.name, query: {page: page}})
+                this.$router.push({name: this.$router.currentRoute.name, query: {page: page}});
                 //获取最新数据
-                this.getData({page: page, params: search})
+                this.getData({page: page, params: search});
             },
             //消息回复
             reply() {
                 //获取回复组件内容
-                const content = this.$refs.reply.replyContent
+                const content = this.$refs.reply.replyContent;
                 if (!this.replyData.id || !this.replyData.openid) {
-                    this.$Message.error('请选择一个粉丝回复消息!')
-                    return
+                    this.$Message.error('请选择一个粉丝回复消息!');
+                    return false;
                 }
 
                 if (!content || this.$refs.reply.wordsNumber < 0) {
-                    this.$Message.error('请填写600字以内的消息内容!')
-                    return
+                    this.$Message.error('请填写600字以内的消息内容!');
+                    return false;
                 }
                 this.request('MerchantWxSendMessage', {
                     type: 'text',
@@ -221,19 +221,19 @@
                     content: content
                 }, '发送中...').then((res) => {
                     if (res.status) {
-                        this.replyModal = false
-                        this.$refs.reply.replyContent = ''
-                        this.$Message.success(res.msg)
+                        this.replyModal = false;
+                        this.$refs.reply.replyContent = '';
+                        this.$Message.success(res.msg);
                         // notice 是否要从后台重新接取数据 后台记得处理emoji
                     } else {
-                        this.$Message.error(res.msg)
+                        this.$Message.error(res.msg);
                     }
                 })
             },
             //详情路由跳转
             detail(id) {
             	//这儿到时候直接传用户的身份ID 后台不用再进行一次查找用户身份信息
-                this.$router.push({ path: '/wechat/message_detail/' + id, params: { id: id }})
+                this.$router.push({ path: '/wechat/message_detail/' + id, params: { id: id }});
             },
         },
         components: {
@@ -241,7 +241,7 @@
         },
         mounted() {
             //服务端获取数据
-            this.getData()
+            this.getData();
         }
     }
 </script>
