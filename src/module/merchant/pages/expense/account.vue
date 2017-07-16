@@ -7,6 +7,9 @@
                     <div class="title">账户余额</div>
                     <div class="usage">
                         <span>{{merchant.balance}}<span class="unit">&nbsp;元</span></span>
+                        <div class="withdraw">
+                            <Button type="primary" size="small">提现</Button>
+                        </div>
                     </div>
                 </div>
                 <div class="item line">

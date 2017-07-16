@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="content">
-                <p>1、为了更好的服务目前我们只支持已认证的订阅号和已认证的服务号接入。暂不支持未认证的公众号接入，谢谢理解</p>
+                <p>1、为了更好的服务目前我们只支持【已认证的订阅号】和【已认证的服务号】接入。暂不支持未认证的公众号接入，谢谢理解</p>
                 <p>2、登陆微信公众平台，链接地址：<a class="red" href="https://mp.weixin.qq.com/" target="_blank">https://mp.weixin.qq.com/</a></p>
                 <p>3、在<span class="red">【开发&gt;基本配置】</span>关闭服务器配置选项和取消其他同类第三方平台授权,以兔服务冲突</p>
                 <p>4、请点击下方“<span class="red">一键授权绑定</span>”，<span class="red">扫描</span>显示的二维码</p>
