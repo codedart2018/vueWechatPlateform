@@ -114,6 +114,8 @@ const methodMap = {
     MerchantRegister: {url: '/merchants/passport/register', method: 'post'},
     /** 商户退出 **/
     MerchantSignOut: {url: '/merchants/passport/sign_out', method: 'post'},
+    /** 商户公共MAIN页 不走授权 **/
+    MerchantCommonMain: {url: '/merchants/common_main/index', method: 'get'},
     //todo 后台过滤某些公共节点
     /** 获取某个用户详情 notice:未添加到节点**/
     MerchantUserDetail: {url: '/merchants/user/detail', method: 'get'},

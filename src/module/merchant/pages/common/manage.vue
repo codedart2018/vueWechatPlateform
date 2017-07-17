@@ -24,51 +24,40 @@
                                         </Menu-item>
                                     </Submenu>
                                 </Menu>
-                                <!--<Menu width="auto" style="position: static;" accordion>-->
-                                    <!--<Submenu name="1">-->
-                                        <!--<template slot="title">-->
-                                            <!--<Icon type="chatbubbles"></Icon>-->
-                                            <!--公众号-->
-                                        <!--</template>-->
-                                        <!--<Menu-item name="1-1"><router-link to="/public/list">公众号列表</router-link></Menu-item>-->
-                                        <!--<Menu-item name="1-2"> <router-link to="/public/bind">快速绑定</router-link></Menu-item>-->
-                                    <!--</Submenu>-->
-                                    <!--<Submenu name="2">-->
-                                        <!--<template slot="title">-->
-                                            <!--<Icon type="stats-bars"></Icon>-->
-                                            <!--财务中心-->
-                                        <!--</template>-->
-                                        <!--<Menu-item name="2-1"><router-link to="/expense/account">帐户总览</router-link></Menu-item>-->
-                                        <!--<Menu-item name="2-2"><router-link to="/expense/bills">资金明细</router-link></Menu-item>-->
-                                        <!--<Menu-item name="2-3"><router-link to="/expense/integral">积分明细</router-link></Menu-item>-->
-                                    <!--</Submenu>-->
-                                    <!--<Submenu name="5">-->
-                                        <!--<template slot="title">-->
-                                            <!--<Icon type="stats-bars"></Icon>-->
-                                            <!--商户管理-->
-                                        <!--</template>-->
-                                        <!--<Menu-item name="5-1"><router-link to="/setting/merchant">商户信息</router-link></Menu-item>-->
-                                        <!--<Menu-item name="5-2">活跃分析</Menu-item>-->
-                                        <!--<Menu-item name="5-3">时段分析</Menu-item>-->
-                                    <!--</Submenu>-->
-                                    <!--<Submenu name="6">-->
-                                        <!--<template slot="title">-->
-                                            <!--<Icon type="gear-a"></Icon>-->
-                                            <!--个人设置-->
-                                        <!--</template>-->
-                                        <!--<Menu-item name="6-1"><router-link to="/setting/personal">资料修改</router-link></Menu-item>-->
-                                        <!--<Menu-item name="6-2"><router-link to="/personal">登陆日志</router-link></Menu-item>-->
-                                        <!--<Menu-item name="6-3"><router-link to="/personal">操作日志</router-link></Menu-item>-->
-                                    <!--</Submenu>-->
-                                    <!--<Submenu name="7">-->
-                                        <!--<template slot="title">-->
-                                            <!--<Icon type="help-circled"></Icon>-->
-                                            <!--帮助中心-->
-                                        <!--</template>-->
-                                        <!--<Menu-item name="7-1">新增用户</Menu-item>-->
-                                        <!--<Menu-item name="7-2">活跃用户</Menu-item>-->
-                                    <!--</Submenu>-->
-                                <!--</Menu>-->
+                            </div>
+
+                            <!--联系客服-->
+                            <div class="contact-us">
+                                <div class="title" style="">
+                                    <span style="font-size: 14px;">联系我们</span>
+                                </div>
+                                <div class="box-bd">
+                                    <ul>
+                                        <li>
+                                            <i class="iconfont icon-QQ"></i>
+                                            <span>5353920</span>
+                                        </li>
+                                        <li>
+                                            <i class="iconfont icon-dianhua"></i>
+                                            <span>400-800-8888</span>
+                                        </li>
+                                        <li>
+                                            <i class="iconfont icon-youxiang"></i>
+                                            <span>kefu@daimatu.cn</span>
+                                        </li>
+                                        <li>
+                                            <i class="iconfont icon-weixin"></i>
+                                            <span>关注微信公众号</span>
+                                            <div class="qr-code">
+                                                <div class="follow" style="transform:scaleY(-1);">
+                                                    444
+                                                </div>
+                                                <div class="arrow arrow-outer"></div>
+                                                <div class="arrow arrow-inner"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
@@ -79,7 +68,7 @@
                             </transition>
                             <transition :name="transitionName" v-if="$route.path != '/'">
                                 <div>
-                                    <div style="height: 14px; display: flex; align-items: center; line-height: 14px; margin-bottom: 20px;">
+                                    <div style="height: 14px; display: flex; align-items: center; line-height: 14px; margin-bottom: 20px; cursor: pointer">
                                         <Breadcrumb>
                                             <Breadcrumb-item>管理中心</Breadcrumb-item>
                                             <Breadcrumb-item v-for="(item, index) in $route.meta.navigation" v-if="$route.meta.navigation.length > 0" :key="index">{{item}}</Breadcrumb-item>
@@ -128,56 +117,6 @@
                                         </template>
                                     </Submenu>
                                 </Menu>
-                                <!--<Menu width="auto" style="position: static;" accordion>-->
-                                    <!--<Submenu name="0">-->
-                                        <!--<template slot="title">-->
-                                            <!--<Icon type="android-apps"></Icon>-->
-                                            <!--应用管理-->
-                                        <!--</template>-->
-                                        <!--<Menu-item name="0-1"><router-link to="/website/index">微网站</router-link></Menu-item>-->
-                                    <!--</Submenu>-->
-                                    <!--<Submenu name="1">-->
-                                        <!--<template slot="title">-->
-                                            <!--<Icon type="chatbubbles"></Icon>-->
-                                            <!--微信管理-->
-                                        <!--</template>-->
-                                        <!--<Menu-item name="1-1"><router-link to="/wechat/fans">粉丝管理</router-link></Menu-item>-->
-                                        <!--<Menu-item name="1-2"><router-link to="/wechat/message">消息管理</router-link></Menu-item>-->
-                                        <!--<Menu-item name="1-3"><router-link to="/public/bind">自动回复</router-link></Menu-item>-->
-                                        <!--<Menu-item name="1-4"><router-link to="/public/bind">消息群发</router-link></Menu-item>-->
-                                        <!--<Menu-item name="1-5"><router-link to="/wechat/menu">自定义菜单</router-link></Menu-item>-->
-                                    <!--</Submenu>-->
-                                    <!--<Submenu name="2">-->
-                                        <!--<template slot="title">-->
-                                            <!--<Icon type="ios-compose-outline"></Icon>-->
-                                            <!--文章素材-->
-                                        <!--</template>-->
-                                        <!--<Menu-item name="2-1"><router-link to="/archives/material">素材管理</router-link></Menu-item>-->
-                                        <!--<Menu-item name="2-2"><router-link to="/archives/category">文章分类</router-link></Menu-item>-->
-                                        <!--<Menu-item name="2-3"><router-link to="/archives/index">文章列表</router-link></Menu-item>-->
-                                    <!--</Submenu>-->
-                                    <!--<Submenu name="4">-->
-                                        <!--<template slot="title">-->
-                                            <!--<Icon type="android-bookmark"></Icon>-->
-                                            <!--营销活动-->
-                                        <!--</template>-->
-                                        <!--<Menu-item name="4-1">活动列表</Menu-item>-->
-                                        <!--<Menu-item name="4-2">添加活动</Menu-item>-->
-                                    <!--</Submenu>-->
-                                    <!--<Submenu name="5">-->
-                                        <!--<template slot="title">-->
-                                            <!--<Icon type="gear-a"></Icon>-->
-                                            <!--平台设置-->
-                                        <!--</template>-->
-                                        <!--<Menu-item name="5-1">平台设置</Menu-item>-->
-                                    <!--</Submenu>-->
-                                    <!--<Submenu name="6">-->
-                                        <!--<template slot="title">-->
-                                            <!--<Icon type="settings"></Icon>-->
-                                            <!--<a href="" style="color: #657180;">定制中心</a>-->
-                                        <!--</template>-->
-                                    <!--</Submenu>-->
-                                <!--</Menu>-->
                             </div>
                         </div>
 
@@ -200,7 +139,7 @@
                         </div>
                     </div>
 
-                    <div style="height: 40px; text-align: center; line-height: 40px;">
+                    <div class="footer">
                         Copyright　© daimatu.cn　All Rights Reserved　代码兔微信公众平台版权所有
                     </div>
                 </div>

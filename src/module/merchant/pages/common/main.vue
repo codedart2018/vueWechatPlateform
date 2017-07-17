@@ -9,7 +9,7 @@
                     <img src="https://avatars.githubusercontent.com/u/12706830?v=3" alt="头像">
                 </div>
                 <div class="info">
-                    <div style="font-size: 16px; font-weight: bold;"><span>你好，百德商贸有限公司 欢迎你回来！</span>
+                    <div style="font-size: 16px; font-weight: bold;"><span>你好，{{data.name}} 欢迎你回来！</span>
                     </div>
                     <div style="font-size: 16px; font-weight: bold; color: #e74b3c;">
                         myxingke@126.com
@@ -35,20 +35,20 @@
                 </div>
                 <div style="flex: 1;">
                     <div class="pre">
-                        预付款金额：
+                        帐户余额：
                     </div>
                     <div class="row">
                         <div class="money">
-                            100.00 元
+                            {{data.balance}} 元
                         </div>
                         <div class="recharge">
-                            帐户充值
+                            <router-link to="/expense/account">帐户充值</router-link>
                         </div>
                         <div class="list">
-                            <div style="border-right: 1px solid #dedede">
-                                财务明细
+                            <div class="right-line">
+                                <router-link to="/expense/bills">财务明细</router-link>
                             </div>
-                            <div style="border-right: 1px solid #dedede">
+                            <div class="right-line">
                                 索取发票
                             </div>
                             <div>
@@ -60,12 +60,12 @@
             </div>
             <div style="margin-left: 20px; border: 1px solid #dedede; flex: 1; display: flex; justify-content: space-around; padding: 10px; flex-direction: row">
                 <div style="border-right: 1px dotted #dedede; display: flex; flex-direction: column; align-items: center; width: 50%">
-                    <i class="iconfont icon-money" style="font-size: 60px; color: #f15a4a;"></i>
-                    <div style="font-size: 14px; font-weight: 600; padding-top: 5px;">消费：<span style="color: #ED3C4C;">100</span> 元</div>
+                    <i class="iconfont icon-jifen" style="font-size: 60px; color: #f15a4a;"></i>
+                    <div style="font-size: 14px; font-weight: 600; padding-top: 5px;">消费：<span style="color: #ED3C4C;">{{data.consume}}</span> 元</div>
                 </div>
                 <div style="display: flex; flex-direction: column; align-items: center; width: 50%">
-                    <i class="iconfont icon-jifen" style="font-size: 60px; color: #ea9518;"></i>
-                    <div style="font-size: 14px; font-weight: 600; padding-top: 5px;">积分：85</div>
+                    <i class="iconfont icon-jifen1" style="font-size: 60px; color: #ea9518;"></i>
+                    <div style="font-size: 14px; font-weight: 600; padding-top: 5px;">积分：<span style="color: #ED3C4C;">{{data.integral}}</span> 个</div>
                 </div>
             </div>
         </div>
@@ -127,8 +127,28 @@
 </template>
 <script>
     export default {
-        data () {
-            return {}
+        data(){
+            return {
+            	data: {}
+            }
+        },
+        methods: {
+            //获取公共信息
+            getData() {
+                this.request("MerchantCommonMain", {}, false).then((res) => {
+                    if(res.status) {
+                        this.data = res.data;
+                    } else {
+                        this.$Message.error(res.msg);
+                    }
+                }).catch((err) => {
+                    this.$Message.error(err);
+                })
+            }
+        },
+        mounted() {
+            //获取服务数据
+            this.getData();
         }
     }
 </script>
