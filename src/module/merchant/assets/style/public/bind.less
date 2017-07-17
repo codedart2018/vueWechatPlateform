@@ -38,7 +38,7 @@
     }
 
     .footer {
-        height: 110px;
+        height: auto;
         width: 100%;
         margin-top: 20px;
         padding-top: 20px;
@@ -51,13 +51,105 @@
             text-align: center
         }
 
-        .button {
+        .auth-button {
             text-align: center;
             margin-top: 25px;
+
+            .button-green {
+                display: inline-block;
+                height: 50px;
+                line-height: 50px;
+                background-color: #5fbf31;
+                font-size: 16px;
+                color: #fff;
+                padding: 0 15px;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                border-radius: 3px;
+                text-align: center;
+                min-width: 200px;
+            }
+
+            .button-green:before {
+                content: "";
+                display: inline-block;
+                width: 35px;
+                height: 29px;
+                background: url(../../images/weixin-logo.png) no-repeat;
+                margin-right: 8px;
+                vertical-align: middle;
+            }
         }
     }
 }
 
 .red {
     color: #db4d4d;
+}
+
+.auth-intros {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    position: relative;
+
+    h4 {
+        position: relative;
+        background: #FFFFFF;
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        margin-left: -95px;
+        font-size: 14px;
+        padding: 0 20px;
+        color: #999;
+    }
+
+    ul {
+        padding: 40px 0;
+        overflow: hidden;
+
+        li {
+            float: left;
+            width: 33%;
+            text-align: center;
+
+            dt {
+                font-size: 16px;
+            }
+
+            dd {
+                color: #999;
+            }
+        }
+
+        li:before {
+            content: "";
+            width: 91px;
+            height: 91px;
+            display: inline-block;
+            margin-bottom: 10px;
+            background: url(../../images/auth-icons.png) no-repeat;
+            opacity: 0.5;
+            filter: "alpha(opacity=50)";
+            filter: alpha(opacity=50);
+        }
+
+        li.free:before {
+            background-position: 0 -91px;
+            height: 90px;
+            margin-bottom: 9px;
+        }
+
+        li.safe:before {
+            background-position: 0 -181px;
+            height: 90px;
+            margin-bottom: 9px;
+        }
+    }
+}
+
+.fn-clear {
+    zoom: 1;
 }

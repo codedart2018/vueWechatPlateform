@@ -22,7 +22,7 @@
                     <!--<Tag color="blue">一级商户 todo 后面这个可能取消</Tag>-->
                 </Form-item>
                 <Form-item label="帐户余额">
-                    {{data.balance}} 元 <Tag color="blue">提现</Tag>
+                    {{data.balance}} 元
                 </Form-item>
                 <Form-item label="已消费金额">
                     {{data.consume}} 元

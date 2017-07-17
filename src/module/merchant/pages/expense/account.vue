@@ -8,7 +8,7 @@
                     <div class="usage">
                         <span>{{merchant.balance}}<span class="unit">&nbsp;元</span></span>
                         <div class="withdraw">
-                            <Button type="primary" size="small">提现</Button>
+                            <Button type="primary" size="small" @click="withdraw = true">提现</Button>
                         </div>
                     </div>
                 </div>
@@ -42,9 +42,7 @@
                         <div class="option-box">
                             <Radio-group v-model="money">
                                 <Radio :label="item" style="padding: 5px 10px;" v-for="(item, index) of configs.amounts" :key="index">{{item}}元</Radio>
-                                <Radio label="0" style="padding: 5px 10px;"><Input v-model="customize_money"
-                                                                                   placeholder="请输入充值金额"
-                                                                                   style="width: 120px"></Input>&nbsp;&nbsp;元
+                                <Radio label="0" style="padding: 5px 10px;"><Input v-model="customize_money" @on-focus="money = 0" placeholder="请输入充值金额" style="width: 120px"></Input>&nbsp;&nbsp;元
                                 </Radio>
                             </Radio-group>
                         </div>
@@ -58,7 +56,7 @@
                 <span>线下汇款</span>
             </div>
             <div class="explain">
-                <Table stripe :columns="columns1" :data="configs.banks"></Table>
+                <Table stripe :columns="columns" :data="configs.banks"></Table>
                 <div class="well">
                     <h5>线下汇款处理说明</h5>
                     <div v-html="configs.desc" style="line-height: 28px;"></div>
@@ -88,6 +86,26 @@
                 <!--<Button type="error" size="large" long :loading="modal_loading" @click="del">删除</Button>-->
             </div>
         </Modal>
+
+        <Modal v-model="withdraw" width="480">
+            <p slot="header" style="color:#f60;text-align:center">
+                <Icon type="information-circled"></Icon>
+                <span>提现确认</span>
+            </p>
+            <div class="withdraw-tips">
+                <p>您目前有 <span style="color: orangered; font-weight: bold;">{{merchant.balance}}</span> 元，可提现！</p>
+                <p>对于提现操作我们将收取 1% 的手续费用！</p>
+                <p>提现后我们会在3个工作日内转到你的支付宝或银行帐号。</p>
+                <p class="withdraw-money">
+                    <span>提现金额：</span>
+                    <span><Input v-model="withdrawForm.money" placeholder="请输入您要提现的金额..." @on-change="validateMoney" style="width: 300px"></Input></span>
+                </p>
+            </div>
+            <div slot="footer">
+                <Button type="ghost" size="large" @click="withdraw = false">取消</Button>
+                <Button type="info" size="large">确认</Button>
+            </div>
+        </Modal>
     </div>
 </template>
 
@@ -103,14 +121,15 @@
                 customize_money: '',
                 //确认充值modal
                 recharge_confirm_modal: false,
+                //提现modal
+                withdraw: false,
                 type1: true,
                 type2: false,
                 configs: {
                     banks: [],
                     pay_type: {}
                 },
-
-                columns1: [
+                columns: [
                     {
                         title: '开户名',
                         key: 'payee'
@@ -123,7 +142,11 @@
                         title: '银行帐号',
                         key: 'account'
                     }
-                ]
+                ],
+                //提现表单
+                withdrawForm: {
+                	money: ''
+                }
             }
         },
         methods: {
@@ -175,6 +198,26 @@
                 }).catch((err) => {
                     this.$Message.error(err);
                 })
+            },
+            //表单金额变化时
+            validateMoney(e) {
+            	const reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
+                if (!reg.test(this.withdrawForm.money)) {
+                    this.withdrawForm.money = '';
+                    this.$Message.error("提现金额不正确");
+                    return false;
+                };
+
+                if(this.withdrawForm.money > this.merchant.balance) {
+                    this.withdrawForm.money = '';
+                    this.$Message.error("提现金额不能大于余额");
+                    return false;
+                }
+
+            },
+            //确认提现
+            confirmWithdraw() {
+
             }
         },
         mounted() {
