@@ -172,7 +172,7 @@
                 this.$emit('coordinate',this.coordinate);
             },
             close() {
-                this.show = false
+                this.show = false;
             },
         }
     }

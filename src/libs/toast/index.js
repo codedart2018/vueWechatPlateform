@@ -30,7 +30,7 @@ Toast.install = function (Vue, options) {
         document.body.appendChild(tpl);
         setTimeout(function () {
             document.body.removeChild(tpl);
-        }, opt.duration)
+        }, opt.duration);
     };
     ['bottom', 'center', 'top'].forEach(function(type) {
         Vue.prototype.$toast[type] = function(tips) {
@@ -58,9 +58,9 @@ Toast.install = function (Vue, options) {
 
     ['open', 'close'].forEach(function(type) {
         Vue.prototype.$loading[type] = function(tips) {
-            return Vue.prototype.$loading(tips,type)
+            return Vue.prototype.$loading(tips,type);
         }
     });
-}
+};
 
-export default Toast
+export default Toast;

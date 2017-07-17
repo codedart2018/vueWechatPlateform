@@ -20,7 +20,7 @@ Plugin.install = function (Vue, options) {
         if(!value) return
         //防止PHP后台输出为10位的时间戳
         if(value.length == 10) {
-            value = value * 1000
+            value = value * 1000;
         }
         var time = new Date(parseInt(value));
         var date = {
@@ -37,12 +37,11 @@ Plugin.install = function (Vue, options) {
         }
         for (var k in date) {
             if (new RegExp("(" + k + ")").test(format)) {
-                format = format.replace(RegExp.$1, RegExp.$1.length == 1
-                    ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+                format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
             }
         }
-        return format
+        return format;
     }
 }
 
-export default Plugin
+export default Plugin;

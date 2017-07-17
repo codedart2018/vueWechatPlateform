@@ -117,47 +117,47 @@
             //点击获得选中的值
             changeEmoji(index, item) {
                 //<img src="../../../../assets/images/emotions/smiley_1.png" class="icon_emotion_single icon_smiley_0" alt="mo-[微笑]">
-                if (this.wordsNumber <= 0) return false
-                var dom = document.getElementById(this.randomNumber).querySelector('textarea')
-                var valueLen = dom.value.length
+                if (this.wordsNumber <= 0) return false;
+                var dom = document.getElementById(this.randomNumber).querySelector('textarea');
+                var valueLen = dom.value.length;
                 if (typeof document.selection != "undefined") {
-                    document.selection.createRange().text = item
+                    document.selection.createRange().text = item;
                 }
                 else {
-                    this.replyContent = dom.value.substr(0, dom.selectionStart) + item + dom.value.substring(dom.selectionStart, valueLen)
+                    this.replyContent = dom.value.substr(0, dom.selectionStart) + item + dom.value.substring(dom.selectionStart, valueLen);
                 }
-                this.countWordsNumber()
-                dom.focus()
+                this.countWordsNumber();
+                dom.focus();
             },
             //统计字数
             countWordsNumber() {
                 //再获取一次长度
-                let len = this.replyContent.length
-                let value = this.replyContent
-                let maxLen = 600
-                let initLen = 0
+                let len = this.replyContent.length;
+                let value = this.replyContent;
+                let maxLen = 600;
+                let initLen = 0;
                 for (var i = 0; (i < len) && (initLen <= maxLen * 2); i++) {
                     if (value.charCodeAt(i) > 0 && value.charCodeAt(i) < 128)
-                        initLen++
+                        initLen++;
                     else
-                        initLen += 1
+                        initLen += 1;
                 }
-                this.wordsNumber = maxLen - initLen
+                this.wordsNumber = maxLen - initLen;
             },
             //键盘事件 没有使用
             keyUp(e) {
-                this.countWordsNumber()
+                this.countWordsNumber();
                 if (this.wordsNumber <= 0) {
                 }
             },
             //获得光标位置 没有使用
             saveRange() {
                 document.getElementById(this.randomNumber).focus()//获取焦点
-                const selection = window.getSelection ? window.getSelection() : document.selection
-                if (!selection.rangeCount) return
-                const range = selection.createRange ? selection.createRange() : selection.getRangeAt(0)
-                window._range = range
-                this.cursorPosition = range.startOffset
+                const selection = window.getSelection ? window.getSelection() : document.selection;
+                if (!selection.rangeCount) return false;
+                const range = selection.createRange ? selection.createRange() : selection.getRangeAt(0);
+                window._range = range;
+                this.cursorPosition = range.startOffset;
             }
         },
         components: {}

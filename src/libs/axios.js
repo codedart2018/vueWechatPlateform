@@ -2,9 +2,9 @@
  * Created by truncate on 2017/4/10.
  */
 
-import axios from 'axios'
-import Qs from 'qs'
-import Api from './api'
+import axios from 'axios';
+import Qs from 'qs';
+import Api from './api';
 
 const config = {
     baseURL: Api.domain,
@@ -28,7 +28,7 @@ AxiosInst.interceptors.request.use((config) => {
     if (window.localStorage.getItem('token')) {
         config.headers.Authorization = `${window.localStorage.getItem('token')}`;
     }
-    return config
+    return config;
 },(err) => {
     return Promise.reject(err);
 })
@@ -42,7 +42,7 @@ AxiosInst.interceptors.response.use((response) => {
     return response;
 },(error) => {
     //请求错误时做些事
-    return Promise.reject(error)
+    return Promise.reject(error);
 })
 
-export default AxiosInst
+export default AxiosInst;
