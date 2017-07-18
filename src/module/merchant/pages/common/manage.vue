@@ -6,7 +6,7 @@
         <common-header></common-header>
         <!--头部组件结束-->
 
-        <div class="contentDiv">
+        <div class="content-container">
             <div class="content">
                 <div class="box">
                     <div class="box-content flex" v-if="$route.meta.group == 'manage'">
@@ -45,18 +45,21 @@
                                             <i class="iconfont icon-youxiang"></i>
                                             <span>kefu@daimatu.cn</span>
                                         </li>
-                                        <li>
-                                            <i class="iconfont icon-weixin"></i>
-                                            <span>关注微信公众号</span>
-                                            <div class="qr-code">
-                                                <div class="follow" style="transform:scaleY(-1);">
-                                                    444
-                                                </div>
-                                                <div class="arrow arrow-outer"></div>
-                                                <div class="arrow arrow-inner"></div>
-                                            </div>
-                                        </li>
+                                        <!--<li>-->
+                                            <!--<i class="iconfont icon-weixin"></i>-->
+                                            <!--<span>关注微信公众号</span>-->
+                                            <!--<div class="qr-code">-->
+                                                <!--<div class="follow" style="transform:scaleY(-1);">-->
+                                                    <!--444-->
+                                                <!--</div>-->
+                                                <!--<div class="arrow arrow-outer"></div>-->
+                                                <!--<div class="arrow arrow-inner"></div>-->
+                                            <!--</div>-->
+                                        <!--</li>-->
                                     </ul>
+                                </div>
+                                <div class="dis-qr-code">
+                                    <img src="../../assets/images/qrcode.jpg" alt="扫扫我们更健康">
                                 </div>
                             </div>
                         </div>
@@ -68,7 +71,7 @@
                             </transition>
                             <transition :name="transitionName" v-if="$route.path != '/'">
                                 <div>
-                                    <div style="height: 14px; display: flex; align-items: center; line-height: 14px; margin-bottom: 20px; cursor: pointer">
+                                    <div class="navigation-box">
                                         <Breadcrumb>
                                             <Breadcrumb-item>管理中心</Breadcrumb-item>
                                             <Breadcrumb-item v-for="(item, index) in $route.meta.navigation" v-if="$route.meta.navigation.length > 0" :key="index">{{item}}</Breadcrumb-item>
@@ -127,7 +130,7 @@
                             </transition>
                             <transition :name="transitionName" v-if="$route.path != '/'">
                                 <div>
-                                    <div style="height: 14px; display: flex; align-items: center; line-height: 14px; margin-bottom: 20px;">
+                                    <div class="navigation-box">
                                         <Breadcrumb>
                                             <Breadcrumb-item>微信公众号管理中心</Breadcrumb-item>
                                             <Breadcrumb-item v-for="(item, index) in $route.meta.navigation" v-if="$route.meta.navigation.length > 0" :key="index">{{item}}</Breadcrumb-item>
@@ -140,7 +143,8 @@
                     </div>
 
                     <div class="footer">
-                        Copyright　© daimatu.cn　All Rights Reserved　代码兔微信公众平台版权所有
+                        <p>推荐使用先进浏览器获得最佳体验 <span><a href="http://rj.baidu.com/soft/detail/14744.html">谷歌Chrome浏览器</a></span> | <span><a href="http://rj.baidu.com/soft/detail/11843.html" target="_blank">Firefox浏览器</a></span></p>
+                        Copyright 2017 © daimatu.cn　All Rights Reserved 代码兔微信公众平台版权所有
                     </div>
                 </div>
 
