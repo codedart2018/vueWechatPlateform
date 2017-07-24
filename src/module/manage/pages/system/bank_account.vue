@@ -21,8 +21,8 @@
                         :rules="{required: true, message: '开户行' + (index + 1) +'不能为空', trigger: 'blur'}">
                         <Input type="text" v-model="item.value" placeholder="请输入..."></Input>
                     </Form-item>
-                    </Col>
-                    <Col span="7">
+                </Col>
+                <Col span="7">
                     <Form-item
                         v-for="(item, index) in formDynamic.payee"
                         :key="item"
@@ -31,8 +31,8 @@
                         :rules="{required: true, message: '开户名' + (index + 1) +'不能为空', trigger: 'blur'}">
                         <Input type="text" v-model="item.value" placeholder="请输入..."></Input>
                     </Form-item>
-                    </Col>
-                    <Col span="10">
+                </Col>
+                <Col span="10">
                     <Form-item
                         v-for="(item, index) in formDynamic.account"
                         :key="item"
