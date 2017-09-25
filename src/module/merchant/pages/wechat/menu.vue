@@ -279,7 +279,7 @@
                     ]
                 },
                  **/
-                menu: {button: {}},
+                menu: {button: []},
 //                "new_menu": {'button': []},
                 activeMenuName: '',
                 activeMenuIndex: '',
@@ -299,7 +299,7 @@
                 //todo 参数临时写死
                 this.request("MerchantWxMenu", {mch_id: this.$store.state.Merchant.merchant.id, platform_id: this.$store.state.Merchant.platform.id}, true).then((res) => {
                     if (res.status) {
-                        this.menu.button = res.data;
+                        this.menu.button = res.data.button;
                     }
                 })
             },

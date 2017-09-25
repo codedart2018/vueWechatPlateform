@@ -315,7 +315,7 @@
             getData (params) {
                 if (!params) params = {page: 1}
                 this.request('AdminMerchant', params, true).then((res) => {
-                    if(res.status) {
+                    if (res.status) {
                         //列表数据
                         this.list = res.data.list;
                         //总页数
@@ -356,7 +356,7 @@
                 })
             },
             view(id) {
-                this.$router.push({ path: '/merchant/view/' + id, params: { id: id }});
+                this.$router.push({ path: '/merchant/detail/' + id, params: { id: id }});
             }
         },
         mounted() {

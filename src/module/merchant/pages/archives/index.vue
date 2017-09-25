@@ -213,14 +213,14 @@
                 this.$router.push({ path: '/archives/edit/' + id, params: { id: id }})
             },
             //删除素材数据
-            del (index, id) {
+            remove (index, id) {
                 this.$Modal.confirm({
                     title: '温馨提示',
                     width: 300,
                     content: '<p>你确定要删除?删除后不可恢复!</p>',
                     loading: true,
                     onOk: () => {
-                        this.request('AdminDelEditorMaterial', {id, id}).then((res) => {
+                        this.request('AdminDelEditorMaterial', {id: id}).then((res) => {
                             if(res.status) {
                                 this.$Message.info(res.msg)
                                 this.$Modal.remove();
